@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Jadval from "../../src/Components/Pages/Jadval";
 import HomeDashboard from "../../src/Components/Pages/DashboardPages/Home";
 
 
