@@ -20,7 +20,7 @@ const Wrapper=styled.div`
   }
 
   .layout__main {
-    margin-top: 100px;
+    margin-top: 50px;
     height: calc(100vh - 100px);
     overflow-y: auto;
 

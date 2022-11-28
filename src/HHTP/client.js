@@ -1,7 +1,7 @@
 import axios from "axios";
 import Message from "../utils/Message";
 
-export const API_URL = "http://b80b-213-230-80-46.ngrok.io:3000";
+export const API_URL = "http://4cd6-213-230-80-46.ngrok.io";
 
 const client = axios.create({
   withCredentials: true,
@@ -18,7 +18,7 @@ client.interceptors.request.use((config) => {
 client.interceptors.response.use((config) => {
   return config;
 }, (error) => {
-  if (error.response.status === 401) {
+  if (error.response === undefined) {
     Message.unauthorizedError();
     localStorage.removeItem("token");
     throw error;

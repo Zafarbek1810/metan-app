@@ -14,17 +14,17 @@ const RightNav = ({ open }) => {
           </MyLink>
         </li>
         <li>
-          <MyLink  to="/dashboard/table" className={router.pathname == "/link" ? "active" : "link"}>
+          <MyLink  to="/dashboard/home" className={router.pathname == "/link" ? "active" : "link"}>
             Link
           </MyLink>
         </li>
         <li>
-          <MyLink  to="/dashboard/table" className={router.pathname == "/link" ? "active" : "link"}>
+          <MyLink  to="/dashboard/home" className={router.pathname == "/link" ? "active" : "link"}>
             Link
           </MyLink>
         </li>
         <li>
-          <MyLink  to="/dashboard/table" className={router.pathname == "/link" ? "active" : "link"}>
+          <MyLink  to="/dashboard/home" className={router.pathname == "/link" ? "active" : "link"}>
             Link
           </MyLink>
         </li>
