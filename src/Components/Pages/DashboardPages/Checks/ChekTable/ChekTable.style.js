@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 const ChekTableWrapper=styled.div`
-  padding: 40px 30px;
-  font-family: "Montserrat" !important;
+  //padding: 40px 30px;
 
   .title{
     font-style: normal;
@@ -21,7 +20,7 @@ const ChekTableWrapper=styled.div`
       width: 100%;
       tr{
         display: flex;
-        justify-content: space-between;
+        //justify-content: space-between;
         background: rgba(31, 60, 136, 0.1);
         border-radius: 6px 6px 0px 0px;
         padding: 22px 13px;

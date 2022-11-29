@@ -23,6 +23,7 @@ const Wrapper=styled.div`
     margin-top: 50px;
     height: calc(100vh - 100px);
     overflow-y: auto;
+    padding: 20px 20px 10px;
 
     &::-webkit-scrollbar-track {
       //-webkit-box-shadow: inset 0 0 6px rgba(187, 187, 187, 0.3);

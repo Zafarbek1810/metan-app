@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
-import Chart from 'react-apexcharts'
+// import Chart from 'react-apexcharts'
+import {ChartsWrapper} from "./Charts.style";
+import dynamic from 'next/dynamic'
+
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 class Charts extends Component {
   constructor(props) {
@@ -20,9 +24,23 @@ class Charts extends Component {
       }]
     }
   }
+
   render() {
     return (
-      <Chart options={this.state.options} series={this.state.series} type="area" width="100%" height={520} />
+      <ChartsWrapper>
+        <h3 className="title">Statistika</h3>
+        {
+          (typeof window !== 'undefined') &&
+            <Chart
+              options={this.state.options}
+              series={this.state.series}
+              type="area"
+              width="100%"
+              height={520}
+            />
+        }
+
+      </ChartsWrapper>
     );
   }
 }

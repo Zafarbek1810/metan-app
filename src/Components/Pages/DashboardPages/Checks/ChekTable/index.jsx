@@ -24,7 +24,7 @@ const ChekTable = () => {
         <tbody>
                 <tr >
                   <td style={{width: "10%"}} className="row">1.12.12.2022</td>
-                  <td style={{width: "10%"}} className="row">50000</td>
+                  <td style={{width: "10%"}} className="col">50000</td>
                   <td style={{width: "10%"}} className="col">0.00</td>
                   <td style={{width: "10%"}} className="col">1200</td>
                   <td style={{width: "15%"}} className="col">Zafar</td>
@@ -45,7 +45,7 @@ const ChekTable = () => {
                 </tr>
                 <tr >
                   <td style={{width: "10%"}} className="row">1.12.12.2022</td>
-                  <td style={{width: "10%"}} className="row">50000</td>
+                  <td style={{width: "10%"}} className="col">50000</td>
                   <td style={{width: "10%"}} className="col">0.00</td>
                   <td style={{width: "10%"}} className="col">1200</td>
                   <td style={{width: "15%"}} className="col">Zafar</td>
@@ -66,7 +66,7 @@ const ChekTable = () => {
                 </tr>
                 <tr >
                   <td style={{width: "10%"}} className="row">1.12.12.2022</td>
-                  <td style={{width: "10%"}} className="row">50000</td>
+                  <td style={{width: "10%"}} className="col">50000</td>
                   <td style={{width: "10%"}} className="col">0.00</td>
                   <td style={{width: "10%"}} className="col">1200</td>
                   <td style={{width: "15%"}} className="col">Zafar</td>
@@ -87,7 +87,7 @@ const ChekTable = () => {
                 </tr>
                 <tr >
                   <td style={{width: "10%"}} className="row">1.12.12.2022</td>
-                  <td style={{width: "10%"}} className="row">50000</td>
+                  <td style={{width: "10%"}} className="col">50000</td>
                   <td style={{width: "10%"}} className="col">0.00</td>
                   <td style={{width: "10%"}} className="col">1200</td>
                   <td style={{width: "15%"}} className="col">Zafar</td>
