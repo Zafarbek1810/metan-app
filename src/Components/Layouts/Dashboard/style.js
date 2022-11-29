@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 const Wrapper=styled.div`
   display: flex;
-  font-family: "Montserrat" !important;
-
+  background: #eee;
 
   .layout__sidebar {
     flex-shrink: 0;
@@ -17,6 +16,7 @@ const Wrapper=styled.div`
     top: 0;
     left: 260px;
     width: calc(100% - 250px);
+    background: #fff;
   }
 
   .layout__main {

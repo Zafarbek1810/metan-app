@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
 const SideBarWrapper=styled.div`
-  padding: 20px 0 0;
-  height: 100%;
-  font-family: "Montserrat" !important;
-  
+  padding: 10px 0 0;
+  height: 100vh;
+  background: #fff;
   .nav{
     border-bottom: 1px solid #ced4da;
   }
@@ -60,7 +59,7 @@ const SideBarWrapper=styled.div`
     align-items: center;
     text-decoration: none;
     color: #000;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 
     svg {
       height: 40px;
@@ -78,6 +77,7 @@ const SideBarWrapper=styled.div`
   .links {
     display: flex;
     flex-direction: column;
+    padding: 10px;
   }
 
   .wrapper {
@@ -102,6 +102,7 @@ const SideBarWrapper=styled.div`
     line-height: 18px;
     color: rgba(0, 0, 0, 0.5);
     text-align: end;
+    margin-right: 10px;
 
     .crlink {
       color: #1f3c88;
@@ -110,10 +111,10 @@ const SideBarWrapper=styled.div`
   }
 
   .link {
-    padding: 15px;
+    padding: 10px;
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 15px;
     line-height: 18px;
     color: #1F3C88;
     display: flex;
@@ -126,29 +127,29 @@ const SideBarWrapper=styled.div`
     fill: none !important;
     stroke: #1F3C88 !important;
     margin-right: 8px;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
   }
 
-  .active {
-    padding: 15px;
+  .activelink {
+    padding: 10px;
     font-style: normal;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 15px;
     line-height: 18px;
     color: #1F3C88;
     display: flex;
     align-items: center;
     justify-content: start;
     text-decoration: none;
-    background: rgba(31, 60, 136, 0.15);
+    background: rgba(31, 60, 136, 0.15) !important;
 
     svg {
       fill: none !important;
       stroke: #1F3C88 !important;
       margin-right: 8px;
-      width: 30px;
-      height: 30px;
+      width: 25px;
+      height: 25px;
     }
   }
 

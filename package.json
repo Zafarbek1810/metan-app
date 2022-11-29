@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.10.16",
     "antd": "^5.0.1",
     "apexcharts": "^3.36.3",
     "axios": "^1.2.0",
@@ -20,6 +23,7 @@
     "react-apexcharts": "^1.4.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.39.5",
+    "react-icons": "^4.7.1",
     "react-toastify": "^9.1.1",
     "reactstrap": "^9.1.5",
     "styled-components": "^5.3.6",

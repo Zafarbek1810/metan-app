@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
-const ChekTableWrapper=styled.div`
-  //padding: 40px 30px;
-
+const ExpensesTableWrapper=styled.div`
   .title{
     font-style: normal;
     font-weight: 600;
@@ -14,7 +12,7 @@ const ChekTableWrapper=styled.div`
     display: flex;
     background: #fff;
     padding: 22px 13px 0;
-    
+
   }
 
   .table{
@@ -99,4 +97,4 @@ const ChekTableWrapper=styled.div`
   }
 `
 
-export{ChekTableWrapper}
+export{ ExpensesTableWrapper}
