@@ -47,23 +47,23 @@ const LoginPage = () => {
             <span>LOGO</span>
           </MyLink>
           <div className="main">
-            <h4>Кириш</h4>
+            <h4>Kirish</h4>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="input">
-                <label>Логин</label>
+                <label>Login</label>
                 <input type="text" {...register("name", {required: true})}/>
               </div>
               <div className="input">
-                <label>Парол</label>
+                <label>Parol</label>
                 <input type="password" {...register("password", {required: true})}/>
               </div>
               <button type="submit" className="loginBtn">
-                Кириш
+                Kirish
               </button>
             </form>
           </div>
           <div className="created">
-            <MyLink className="crlink" to="https://jdsystems.uz/" target="_blank">JDSystems </MyLink>томонидан яратилди
+            <MyLink className="crlink" to="https://jdsystems.uz/" target="_blank">JDSystems </MyLink>tomonidan yaratildi
           </div>
         </div>
       </Container>

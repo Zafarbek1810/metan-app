@@ -18,18 +18,9 @@ const RightNav = ({ open }) => {
             Link
           </MyLink>
         </li>
+
         <li>
-          <MyLink  to="/dashboard/home" className={router.pathname == "/link" ? "active" : "link"}>
-            Link
-          </MyLink>
-        </li>
-        <li>
-          <MyLink  to="/dashboard/home" className={router.pathname == "/link" ? "active" : "link"}>
-            Link
-          </MyLink>
-        </li>
-        <li>
-          <MyLink to="/login" className="login">ЛОГИН</MyLink>
+          <MyLink to="/login" className="login">Login</MyLink>
         </li>
       </ul>
 

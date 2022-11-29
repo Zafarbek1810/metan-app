@@ -12,12 +12,13 @@ const RightNavWrapper = styled.div`
     display: flex;
     width: 100%;
     padding-left: 30px;
-    justify-content: space-between;
+    //justify-content: space-between;
   }
 
   li {
     padding: 10px 0 10px 20px;
     width: auto;
+    margin-left: 50px;
 
     .active {
       font-style: normal;

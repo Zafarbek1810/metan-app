@@ -4,55 +4,7 @@ const SideBarWrapper=styled.div`
   padding: 10px 0 0;
   height: 100vh;
   background: #fff;
-  .nav{
-    border-bottom: 1px solid #ced4da;
-  }
-  .nav-item{
-    display: flex;  
-    
-    .nav-link{
-      font-weight: 600;
-      font-size: 20px;
-      line-height: 18px;
-      color: #1F3C88;
-      display: flex;
-      align-items: center;
-      justify-content: start;
-      text-decoration: none;
-      background: none;
-      border: 1px solid transparent;
-      border-top-left-radius: 0.25rem;
-      border-top-right-radius: 0.25rem;
-      margin-bottom: -1px;
-    }
-    .active{
-      font-weight: 600;
-      font-size: 20px;
-      line-height: 18px;
-      color: #1F3C88;
-      display: flex;
-      align-items: center;
-      justify-content: start;
-      text-decoration: none;
-      background-color: #fff;
-      border-color: #ced4da #ced4da #fff;
-      border-top-left-radius: 0.25rem;
-      border-top-right-radius: 0.25rem;
-      margin-bottom: -1px;
-    }
-    
-    
-    svg{
-      width: 20px !important;
-      height: 20px !important;
-    }
-  }
   
-  .tab-content{
-    .tab-pane, .active{
-      background: #fff;
-    }
-  }
 
   .logo {
     display: flex;

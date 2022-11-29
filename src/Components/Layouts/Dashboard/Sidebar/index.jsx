@@ -6,7 +6,7 @@ import HomeSvg from "../../../Common/Svgs/HomeSvg";
 import CheckSvg from "../../../Common/Svgs/CheckSvg";
 import UsersSvg from "../../../Common/Svgs/UsersSvg";
 import CashSvg from "../../../Common/Svgs/CashSvg";
-import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
+import {TabContent, TabPane, Nav, NavItem, NavLink, Row, Col} from 'reactstrap';
 import classnames from 'classnames';
 import SettingSvg from "../../../Common/Svgs/SettingSvg";
 import ShopSvg from "../../../Common/Svgs/ShopSvg";
@@ -87,19 +87,19 @@ const SidebarItemsSetting = [
     Svg: CashbackSvg,
     role: ["MANAGER"]
   },
-{
+  {
     title: "Aksiya",
     path: "/dashboard/prize",
     Svg: AwardSvg,
     role: ["MANAGER"]
   },
-{
+  {
     title: "Kolonkalar",
     path: "/dashboard/gas-columns",
     Svg: FireSvg,
     role: ["MANAGER"]
   },
-{
+  {
     title: "Kolonkalar hisoboti",
     path: "/dashboard/gas-columns-report",
     Svg: FireSvg,
@@ -115,7 +115,7 @@ const SidebarItemsSetting = [
 ];
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+  const {children, value, index, ...other} = props;
 
   return (
     <div
@@ -126,7 +126,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{p: 1}}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -151,10 +151,10 @@ const Sidebar = () => {
   const router = useRouter();
   const [value, setValue] = React.useState(0);
 
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
 
   return (
     <SideBarWrapper>
@@ -164,10 +164,10 @@ const Sidebar = () => {
             <span>Logo</span>
           </MyLink>
 
-          <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Box sx={{width: '100%'}}>
+            <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
               <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                <Tab label="Menu" {...a11yProps(0)} />
+                <Tab label="Menu" {...a11yProps(0)}  />
                 <Tab label={<SettingSvg/>} {...a11yProps(1)} />
               </Tabs>
             </Box>
@@ -204,77 +204,11 @@ const Sidebar = () => {
               }
             </TabPanel>
           </Box>
-
-          {/*<Nav>*/}
-          {/*  <NavItem>*/}
-          {/*    <NavLink*/}
-          {/*      className={classnames({ active: activeTab === '1' })}*/}
-          {/*      onClick={() => { toggle('1'); }}*/}
-          {/*    >*/}
-          {/*      Menu*/}
-          {/*    </NavLink>*/}
-          {/*  </NavItem>*/}
-          {/*  <NavItem>*/}
-          {/*    <NavLink*/}
-          {/*      className={classnames({ active: activeTab === '2' })}*/}
-          {/*      onClick={() => { toggle('2'); }}*/}
-          {/*    >*/}
-          {/*      <SettingSvg/>*/}
-          {/*    </NavLink>*/}
-          {/*  </NavItem>*/}
-          {/*</Nav>*/}
-          {/*<TabContent activeTab={activeTab}>*/}
-          {/*  <TabPane tabId="1">*/}
-          {/*    <Row>*/}
-          {/*      <Col sm="12" className="links">*/}
-          {/*        {*/}
-          {/*          SidebarItemsMenu.map(({title, Svg, path}, idx) => {*/}
-          {/*            return (*/}
-          {/*              <MyLink*/}
-          {/*                className={router.pathname === path ? "activelink" : "link"}*/}
-          {/*                to={path}*/}
-          {/*                key={idx}*/}
-          {/*              >*/}
-          {/*                <Svg/>*/}
-          {/*                {title}*/}
-          {/*              </MyLink>*/}
-          {/*            )*/}
-          {/*          })*/}
-          {/*        }*/}
-          {/*      </Col>*/}
-          {/*    </Row>*/}
-          {/*  </TabPane>*/}
-          {/*  <TabPane tabId="2">*/}
-          {/*    <Row>*/}
-          {/*      <Col sm="12" className="links">*/}
-          {/*        {*/}
-          {/*          SidebarItemsSetting.map(({title, Svg, path}, idx) => {*/}
-          {/*            return (*/}
-          {/*              <MyLink*/}
-          {/*                className={router.pathname === path ? "activelink" : "link"}*/}
-          {/*                to={path}*/}
-          {/*                key={idx}*/}
-          {/*              >*/}
-          {/*                <Svg/>*/}
-          {/*                {title}*/}
-          {/*              </MyLink>*/}
-          {/*            )*/}
-          {/*          })*/}
-          {/*        }*/}
-          {/*      </Col>*/}
-          {/*    </Row>*/}
-          {/*  </TabPane>*/}
-          {/*</TabContent>*/}
-
-          {/*/!*<div className="links">*!/*/}
-
-
-          {/*</div>*/}
         </div>
         <div className="bottom">
-          <div className="exit">
-            <MyLink className="link" to="#" > Тизимдан чиқиш</MyLink>
-          </div>
+          {/*<div className="exit">*/}
+          {/*  <MyLink className="link" to="#" > Тизимдан чиқиш</MyLink>*/}
+          {/*</div>*/}
 
           <div className="created">
             Created by <MyLink className="crlink" to="https://jdsystems.uz/" target="_blank">JDSystems</MyLink>
