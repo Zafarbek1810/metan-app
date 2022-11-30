@@ -55,24 +55,6 @@ const DocumentsTable = () => {
           </td>
 
         </tr>
-        <tr>
-          <td style={{width: "16%"}} className="row">Guliston Metan</td>
-          <td style={{width: "16%"}} className="col">aaa</td>
-          <td style={{width: "16%"}} className="col">124</td>
-          <td style={{width: "16%"}} className="col">12.12.2022</td>
-          <td style={{width: "16%"}} className="col">22.12.2023</td>
-          <td style={{width: "16%"}} className="col">
-            <div className="btns">
-              <button>
-                <DeleteSvg/>
-              </button>
-              <button>
-                <EditSvg/>
-              </button>
-            </div>
-          </td>
-
-        </tr>
         </tbody>
       </table>
     </DocumentsTableWrapper>

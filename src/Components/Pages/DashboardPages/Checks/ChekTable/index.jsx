@@ -1,75 +1,74 @@
 import React, {useState} from 'react';
 import {ChekTableWrapper} from "./ChekTable.style";
-import DeleteSvg from "../../../../Common/Svgs/DeleteSvg";
-import EditSvg from "../../../../Common/Svgs/EditSvg";
-import {
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from 'reactstrap';
-
-// <div className="filter">
-//   <input type="text"/>
-//   {/*<Dropdown isOpen={dropdownOpen} toggle={toggle} {...props}>*/}
-//   {/*  <DropdownToggle caret size="sm">*/}
-//   {/*    Filtr*/}
-//   {/*  </DropdownToggle>*/}
-//   {/*  <DropdownMenu>*/}
-//   {/*      <div className="select">*/}
-//   {/*        <label>Savdo nuqtasi</label>*/}
-//   {/*        <select className="form-select form-select-sm" aria-label=".form-select-sm example">*/}
-//   {/*          <option selected>Open this select menu</option>*/}
-//   {/*          <option value="1">One</option>*/}
-//   {/*          <option value="2">Two</option>*/}
-//   {/*          <option value="3">Three</option>*/}
-//   {/*        </select>*/}
-//   {/*      </div>*/}
-//   {/*      <div className="select">*/}
-//   {/*        <label>Status</label>*/}
-//   {/*        <select className="form-select form-select-sm" aria-label=".form-select-sm example">*/}
-//   {/*          <option selected>Open this select menu</option>*/}
-//   {/*          <option value="1">One</option>*/}
-//   {/*          <option value="2">Two</option>*/}
-//   {/*          <option value="3">Three</option>*/}
-//   {/*        </select>*/}
-//   {/*      </div>*/}
-//   {/*      <div className="input">*/}
-//   {/*        <label>Mijoz</label>*/}
-//   {/*        <input type="text"/>*/}
-//   {/*      </div>*/}
-//   {/*      <div className="select">*/}
-//   {/*        <label>Kassir</label>*/}
-//   {/*        <select className="form-select form-select-sm" aria-label=".form-select-sm example">*/}
-//   {/*          <option selected>Open this select menu</option>*/}
-//   {/*          <option value="1">One</option>*/}
-//   {/*          <option value="2">Two</option>*/}
-//   {/*          <option value="3">Three</option>*/}
-//   {/*        </select>*/}
-//   {/*      </div>*/}
-//   {/*      <div className="input">*/}
-//   {/*        <label>dan</label>*/}
-//   {/*        <input type="date"/>*/}
-//   {/*      </div>*/}
-//   {/*      <div className="input">*/}
-//   {/*        <label>gacha</label>*/}
-//   {/*        <input type="date"/>*/}
-//   {/*      </div>*/}
-//
-//   {/*      <div className="btns">*/}
-//   {/*        <button type="button" className="btn btn-secondary btn-sm">Secondary</button>*/}
-//   {/*        <button type="button" className="btn btn-success btn-sm">Success</button>*/}
-//   {/*      </div>*/}
-//   {/*  </DropdownMenu>*/}
-//   {/*</Dropdown>*/}
-// </div>
-
 
 
 const ChekTable = () => {
   return (
     <ChekTableWrapper>
       <h3 className="title">Cheklar</h3>
+      <div className="filter">
+        <div className="col-3">
+          <input type="text" className="form-control" placeholder="Izlash"/>
+        </div>
+        <div className="dropdown">
+          <button type="button" className="btn btn-primary dropdown-toggle px-4" data-bs-toggle="dropdown"
+                  aria-expanded="false" data-bs-auto-close="outside">
+            Filtr
+          </button>
+          <form className="dropdown-menu p-3 col-6">
+            <div className="row">
+              <div className="select mb-3 col-6">
+                <label className="form-label">Savdo nuqtasi</label>
+                <select className="form-select">
+                  <option disabled selected value>Tanlang</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+              <div className="select mb-3 col-6">
+                <label className="form-label">Status</label>
+                <select className="form-select">
+                  <option disabled selected value>Tanlang</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+            </div>
+            <div className="row">
+              <div className="mb-3 col-6">
+                <label className="form-label">Mijoz</label>
+                <input type="text" className="form-control"/>
+              </div>
+              <div className="select mb-3 col-6">
+                <label className="form-label">Kassir</label>
+                <select className="form-select">
+                  <option disabled selected value>Tanlang</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+            </div>
+            <div className="row">
+              <div className="mb-3 col-6">
+                <label className="form-label">dan</label>
+                <input type="date" className="form-control"/>
+              </div>
+              <div className="mb-3 col-6">
+                <label className="form-label">gacha</label>
+                <input type="date" className="form-control"/>
+              </div>
+            </div>
+
+            <div className="btns">
+              <button className="btn btn-secondary">Bekor qilish</button>
+              <button className="btn btn-success">Qo'llash</button>
+            </div>
+          </form>
+        </div>
+      </div>
       <table className="table">
         <thead>
         <tr>
@@ -81,7 +80,6 @@ const ChekTable = () => {
           <th style={{width: "15%"}} className="col">Kassir</th>
           <th style={{width: "10%"}} className="col">Savdo nuqtasi</th>
           <th style={{width: "10%"}} className="col">Status</th>
-          {/*<th style={{width: "10%"}} className="col">Action</th>*/}
         </tr>
         </thead>
         <tbody>
@@ -94,17 +92,6 @@ const ChekTable = () => {
           <td style={{width: "15%"}} className="col">Javokhir</td>
           <td style={{width: "10%"}} className="col">Ippodrom GAS</td>
           <td style={{width: "10%"}} className="col">Muvaffaqiyatli</td>
-          {/*<td style={{width: "10%"}} className="col">*/}
-          {/*  <div className="btns">*/}
-          {/*    <button>*/}
-          {/*      <DeleteSvg/>*/}
-          {/*    </button>*/}
-          {/*    <button>*/}
-          {/*      <EditSvg/>*/}
-          {/*    </button>*/}
-          {/*  </div>*/}
-          {/*</td>*/}
-
         </tr>
         <tr>
           <td style={{width: "10%"}} className="row">1.12.12.2022</td>
@@ -115,17 +102,6 @@ const ChekTable = () => {
           <td style={{width: "15%"}} className="col">Javokhir</td>
           <td style={{width: "10%"}} className="col">Ippodrom GAS</td>
           <td style={{width: "10%"}} className="col">Muvaffaqiyatli</td>
-          {/*<td style={{width: "10%"}} className="col">*/}
-          {/*  <div className="btns">*/}
-          {/*    <button>*/}
-          {/*      <DeleteSvg/>*/}
-          {/*    </button>*/}
-          {/*    <button>*/}
-          {/*      <EditSvg/>*/}
-          {/*    </button>*/}
-          {/*  </div>*/}
-          {/*</td>*/}
-
         </tr>
         <tr>
           <td style={{width: "10%"}} className="row">1.12.12.2022</td>
@@ -136,17 +112,6 @@ const ChekTable = () => {
           <td style={{width: "15%"}} className="col">Javokhir</td>
           <td style={{width: "10%"}} className="col">Ippodrom GAS</td>
           <td style={{width: "10%"}} className="col">Muvaffaqiyatli</td>
-          {/*<td style={{width: "10%"}} className="col">*/}
-          {/*  <div className="btns">*/}
-          {/*    <button>*/}
-          {/*      <DeleteSvg/>*/}
-          {/*    </button>*/}
-          {/*    <button>*/}
-          {/*      <EditSvg/>*/}
-          {/*    </button>*/}
-          {/*  </div>*/}
-          {/*</td>*/}
-
         </tr>
         <tr>
           <td style={{width: "10%"}} className="row">1.12.12.2022</td>
@@ -157,17 +122,6 @@ const ChekTable = () => {
           <td style={{width: "15%"}} className="col">Javokhir</td>
           <td style={{width: "10%"}} className="col">Ippodrom GAS</td>
           <td style={{width: "10%"}} className="col">Muvaffaqiyatli</td>
-          {/*<td style={{width: "10%"}} className="col">*/}
-          {/*  <div className="btns">*/}
-          {/*    <button>*/}
-          {/*      <DeleteSvg/>*/}
-          {/*    </button>*/}
-          {/*    <button>*/}
-          {/*      <EditSvg/>*/}
-          {/*    </button>*/}
-          {/*  </div>*/}
-          {/*</td>*/}
-
         </tr>
         </tbody>
       </table>

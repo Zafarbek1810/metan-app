@@ -1,7 +1,7 @@
 import axios from "axios";
 import Message from "../utils/Message";
 
-export const API_URL = "http://6842-213-230-80-46.ngrok.io";
+export const API_URL = "http://178.159.39.206:3000";
 
 const client = axios.create({
   withCredentials: true,

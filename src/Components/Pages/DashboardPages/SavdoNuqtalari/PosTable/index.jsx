@@ -7,6 +7,11 @@ const PosTable = () => {
   return (
     <PosTableWrapper>
       <h3 className="title">Savdo nuqtalari</h3>
+      <div className="filter">
+        <div className="col-3 mb-2">
+          <input type="text" className="form-control" placeholder="Izlash"/>
+        </div>
+      </div>
       <table className="table">
         <thead>
         <tr>

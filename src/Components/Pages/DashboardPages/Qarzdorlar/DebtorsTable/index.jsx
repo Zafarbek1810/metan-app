@@ -7,6 +7,19 @@ const DebtorsTable = () => {
   return (
     <DebtorsTableWrapper>
       <h3 className="title">Qarzdorlar</h3>
+      <div className="filter ">
+        <div className="col-3 mb-2">
+          <input type="text" className="form-control" placeholder="Izlash"/>
+        </div>
+        <div className="select mb-2 ms-3 col-3">
+          <select className="form-select">
+            <option disabled selected value>Tanlang</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+      </div>
       <table className="table">
         <thead>
         <tr>

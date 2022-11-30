@@ -8,6 +8,9 @@ const ShiftsTableWrapper=styled.div`
     line-height: 25px;
     color: #1F3C88;
   }
+  
+  
+  
 `
 
 export {ShiftsTableWrapper}

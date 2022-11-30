@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {SideBarWrapper} from "./Sidebar.style";
 import MyLink from "../../../Common/MyLink";
 import {useRouter} from "next/router";
@@ -6,8 +6,6 @@ import HomeSvg from "../../../Common/Svgs/HomeSvg";
 import CheckSvg from "../../../Common/Svgs/CheckSvg";
 import UsersSvg from "../../../Common/Svgs/UsersSvg";
 import CashSvg from "../../../Common/Svgs/CashSvg";
-import {TabContent, TabPane, Nav, NavItem, NavLink, Row, Col} from 'reactstrap';
-import classnames from 'classnames';
 import SettingSvg from "../../../Common/Svgs/SettingSvg";
 import ShopSvg from "../../../Common/Svgs/ShopSvg";
 import FileSvg from "../../../Common/Svgs/FileSvg";
@@ -87,12 +85,12 @@ const SidebarItemsSetting = [
     Svg: CashbackSvg,
     role: ["MANAGER"]
   },
-  {
-    title: "Aksiya",
-    path: "/dashboard/prize",
-    Svg: AwardSvg,
-    role: ["MANAGER"]
-  },
+  // {
+  //   title: "Aksiya",
+  //   path: "/dashboard/prize",
+  //   Svg: AwardSvg,
+  //   role: ["MANAGER"]
+  // },
   {
     title: "Kolonkalar",
     path: "/dashboard/gas-columns",
@@ -156,6 +154,10 @@ const Sidebar = () => {
     setValue(newValue);
   };
 
+  useEffect(()=>{
+
+  }, [])
+
   return (
     <SideBarWrapper>
       <div className="wrapper">
@@ -190,6 +192,12 @@ const Sidebar = () => {
             <TabPanel value={value} index={1}>
               {
                 SidebarItemsSetting.map(({title, Svg, path}, idx) => {
+                  useLayoutEffect(() => {
+                    if(router.pathname === path) {
+                      setValue(1);
+                    }
+                  }, [])
+
                   return (
                     <MyLink
                       className={router.pathname === path ? "activelink" : "link"}

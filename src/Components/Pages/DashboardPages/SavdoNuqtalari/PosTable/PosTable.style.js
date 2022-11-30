@@ -10,6 +10,7 @@ const PosTableWrapper=styled.div`
   }
   .filter{
     display: flex;
+    align-items: center;
     background: #fff;
     padding: 22px 13px 0;
 
