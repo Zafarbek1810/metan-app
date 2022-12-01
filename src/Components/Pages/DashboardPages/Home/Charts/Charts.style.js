@@ -1,12 +1,36 @@
 import styled from "styled-components";
 
 const ChartsWrapper=styled.div`
-  .title{
-    font-style: normal;
-    font-weight: 600;
-    font-size: 30px;
-    line-height: 25px;
-    color: #1F3C88;
+  background: #fff;
+  padding: 10px;
+
+  h4{
+    font-size: 20px;
+    font-weight: 500;
+  }
+  .wrap{
+    display: flex;
+    & > div{
+      margin-right: 20px;
+      p{
+        font-size: 16px;
+        margin-bottom: 0;
+      }
+      span{
+        font-size: 20px;        
+      }
+      .first{
+        color: green;
+      }
+      .second{
+        color: orange;
+      }
+      .third{
+        color: #1F3C88;
+      }
+
+    }
+    
   }
 `
 

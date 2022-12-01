@@ -154,9 +154,14 @@ const Sidebar = () => {
     setValue(newValue);
   };
 
-  useEffect(()=>{
-
+  useLayoutEffect(() => {
+    for (const {path} of SidebarItemsSetting) {
+      if(router.pathname===path){
+        setValue(1)
+      }
+    }
   }, [])
+
 
   return (
     <SideBarWrapper>
@@ -192,17 +197,10 @@ const Sidebar = () => {
             <TabPanel value={value} index={1}>
               {
                 SidebarItemsSetting.map(({title, Svg, path}, idx) => {
-                  useLayoutEffect(() => {
-                    if(router.pathname === path) {
-                      setValue(1);
-                    }
-                  }, [SidebarItemsSetting])
-
                   return (
                     <MyLink
                       className={router.pathname === path ? "activelink" : "link"}
                       to={path}
-                      key={idx}
                     >
                       <Svg/>
                       {title}

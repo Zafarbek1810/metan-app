@@ -28,7 +28,21 @@ class Charts extends Component {
   render() {
     return (
       <ChartsWrapper>
-        <h3 className="title">Statistika</h3>
+        <h4>Statistika</h4>
+        <div className="wrap">
+          <div>
+            <p>Summa</p>
+            <span className="first">100 900 700.00 so'm</span>
+          </div>
+          <div>
+            <p>Bonus</p>
+            <span className="second">2 630 413.10 Ball</span>
+          </div>
+          <div>
+            <p>To'langan ballar</p>
+            <span className="third">9 280.00 Ball</span>
+          </div>
+        </div>
         {
           (typeof window !== 'undefined') &&
             <Chart
