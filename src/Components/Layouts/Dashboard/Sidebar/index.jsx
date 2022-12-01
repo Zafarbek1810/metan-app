@@ -10,7 +10,7 @@ import SettingSvg from "../../../Common/Svgs/SettingSvg";
 import ShopSvg from "../../../Common/Svgs/ShopSvg";
 import FileSvg from "../../../Common/Svgs/FileSvg";
 import CashbackSvg from "../../../Common/Svgs/CashbackSvg";
-import AwardSvg from "../../../Common/Svgs/AwardSvg";
+// import AwardSvg from "../../../Common/Svgs/AwardSvg";
 import FireSvg from "../../../Common/Svgs/FireSvg";
 import ClockSvg from "../../../Common/Svgs/ClockSvg";
 import Box from "@mui/material/Box";
