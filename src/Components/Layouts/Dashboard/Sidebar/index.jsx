@@ -201,6 +201,7 @@ const Sidebar = () => {
                     <MyLink
                       className={router.pathname === path ? "activelink" : "link"}
                       to={path}
+                      key={idx}
                     >
                       <Svg/>
                       {title}
