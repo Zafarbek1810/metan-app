@@ -3,7 +3,7 @@ import {UserContextProvider} from "../src/Context/UserContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import $ from 'jquery';
 import Popper from 'popper.js';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
+// import 'bootstrap/dist/js/bootstrap.bundle.min';
 import {useEffect, useState} from "react";
 
 function MyApp({Component, pageProps}) {
