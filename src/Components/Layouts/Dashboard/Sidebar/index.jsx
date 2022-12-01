@@ -196,7 +196,7 @@ const Sidebar = () => {
                     if(router.pathname === path) {
                       setValue(1);
                     }
-                  }, [])
+                  }, [SidebarItemsSetting])
 
                   return (
                     <MyLink
