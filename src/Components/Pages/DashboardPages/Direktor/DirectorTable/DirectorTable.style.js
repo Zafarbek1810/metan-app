@@ -1,12 +1,40 @@
 import styled from "styled-components";
 
 const DirectorTableWrapper=styled.div`
-  .title{
-    font-style: normal;
-    font-weight: 600;
-    font-size: 30px;
-    line-height: 25px;
-    color: #1F3C88;
+  .top{
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    .title{
+      font-style: normal;
+      font-weight: 600;
+      font-size: 30px;
+      line-height: 25px;
+      color: #1F3C88;
+    }
+    .modal-wrapper{
+      .modal-body{
+        .input, .select{
+          margin-bottom: 20px;
+          label{
+            font-size: 15px;
+            span{
+              color: red;
+            }
+          }
+        }
+      }
+      .modal-footer{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        .btn{
+          width: 45%;
+          font-weight: 600;
+        }
+      }
+    }
   }
   .filter{
     display: flex;
