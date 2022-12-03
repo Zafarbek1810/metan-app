@@ -63,9 +63,9 @@ const Cards = () => {
   return (
     <CardsWrapper>
       <div className="top">
-        <h3 className="title col-2">Statistika</h3>
-        <div className="filter col-5">
-          <div className="select mb-3 col-3">
+        <h3 className="title">Statistika</h3>
+        <div className="filter row">
+          <div className="select mb-3 col-md-3 col-sm-6 col-12 col ">
             <select className="form-select">
               <option disabled selected value>Tanlang</option>
               <option value="1">One</option>
@@ -73,13 +73,13 @@ const Cards = () => {
               <option value="3">Three</option>
             </select>
           </div>
-          <div className="mb-3 col-3">
+          <div className="mb-3 col-md-3 col-sm-6 col-12 col">
             <input type="date" className="form-control"/>
           </div>
-          <div className="mb-3 col-3">
+          <div className="mb-3 col-md-3 col-sm-6 col-12 col">
             <input type="date" className="form-control"/>
           </div>
-          <button className="btn btn-primary mb-3 px-4">Filtr</button>
+          <button className="btn btn-primary mb-3 col-md-2 col-sm-6 col-12 col px-4">Filtr</button>
         </div>
       </div>
       <div className="cards">

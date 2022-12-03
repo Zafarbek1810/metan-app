@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Wrapper=styled.div`
   display: flex;
-  background: #eee;
+  background: #f6f5f5;
 
   .layout__sidebar {
     flex-shrink: 0;
@@ -43,6 +43,17 @@ const Wrapper=styled.div`
   .layout__right {
     flex-grow: 1;
   }
+  
+  @media(max-width: 992px){
+    .layout__sidebar{
+      display: none;
+    }
+    .layout__top{
+      left: 0;
+      width: 100%;
+    }
+  }
+
 `
 
 export {Wrapper}

@@ -8,6 +8,8 @@ import {useContextSelector} from "use-context-selector";
 import UserContext from "../../../Context/UserContext";
 import {useRouter} from "next/router";
 import AuthProvider from "../../../Data/Providers/AuthProvider";
+import Message from "../../../utils/Message";
+import ButtonLoader from "../../Common/ButtonLoader";
 
 const LoginPage = () => {
   const {register, formState: {errors}, handleSubmit, reset, setValue} = useForm();
@@ -17,10 +19,11 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    console.log(currentUser)
     if (isAuth && currentUser) {
       switch (currentUser.role){
-        case "MANAGER":{
-          router.replace("/dashboard/table")
+        case "SUPER_ADMIN":{
+          router.replace("/dashboard/home")
           break;
         }
       }
@@ -33,7 +36,13 @@ const LoginPage = () => {
     setLoading(true);
     AuthProvider.login(body).then(({data}) => {
       localStorage.setItem("token", data.token);
-      loginContext({isAuth: true});
+      loginContext({isAuth: true,  user: {name: data.name, role: data.role}});
+    }).catch(err => {
+      if(err.response.status === 400) {
+        toast.error("Логин ёки парол нотўгри!");
+      } else if (err.response.status === 500) {
+        Message.serverError();
+      }
     }).finally(() => {
       setLoading(false);
     })
@@ -57,8 +66,9 @@ const LoginPage = () => {
                 <label>Parol</label>
                 <input type="password" {...register("password", {required: true})}/>
               </div>
-              <button type="submit" className="loginBtn">
+              <button disabled={loading} type="submit" className="loginBtn">
                 Kirish
+                {loading && <ButtonLoader/>}
               </button>
             </form>
           </div>

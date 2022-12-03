@@ -4,6 +4,7 @@ import Sidebar from "./Sidebar";
 import DashboardHeader from "./DashHeader";
 
 const DashboardLayout = ({children}) => {
+
   return (
     <Wrapper>
       <div className="layout__sidebar">

@@ -10,12 +10,14 @@ const CardsWrapper = styled.div`
       font-size: 30px;
       line-height: 25px;
       color: #1F3C88;
+      width: 30%;
     }
     
     .filter{
       display: flex;
       justify-content: space-between;
       align-items: center;
+      width: 50%;
     }
   }
   
@@ -56,6 +58,31 @@ const CardsWrapper = styled.div`
           font-size: 15px;
           color: #74788d;
         }
+      }
+    }
+  }
+
+  @media(max-width: 992px){
+    .top{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .filter{
+        width: 100%;
+      }
+    }
+    
+    .cards{
+      & > div{
+        width: 48%;
+      }
+    }
+  }
+  
+  @media(max-width: 690px){
+    .cards{
+      & > div{
+        width: 100%;
       }
     }
   }
