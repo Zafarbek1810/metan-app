@@ -21,8 +21,20 @@ const LoginPage = () => {
   useEffect(() => {
     console.log(currentUser)
     if (isAuth && currentUser) {
-      switch (currentUser.role){
-        case "SUPER_ADMIN":{
+      switch (currentUser.role) {
+        case "SUPER_ADMIN": {
+          router.replace("/dashboard/home")
+          break;
+        }
+      }
+      switch (currentUser.role) {
+        case "DIRECTOR": {
+          router.replace("/dashboard/home")
+          break;
+        }
+      }
+      switch (currentUser.role) {
+        case "CASHIER": {
           router.replace("/dashboard/home")
           break;
         }
@@ -35,13 +47,12 @@ const LoginPage = () => {
     const body = {username: values.name, password: values.password}
     setLoading(true);
     AuthProvider.login(body).then(({data}) => {
-      localStorage.setItem("token", data.token);
-      loginContext({isAuth: true,  user: {name: data.name, role: data.role}});
+      localStorage.setItem("token", data.accessToken);
+      loginContext({isAuth: true});
     }).catch(err => {
-      if(err.response.status === 400) {
-        toast.error("Логин ёки парол нотўгри!");
-      } else if (err.response.status === 500) {
-        Message.serverError();
+      console.log(err.response)
+      if (err.response.status === 401) {
+        toast.error("Login yoki parol noto'g'ri!");
       }
     }).finally(() => {
       setLoading(false);

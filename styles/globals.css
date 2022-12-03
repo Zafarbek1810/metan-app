@@ -5,3 +5,8 @@ body {
   overflow-x: hidden;
 
 }
+
+.ReactModal__Overlay {
+  background-color: rgba(31, 60, 136, 0.2) !important;
+  z-index: 99999;
+}

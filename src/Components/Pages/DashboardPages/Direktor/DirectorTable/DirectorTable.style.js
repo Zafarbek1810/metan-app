@@ -12,29 +12,6 @@ const DirectorTableWrapper=styled.div`
       line-height: 25px;
       color: #1F3C88;
     }
-    .modal-wrapper{
-      .modal-body{
-        .input, .select{
-          margin-bottom: 20px;
-          label{
-            font-size: 15px;
-            span{
-              color: red;
-            }
-          }
-        }
-      }
-      .modal-footer{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
-        .btn{
-          width: 45%;
-          font-weight: 600;
-        }
-      }
-    }
   }
   .filter{
     display: flex;
@@ -130,4 +107,150 @@ const DirectorTableWrapper=styled.div`
   }
 `
 
-export{ DirectorTableWrapper}
+const ModalHeader=styled.header`
+  background: #fff;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f5f6f8;
+  padding: 20px 20px 5px 20px;
+  h2.title{
+    margin-bottom: 0;
+    font-size: 25px !important;
+  }
+    svg{
+      height: 20px;
+      width: 20px;
+      color:#000;
+    }
+  
+  button.closeSvg{
+    background: transparent;
+    border: none;
+  }
+`
+
+
+const ModalContent=styled.div`
+  padding: 20px;
+  border-bottom: 1px solid #f5f6f8;
+  background: #fff;
+  
+  form{
+    background: #fff;
+    .label {
+      width: 100%;
+      display: block;
+      margin-bottom: 10px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      margin-bottom: 30px;
+
+      span.label-text {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 0.875rem;
+        line-height: 18px;
+        color: #000000;
+        margin-bottom: 8px;
+      }
+
+      input {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 16px;
+        color: #000000;
+        border: 2px solid rgba(31, 60, 136, 0.4);
+        border-radius: 6px;
+        padding: 10px 10px;
+      }
+
+      span.err-text {
+        color: red !important;
+        position: absolute;
+        left: 0;
+        top: 70px;
+      }
+      .select{
+        font-style: normal;
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 20px;
+        color: #000000;
+        .css-319lph-ValueContainer{
+          padding: 15px 10px;
+        }
+        .css-1s2u09g-control{
+          height: 60px;
+        }
+        .css-1okebmr-indicatorSeparator{
+          display: none;
+        }
+      }
+    }
+    
+    .btns{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      button{
+        width: 100%;
+        text-align: center;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 0.875rem;
+        line-height: 18px;
+        border-radius: 4px;
+        padding: 12px 22px;
+
+        &:disabled {
+          cursor: not-allowed;
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+  
+`
+
+
+
+
+const ModalFooter=styled.footer`
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+    button{
+      font-style: normal;
+      font-weight: 600;
+      font-size: 0.875rem;
+      line-height: 18px;
+      color: #FFFFFF;
+      background: #1F3C88;
+      font-family: "Montserrat";
+      border-radius: 8px;
+      border: none;
+      padding: 12px 22px;
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.8;
+      }
+    }
+`
+
+export{
+  DirectorTableWrapper,
+  ModalHeader,
+  ModalContent,
+  ModalFooter
+}

@@ -7,22 +7,13 @@ import Popper from 'popper.js';
 import {useEffect, useState} from "react";
 import Head from "next/head";
 import Script from "next/script";
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import NewLoader from "../src/Components/Common/NewLoader";
 
 function MyApp({Component, pageProps}) {
-  // const [showChild, setShowChild] = useState(false);
-  // useEffect(() => {
-  //   setShowChild(true);
-  // }, []);
-  //
-  // if (!showChild) {
-  //   return null;
-  // }
-  //
-  // if (typeof window === 'undefined') {
-  //   return <></>;
-  // } else {
-  //
-  // }
+  const [loading, setLoading] = useState(false);
+
   return (
     <>
       <Head>
@@ -42,6 +33,18 @@ function MyApp({Component, pageProps}) {
       />
       <UserContextProvider>
         <Component {...pageProps} />
+        {loading && <NewLoader/>}
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </UserContextProvider>
     </>
   )

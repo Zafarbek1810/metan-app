@@ -6,8 +6,10 @@ const Provider = ({children}) => {
   const [userData, setUserData] = useState({isAuth: false, user: null});
   const [actions] = useState({login, logout});
 
-  function login(payload) {
-    setUserData(payload);
+  function login() {
+    const token = localStorage.getItem("token");
+    const data = token && (jwtDecode(token) || null);
+    setUserData({isAuth: true, user: {name: data.name, role: data.role, type: data.type}});
   }
 
   function logout() {

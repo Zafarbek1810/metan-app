@@ -20,10 +20,18 @@ const DashHeaderWrapper=styled.div`
   }
   
   .admin{
+    display: flex;
+    justify-content: end;
+    align-items: center;
     width: 100%;
-    text-align: end;
     padding-right: 30px ;
+    text-decoration: none;
+    p{
+      margin-bottom: 0;
+      color: #000;
+    }
     svg{
+      margin-left: 10px;
       width: 30px;
       height: 30px;
     }
