@@ -1,19 +1,17 @@
 import styled from "styled-components";
 
 const PosTableWrapper=styled.div`
-  .title{
-    font-style: normal;
-    font-weight: 600;
-    font-size: 30px;
-    line-height: 25px;
-    color: #1F3C88;
-  }
-  .filter{
+  .top{
+    margin-bottom: 15px;
     display: flex;
-    align-items: center;
-    background: #fff;
-    padding: 22px 13px 0;
-
+    justify-content: space-between;
+    .title {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 30px;
+      line-height: 25px;
+      color: #1F3C88;
+    }
   }
 
   .table{

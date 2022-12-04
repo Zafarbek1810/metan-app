@@ -17,6 +17,8 @@ import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import UserContext from "../../../../Context/UserContext";
+import {useContextSelector} from "use-context-selector";
 
 
 const SidebarItemsMenu = [
@@ -24,31 +26,31 @@ const SidebarItemsMenu = [
     title: "Bosh Sahifa",
     path: "/dashboard/home",
     Svg: HomeSvg,
-    role: ["MANAGER"]
+    role: ["SUPER_ADMIN", "DIRECTOR"]
   },
   {
     title: "Cheklar",
     path: "/dashboard/cheks",
     Svg: CheckSvg,
-    role: ["MANAGER"]
+    role: ["CASHIER", "SUPER_ADMIN", "DIRECTOR"]
   },
   {
     title: "Mijozlar",
     path: "/dashboard/clients",
     Svg: UsersSvg,
-    role: ["MANAGER"]
+    role: ["CASHIER", "SUPER_ADMIN", "DIRECTOR"]
   },
   {
     title: "Qarzdorlar",
     path: "/dashboard/debtors",
     Svg: UsersSvg,
-    role: ["MANAGER"]
+    role: ["SUPER_ADMIN", "DIRECTOR"]
   },
   {
     title: "Xarajatlar",
     path: "/dashboard/expenses",
     Svg: CashSvg,
-    role: ["MANAGER"]
+    role: ["CASHIER", "SUPER_ADMIN", "DIRECTOR"]
   },
 
 ];
@@ -58,49 +60,49 @@ const SidebarItemsSetting = [
     title: "Savdo nuqtalari",
     path: "/dashboard/pos",
     Svg: ShopSvg,
-    role: ["MANAGER"]
+    role: ["SUPER_ADMIN", "DIRECTOR"]
   },
   {
     title: "Direktor",
     path: "/dashboard/directors",
     Svg: UsersSvg,
-    role: ["MANAGER"]
+    role: ["SUPER_ADMIN"]
   },
   {
     title: "Hujjatlar",
     path: "/dashboard/documents",
     Svg: FileSvg,
-    role: ["MANAGER"]
+    role: ["SUPER_ADMIN", "DIRECTOR"]
   },
   {
     title: "Kassirlar",
     path: "/dashboard/cashiers",
     Svg: UsersSvg,
-    role: ["MANAGER"]
+    role: ["SUPER_ADMIN", "DIRECTOR"]
   },
   {
     title: "Keshbek",
     path: "/dashboard/services",
     Svg: CashbackSvg,
-    role: ["MANAGER"]
+    role: ["SUPER_ADMIN", "DIRECTOR"]
   },
   {
     title: "Kolonkalar",
     path: "/dashboard/gas-columns",
     Svg: FireSvg,
-    role: ["MANAGER"]
+    role: ["CASHIER", "SUPER_ADMIN", "DIRECTOR"]
   },
   {
     title: "Kolonkalar hisoboti",
     path: "/dashboard/gas-columns-report",
     Svg: FireSvg,
-    role: ["MANAGER"]
+    role: ["SUPER_ADMIN", "DIRECTOR"]
   },
   {
     title: "Smena",
     path: "/dashboard/shifts",
     Svg: ClockSvg,
-    role: ["MANAGER"]
+    role: ["SUPER_ADMIN", "DIRECTOR"]
   },
 
 ];
@@ -141,6 +143,12 @@ function a11yProps(index) {
 const Sidebar = () => {
   const router = useRouter();
   const [value, setValue] = React.useState(0);
+  const userRole = useContextSelector(UserContext, ctx => ctx.state.user.role);
+  const SidebarLinks= SidebarItemsMenu.concat(SidebarItemsSetting)
+
+
+  const NavListMenu = SidebarItemsMenu.filter(({role}) => role.includes(userRole));
+  const NavListSetting = SidebarItemsSetting.filter(({role}) => role.includes(userRole));
 
 
   const handleChange = (event, newValue) => {
@@ -149,7 +157,7 @@ const Sidebar = () => {
 
   useLayoutEffect(() => {
     for (const {path} of SidebarItemsSetting) {
-      if(router.pathname===path){
+      if (router.pathname === path) {
         setValue(1)
       }
     }
@@ -173,7 +181,7 @@ const Sidebar = () => {
             </Box>
             <TabPanel value={value} index={0}>
               {
-                SidebarItemsMenu.map(({title, Svg, path}, idx) => {
+                NavListMenu.map(({title, Svg, path}, idx) => {
                   return (
                     <MyLink
                       className={router.pathname === path ? "activelink" : "link"}
@@ -189,7 +197,7 @@ const Sidebar = () => {
             </TabPanel>
             <TabPanel value={value} index={1}>
               {
-                SidebarItemsSetting.map(({title, Svg, path}, idx) => {
+                NavListSetting.map(({title, Svg, path}, idx) => {
                   return (
                     <MyLink
                       className={router.pathname === path ? "activelink" : "link"}

@@ -53,8 +53,7 @@ const DirectorTableWrapper=styled.div`
           color: #1F3C88;
           display: flex;
           align-items: center;
-          justify-content: center;
-          text-align: center;
+          justify-content: start;
         }
       }
     }
@@ -75,6 +74,16 @@ const DirectorTableWrapper=styled.div`
           justify-content: center;
           color: #000000;
           text-align: center;
+          td.row{
+            font-style: normal;
+            font-weight: 600;
+            font-size: 0.8125rem;
+            line-height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            text-align: center;
+          }
 
           img{
             width: 50px;
@@ -92,16 +101,7 @@ const DirectorTableWrapper=styled.div`
             justify-content: center;
           }
         }
-        td.row{
-          font-style: normal;
-          font-weight: 600;
-          font-size: 0.8125rem;
-          line-height: 24px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-        }
+       
       }
     }
   }

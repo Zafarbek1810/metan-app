@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Kassirlar from "../../src/Components/Pages/DashboardPages/Kassirlar";
-import WithAuthComponent from "../../src/Components/Hocs/PrivateRoute";
+import WithAuthComponent from "../../../src/Components/Hocs/PrivateRoute";
+import EditSavdo from "../../../src/Components/Pages/DashboardPages/EditSavdo";
 
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico"/>
       </Head>
       <WithAuthComponent>
-        <Kassirlar/>
+        <EditSavdo/>
       </WithAuthComponent>
     </>
   )

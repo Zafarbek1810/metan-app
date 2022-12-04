@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {CashierTableWrapper} from "./CashierTable.style";
+import {CashierTableWrapper, ModalContent, ModalHeader} from "./CashierTable.style";
 import EditSvg from "../../../../Common/Svgs/EditSvg";
 import {useForm} from "react-hook-form";
 import UserProvider from "../../../../../Data/Providers/UserProvider";
 import Message from "../../../../../utils/Message";
-import {ModalContent, ModalHeader} from "../../Direktor/DirectorTable/DirectorTable.style";
 import CloseSvg from "../../../../Common/Svgs/CloseSvg";
 import ButtonLoader from "../../../../Common/ButtonLoader";
 import Modal from "react-modal";

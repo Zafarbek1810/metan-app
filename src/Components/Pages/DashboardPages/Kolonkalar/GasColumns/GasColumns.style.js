@@ -70,7 +70,7 @@ const GasColumnsWrapper=styled.div`
           color: #1F3C88;
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: start;
           text-align: center;
         }
       }
@@ -116,7 +116,7 @@ const GasColumnsWrapper=styled.div`
           line-height: 24px;
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: start;
           text-align: center;
         }
       }

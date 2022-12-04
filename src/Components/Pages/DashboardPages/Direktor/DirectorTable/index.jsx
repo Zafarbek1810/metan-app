@@ -154,7 +154,7 @@ const DirectorTable = () => {
           directors.length
           ? directors.map((obj, index)=>(
               <tr key={index}>
-                <td style={{width: "30%"}} className="row">1. {obj.fullName} </td>
+                <td style={{width: "30%"}} className="row">{index+1}. {obj.fullName} </td>
                 <td style={{width: "30%"}} className="col">{obj.username}</td>
                 <td style={{width: "30%"}} className="col">
                   <div className="btns">
