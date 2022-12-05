@@ -1,13 +1,13 @@
 import React from 'react';
 import DashboardLayout from "../../../Layouts/Dashboard";
-import EditTable from "./EditTable";
+import Cashbox from "./Cashbox";
 
-const EditSavdo = ({outletId}) => {
+const Kassa = () => {
   return (
     <DashboardLayout>
-      <EditTable id={outletId}/>
+      <Cashbox/>
     </DashboardLayout>
   );
 };
 
-export default EditSavdo;
+export default Kassa;

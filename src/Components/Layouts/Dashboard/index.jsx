@@ -4,6 +4,7 @@ import Sidebar from "./Sidebar";
 import DashboardHeader from "./DashHeader";
 import {ModalContextProvider} from "../../../Context/ModalContext";
 import ConfirmModal from "../../Common/ConfirmModal";
+import NewSidebar from "../NewSidebar";
 
 const DashboardLayout = ({children, title}) => {
   const RefObj = useRef({resolve(){}, reject(){}});
@@ -14,6 +15,7 @@ const DashboardLayout = ({children, title}) => {
       <Wrapper>
         <div className="layout__sidebar">
           <Sidebar/>
+          {/*<NewSidebar/>*/}
         </div>
         <div className="layout__right">
           <div className="layout__top">

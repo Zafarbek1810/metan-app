@@ -24,7 +24,7 @@ const customStyles = {
     flexDirection: "column",
     justifyContent: "space-between",
     borderRadius: 8,
-    padding:0,
+    padding: 0,
     overlay: {
       background: "red"
     }
@@ -38,22 +38,23 @@ const DirectorTable = () => {
     defaultValues: {}
   });
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [editingDirector, setEditingDirector] = useState(null)
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
-  const [directors, setDirectors]=useState([])
-  const [forRender, setForRender]=useState(null)
+  const [directors, setDirectors] = useState([])
+  const [forRender, setForRender] = useState(null)
 
-  useEffect(()=>{
+  useEffect(() => {
     setLoading2(true);
     UserProvider.getAllDirectors(0, 1000)
-      .then(res=>{
+      .then(res => {
         console.log(res)
         setDirectors(res.data)
       })
-      .catch(err=>{
+      .catch(err => {
         console.log(err)
         Message.serverError()
-      }).finally(()=>{
+      }).finally(() => {
       setLoading2(false);
     })
   }, [forRender])
@@ -61,27 +62,55 @@ const DirectorTable = () => {
   function openModal() {
     setIsOpen(true);
   }
+
   function closeModal() {
     setIsOpen(false);
   }
 
   const onSubmit = async (values) => {
-    const body={}
-    body.fullName=values.name;
-    body.username=values.login;
-    body.password=values.pass;
+    const body = {}
+    body.fullName = values.name;
+    body.username = values.login;
+    body.password = values.pass;
 
     setLoading(true)
-    try{
-      const {data}=await UserProvider.createDirector(body);
-      setForRender(Math.random());
-      closeModal()
-    }catch(err){
-      console.log(err)
-      Message.serverError();
+    if(editingDirector){
+      try {
+        // body.id = editingDirector.id
+
+        const {data} = await UserProvider.updateDirector(body);
+        setForRender(Math.random());
+        closeModal()
+      } catch (err) {
+        console.log(err)
+        Message.serverError();
+      }
+    }else{
+      try {
+        const {data} = await UserProvider.createDirector(body);
+        setForRender(Math.random());
+        closeModal()
+      } catch (err) {
+        console.log(err)
+        Message.serverError();
+      }
     }
     setLoading(false)
   }
+
+  const handleEdit = (obj) => {
+    setEditingDirector(obj)
+    setIsOpen(true)
+  }
+
+  useEffect(()=>{
+    console.log(editingDirector)
+    if(editingDirector){
+      console.log(editingDirector)
+      setValue("name", editingDirector.fullName)
+      setValue("login", editingDirector.username)
+    }
+  }, [modalIsOpen])
 
   return (
     <DirectorTableWrapper>
@@ -101,41 +130,42 @@ const DirectorTable = () => {
               <h2 className="title">Qo'shish</h2>
               <button className="closeSvg" onClick={closeModal}><CloseSvg/></button>
             </ModalHeader>
-           <ModalContent>
-             <form onSubmit={handleSubmit(onSubmit)}>
-               <label className="label">
-                 <span className="label-text">Ism</span>
-                 {errors.name && (
-                   <span className="err-text">Majburiy maydon</span>
-                 )}
-                 <input
-                   type="text"
-                   {...register("name", {required: true})}
-                 />
-               </label>
-               <label className="label">
-                 <span className="label-text">Login</span>
-                 {errors.login && (
-                   <span className="err-text">Majburiy maydon</span>
-                 )}
-                 <input
-                   type="text"
-                   {...register("login", {required: true})}
-                 />
-               </label>
-               <label className="label">
-                 <span className="label-text">Maxfiy so'z</span>
-                 <input
-                   type="text"
-                   {...register("pass", {required: false})}
-                 />
-               </label>
-               <div className="btns">
-                 <button type="button" className="btn btn-outline-warning" onClick={closeModal}>Bekor qilish</button>
-                 <button type="submit" className="btn btn-primary" disabled={loading}>Saqlash {loading && <ButtonLoader/>}</button>
-               </div>
-             </form>
-           </ModalContent>
+            <ModalContent>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <label className="label">
+                  <span className="label-text">Ism</span>
+                  {errors.name && (
+                    <span className="err-text">Majburiy maydon</span>
+                  )}
+                  <input
+                    type="text"
+                    {...register("name", {required: true})}
+                  />
+                </label>
+                <label className="label">
+                  <span className="label-text">Login</span>
+                  {errors.login && (
+                    <span className="err-text">Majburiy maydon</span>
+                  )}
+                  <input
+                    type="text"
+                    {...register("login", {required: true})}
+                  />
+                </label>
+                <label className="label">
+                  <span className="label-text">Maxfiy so'z</span>
+                  <input
+                    type="text"
+                    {...register("pass", {required: false})}
+                  />
+                </label>
+                <div className="btns">
+                  <button type="button" className="btn btn-outline-warning" onClick={closeModal}>Bekor qilish</button>
+                  <button type="submit" className="btn btn-primary" disabled={loading}>Saqlash {loading &&
+                  <ButtonLoader/>}</button>
+                </div>
+              </form>
+            </ModalContent>
           </Modal>
         </div>
 
@@ -151,26 +181,26 @@ const DirectorTable = () => {
         <tbody>
         {
           !loading2 ?
-          directors.length
-          ? directors.map((obj, index)=>(
-              <tr key={index}>
-                <td style={{width: "30%"}} className="row">{index+1}. {obj.fullName} </td>
-                <td style={{width: "30%"}} className="col">{obj.username}</td>
-                <td style={{width: "30%"}} className="col">
-                  <div className="btns">
-                    <button>
-                      <EditSvg/>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            )): <div style={
-              {
-                textAlign: "center",
-                padding: 30,
-              }
-            }><h3>Direktorlar mavjud emas!</h3></div>
-            :  <MinLoader/>
+            directors.length
+              ? directors.map((obj, index) => (
+                <tr key={index}>
+                  <td style={{width: "30%"}} className="row">{index + 1}. {obj.fullName} </td>
+                  <td style={{width: "30%"}} className="col">{obj.username}</td>
+                  <td style={{width: "30%"}} className="col">
+                    <div className="btns">
+                      <button onClick={() => handleEdit(obj)}>
+                        <EditSvg/>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              )) : <div style={
+                {
+                  textAlign: "center",
+                  padding: 30,
+                }
+              }><h3>Direktorlar mavjud emas!</h3></div>
+            : <MinLoader/>
         }
         </tbody>
       </table>

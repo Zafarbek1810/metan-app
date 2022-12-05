@@ -12,6 +12,8 @@ import Message from "../../../../../utils/Message";
 import OutletProvider from "../../../../../Data/Providers/OutletProvider";
 import MinLoader from "../../../../Common/MinLoader";
 import {useRouter} from "next/router";
+import {useContext, useContextSelector} from "use-context-selector";
+import GlobalContext from "../../../../../Context/GlobalContext/Context";
 
 const customStyles = {
   content: {
@@ -46,6 +48,7 @@ const PosTable = ({RefObj, setIsOpen}) => {
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
   const [forRender, setForRender] = useState(null)
+  const savdo_edit = useContextSelector(GlobalContext, (state)=>state.savdo_edit)
 
   function openModal() {
     setIsModalOpen(true);
@@ -54,19 +57,6 @@ const PosTable = ({RefObj, setIsOpen}) => {
   function closeModal() {
     setIsModalOpen(false);
   }
-
-  // useEffect(()=>{
-  //   if(isEditMode) {
-  //     OutletProvider.getOneOutlet(outletId)
-  //       .then(({data}) => {
-  //         setValue("title", data.title);
-  //       })
-  //       .catch(err => {
-  //         console.log(err);
-  //         Message.serverError();
-  //       })
-  //   }
-  // })
 
   useEffect(() => {
     setLoading2(true);
@@ -100,10 +90,11 @@ const PosTable = ({RefObj, setIsOpen}) => {
   }
 
   const handleEditUser = (outletId) => {
-    router.push("/dashboard/editOutlet/" + outletId);
+    savdo_edit(outletId)
+    router.push("/dashboard/editOutlet/");
   }
 
-  const handleDeleteOutlet = (body) => {
+  const handleDeleteOutlet = (id) => {
     RefObj.current.textContent = `Rostdan ham o'chirishni xoxlaysizmi?`
     setIsOpen(true)
     new Promise((res, rej) => {
@@ -111,9 +102,9 @@ const PosTable = ({RefObj, setIsOpen}) => {
       RefObj.current.reject = rej;
     })
       .then(async () => {
-        const {data} = await OutletProvider.deleteOutlet(body)
-        setOutlet(pre => pre.filter(out => {
-          return out.id !== id
+        await OutletProvider.deleteOutlet(id)
+        setOutlet(pre => pre.filter(mod => {
+          return mod.id !== id
         }))
       })
       .catch((err) => {
@@ -186,7 +177,7 @@ const PosTable = ({RefObj, setIsOpen}) => {
           !loading2 ?
             outlet.length
               ? outlet.map((obj, index) => (
-                <tr>
+                <tr key={obj.id}>
                   <td style={{width: "3%"}} className="row">{index + 1}</td>
                   {/*<td style={{width: "10%"}} className="col"><img src="/img/metan.png" alt=""/></td>*/}
                   <td style={{width: "10%"}} className="col">{obj.title}</td>

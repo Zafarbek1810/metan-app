@@ -37,6 +37,7 @@ const CashierTable = () => {
     defaultValues: {}
   });
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [editingCashier, setEditingCashier] = useState(null)
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
   const [cashiers, setCashiers] = useState([])
@@ -72,16 +73,43 @@ const CashierTable = () => {
     body.password = values.pass;
 
     setLoading(true)
-    try {
-      const {data} = await UserProvider.createCashier(body);
-      setForRender(Math.random())
-      closeModal()
-    } catch (err) {
-      console.log(err)
-      Message.serverError();
+    if (editingCashier) {
+      try {
+        // body.id = editingDirector.id
+
+        const {data} = await UserProvider.updateCashier(body);
+        setForRender(Math.random());
+        closeModal()
+      } catch (err) {
+        console.log(err)
+        Message.serverError();
+      }
+    } else {
+      try {
+        const {data} = await UserProvider.createCashier(body);
+        setForRender(Math.random())
+        closeModal()
+      } catch (err) {
+        console.log(err)
+        Message.serverError();
+      }
     }
     setLoading(false)
   }
+
+  const handleEdit = (obj) => {
+    setEditingCashier(obj)
+    setIsOpen(true)
+  }
+
+  useEffect(() => {
+    console.log(editingCashier)
+    if (editingCashier) {
+      console.log(editingCashier)
+      setValue("name", editingCashier.fullName)
+      setValue("login", editingCashier.username)
+    }
+  }, [modalIsOpen])
 
 
   return (
@@ -160,7 +188,7 @@ const CashierTable = () => {
                   <td style={{width: "30%"}} className="col">{obj.username}</td>
                   <td style={{width: "30%"}} className="col">
                     <div className="btns">
-                      <button>
+                      <button onClick={() => handleEdit(obj)}>
                         <EditSvg/>
                       </button>
                     </div>

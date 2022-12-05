@@ -23,6 +23,12 @@ import {useContextSelector} from "use-context-selector";
 
 const SidebarItemsMenu = [
   {
+    title: "Kassa",
+    path: "/dashboard/cashbox",
+    Svg: HomeSvg,
+    role: ["CASHIER"]
+  },
+  {
     title: "Bosh Sahifa",
     path: "/dashboard/home",
     Svg: HomeSvg,
@@ -39,6 +45,12 @@ const SidebarItemsMenu = [
     path: "/dashboard/clients",
     Svg: UsersSvg,
     role: ["CASHIER", "SUPER_ADMIN", "DIRECTOR"]
+  },
+  {
+    title: "Kolonkalar",
+    path: "/dashboard/gas-columns",
+    Svg: FireSvg,
+    role: ["CASHIER"]
   },
   {
     title: "Qarzdorlar",
@@ -68,12 +80,12 @@ const SidebarItemsSetting = [
     Svg: UsersSvg,
     role: ["SUPER_ADMIN"]
   },
-  {
-    title: "Hujjatlar",
-    path: "/dashboard/documents",
-    Svg: FileSvg,
-    role: ["SUPER_ADMIN", "DIRECTOR"]
-  },
+  // {
+  //   title: "Hujjatlar",
+  //   path: "/dashboard/documents",
+  //   Svg: FileSvg,
+  //   role: ["SUPER_ADMIN", "DIRECTOR"]
+  // },
   {
     title: "Kassirlar",
     path: "/dashboard/cashiers",
@@ -90,7 +102,7 @@ const SidebarItemsSetting = [
     title: "Kolonkalar",
     path: "/dashboard/gas-columns",
     Svg: FireSvg,
-    role: ["CASHIER", "SUPER_ADMIN", "DIRECTOR"]
+    role: ["SUPER_ADMIN", "DIRECTOR"]
   },
   {
     title: "Kolonkalar hisoboti",

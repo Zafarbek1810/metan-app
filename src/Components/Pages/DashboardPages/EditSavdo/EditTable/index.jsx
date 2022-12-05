@@ -4,6 +4,8 @@ import {Input, Select} from "antd";
 import UserProvider from "../../../../../Data/Providers/UserProvider";
 import Message from "../../../../../utils/Message";
 import {useRouter} from "next/router";
+import OutletProvider from "../../../../../Data/Providers/OutletProvider";
+import {useForm} from "react-hook-form";
 
 const provinceData = ['Zhejiang', 'Jiangsu'];
 const cityData = {
@@ -12,7 +14,10 @@ const cityData = {
 };
 
 
-const EditTable = () => {
+const EditTable = ({id}) => {
+  const {register, formState: {errors}, handleSubmit, setValue, reset, control} = useForm({
+    defaultValues: {}
+  });
   const router = useRouter()
   const [cities, setCities] = useState(cityData[provinceData[0]]);
   const [secondCity, setSecondCity] = useState(cityData[provinceData[0]][0]);
@@ -28,16 +33,16 @@ const EditTable = () => {
   const [directors, setDirectors] = useState([]);
 
   useEffect(() => {
-    UserProvider.getAllCashiers(0, 1000)
-      .then(res => {
-        console.log(res.data)
-        setCashiers(res.data)
+    OutletProvider.getOneFullOutlet(id)
+      .then(({data}) => {
+        setValue("title", data.title);
+        setCashiers(data.cashiers)
+        setDirectors(data.directors)
       })
       .catch(err => {
-        console.log(err)
-        Message.serverError()
-      }).finally(() => {
-    })
+        console.log(err);
+        Message.serverError();
+      })
   }, [])
 
 
@@ -52,7 +57,18 @@ const EditTable = () => {
     router.push("/dashboard/pos")
   }
 
-  const options1 = cashiers.filter(cashier => cashier.username.id === cashiers.id)
+  const optionskassir = cashiers.map((i)=>(
+    {
+      label: i.username,
+      value: i.id
+    }
+  ))
+  const optionsdirektor = directors.map((i)=>(
+    {
+      label: i.username,
+      value: i.id
+    }
+  ))
 
 
   return (
@@ -72,7 +88,7 @@ const EditTable = () => {
                 placeholder="Please select"
                 onChange={handleChange}
                 options={
-                  options1
+                  optionskassir
                 }
               />
             </div>
@@ -86,18 +102,20 @@ const EditTable = () => {
                 }}
                 placeholder="Please select"
                 onChange={handleChange}
-                options={cashiers}
+                options={optionsdirektor}
               />
             </div>
           </div>
           <div className="col-md-4 col-12">
             <div className="input">
-              <label>Savdo nuqtasi nomi</label>
-              <Input
-                style={{
-                  width: '100%',
-                }}
-              />
+              <label className="label">
+                <span className="label-text">Savdo nuqtasi nomi</span>
+                <input
+                  type="text"
+                  style={{width:"100%", borderRadius:"6px", borderColor:"#d9d9d9"}}
+                  {...register("title", {required: true})}
+                />
+              </label>
             </div>
             <div className="input">
               <label>Telefon</label>

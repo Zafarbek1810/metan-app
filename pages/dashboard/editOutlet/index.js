@@ -1,9 +1,13 @@
 import Head from 'next/head'
 import WithAuthComponent from "../../../src/Components/Hocs/PrivateRoute";
 import EditSavdo from "../../../src/Components/Pages/DashboardPages/EditSavdo";
+import {useContextSelector} from "use-context-selector";
+import GlobalContext from "../../../src/Context/GlobalContext/Context";
 
 
 export default function Home() {
+  const outletId = useContextSelector(GlobalContext, value => value.state.savdo_id)
+  console.log(outletId)
   return (
     <>
       <Head>
@@ -12,7 +16,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico"/>
       </Head>
       <WithAuthComponent>
-        <EditSavdo/>
+        <EditSavdo outletId={outletId}/>
       </WithAuthComponent>
     </>
   )

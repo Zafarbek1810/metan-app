@@ -10,7 +10,10 @@ export default class OutletProvider{
   static async getOneOutlet(outletId) {
     return await client.get(`/outlet/getOutlets/${outletId}`);
   }
-  static async deleteOutlet(body) {
-    return await client.post(`/outlet/deleteOutlet`, body);
+  static async getOneFullOutlet(id) {
+    return await client.get(`/outlet/getOutlet/${id}`);
+  }
+  static async deleteOutlet(id) {
+    return await client.delete(`/outlet/deleteOutlet/${id}`);
   }
 }
