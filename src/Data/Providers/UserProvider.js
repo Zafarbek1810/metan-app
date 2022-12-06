@@ -19,5 +19,8 @@ export default class UserProvider {
   static async getAllCashiers(page = 0, size = 10, sort = "asc") {
     return await client.get(`/admin/cashiers?page=${page}&size=${size}&sort=${sort}`);
   }
+  static async getMe(body) {
+    return await client.get("/admin/getme", body);
+  }
 
 }

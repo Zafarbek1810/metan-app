@@ -16,4 +16,19 @@ export default class OutletProvider{
   static async deleteOutlet(id) {
     return await client.delete(`/outlet/deleteOutlet/${id}`);
   }
+  static async addCashierOutlet(body) {
+    return await client.post("/outlet/addCashier", body);
+  }
+  static async deleteCashierOutlet(body) {
+    return await client.delete("/outlet/removeCashier", body);
+  }
+  static async addDirektorOutlet(body) {
+    return await client.post("/outlet/addDirector", body);
+  }
+  static async deleteDirektorOutlet(body) {
+    return await client.delete(`/outlet/removeDirector`, body);
+  }
+  static async updateOutlet(body) {
+    return await client.post("/outlet/editOutlet", body);
+  }
 }
