@@ -8,7 +8,6 @@ import OutletProvider from "../../../../../Data/Providers/OutletProvider";
 import {useForm, Controller} from "react-hook-form";
 import DeleteSvg from "../../../../Common/Svgs/DeleteSvg";
 import Modal from "react-modal";
-import axios from "axios";
 
 const provinceData = ['Zhejiang', 'Jiangsu'];
 const cityData = {
@@ -171,21 +170,17 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
       RefObj.current.reject = rej;
     })
       .then(async () => {
-        console.log(cashid)
-        console.log(id)
-        console.log(typeof cashid)
-        console.log(typeof id)
         const body = {
           adminId: +cashid,
           outletId: +id
         }
-        // await OutletProvider.deleteCashierOutlet(body)
-        axios.delete("http://178.159.39.206:3000/outlet/removeCashier", {
-          headers: {
-            Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InphZmFyIiwidXNlcklkIjoxLCJyb2xlIjoiU1VQRVJfQURNSU4iLCJ0eXBlIjoiQURNSU4iLCJpYXQiOjE2NzAzNDYwNDB9.hOKZgiuARpmlT7dohgpXqqlSBmB12XJVeOEYiMMme1Y"
-          },
-          data: body
-        });
+        await OutletProvider.deleteCashierOutlet(body)
+        // axios.delete("http://178.159.39.206:3000/outlet/removeCashier", {
+        //   headers: {
+        //     Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InphZmFyIiwidXNlcklkIjoxLCJyb2xlIjoiU1VQRVJfQURNSU4iLCJ0eXBlIjoiQURNSU4iLCJpYXQiOjE2NzAzNDYwNDB9.hOKZgiuARpmlT7dohgpXqqlSBmB12XJVeOEYiMMme1Y"
+        //   },
+        //   data: body
+        // });
 
         setSavoNuqta(pre => ({
           ...pre, cashiers: pre.cashiers.filter(cash => cash.id !== cashid)
@@ -275,7 +270,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
                 <Select
                   defaultValue={provinceData[0]}
                   style={{
-                    width: '100%',
+                    width: "100%",
                   }}
                   onChange={handleProvinceChange}
                   options={provinceData.map((province) => ({
@@ -290,7 +285,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
                 <span>Tuman</span>
                 <Select
                   style={{
-                    width: '100%',
+                    width: "100%",
                   }}
                   value={secondCity}
                   onChange={onSecondCityChange}

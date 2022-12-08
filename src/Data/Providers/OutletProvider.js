@@ -20,15 +20,27 @@ export default class OutletProvider{
     return await client.post("/outlet/addCashier", body);
   }
   static async deleteCashierOutlet(body) {
-    return await client.delete("/outlet/removeCashier", body);
+    return await client.delete("/outlet/removeCashier", {
+      data: body
+    });
   }
   static async addDirektorOutlet(body) {
     return await client.post("/outlet/addDirector", body);
   }
   static async deleteDirektorOutlet(body) {
-    return await client.delete(`/outlet/removeDirector`, body);
+    return await client.delete(`/outlet/removeDirector`, {
+      data: body
+    });
   }
   static async updateOutlet(body) {
     return await client.post("/outlet/editOutlet", body);
+  }
+
+
+  static async addExpence(body) {
+    return await client.post("/outlet/addExpense", body);
+  }
+  static async getExpenses(page = 0, size = 10) {
+    return await client.get(`/outlet/getExpenses?skip=${page}&take=${size}`);
   }
 }

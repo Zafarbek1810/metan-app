@@ -14,7 +14,10 @@ export default class UserProvider {
     return await client.post("/admin/addCashier", body);
   }
   static async updateCashier(body) {
-    return await client.post("/admin/addCashier", body);
+    return await client.post("/admin/editAdmin", body);
+  }
+  static async updateDirector(body) {
+    return await client.post("/admin/editAdmin", body);
   }
   static async getAllCashiers(page = 0, size = 10, sort = "asc") {
     return await client.get(`/admin/cashiers?page=${page}&size=${size}&sort=${sort}`);

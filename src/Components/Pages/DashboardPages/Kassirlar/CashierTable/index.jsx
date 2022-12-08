@@ -64,6 +64,10 @@ const CashierTable = () => {
 
   function closeModal() {
     setIsOpen(false);
+    setEditingCashier(null)
+    setValue("name", "")
+    setValue("login", "")
+    setValue("pass", "")
   }
 
   const onSubmit = async (values) => {
@@ -75,7 +79,7 @@ const CashierTable = () => {
     setLoading(true)
     if (editingCashier) {
       try {
-        // body.id = editingDirector.id
+        body.id = editingCashier.id
 
         const {data} = await UserProvider.updateCashier(body);
         setForRender(Math.random());
@@ -103,11 +107,10 @@ const CashierTable = () => {
   }
 
   useEffect(() => {
-    console.log(editingCashier)
     if (editingCashier) {
-      console.log(editingCashier)
       setValue("name", editingCashier.fullName)
       setValue("login", editingCashier.username)
+      setValue("pass", "")
     }
   }, [modalIsOpen])
 
@@ -154,9 +157,12 @@ const CashierTable = () => {
                 </label>
                 <label className="label">
                   <span className="label-text">Maxfiy so'z</span>
+                  {errors.pass && (
+                    <span className="err-text">Majburiy maydon</span>
+                  )}
                   <input
                     type="text"
-                    {...register("pass", {required: false})}
+                    {...register("pass", {required: true})}
                   />
                 </label>
                 <div className="btns">

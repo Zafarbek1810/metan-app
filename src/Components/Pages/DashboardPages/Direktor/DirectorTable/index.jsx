@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {DirectorTableWrapper, ModalContent, ModalFooter, ModalHeader} from "./DirectorTable.style";
 import EditSvg from "../../../../Common/Svgs/EditSvg";
-import {Input} from "antd";
 import {useForm} from "react-hook-form";
 import Modal from "react-modal"
 import CloseSvg from "../../../../Common/Svgs/CloseSvg";
@@ -65,6 +64,10 @@ const DirectorTable = () => {
 
   function closeModal() {
     setIsOpen(false);
+    setEditingDirector(null)
+    setValue("name", "")
+    setValue("login", "")
+    setValue("pass", "")
   }
 
   const onSubmit = async (values) => {
@@ -76,7 +79,7 @@ const DirectorTable = () => {
     setLoading(true)
     if(editingDirector){
       try {
-        // body.id = editingDirector.id
+        body.id = editingDirector.id
 
         const {data} = await UserProvider.updateDirector(body);
         setForRender(Math.random());
@@ -104,11 +107,10 @@ const DirectorTable = () => {
   }
 
   useEffect(()=>{
-    console.log(editingDirector)
     if(editingDirector){
-      console.log(editingDirector)
       setValue("name", editingDirector.fullName)
       setValue("login", editingDirector.username)
+      setValue("pass", "")
     }
   }, [modalIsOpen])
 
@@ -154,9 +156,12 @@ const DirectorTable = () => {
                 </label>
                 <label className="label">
                   <span className="label-text">Maxfiy so'z</span>
+                  {errors.pass && (
+                    <span className="err-text">Majburiy maydon</span>
+                  )}
                   <input
                     type="text"
-                    {...register("pass", {required: false})}
+                    {...register("pass", {required: true})}
                   />
                 </label>
                 <div className="btns">
