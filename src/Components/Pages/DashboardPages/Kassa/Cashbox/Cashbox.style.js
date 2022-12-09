@@ -141,7 +141,7 @@ const CashboxWrapper = styled.div`
 
 `
 
-const Tab1Wrapper = styled.div`
+const Tab1Wrapper = styled.form`
   background: #fff;
   padding: 15px;
   border: 1px solid #1F3C88;

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {CashboxWrapper, Tab1Wrapper, Tab2Wrapper, Tab3Wrapper} from "./Cashbox.style";
 import EditSvg from "../../../../Common/Svgs/EditSvg";
 import UserSvg from "../../../../Common/Svgs/UserSvg";
@@ -11,17 +11,53 @@ import AwardSvg from "../../../../Common/Svgs/AwardSvg";
 import CashSvg from "../../../../Common/Svgs/CashSvg";
 import CalendarSvg from "../../../../Common/Svgs/CalendarSvg";
 import GasBallonSvg from "../../../../Common/Svgs/GasBallonSvg";
-import {Modal, Select, Tabs} from "antd";
+import {message, Modal, Select, Tabs} from "antd";
 import {ModalContent} from "../../Xarajatlar/ExpensesTable/ExpensesTable.style";
 import ButtonLoader from "../../../../Common/ButtonLoader";
 import {useForm} from "react-hook-form";
+import {useContextSelector} from "use-context-selector";
+import UserContext from "../../../../../Context/UserContext";
+import UserProvider from "../../../../../Data/Providers/UserProvider";
+import PaymentProvider from "../../../../../Data/Providers/PaymentProvider";
+import {toast} from "react-toastify";
 
-const Tab1 = () => {
+const Tab1 = ({outletId, setMijozObj}) => {
+  const [data, setData] = useState({});
   const {register, formState: {errors}, handleSubmit, setValue, reset, control} = useForm({
     defaultValues: {}
   });
+
+  const handleFetchMijoz = (e) => {
+    if(e.code === "Enter" && e.target.value.length > 0) {
+      PaymentProvider.getQrInfo(e.target.value)
+        .then(({data}) => {
+          console.log(data)
+          setMijozObj(data);
+          setData(data);
+          setValue("carNum", data.plateNumber);
+        }, err => {
+          toast.error(err?.response?.data?.message);
+        })
+    }
+  }
+
+  const onSubmit = (values) => {
+    const body = {
+      amount: +values.summa,
+      clientId: data.id,
+      outletId
+    }
+
+    PaymentProvider.pay(body)
+      .then(({data}) => {
+        console.log(data);
+      }, err => {
+        console.log(err);
+      })
+  }
+
   return (
-    <Tab1Wrapper>
+    <Tab1Wrapper onSubmit={handleSubmit(onSubmit)}>
       <div className="row">
         <div className="col-md-6">
           <label className="label ">
@@ -33,6 +69,7 @@ const Tab1 = () => {
               placeholder="Izlash..."
               type="number"
               {...register("name", {required: true})}
+              onKeyDown={handleFetchMijoz}
             />
           </label>
         </div>
@@ -56,7 +93,7 @@ const Tab1 = () => {
             <span className="err-text">Majburiy maydon</span>
           )}
           <input
-            placeholder="Izlash..."
+            placeholder=""
             type="number"
             {...register("summa", {required: true})}
           />
@@ -69,7 +106,7 @@ const Tab1 = () => {
           </button>
         </div>
         <div className="col-md-6">
-          <button type="button" className="btn btn-success w-100">
+          <button type="submit" className="btn btn-success w-100">
             To'lash
           </button>
         </div>
@@ -162,11 +199,23 @@ const Tab3 = () => {
 }
 
 const Cashbox = () => {
+  const [outletId, setOutletId] = useState(null);
+  const [mijozObj, setMijozObj] = useState({});
   const {register, formState: {errors}, handleSubmit, setValue, reset, control} = useForm({
     defaultValues: {}
   });
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    UserProvider.getMe()
+      .then(({data}) => {
+        setOutletId(data.outletAsCashier?.id);
+      }, err => {
+        console.log(err);
+      })
+  })
+
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -175,8 +224,8 @@ const Cashbox = () => {
     setIsModalOpen(false);
   };
 
-  const onSubmit = () => {
-    console.log("click")
+  const onSubmit = (values) => {
+    console.log(values);
   }
 
   return (
@@ -282,7 +331,7 @@ const Cashbox = () => {
           <div className="bottom">
             <div className="box">
               <div className="head">
-                <h3>Balans: 0</h3>
+                <h3>Balans: {mijozObj.balance}</h3>
                 <button onClick={showModal}><EditSvg/></button>
               </div>
               <div className="body">
@@ -292,70 +341,70 @@ const Cashbox = () => {
                       <UserSvg/>
                       <h4>Mijoz</h4>
                     </div>
-                    <div className="right"><p>jsjs</p></div>
+                    <div className="right"><p>{mijozObj.fullName}</p></div>
                   </div>
                   <div className="col">
                     <div className="left">
                       <PhoneSvg/>
                       <h4>Telefon raqami</h4>
                     </div>
-                    <div className="right"><p>jsjs</p></div>
+                    <div className="right"><p>{mijozObj.phoneNumber}</p></div>
                   </div>
                   <div className="col">
                     <div className="left">
                       <CarNumberSvg/>
                       <h4>Avto raqami</h4>
                     </div>
-                    <div className="right"><p>jsjs</p></div>
+                    <div className="right"><p>{mijozObj.plateNumber}</p></div>
                   </div>
                   <div className="col">
                     <div className="left">
                       <CarSvg/>
                       <h4>Avto turi</h4>
                     </div>
-                    <div className="right"><p>jsjs</p></div>
+                    <div className="right"><p>{mijozObj.carType?.title}</p></div>
                   </div>
                   <div className="col">
                     <div className="left">
                       <CheckSvg/>
                       <h4>Maksimal summa</h4>
                     </div>
-                    <div className="right"><p>jsjs</p></div>
+                    <div className="right"><p>{mijozObj.fullName}</p></div>
                   </div>
                   <div className="col">
                     <div className="left">
                       <StatusSvg/>
                       <h4>Status</h4>
                     </div>
-                    <div className="right"><p>jsjs</p></div>
+                    <div className="right"><p>{mijozObj.fullName}</p></div>
                   </div>
                   <div className="col">
                     <div className="left">
                       <AwardSvg/>
                       <h4>Bonus</h4>
                     </div>
-                    <div className="right"><p>jsjs</p></div>
+                    <div className="right"><p>{mijozObj.fullName}</p></div>
                   </div>
                   <div className="col">
                     <div className="left">
                       <CashSvg/>
                       <h4>Qarz</h4>
                     </div>
-                    <div className="right"><p>jsjs</p></div>
+                    <div className="right"><p>{mijozObj.fullName}</p></div>
                   </div>
                   <div className="col">
                     <div className="left">
                       <CalendarSvg/>
                       <h4>Qaytarish kuni</h4>
                     </div>
-                    <div className="right"><p>jsjs</p></div>
+                    <div className="right"><p>{mijozObj.fullName}</p></div>
                   </div>
                   <div className="col">
                     <div className="left">
                       <GasBallonSvg/>
                       <h4>Gaz ballon</h4>
                     </div>
-                    <div className="right"><p>jsjs</p></div>
+                    <div className="right"><p>{mijozObj.fullName}</p></div>
                   </div>
                 </div>
               </div>
@@ -370,12 +419,17 @@ const Cashbox = () => {
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td style={{width: "30%"}} className="row">1.</td>
-                <td style={{width: "30%"}} className="col">11</td>
-                <td style={{width: "10%"}} className="col">00</td>
-                <td style={{width: "10%"}} className="col">12.12.2022</td>
-              </tr>
+              {
+                mijozObj?.cheques?.map((check, index) => (
+                  <tr key={check.id}>
+                    {/* TODO */}
+                    <td style={{width: "30%"}} className="row">{index+ 1}.</td>
+                    <td style={{width: "30%"}} className="col">{check.amount}</td>
+                    <td style={{width: "10%"}} className="col">00</td>
+                    <td style={{width: "10%"}} className="col">12.12.2022</td>
+                  </tr>
+                ))
+              }
               </tbody>
             </table>
           </div>
@@ -389,7 +443,7 @@ const Cashbox = () => {
               {
                 label: `Kassa`,
                 key: '1',
-                children: <Tab1/>,
+                children: <Tab1 setMijozObj={setMijozObj} outletId={outletId}/>,
               },
               {
                 label: `Hisobdan o'chirish`,

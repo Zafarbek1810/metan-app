@@ -25,6 +25,9 @@ const ChekTable = () => {
       setLoading2(false);
     })
   }, [])
+
+
+  console.log(cheques)
   return (
     <ChekTableWrapper>
       <h3 className="title">Cheklar</h3>
@@ -49,12 +52,12 @@ const ChekTable = () => {
               cheques.map((obj, index) => (
                 <tr key={obj.id}>
                   <td style={{width: "10%"}} className="row">1.12.12.2022</td>
-                  <td style={{width: "10%"}} className="col">50000</td>
+                  <td style={{width: "10%"}} className="col">{obj.amount}</td>
                   <td style={{width: "10%"}} className="col">0.00</td>
-                  <td style={{width: "10%"}} className="col">1200</td>
-                  <td style={{width: "15%"}} className="col">Zafar</td>
-                  <td style={{width: "15%"}} className="col">Javokhir</td>
-                  <td style={{width: "10%"}} className="col">Ippodrom GAS</td>
+                  <td style={{width: "10%"}} className="col">{obj.giftedPoints}</td>
+                  <td style={{width: "15%"}} className="col">{obj.client?.fullName}</td>
+                  <td style={{width: "15%"}} className="col">{obj.cashier?.fullName}</td>
+                  <td style={{width: "10%"}} className="col">{obj.outlet.title}</td>
                   <td style={{width: "10%"}} className="col">Muvaffaqiyatli</td>
                 </tr>
               ))
