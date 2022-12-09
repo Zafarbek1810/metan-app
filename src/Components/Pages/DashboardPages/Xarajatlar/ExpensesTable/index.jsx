@@ -121,6 +121,7 @@ const ExpensesTable = () => {
                     <span className="label-text">Savdo nuqtalasi</span>
                     <Select
                       placeholder="Tanlang"
+                      size="large"
                       allowClear
                       style={{
                         width: "100%",

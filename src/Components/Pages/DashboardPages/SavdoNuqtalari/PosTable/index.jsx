@@ -182,8 +182,12 @@ const PosTable = ({RefObj, setIsOpen}) => {
                   <td style={{width: "3%"}} className="row">{index + 1}</td>
                   {/*<td style={{width: "10%"}} className="col"><img src="/img/metan.png" alt=""/></td>*/}
                   <td style={{width: "10%"}} className="col">{obj.title}</td>
-                  <td style={{width: "8%"}} className="col">Ha</td>
-                  <td style={{width: "8%"}} className="col">Ha</td>
+                  <td style={{width: "8%"}} className="col">
+                    <span style={{background:"#1F3C88", color:"#fff", padding:"5px 10px", borderRadius:10}}>Ha</span>
+                  </td>
+                  <td style={{width: "8%"}} className="col">
+                    <span style={{background:"#1F3C88", color:"#fff", padding:"5px 10px", borderRadius:10}}>Ha</span>
+                  </td>
                   {/*<td style={{width: "10%"}} className="col">0.00</td>*/}
                   {/*<td style={{width: "10%"}} className="col">500.000</td>*/}
                   {/*<td style={{width: "30%"}} className="col">946b1920-68ab-11ed-87b8-0242ac12000c</td>*/}

@@ -1,92 +1,185 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {GasColumnsWrapper} from "./GasColumns.style";
 import EditSvg from "../../../../Common/Svgs/EditSvg";
-import {Input} from "antd";
-
-const Modal=()=>{
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
-
-  return(
-    <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1"
-         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div className="modal-dialog modal-dialog-centered">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h1 className="modal-title fs-5" id="staticBackdropLabel">Qo'shish</h1>
-            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
-          </div>
-          <div className="modal-body">
-            <div className="input">
-              <label>Nomi<span>*</span></label>
-              <Input size="large"/>
-            </div>
-            <div className="select">
-              <label className="form-label">Savdo nuqtasi<span>*</span></label>
-              <select className="form-select">
-                <option disabled selected value>Tanlang</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-          </div>
-          <div className="modal-footer">
-            <button type="button" className="btn btn-outline-warning" data-bs-dismiss="modal">Bekor qilish</button>
-            <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Saqlash</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
+import {Modal, Select} from "antd";
+import {ModalContent} from "../../Xarajatlar/ExpensesTable/ExpensesTable.style";
+import ButtonLoader from "../../../../Common/ButtonLoader";
+import {useForm} from "react-hook-form";
+import OutletProvider from "../../../../../Data/Providers/OutletProvider";
+import Message from "../../../../../utils/Message";
+import GasBallonsProvider from "../../../../../Data/Providers/GasBallonsProvider";
+import MinLoader from "../../../../Common/MinLoader";
 
 
 const GasColumns = () => {
+  const {register, formState: {errors}, handleSubmit, setValue, reset, control} = useForm({
+    defaultValues: {}
+  });
+  const [outletId, setoutletId] = useState(null)
+  const [outlet, setOutlet] = useState([])
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
+  const [forRender, setForRender] = useState(null)
+  const [ballons, setBallons] = useState([])
+
+  useEffect(() => {
+    OutletProvider.getAllOutlets(0, 1000)
+      .then(res => {
+        setOutlet(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+        Message.serverError()
+      })
+  }, [])
+
+  useEffect(() => {
+    setLoading2(true);
+    GasBallonsProvider.getGasColums(0, 1000)
+      .then(res => {
+        console.log("setBallon", res.data)
+        setBallons(res.data)
+        console.log("ballon", ballons)
+      })
+      .catch(err => {
+        console.log(err)
+        Message.serverError()
+      }).finally(() => {
+      setLoading2(false);
+    })
+  }, [forRender])
+
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  const optionExpense = outlet.map((i) => (
+    {
+      label: i.title,
+      value: i.id
+    }
+  ))
+
+  const handleOutletId = (value) => {
+    setoutletId(value)
+    console.log("setoutletId", value)
+  }
+  const onSubmit = async (values) => {
+    const body = {}
+    body.outletId = outletId
+    body.title = values.name;
+
+    setLoading(true)
+    try {
+      const {data} = await GasBallonsProvider.addGasColumn(body);
+      console.log(data.res)
+      setForRender(Math.random());
+      handleCancel()
+    } catch (err) {
+      console.log(err)
+      Message.serverError();
+    }
+    setLoading(false)
+  }
+
+
   return (
     <GasColumnsWrapper>
       <div className="top">
         <h3 className="title">Kolonkalar</h3>
         <div className="modal-wrapper">
-          <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            + Qo'shish
-          </button>
           {/*====MODAL====*/}
-          <Modal/>
+          <div className="modal-wrapper">
+            <button className="btn btn-primary" onClick={showModal}>
+              + Qo'shish
+            </button>
+            <Modal
+              title="Qo'shish"
+              open={isModalOpen}
+              onCancel={handleCancel}
+              width={700}
+              footer={[null]}
+            >
+              <ModalContent>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <label className="label">
+                    <span className="label-text">Savdo nuqtalasi</span>
+                    <Select
+                      placeholder="Tanlang"
+                      size="large"
+                      allowClear
+                      style={{
+                        width: "100%",
+                        marginTop: "10px",
+                        marginBottom: "10px",
+                      }}
+                      onChange={handleOutletId}
+                      options={optionExpense}
+                      value={outletId}
+                    />
+                  </label>
+                  <label className="label">
+                    <span className="label-text">Nomi</span>
+                    {errors.name && (
+                      <span className="err-text">Majburiy maydon</span>
+                    )}
+                    <input
+                      type="text"
+                      {...register("name", {required: true})}
+                    />
+                  </label>
+                  <div className="btns">
+                    <button type="button" className="btn btn-outline-warning" onClick={handleCancel}>Bekor qilish
+                    </button>
+                    <button type="submit" className="btn btn-primary" disabled={loading}>Saqlash {loading &&
+                    <ButtonLoader/>}</button>
+                  </div>
+                </form>
+              </ModalContent>
+            </Modal>
+          </div>
         </div>
 
-      </div>
-      <div className="filter">
-        <div className="select mb-3 col-3">
-          <select className="form-select">
-            <option disabled selected value>Tanlang</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
       </div>
       <table className="table">
         <thead>
         <tr>
-          <th style={{width: "30%"}} className="row">To'liq ismi</th>
-          <th style={{width: "30%"}} className="col">Login</th>
+          <th style={{width: "30%"}} className="row">Nomi</th>
+          <th style={{width: "30%"}} className="col">Savdo nuqtasi</th>
           <th style={{width: "30%"}} className="col">Amallar</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td style={{width: "30%"}} className="row">1. Abulfayz</td>
-          <td style={{width: "30%"}} className="col">abulfayz</td>
-          <td style={{width: "30%"}} className="col">
-            <div className="btns">
-              <button>
-                <EditSvg/>
-              </button>
-            </div>
-          </td>
-        </tr>
+        {
+          !loading2 ?
+            ballons.length
+              ? ballons.map((obj, index) => (
+                <tr key={obj.id}>
+                  <td style={{width: "30%"}} className="row">{index+1}. {obj.title}</td>
+                  <td style={{width: "30%"}} className="col">{obj.outlet.title}</td>
+                  <td style={{width: "30%"}} className="col">
+                    <div className="btns">
+                      <button>
+                        <EditSvg/>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+              : <div style={
+                {
+                  textAlign: "center",
+                  padding: 30,
+                }
+              }><h3>Gaz ballon mavjud emas!</h3></div>
+            : <MinLoader/>
+        }
+
 
         </tbody>
       </table>
