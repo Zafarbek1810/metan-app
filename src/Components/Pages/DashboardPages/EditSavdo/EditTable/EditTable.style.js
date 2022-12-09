@@ -3,7 +3,7 @@ import styled from "styled-components";
 const EditTableWrapper = styled.div`
   form {
     background: #fff;
-    padding: 20px 10px;
+    padding: 20px;
   }
 
   .input {
@@ -13,15 +13,28 @@ const EditTableWrapper = styled.div`
     padding: 0;
 
     label {
-      width: 80%;
+      width: 100%;
+      position: relative;
       display: flex;
       flex-direction: column;
-      margin-bottom: 20px;
-    }
+      justify-content: space-between;
+      position: relative;
+      margin-bottom: 25px;
 
-    .btn {
+      input {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 16px;
+        color: #000000;
+        border: 2px solid rgba(31, 60, 136, 0.4);
+        border-radius: 6px;
+        padding: 10px 10px;
+      }
     }
   }
+
+  
 
   .box {
     border: 1px solid #0d6efd;

@@ -56,6 +56,7 @@ const PosTable = ({RefObj, setIsOpen}) => {
 
   function closeModal() {
     setIsModalOpen(false);
+    setValue("title", "")
   }
 
   useEffect(() => {
@@ -134,7 +135,7 @@ const PosTable = ({RefObj, setIsOpen}) => {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <label className="label">
                   <span className="label-text">Savdo nuqtasi nomi</span>
-                  {errors.name && (
+                  {errors.title && (
                     <span className="err-text">Majburiy maydon</span>
                   )}
                   <input

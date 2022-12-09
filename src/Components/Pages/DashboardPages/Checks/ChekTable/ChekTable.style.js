@@ -9,53 +9,7 @@ const ChekTableWrapper=styled.div`
     font-size: 30px;
     line-height: 25px;
     color: #1F3C88;
-  }
-  .filter{
-    display: flex;
-    align-items: center;
-    background: #fff;
-    padding: 22px 13px 0;
-    
-    .dropdown{
-      padding: 20px;
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      background: #fff !important;
-      
-      .dropdown-menu{
-        box-shadow: 0 5px 25px 0 rgb(0 0 0 / 10%);
-        border: none;
-
-        .btns{
-          display: flex;
-          justify-content: end;
-          .btn{
-            margin: 0 10px;
-          }
-
-        }
-      }
-
-      .select{
-        padding: 0 10px;
-        margin-bottom: 10px;
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-
-      .input{
-        padding: 0 10px;
-        margin-bottom: 10px;
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-      }
-
-      
-    }
+    font-family: "Inter";
   }
 
   .table{
@@ -75,24 +29,28 @@ const ChekTableWrapper=styled.div`
         th.col{
           font-style: normal;
           font-weight: 600;
-          font-size: 0.875rem;
+          font-size: 18px;
           line-height: 24px;
           color: #1F3C88;
           display: flex;
           align-items: center;
           justify-content: center;
           text-align: center;
+              font-family: "Inter";
+
         }
         th.row{
           font-style: normal;
           font-weight: 600;
-          font-size: 0.875rem;
+          font-size: 20px;
           line-height: 24px;
           color: #1F3C88;
           display: flex;
           align-items: center;
           justify-content: center;
           text-align: center;
+              font-family: "Inter";
+
         }
       }
     }

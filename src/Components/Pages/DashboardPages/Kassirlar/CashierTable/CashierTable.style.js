@@ -200,6 +200,9 @@ const ModalContent=styled.div`
         line-height: 18px;
         border-radius: 4px;
         padding: 12px 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         &:disabled {
           cursor: not-allowed;

@@ -39,7 +39,7 @@ const LoginPageWrapper=styled.div`
       width: 80%;
       font-size: 0.6875rem;
       line-height: 18px;
-      font-family: "Montserrat";
+      font-family: "Inter";
       letter-spacing: 0.5px;
       font-weight: 600;
       margin-right: -50px;
@@ -48,7 +48,7 @@ const LoginPageWrapper=styled.div`
 
   .main{
     h4{
-      font-family: 'Montserrat';
+      font-family: 'Inter';
       font-style: normal;
       font-weight: 600;
       font-size: 1.875rem;
@@ -95,7 +95,7 @@ const LoginPageWrapper=styled.div`
       }
 
       .loginBtn{
-        font-family: 'Montserrat';
+        font-family: 'Inter';
         font-style: normal;
         font-weight: 400;
         font-size: 1rem;
@@ -120,7 +120,7 @@ const LoginPageWrapper=styled.div`
   }
 
   .created{
-    font-family: 'Montserrat';
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 300;
     font-size: 0.75rem;

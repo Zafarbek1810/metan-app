@@ -236,7 +236,6 @@ const ModalFooter=styled.footer`
       line-height: 18px;
       color: #FFFFFF;
       background: #1F3C88;
-      font-family: "Montserrat";
       border-radius: 8px;
       border: none;
       padding: 12px 22px;

@@ -1,36 +1,38 @@
 import styled from "styled-components";
 
-const ServicesTableWrapper=styled.div`
-  .title{
-    font-style: normal;
-    font-weight: 600;
-    font-size: 30px;
-    line-height: 25px;
-    color: #1F3C88;
-  }
-  .filter{
+const ServicesTableWrapper = styled.div`
+  .top {
+    margin-bottom: 15px;
     display: flex;
-    align-items: center;
-    background: #fff;
-    padding: 22px 13px 0;
+    justify-content: space-between;
 
+    .title {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 30px;
+      line-height: 25px;
+      color: #1F3C88;
+    }
   }
 
-  .table{
+  .table {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    thead{
+
+    thead {
       width: 100%;
-      tr{
+
+      tr {
         display: flex;
         //justify-content: space-between;
         //background: rgba(31, 60, 136, 0.1);
         background: #fff;
         border-radius: 6px 6px 0px 0px;
         padding: 22px 13px;
-        th.col{
+
+        th.col {
           font-style: normal;
           font-weight: 600;
           font-size: 0.875rem;
@@ -41,7 +43,8 @@ const ServicesTableWrapper=styled.div`
           justify-content: center;
           text-align: center;
         }
-        th.row{
+
+        th.row {
           font-style: normal;
           font-weight: 600;
           font-size: 0.875rem;
@@ -55,13 +58,15 @@ const ServicesTableWrapper=styled.div`
       }
     }
 
-    tbody{
+    tbody {
       background: #fff;
-      tr{
+
+      tr {
         display: flex;
         justify-content: space-between;
         padding: 10px 22px;
-        td.col{
+
+        td.col {
           font-style: normal;
           font-weight: 400;
           font-size: 0.8125rem;
@@ -72,18 +77,16 @@ const ServicesTableWrapper=styled.div`
           color: #000000;
           text-align: center;
 
-          .btns{
-            button{
+          .btns {
+            button {
               background: transparent;
               border: none;
               cursor: pointer;
             }
-            width: 40%;
-            display: flex;
-            justify-content: space-between;
           }
         }
-        td.row{
+
+        td.row {
           font-style: normal;
           font-weight: 600;
           font-size: 0.8125rem;
@@ -98,4 +101,4 @@ const ServicesTableWrapper=styled.div`
   }
 `
 
-export{ServicesTableWrapper}
+export {ServicesTableWrapper}

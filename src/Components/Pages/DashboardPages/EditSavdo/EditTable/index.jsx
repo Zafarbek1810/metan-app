@@ -8,6 +8,7 @@ import OutletProvider from "../../../../../Data/Providers/OutletProvider";
 import {useForm, Controller} from "react-hook-form";
 import DeleteSvg from "../../../../Common/Svgs/DeleteSvg";
 import Modal from "react-modal";
+import CashbackProvider from "../../../../../Data/Providers/CashbackProvider";
 
 const provinceData = ['Zhejiang', 'Jiangsu'];
 const cityData = {
@@ -60,6 +61,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
 
   const [cassirId, setcassirId] = useState(null)
   const [directorId, setDirectorId] = useState(null)
+  const [cashback, setCashback] = useState(null)
 
   useEffect(() => {
     UserProvider.getAllCashiers(0, 1000)
@@ -75,6 +77,15 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
       .then(res => {
         console.log(res)
         setDirectors(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+        Message.serverError()
+      })
+    CashbackProvider.getAllCashback()
+      .then(res=>{
+        console.log('cashback', res)
+        setCashback(res.data)
       })
       .catch(err => {
         console.log(err)
@@ -104,14 +115,13 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
     }
   ))
 
+
   useEffect(() => {
     OutletProvider.getOneFullOutlet(id)
       .then(({data}) => {
         setValue("title", data.title);
         setSavoNuqta(data)
         console.log(data)
-        // setCashiers(data.cashiers)
-        // setDirectors(data.directors)
       })
       .catch(err => {
         console.log(err);
@@ -233,7 +243,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
       <form>
         <h5>Sozlamalar</h5>
         <div className="row">
-          <div className="col-md-4 col-12">
+          <div className="col-md-4 col-12 mb-5">
             <div className="input">
               <label className="label">
                 <span className="label-text">Savdo nuqtasi nomi</span>
@@ -246,28 +256,45 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
             </div>
             <div className="input">
               <label>
-                <span>Telefon</span>
-                <Input
-                  style={{
-                    width: '100%',
-                  }}
+                <span className="label-text">Telefon</span>
+                <input
+                  type="text"
+                  style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
+                  {...register("tel", {required: true})}
                 />
               </label>
             </div>
             <div className="input">
               <label>
                 <span>Manzil</span>
-                <Input
-                  style={{
+                <Controller
+                  control={control}
+                  name="title"
+                  render={({
+                             field: { onChange, onBlur, value, name, ref },
+                             fieldState: { invalid, isTouched, isDirty, error },
+                             formState,
+                           }) => (
+                    <Input
+                      size="large"
+                    style={{
                     width: '100%',
                   }}
+                    onBlur={onBlur} // notify when input is touched
+                    onChange={onChange} // send value to hook form
+                    checked={value}
+                    inputRef={ref}
+                    />
+                  )}
                 />
+
               </label>
             </div>
             <div className="input">
               <label>
                 <span>Hudud</span>
                 <Select
+                  size="large"
                   defaultValue={provinceData[0]}
                   style={{
                     width: "100%",
@@ -284,6 +311,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
               <label>
                 <span>Tuman</span>
                 <Select
+                  size="large"
                   style={{
                     width: "100%",
                   }}
@@ -297,15 +325,22 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
               </label>
             </div>
           </div>
+          <div className="col-md-4 col-12 mb-5">
+            <img style={{width:"100%", height:"100%"}} src="/img/metan.png" alt=""/>
+          </div>
+          <div className="col-md-4 col-12 mb-5">
+
+          </div>
           <div className="col-md-4 col-12">
             <div className="input">
               <label>
                 <span>Kassirlar</span>
                 <Select
+                  size="large"
                   // mode="multiple"
                   allowClear
                   style={{
-                    width: '100%',
+                    width: '90%',
                   }}
                   placeholder="Tanlang"
                   options={
@@ -335,21 +370,59 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
               </table>
             </div>
           </div>
-
           <div className="col-md-4 col-12">
             <div className="input">
               <label>
                 <span>Ish boshqaruvchi</span>
                 <Select
+                  size="large"
                   // mode="multiple"
                   allowClear
                   style={{
-                    width: '100%',
+                    width: '90%',
                   }}
                   placeholder="Tanlang"
                   options={
                     optionsdirektor
                   }
+                  onChange={handleDirectorId}
+                  value={directorId}
+                />
+              </label>
+              <button onClick={addDirector} type="button" className="btn btn-primary">Qo'shish</button>
+            </div>
+            <div className="box">
+              <table>
+                <tbody>
+                {
+                  savdoNuqta.directors?.map((obj, i) => (
+                    <tr key={obj.id}>
+                      <td style={{width: "15%"}}>{i + 1}</td>
+                      <td style={{width: "70%"}}>{obj.fullName}</td>
+                      <td style={{width: "15%"}}>
+                        <button type="button" onClick={() => removeDirector(obj.id)}><DeleteSvg/></button>
+                      </td>
+                    </tr>
+                  ))
+                }
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="col-md-4 col-12">
+            <div className="input">
+              <label>
+                <span>Keshbek turi</span>
+                <Select
+                  size="large"
+                  allowClear
+                  style={{
+                    width: '90%',
+                  }}
+                  placeholder="Tanlang"
+                  // options={
+                  //   optionscashback
+                  // }
                   onChange={handleDirectorId}
                   value={directorId}
                 />

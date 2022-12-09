@@ -12,74 +12,18 @@ const ExpensesTableWrapper=styled.div`
       line-height: 25px;
       color: #1F3C88;
     }
-  }
-
-  .filter{
-    display: flex;
-    align-items: center;
-    background: #fff;
-    padding: 22px 13px 0;
-
-    .dropdown{
-      padding: 20px;
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      background: #fff !important;
-
-      .dropdown-menu{
-        box-shadow: 0 5px 25px 0 rgb(0 0 0 / 10%);
-        border: none;
-
-        .btns{
-          display: flex;
-          justify-content: end;
-          .btn{
-            margin: 0 10px;
-          }
-
-        }
-      }
-
-      .select{
-        padding: 0 10px;
-        margin-bottom: 10px;
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-
-      .input{
-        padding: 0 10px;
-        margin-bottom: 10px;
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-      }
-
-
-    }
-
+    
     .summ{
       display: flex;
       align-items: center;
-      justify-content: end;
-      
       h3{
-        font-size: 24px;
-        margin-bottom: 0;
-        margin-right: 10px;
+        margin: 0 15px 0 0;
       }
       p{
-        font-size: 20px;
-        margin-bottom: 0;
+        margin: 0;
       }
     }
-    
-    
   }
-
 
   .table{
     width: 100%;
@@ -161,6 +105,7 @@ const ExpensesTableWrapper=styled.div`
       }
     }
   }
+
 `
 const ModalHeader=styled.header`
   background: #fff;
@@ -291,7 +236,7 @@ const ModalFooter=styled.footer`
       line-height: 18px;
       color: #FFFFFF;
       background: #1F3C88;
-      font-family: "Montserrat";
+      font-family: "Inter";
       border-radius: 8px;
       border: none;
       padding: 12px 22px;

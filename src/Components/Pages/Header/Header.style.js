@@ -14,7 +14,7 @@ const HeaderWrapper = styled.div`
       width: 80%;
       font-size: 30px;
       line-height: 18px;
-      font-family: "Montserrat";
+      font-family: "Inter";
       letter-spacing: 0.5px;
       font-weight: 600;
       margin-right: -50px;
