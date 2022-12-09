@@ -43,7 +43,7 @@ const ServicesTable = () => {
   const {register, formState: {errors}, handleSubmit, setValue, reset, control} = useForm({
     defaultValues: {}
   });
-  const cash_edit = useContextSelector(GlobalContext, (state)=>state.cash_edit)
+  const cash_edit = useContextSelector(GlobalContext, (state)=>state.keshbek_edit)
   const router = useRouter();
   const [modalIsOpen, setIsModalOpen] = React.useState(false);
   const [loading, setLoading] = useState(false);
@@ -92,10 +92,10 @@ const ServicesTable = () => {
     setLoading(false)
   }
 
-  // const handleEditUser = (cashId) => {
-  //   cash_edit(cashId)
-  //   router.push("/dashboard/editCashback/");
-  // }
+  const handleEditCash = (cashId) => {
+    cash_edit(cashId);
+    router.push("/dashboard/editCashback");
+  }
 
 
 
@@ -166,7 +166,7 @@ const ServicesTable = () => {
                       {/*<button>*/}
                       {/*  <DeleteSvg/>*/}
                       {/*</button>*/}
-                      <button onClick={() => handleEditUser(obj.id)}>
+                      <button onClick={() => handleEditCash(obj.id)}>
                         <EditSvg/>
                       </button>
                     </div>

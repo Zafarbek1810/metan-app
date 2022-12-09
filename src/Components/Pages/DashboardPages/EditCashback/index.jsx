@@ -5,7 +5,7 @@ import EditCashbackTable from "./EditCashbackTable";
 const EditCashback = ({cashbackId}) => {
   return (
     <DashboardLayout>
-      <EditCashbackTable id={cashbackId}/>
+      <EditCashbackTable cashId={cashbackId}/>
     </DashboardLayout>
   );
 };

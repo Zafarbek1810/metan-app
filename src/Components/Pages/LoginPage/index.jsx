@@ -51,7 +51,7 @@ const LoginPage = () => {
       loginContext({isAuth: true});
     }).catch(err => {
       console.log(err.response)
-      if (err.response.status === 401) {
+      if (err?.response?.status === 401) {
         toast.error("Login yoki parol noto'g'ri!");
       }
     }).finally(() => {

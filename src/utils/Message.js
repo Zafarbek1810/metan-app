@@ -6,6 +6,12 @@ const Message = {
   },
   unauthorizedError: function () {
     toast.error("Сиз рўйхатдан ўтмагансиз!");
+  },
+  success () {
+    toast.success("Muvaffaqiyatli amalga oshdi!");
+  },
+  error() {
+    toast.error("Kutilmagan xatolik yuz berdi!");
   }
 }
 
