@@ -1,8 +1,30 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ChekTableWrapper} from "./ChekTable.style";
+import UserProvider from "../../../../../Data/Providers/UserProvider";
+import Message from "../../../../../utils/Message";
+import PaymentProvider from "../../../../../Data/Providers/PaymentProvider";
+import MinLoader from "../../../../Common/MinLoader";
 
 
 const ChekTable = () => {
+  const [loading2, setLoading2] = useState(false);
+  const [cheques, setCheques] = useState({})
+
+
+  useEffect(() => {
+    setLoading2(true);
+    PaymentProvider.getAllCheques(0, 1000)
+      .then(res => {
+        console.log(res)
+        setCheques(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+        Message.serverError()
+      }).finally(() => {
+      setLoading2(false);
+    })
+  }, [])
   return (
     <ChekTableWrapper>
       <h3 className="title">Cheklar</h3>
@@ -21,46 +43,30 @@ const ChekTable = () => {
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td style={{width: "10%"}} className="row">1.12.12.2022</td>
-          <td style={{width: "10%"}} className="col">50000</td>
-          <td style={{width: "10%"}} className="col">0.00</td>
-          <td style={{width: "10%"}} className="col">1200</td>
-          <td style={{width: "15%"}} className="col">Zafar</td>
-          <td style={{width: "15%"}} className="col">Javokhir</td>
-          <td style={{width: "10%"}} className="col">Ippodrom GAS</td>
-          <td style={{width: "10%"}} className="col">Muvaffaqiyatli</td>
-        </tr>
-        <tr>
-          <td style={{width: "10%"}} className="row">1.12.12.2022</td>
-          <td style={{width: "10%"}} className="col">50000</td>
-          <td style={{width: "10%"}} className="col">0.00</td>
-          <td style={{width: "10%"}} className="col">1200</td>
-          <td style={{width: "15%"}} className="col">Zafar</td>
-          <td style={{width: "15%"}} className="col">Javokhir</td>
-          <td style={{width: "10%"}} className="col">Ippodrom GAS</td>
-          <td style={{width: "10%"}} className="col">Muvaffaqiyatli</td>
-        </tr>
-        <tr>
-          <td style={{width: "10%"}} className="row">1.12.12.2022</td>
-          <td style={{width: "10%"}} className="col">50000</td>
-          <td style={{width: "10%"}} className="col">0.00</td>
-          <td style={{width: "10%"}} className="col">1200</td>
-          <td style={{width: "15%"}} className="col">Zafar</td>
-          <td style={{width: "15%"}} className="col">Javokhir</td>
-          <td style={{width: "10%"}} className="col">Ippodrom GAS</td>
-          <td style={{width: "10%"}} className="col">Muvaffaqiyatli</td>
-        </tr>
-        <tr>
-          <td style={{width: "10%"}} className="row">1.12.12.2022</td>
-          <td style={{width: "10%"}} className="col">50000</td>
-          <td style={{width: "10%"}} className="col">0.00</td>
-          <td style={{width: "10%"}} className="col">1200</td>
-          <td style={{width: "15%"}} className="col">Zafar</td>
-          <td style={{width: "15%"}} className="col">Javokhir</td>
-          <td style={{width: "10%"}} className="col">Ippodrom GAS</td>
-          <td style={{width: "10%"}} className="col">Muvaffaqiyatli</td>
-        </tr>
+        {
+          !loading2 ?
+            cheques.length ?
+              cheques.map((obj, index) => (
+                <tr key={obj.id}>
+                  <td style={{width: "10%"}} className="row">1.12.12.2022</td>
+                  <td style={{width: "10%"}} className="col">50000</td>
+                  <td style={{width: "10%"}} className="col">0.00</td>
+                  <td style={{width: "10%"}} className="col">1200</td>
+                  <td style={{width: "15%"}} className="col">Zafar</td>
+                  <td style={{width: "15%"}} className="col">Javokhir</td>
+                  <td style={{width: "10%"}} className="col">Ippodrom GAS</td>
+                  <td style={{width: "10%"}} className="col">Muvaffaqiyatli</td>
+                </tr>
+              ))
+              : <div style={
+                {
+                  textAlign: "center",
+                  padding: 30,
+                }
+              }><h3>Cheklar mavjud emas!</h3></div>
+            : <MinLoader/>
+        }
+
         </tbody>
       </table>
     </ChekTableWrapper>

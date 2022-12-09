@@ -102,7 +102,7 @@ const ServicesTable = () => {
   return (
     <ServicesTableWrapper>
       <div className="top">
-        <h3 className="title">Savdo nuqtalari</h3>
+        <h3 className="title">Keshbeklar</h3>
         <div className="modal-wrapper">
           <button className="btn btn-primary" onClick={openModal}>
             + Qo'shish
