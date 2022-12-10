@@ -25,9 +25,14 @@ export default class UserProvider {
   static async getMe() {
     return await client.get("/admin/getme");
   }
+  static async getStatistics() {
+    return await client.get("/admin/getStatistics");
+  }
 
   static async getClients() {
     return await client.get("/client/getClients");
   }
+
+
 
 }

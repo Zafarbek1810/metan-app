@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {CardsWrapper} from "./Cards.style";
 import UsersSvg from "../../../../Common/Svgs/UsersSvg";
 import GenMaleSvg from "../../../../Common/Svgs/GenMaleSvg";
@@ -9,94 +9,94 @@ import DollarSvg2 from "../../../../Common/Svgs/DollarSvg2";
 import AwardSvg from "../../../../Common/Svgs/AwardSvg";
 import CheckSvg from "../../../../Common/Svgs/CheckSvg";
 import UserCardSvg from "../../../../Common/Svgs/UserCardSvg";
+import UserProvider from "../../../../../Data/Providers/UserProvider";
+import {toast} from "react-toastify";
 
-const cardsData = [
-  {
-    icon: <UsersSvg/>,
-    span: "1 552.00",
-    p: "Umumiy mijozlar",
-  },
-  {
-    icon: <GenMaleSvg/>,
-    span: "70.00",
-    p: "Erkak",
-  },
-  {
-    icon: <GenFemaleSvg/>,
-    span: "1.00",
-    p: "Ayol",
-  },
-  {
-    icon: <CardSvg/>,
-    span: "100 976 605.00",
-    p: "Xaridlar",
-  },
-  {
-    icon: <DollarSvg/>,
-    span: "100 967 325.00",
-    p: "To'langan summa",
-  },
-  {
-    icon: <DollarSvg2/>,
-    span: "9 280.00",
-    p: "To'langan ballar",
-  },
-  {
-    icon: <AwardSvg/>,
-    span: "2 621 133.10",
-    p: "Mijoz ballari",
-  },
-  {
-    icon: <CheckSvg/>,
-    span: "35 555.00",
-    p: "O'rtacha chek",
-  },
-  {
-    icon: <UserCardSvg/>,
-    span: "26.00",
-    p: "O'rtacha yosh",
-  },
-
-]
 
 const Cards = () => {
+  const [data, setData] = useState([])
+  useEffect(() => {
+    UserProvider.getStatistics()
+      .then(res => {
+        console.log(res)
+        setData(res.data)
+        console.log(data)
+      }).catch(err => {
+      console.log(err)
+      toast.warning("Ma'lumotlar olinmadi")
+    })
+  }, [])
+
   return (
     <CardsWrapper>
       <div className="top">
         <h3 className="title">Statistika</h3>
-        {/*<div className="filter row">*/}
-        {/*  <div className="select mb-3 col-md-3 col-sm-6 col-12 col ">*/}
-        {/*    <select className="form-select">*/}
-        {/*      <option disabled selected value>Tanlang</option>*/}
-        {/*      <option value="1">One</option>*/}
-        {/*      <option value="2">Two</option>*/}
-        {/*      <option value="3">Three</option>*/}
-        {/*    </select>*/}
-        {/*  </div>*/}
-        {/*  <div className="mb-3 col-md-3 col-sm-6 col-12 col">*/}
-        {/*    <input type="date" className="form-control"/>*/}
-        {/*  </div>*/}
-        {/*  <div className="mb-3 col-md-3 col-sm-6 col-12 col">*/}
-        {/*    <input type="date" className="form-control"/>*/}
-        {/*  </div>*/}
-        {/*  <button className="btn btn-primary mb-3 col-md-2 col-sm-6 col-12 col px-4">Filtr</button>*/}
-        {/*</div>*/}
       </div>
-      <div className="cards">
-        {
-          cardsData.map((item, index) => (
-            <div key={index} className="cardin">
+          <div className="cards">
+            <div>
               <div className="left">
-                {item.icon}
+                <UsersSvg/>
               </div>
               <div className="right">
-                <span>{item.span}</span>
-                <p>{item.p}</p>
+                <span>{data.numberOfClients}</span>
+                <p>Umumiy mijozlar</p>
               </div>
             </div>
-          ))
-        }
-      </div>
+            <div>
+              <div className="left">
+                <CardSvg/>
+              </div>
+              <div className="right">
+                <span>{data.amountOfAllExpenses?data.amountOfAllExpenses  : "Ma'lumot yo'q"}</span>
+                <p>Xaridlar</p>
+              </div>
+            </div>
+            <div>
+              <div className="left">
+                <DollarSvg/>
+              </div>
+              <div className="right">
+                <span>{data.amountOfAllPayments?data.amountOfAllPayments  : "Ma'lumot yo'q"}</span>
+                <p>To'langan summa</p>
+              </div>
+            </div>
+            <div>
+              <div className="left">
+                <DollarSvg2/>
+              </div>
+              <div className="right">
+                <span>{data.amountOfAllPaidPoints?data.amountOfAllPaidPoints  : "Ma'lumot yoq"}</span>
+                <p>To'langan ballar</p>
+              </div>
+            </div>
+            <div>
+              <div className="left">
+                <AwardSvg/>
+              </div>
+              <div className="right">
+                <span>data</span>
+                <p>Mijoz ballari</p>
+              </div>
+            </div>
+            <div>
+              <div className="left">
+                <CheckSvg/>
+              </div>
+              <div className="right">
+                <span>{data.amountOfAverageCheque?data.amountOfAverageCheque  : "Ma'lumot yo'q"}</span>
+                <p>O'rtacha chek</p>
+              </div>
+            </div>
+            <div>
+              <div className="left">
+                <UserCardSvg/>
+              </div>
+              <div className="right">
+                <span>data</span>
+                <p>O'rtacha yosh</p>
+              </div>
+            </div>
+          </div>
     </CardsWrapper>
   );
 };

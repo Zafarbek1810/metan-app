@@ -73,7 +73,7 @@ const ClientsTable = () => {
           <th style={{width: "8%"}} className="col">Chek summasi</th>
           <th style={{width: "8%"}} className="col">Balans</th>
           {/*<th style={{width: "8%"}} className="col">Status</th>*/}
-          {/*<th style={{width: "8%"}} className="col">Qarz</th>*/}
+          <th style={{width: "8%"}} className="col">Qarz</th>
           <th style={{width: "8%"}} className="col">Oxirgi faoliyat</th>
           <th style={{width: "8%"}} className="col">Umumiy ballar</th>
           <th style={{width: "8%"}} className="col">Tashriflar soni</th>
@@ -94,8 +94,8 @@ const ClientsTable = () => {
             {/*  Silver*/}
             {/*</span>*/}
             {/*  </td>*/}
-            {/*  <td style={{width: "8%"}} className="col">0</td>*/}
-              <td style={{width: "8%"}} className="col">{obj.lastVisit}</td>
+              <td style={{width: "8%"}} className="col">{obj.totalDebt}</td>
+              <td style={{width: "8%"}} className="col">{new Date(obj.lastVisit).toLocaleString("en-GB")}</td>
               <td style={{width: "8%"}} className="col">{obj.totalPoints}</td>
               <td style={{width: "8%"}} className="col">{obj.numberOfVisits}</td>
               {/*<td style={{width: "8%"}} className="col">*/}
