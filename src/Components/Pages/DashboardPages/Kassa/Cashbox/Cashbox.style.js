@@ -52,6 +52,7 @@ const CashboxWrapper = styled.div`
     }
 
     .table {
+      margin-top: 20px;
       width: 100%;
       display: flex;
       flex-direction: column;

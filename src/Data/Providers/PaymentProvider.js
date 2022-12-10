@@ -14,4 +14,8 @@ export default class PaymentProvider{
   static async addDebt(body) {
     return await client.post(`payment/addDebt`, body);
   }
+
+  static async getDeptors(page = 0, size = 10, sort = "asc") {
+    return await client.get(`/payment/getDebtors?page=${page}&size=${size}&sort=${sort}`);
+  }
 }
