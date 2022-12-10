@@ -53,19 +53,19 @@ const ChekTable = () => {
               cheques.map((obj, index) => (
                 <tr key={obj.id} className="edit_row">
                   <td style={{width: "10%"}} className="row">1.12.12.2022</td>
-                  <td style={{width: "10%"}} className="col"
-                      style={{color: "#43A047", fontWeight: 600}}>{obj.amount}</td>
+                  <td style={{width: "10%",color: "#43A047", fontWeight: 600}} className="col"
+                      >{obj.amount}</td>
                   <td style={{width: "10%"}} className="col">0.00</td>
                   <td style={{width: "10%"}} className="col">{obj.giftedPoints}</td>
-                  <td style={{width: "15%"}} className="col" style={{fontWeight: 600}}>
+                  <td style={{width: "15%",fontWeight: 600}} className="col" >
                     <Link href="#" className="link" style={{
                       fontWeight: 600,
                       textDecoration: "none",
                       color: "#43A047"
                     }}>{obj.client?.fullName}</Link>
                   </td>
-                  <td style={{width: "15%"}} className="col" style={{fontWeight: 600}}>{obj.cashier?.fullName}</td>
-                  <td style={{width: "10%"}} className="col" style={{fontWeight: 600}}>{obj.outlet.title}</td>
+                  <td style={{width: "15%", fontWeight: 600}} className="col" >{obj.cashier?.fullName}</td>
+                  <td style={{width: "10%", fontWeight: 600}} className="col" >{obj.outlet.title}</td>
                   {obj.type === "PAID_BY_MONEY" ?
                     <td style={{width: "10%"}} className="col">
                     <span style={{background: "#43A047", color: "white", borderRadius: 5, padding: 10}}>
