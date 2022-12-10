@@ -44,7 +44,7 @@ const DebtorsTable = () => {
           !loading2?
             deptors.length ?
               deptors.map((obj, index)=>(
-                <tr>
+                <tr key={obj.id}>
                   <td style={{width: "10%"}} className="row">{index+1}. {obj.fullName}</td>
                   <td style={{width: "10%"}} className="col">{obj.phoneNumber}</td>
                   <td style={{width: "10%"}} className="col">{obj.plateNumber}</td>
