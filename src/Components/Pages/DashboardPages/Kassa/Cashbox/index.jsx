@@ -27,7 +27,7 @@ const Tab1 = ({outletId, setMijozObj}) => {
     defaultValues: {}
   });
 
-  const handleFetchMijoz = (e) => {
+  const handleFetchMijozByCode = (e) => {
     if(e.code === "Enter" && e.target.value.length > 0) {
       PaymentProvider.getQrInfo(e.target.value)
         .then(({data}) => {
@@ -35,6 +35,19 @@ const Tab1 = ({outletId, setMijozObj}) => {
           setMijozObj(data);
           setData(data);
           setValue("carNum", data.plateNumber);
+        }, err => {
+          toast.error(err?.response?.data?.message);
+        })
+    }
+  }
+
+  const handleFetchMijozByAuto = (e) => {
+    if(e.code === "Enter" && e.target.value.length > 0) {
+      PaymentProvider.getQrInfo(0, e.target.value)
+        .then(({data}) => {
+          console.log(data)
+          setMijozObj(data);
+          setData(data);
         }, err => {
           toast.error(err?.response?.data?.message);
         })
@@ -71,7 +84,7 @@ const Tab1 = ({outletId, setMijozObj}) => {
               placeholder="Izlash..."
               type="number"
               {...register("name", {required: true})}
-              onKeyDown={handleFetchMijoz}
+              onKeyDown={handleFetchMijozByCode}
             />
           </label>
         </div>
@@ -84,6 +97,7 @@ const Tab1 = ({outletId, setMijozObj}) => {
             <input
               type="text"
               {...register("carNum", {required: false})}
+              onKeyDown={handleFetchMijozByAuto}
             />
           </label>
         </div>
@@ -141,12 +155,45 @@ const Tab2 = () => {
     </Tab2Wrapper>
   )
 }
-const Tab3 = () => {
+const Tab3 = ({outletId, setMijozObj}) => {
+  const [data, setData] = useState({});
   const {register, formState: {errors}, handleSubmit, setValue, reset, control} = useForm({
     defaultValues: {}
   });
+
+  const handleFetchMijozByCode = (e) => {
+    if(e.code === "Enter" && e.target.value.length > 0) {
+      PaymentProvider.getQrInfo(e.target.value)
+        .then(({data}) => {
+          console.log(data)
+          setMijozObj(data);
+          setData(data);
+        }, err => {
+          toast.error(err?.response?.data?.message);
+        })
+    }
+  }
+
+  const onSubmit = (values) => {
+    const body = {
+      amount: +values.qarz,
+      clientId: data.id,
+      outletId,
+      returnDate: values.date
+    }
+
+    PaymentProvider.addDebt(body)
+      .then(({data}) => {
+        console.log(data);
+        toast.success("Muvaffaqiyatli yaratildi!")
+        setValue("qarz", "")
+      }, err => {
+        console.log(err);
+      })
+  }
+
   return (
-    <Tab3Wrapper>
+    <Tab3Wrapper onSubmit={handleSubmit(onSubmit)}>
       <div className="col-md-12">
         <label className="label ">
           <span className="label-text">Mijoz kodi</span>
@@ -157,6 +204,7 @@ const Tab3 = () => {
             placeholder="Izlash..."
             type="number"
             {...register("name", {required: true})}
+            onKeyDown={handleFetchMijozByCode}
           />
         </label>
       </div>
@@ -167,7 +215,7 @@ const Tab3 = () => {
             <span className="err-text">Majburiy maydon</span>
           )}
           <input
-            placeholder="Izlash..."
+            placeholder=""
             type="number"
             {...register("qarz", {required: true})}
           />
@@ -190,7 +238,7 @@ const Tab3 = () => {
           </button>
         </div>
         <div className="col-md-6">
-          <button type="button" className="btn btn-success w-100">
+          <button type="submit" className="btn btn-success w-100">
             Qarz
           </button>
         </div>
@@ -453,7 +501,7 @@ const Cashbox = () => {
               {
                 label: `Qarz`,
                 key: '3',
-                children: <Tab3/>,
+                children: <Tab3 setMijozObj={setMijozObj} outletId={outletId}/>,
               },
             ]}
           />
