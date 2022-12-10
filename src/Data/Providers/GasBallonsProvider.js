@@ -5,6 +5,6 @@ export default class GasBallonsProvider{
     return await client.post("/gascolumn/addGasColumn", body);
   }
   static async getGasColums(page = 0, size = 10) {
-    return await client.get(`/gas-column/getGasColumns?skip=${page}&take=${size}`);
+    return await client.get(`/gascolumn/getGasColumns?skip=${page}&take=${size}`);
   }
 }

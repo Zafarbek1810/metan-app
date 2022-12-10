@@ -38,6 +38,7 @@ const GasColumnsWrapper=styled.div`
   }
 
   .table{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     width: 100%;
     display: flex;
     flex-direction: column;
