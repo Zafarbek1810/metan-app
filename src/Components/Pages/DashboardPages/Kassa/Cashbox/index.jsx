@@ -233,13 +233,13 @@ const Tab3 = ({outletId, setMijozObj}) => {
       </div>
       <div className="row">
         <div className="col-md-6">
-          <button type="button" className="btn btn-danger w-100">
-            Qarz olish
+          <button type="button" className="btn btn-success w-100">
+            Qarzni olish
           </button>
         </div>
         <div className="col-md-6">
-          <button type="submit" className="btn btn-success w-100">
-            Qarz
+          <button type="submit" className="btn btn-danger w-100">
+            Qarzga berish
           </button>
         </div>
       </div>
@@ -493,11 +493,11 @@ const Cashbox = () => {
                 key: '1',
                 children: <Tab1 setMijozObj={setMijozObj} outletId={outletId}/>,
               },
-              {
-                label: `Hisobdan o'chirish`,
-                key: '2',
-                children: <Tab2/>,
-              },
+              // {
+              //   label: `Hisobdan o'chirish`,
+              //   key: '2',
+              //   children: <Tab2/>,
+              // },
               {
                 label: `Qarz`,
                 key: '3',
