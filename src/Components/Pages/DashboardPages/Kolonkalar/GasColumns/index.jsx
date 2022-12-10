@@ -160,7 +160,7 @@ const GasColumns = () => {
             ballons.length
               ? ballons.map((obj, index) => (
                 <tr key={obj.id}>
-                  <td style={{width: "30%"}} className="row">{index+1}. {obj.title}</td>
+                  <td style={{width: "30%"}} className="row">{index+1}. {obj.name}</td>
                   <td style={{width: "30%"}} className="col">{obj.outlet.title}</td>
                   <td style={{width: "30%"}} className="col">
                     <div className="btns">

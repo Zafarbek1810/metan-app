@@ -39,6 +39,7 @@ const DocumentsTableWrapper=styled.div`
 
   .table{
     width: 100%;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     display: flex;
     flex-direction: column;
     justify-content: space-between;

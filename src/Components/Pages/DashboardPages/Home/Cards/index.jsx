@@ -85,7 +85,7 @@ const Cards = () => {
       <div className="cards">
         {
           cardsData.map((item, index) => (
-            <div key={index}>
+            <div key={index} className="cardin">
               <div className="left">
                 {item.icon}
               </div>
