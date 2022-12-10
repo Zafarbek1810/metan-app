@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
 const GasColumnReportWrapper=styled.div`
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
   .title{
     font-style: normal;
     font-weight: 600;
@@ -145,6 +152,8 @@ const GasColumnReportWrapper=styled.div`
       }
     }
   }
+  
+  
 `
 
 export{GasColumnReportWrapper}
