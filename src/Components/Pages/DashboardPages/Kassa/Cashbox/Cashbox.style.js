@@ -265,7 +265,7 @@ const Tab2Wrapper = styled.div`
     }
 
 `
-const Tab3Wrapper = styled.div`
+const Tab3Wrapper = styled.form`
   background: #fff;
   padding: 15px;
   border: 1px solid #1F3C88;
