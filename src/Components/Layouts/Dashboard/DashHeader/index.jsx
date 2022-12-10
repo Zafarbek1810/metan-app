@@ -32,15 +32,24 @@ const DashboardHeader = ({title, RefObj, setIsOpen}) => {
       })
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     UserProvider.getMe()
-      .then(res=>{
+      .then(res => {
+        console.log("getme", res)
         setUser(res.data)
       })
       .catch(err => {
-      console.log(err)
-      Message.serverError()
-    })
+        console.log(err)
+        Message.serverError()
+      })
+
+    UserProvider.getAllCashiers(0, 1000)
+      .then(res => {
+        console.log("cashier", res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }, [])
 
   return (
