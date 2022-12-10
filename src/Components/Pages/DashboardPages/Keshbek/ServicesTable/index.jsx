@@ -160,7 +160,9 @@ const ServicesTable = () => {
                   <td style={{width: "50%"}} className="col">Guliston Metan, Saidkent Metan, Propan Metan, 24/25 Avtobaza Metan, </td>
                   <td style={{width: "10%"}} className="col">20.11.2022 22:06</td>
                   <td style={{width: "10%"}} className="col">{obj.endedDate} </td>
-                  <td style={{width: "10%"}} className="col">Ishga tushirildi</td>
+                  <td style={{width: "10%"}} className="col">
+                    <span style={{background:"#43A047", color:"white",borderRadius:5, padding:10}}>Ishga tushirildi</span>
+                  </td>
                   <td style={{width: "10%"}} className="col">
                     <div className="btns">
                       {/*<button>*/}

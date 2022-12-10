@@ -33,27 +33,29 @@ const DirectorTableWrapper=styled.div`
         //background: rgba(31, 60, 136, 0.1);
         background: #fff;
         border-radius: 6px 6px 0px 0px;
-        padding: 22px 13px;
+        padding: 15px 22px;
         th.col{
           font-style: normal;
           font-weight: 600;
-          font-size: 0.875rem;
-          line-height: 24px;
-          color: #1F3C88;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-        }
-        th.row{
-          font-style: normal;
-          font-weight: 600;
-          font-size: 0.875rem;
+          font-size: 18px;
           line-height: 24px;
           color: #1F3C88;
           display: flex;
           align-items: center;
           justify-content: start;
+          text-align: center;
+          font-family: "Inter";
+        }
+        th.row{
+          font-style: normal;
+          font-weight: 600;
+          font-size: 18px;
+          line-height: 24px;
+          color: #1F3C88;
+          display: flex;
+          align-items: center;
+          justify-content: start;
+          font-family: "Inter";
         }
       }
     }
@@ -63,26 +65,29 @@ const DirectorTableWrapper=styled.div`
       tr{
         display: flex;
         justify-content: space-between;
-        padding: 10px 22px;
-        td.col{
+        padding: 0px 22px;
+        td.col {
           font-style: normal;
           font-weight: 400;
-          font-size: 0.8125rem;
+          font-size: 18px;
           line-height: 24px;
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: start;
           color: #000000;
           text-align: center;
+          font-family: "Inter";
+        }
           td.row{
             font-style: normal;
-            font-weight: 600;
-            font-size: 0.8125rem;
+            font-weight: 400;
+            font-size: 18px;
             line-height: 24px;
             display: flex;
             align-items: center;
             justify-content: start;
             text-align: center;
+            font-family: "Inter";
           }
 
           img{
@@ -90,15 +95,27 @@ const DirectorTableWrapper=styled.div`
             height: 50px;
           }
 
-          .btns{
-            button{
-              background: transparent;
-              border: none;
-              cursor: pointer;
-            }
-            width: 40%;
+          .btns {
+            width: 50%;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+
+            button {
+              background: transparent;
+              border: 1px solid #000;
+              cursor: pointer;
+              transition: 300ms;
+
+              &:hover {
+                background: rgba(31, 60, 136, 0.75);
+
+              }
+
+              svg {
+                fill: none;
+                stroke: none;
+              }
+            }
           }
         }
        

@@ -12,6 +12,7 @@ const CashboxWrapper = styled.div`
     .head {
       display: flex;
       justify-content: center;
+      margin-bottom: 15px;
 
       button {
         margin-left: auto;
@@ -23,6 +24,7 @@ const CashboxWrapper = styled.div`
     .wrapper {
       .col {
         display: flex;
+        align-items: center;
         justify-content: space-between;
 
         .left {
@@ -34,10 +36,10 @@ const CashboxWrapper = styled.div`
           }
 
           svg {
-            width: 30px;
-            height: 30px;
-            stroke: #000;
-            margin-right: 5px;
+            width: 20px;
+            height: 20px;
+            stroke: rgba(0, 0, 0, 0.6);
+            margin-right: 10px;
           }
         }
 

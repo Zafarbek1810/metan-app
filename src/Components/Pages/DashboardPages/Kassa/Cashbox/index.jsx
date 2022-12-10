@@ -51,6 +51,8 @@ const Tab1 = ({outletId, setMijozObj}) => {
     PaymentProvider.pay(body)
       .then(({data}) => {
         console.log(data);
+        toast.success("Muvaffaqiyatli yaratildi!")
+        setValue("summa", "")
       }, err => {
         console.log(err);
       })
@@ -81,7 +83,7 @@ const Tab1 = ({outletId, setMijozObj}) => {
             )}
             <input
               type="text"
-              {...register("carNum", {required: true})}
+              {...register("carNum", {required: false})}
             />
           </label>
         </div>
@@ -102,7 +104,7 @@ const Tab1 = ({outletId, setMijozObj}) => {
       <div className="row">
         <div className="col-md-6">
           <button type="button" className="btn btn-danger w-100">
-            Hisobdan o'chirish [summa]
+            Hisobdan o'chirish
           </button>
         </div>
         <div className="col-md-6">
@@ -176,7 +178,6 @@ const Tab3 = () => {
             <span className="err-text">Majburiy maydon</span>
           )}
           <input
-            placeholder="Izlash..."
             type="date"
             {...register("date", {required: true})}
           />
@@ -249,7 +250,6 @@ const Cashbox = () => {
               >
                 <ModalContent>
                   <form onSubmit={handleSubmit(onSubmit)}>
-
                     <label className="label">
                       <span className="label-text">Ismi</span>
                       {errors.name && (
@@ -362,7 +362,7 @@ const Cashbox = () => {
                       <CarSvg/>
                       <h4>Avto turi</h4>
                     </div>
-                    <div className="right"><p>{mijozObj.carType?.title}</p></div>
+                    <div className="right"><p>{mijozObj.cartype?.title}</p></div>
                   </div>
                   <div className="col">
                     <div className="left">

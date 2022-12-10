@@ -61,7 +61,8 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
 
   const [cassirId, setcassirId] = useState(null)
   const [directorId, setDirectorId] = useState(null)
-  const [cashback, setCashback] = useState(null)
+  const [cashbackid, setCashbackid]=useState(null)
+  const [cashback, setCashback] = useState([])
 
   useEffect(() => {
     UserProvider.getAllCashiers(0, 1000)
@@ -111,6 +112,12 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
   const optionsdirektor = directors.map((i) => (
     {
       label: i.fullName,
+      value: i.id
+    }
+  ))
+  const optionscashback = cashback.map((i) => (
+    {
+      label: i.name,
       value: i.id
     }
   ))
@@ -170,6 +177,9 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
   const handleDirectorId = (value) => {
     setDirectorId(value)
     console.log(value)
+  }
+  const handleCashbackId = (value)=>{
+    console.log("handle", value)
   }
 
   const removeCashier = async (cashid) => {
@@ -420,11 +430,11 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
                     width: '90%',
                   }}
                   placeholder="Tanlang"
-                  // options={
-                  //   optionscashback
-                  // }
-                  onChange={handleDirectorId}
-                  value={directorId}
+                  options={
+                    optionscashback
+                  }
+                  onChange={handleCashbackId}
+                  value={cashbackid}
                 />
               </label>
               <button onClick={addDirector} type="button" className="btn btn-primary">Qo'shish</button>
@@ -433,13 +443,13 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
               <table>
                 <tbody>
                 {
-                  savdoNuqta.directors?.map((obj, i) => (
+                  cashback?.map((obj, i) => (
                     <tr key={obj.id}>
                       <td style={{width: "15%"}}>{i + 1}</td>
-                      <td style={{width: "70%"}}>{obj.fullName}</td>
-                      <td style={{width: "15%"}}>
-                        <button type="button" onClick={() => removeDirector(obj.id)}><DeleteSvg/></button>
-                      </td>
+                      <td style={{width: "70%"}}>{obj.name}</td>
+                      {/*<td style={{width: "15%"}}>*/}
+                      {/*  <button type="button" onClick={() => removeDirector(obj.id)}><DeleteSvg/></button>*/}
+                      {/*</td>*/}
                     </tr>
                   ))
                 }

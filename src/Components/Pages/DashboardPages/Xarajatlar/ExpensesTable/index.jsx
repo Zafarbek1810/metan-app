@@ -187,7 +187,9 @@ const ExpensesTable = () => {
                   <td style={{width: "30%"}} className="col">{obj.outlet.title}</td>
                   <td style={{width: "10%"}} className="col" title={obj.admin.fullName}>{obj.admin.username}</td>
                   <td style={{width: "10%"}} className="col">12.12.2022</td>
-                  <td style={{width: "20%"}} className="col">{obj.amount}</td>
+                  <td style={{width: "20%"}} className="col" style={{color:"red", fontWeight:600}}>
+                      {obj.amount}
+                  </td>
                   <td style={{width: "10%"}} className="col">
                     <div className="btns">
                       <button>

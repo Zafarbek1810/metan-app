@@ -70,16 +70,20 @@ const ClientsTable = () => {
         <tr>
           <td style={{width: "10%"}} className="row">1.Zafarbek</td>
           <td style={{width: "10%"}} className="col">998914355612</td>
-          <td style={{width: "10%"}} className="col">Xetchbek</td>
-          <td style={{width: "10%"}} className="col">80T123TT</td>
-          <td style={{width: "15%"}} className="col">120.000</td>
-          <td style={{width: "15%"}} className="col">30.000</td>
-          <td style={{width: "10%"}} className="col">Silver</td>
-          <td style={{width: "10%"}} className="col">0</td>
-          <td style={{width: "10%"}} className="col">29.11.2022</td>
-          <td style={{width: "10%"}} className="col">7000</td>
-          <td style={{width: "10%"}} className="col">7</td>
-          <td style={{width: "10%"}} className="col">
+          <td style={{width: "8%"}} className="col">Xetchbek</td>
+          <td style={{width: "8%"}} className="col">80T123TT</td>
+          <td style={{width: "8%"}} className="col">120.000</td>
+          <td style={{width: "8%"}} className="col">30.000</td>
+          <td style={{width: "8%"}} className="col">
+            <span style={{background:"rgba(47,136,31,0.58)",borderRadius:5, color:"white", padding:10}}>
+              Silver
+            </span>
+          </td>
+          <td style={{width: "8%"}} className="col">0</td>
+          <td style={{width: "8%"}} className="col">29.11.2022</td>
+          <td style={{width: "8%"}} className="col">7000</td>
+          <td style={{width: "8%"}} className="col">7</td>
+          <td style={{width: "8%"}} className="col">
             <div className="btns">
               <button>
                 <DeleteSvg/>
@@ -94,40 +98,20 @@ const ClientsTable = () => {
         <tr>
           <td style={{width: "10%"}} className="row">1.Zafarbek</td>
           <td style={{width: "10%"}} className="col">998914355612</td>
-          <td style={{width: "10%"}} className="col">Xetchbek</td>
-          <td style={{width: "10%"}} className="col">80T123TT</td>
-          <td style={{width: "15%"}} className="col">120.000</td>
-          <td style={{width: "15%"}} className="col">30.000</td>
-          <td style={{width: "10%"}} className="col">Silver</td>
-          <td style={{width: "10%"}} className="col">0</td>
-          <td style={{width: "10%"}} className="col">29.11.2022</td>
-          <td style={{width: "10%"}} className="col">7000</td>
-          <td style={{width: "10%"}} className="col">7</td>
-          <td style={{width: "10%"}} className="col">
-            <div className="btns">
-              <button>
-                <DeleteSvg/>
-              </button>
-              <button>
-                <EditSvg/>
-              </button>
-            </div>
+          <td style={{width: "8%"}} className="col">Xetchbek</td>
+          <td style={{width: "8%"}} className="col">80T123TT</td>
+          <td style={{width: "8%"}} className="col">120.000</td>
+          <td style={{width: "8%"}} className="col">30.000</td>
+          <td style={{width: "8%"}} className="col">
+            <span style={{background:"rgba(47,136,31,0.58)",borderRadius:5, color:"white", padding:10}}>
+              Silver
+            </span>
           </td>
-
-        </tr>
-        <tr>
-          <td style={{width: "10%"}} className="row">1.Zafarbek</td>
-          <td style={{width: "10%"}} className="col">998914355612</td>
-          <td style={{width: "10%"}} className="col">Xetchbek</td>
-          <td style={{width: "10%"}} className="col">80T123TT</td>
-          <td style={{width: "15%"}} className="col">120.000</td>
-          <td style={{width: "15%"}} className="col">30.000</td>
-          <td style={{width: "10%"}} className="col">Silver</td>
-          <td style={{width: "10%"}} className="col">0</td>
-          <td style={{width: "10%"}} className="col">29.11.2022</td>
-          <td style={{width: "10%"}} className="col">7000</td>
-          <td style={{width: "10%"}} className="col">7</td>
-          <td style={{width: "10%"}} className="col">
+          <td style={{width: "8%"}} className="col">0</td>
+          <td style={{width: "8%"}} className="col">29.11.2022</td>
+          <td style={{width: "8%"}} className="col">7000</td>
+          <td style={{width: "8%"}} className="col">7</td>
+          <td style={{width: "8%"}} className="col">
             <div className="btns">
               <button>
                 <DeleteSvg/>

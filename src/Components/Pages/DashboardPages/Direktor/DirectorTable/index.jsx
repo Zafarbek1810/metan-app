@@ -178,7 +178,7 @@ const DirectorTable = () => {
       <table className="table">
         <thead>
         <tr>
-          <th style={{width: "30%"}} className="row">To'liq ismi</th>
+          <th style={{width: "40%"}} className="row">To'liq ismi</th>
           <th style={{width: "30%"}} className="col">Login</th>
           <th style={{width: "30%"}} className="col">Amallar</th>
         </tr>
@@ -188,8 +188,8 @@ const DirectorTable = () => {
           !loading2 ?
             directors.length
               ? directors.map((obj, index) => (
-                <tr key={index}>
-                  <td style={{width: "30%"}} className="row">{index + 1}. {obj.fullName} </td>
+                <tr key={obj.id}>
+                  <td style={{width: "40%"}} className="row">{index+1}.{obj.fullName} </td>
                   <td style={{width: "30%"}} className="col">{obj.username}</td>
                   <td style={{width: "30%"}} className="col">
                     <div className="btns">

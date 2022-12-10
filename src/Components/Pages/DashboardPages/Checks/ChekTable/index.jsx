@@ -4,6 +4,7 @@ import UserProvider from "../../../../../Data/Providers/UserProvider";
 import Message from "../../../../../utils/Message";
 import PaymentProvider from "../../../../../Data/Providers/PaymentProvider";
 import MinLoader from "../../../../Common/MinLoader";
+import Link from "next/link";
 
 
 const ChekTable = () => {
@@ -15,7 +16,7 @@ const ChekTable = () => {
     setLoading2(true);
     PaymentProvider.getAllCheques(0, 1000)
       .then(res => {
-        console.log(res)
+        console.log("chek", res)
         setCheques(res.data)
       })
       .catch(err => {
@@ -50,15 +51,46 @@ const ChekTable = () => {
           !loading2 ?
             cheques.length ?
               cheques.map((obj, index) => (
-                <tr key={obj.id}>
+                <tr key={obj.id} className="edit_row">
                   <td style={{width: "10%"}} className="row">1.12.12.2022</td>
-                  <td style={{width: "10%"}} className="col">{obj.amount}</td>
+                  <td style={{width: "10%"}} className="col"
+                      style={{color: "#43A047", fontWeight: 600}}>{obj.amount}</td>
                   <td style={{width: "10%"}} className="col">0.00</td>
                   <td style={{width: "10%"}} className="col">{obj.giftedPoints}</td>
-                  <td style={{width: "15%"}} className="col">{obj.client?.fullName}</td>
-                  <td style={{width: "15%"}} className="col">{obj.cashier?.fullName}</td>
-                  <td style={{width: "10%"}} className="col">{obj.outlet.title}</td>
-                  <td style={{width: "10%"}} className="col">Muvaffaqiyatli</td>
+                  <td style={{width: "15%"}} className="col" style={{fontWeight: 600}}>
+                    <Link href="#" className="link" style={{
+                      fontWeight: 600,
+                      textDecoration: "none",
+                      color: "#43A047"
+                    }}>{obj.client?.fullName}</Link>
+                  </td>
+                  <td style={{width: "15%"}} className="col" style={{fontWeight: 600}}>{obj.cashier?.fullName}</td>
+                  <td style={{width: "10%"}} className="col" style={{fontWeight: 600}}>{obj.outlet.title}</td>
+                  {obj.type === "PAID_BY_MONEY" ?
+                    <td style={{width: "10%"}} className="col">
+                    <span style={{background: "#43A047", color: "white", borderRadius: 5, padding: 10}}>
+                      To'langan
+                    </span>
+                    </td>
+                    : obj.type === "PAID_BY_POINTS" ?
+                      <td style={{width: "10%"}} className="col">
+                    <span style={{background: "#FB8C00", color: "white", borderRadius: 5, padding: 10}}>
+                      Ballar orqali
+                    </span>
+                      </td>
+                      : obj.type === "PAID_POINTS" ?
+                        <td style={{width: "10%"}} className="col">
+                    <span style={{background: "#3949AB", color: "white", borderRadius: 5, padding: 10}}>
+                      Ballar chiqarilgan
+                    </span>
+                        </td>
+                        : <td style={{width: "10%"}} className="col">
+                    <span style={{background: "#E53935", color: "white", borderRadius: 5, padding: 10}}>
+                      Qarzga
+                    </span>
+                        </td>
+                  }
+
                 </tr>
               ))
               : <div style={

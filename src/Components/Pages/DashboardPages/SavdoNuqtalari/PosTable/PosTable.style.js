@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
-const PosTableWrapper=styled.div`
-  .top{
+const PosTableWrapper = styled.div`
+  .top {
     margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
+
     .title {
       font-style: normal;
       font-weight: 600;
@@ -14,86 +15,109 @@ const PosTableWrapper=styled.div`
     }
   }
 
-  .table{
+  .table {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    thead{
+
+    thead {
       width: 100%;
-      tr{
+
+      tr {
         display: flex;
         //justify-content: space-between;
         //background: rgba(31, 60, 136, 0.1);
         background: #fff;
         border-radius: 6px 6px 0px 0px;
-        padding: 22px 13px;
-        th.col{
+        padding: 15px 22px;
+
+        th.col {
           font-style: normal;
           font-weight: 600;
-          font-size: 0.875rem;
+          font-size: 18px;
           line-height: 24px;
           color: #1F3C88;
           display: flex;
           align-items: center;
           justify-content: center;
           text-align: center;
+          font-family: "Inter";
         }
-        th.row{
+
+        th.row {
           font-style: normal;
           font-weight: 600;
-          font-size: 0.875rem;
+          font-size: 18px;
           line-height: 24px;
           color: #1F3C88;
           display: flex;
           align-items: center;
           justify-content: center;
           text-align: center;
+          font-family: "Inter";
+
         }
       }
     }
 
-    tbody{
+    tbody {
       background: #fff;
-      tr{
+
+      tr {
         display: flex;
         justify-content: space-between;
-        padding: 10px 22px;
-        td.col{
+        padding: 0px 22px;
+
+        td.col {
           font-style: normal;
           font-weight: 400;
-          font-size: 0.8125rem;
+          font-size: 18px;
           line-height: 24px;
           display: flex;
           align-items: center;
           justify-content: center;
           color: #000000;
           text-align: center;
-          
-          img{
+          font-family: "Inter";
+
+          img {
             width: 50px;
             height: 50px;
           }
 
-          .btns{
-            button{
-              background: transparent;
-              border: none;
-              cursor: pointer;
-            }
-            width: 40%;
+          .btns {
+            width: 50%;
             display: flex;
             justify-content: space-between;
+
+            button {
+              background: transparent;
+              border: 1px solid #000;
+              cursor: pointer;
+              transition: 300ms;
+
+              &:hover {
+                background: rgba(31, 60, 136, 0.75);
+
+              }
+
+              svg {
+                fill: none;
+                stroke: none;
+              }
+            }
           }
         }
-        td.row{
+
+        td.row {
           font-style: normal;
           font-weight: 600;
-          font-size: 0.8125rem;
+          font-size: 18px;
           line-height: 24px;
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: start;
           text-align: center;
         }
       }

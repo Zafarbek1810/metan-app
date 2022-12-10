@@ -72,12 +72,12 @@ const GasColumns = () => {
   const onSubmit = async (values) => {
     const body = {}
     body.outletId = outletId
-    body.title = values.name;
+    body.name = values.name;
 
     setLoading(true)
     try {
       const {data} = await GasBallonsProvider.addGasColumn(body);
-      console.log(data.res)
+      console.log(data)
       setForRender(Math.random());
       handleCancel()
     } catch (err) {

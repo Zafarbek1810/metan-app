@@ -38,28 +38,30 @@ const ExpensesTableWrapper=styled.div`
         //background: rgba(31, 60, 136, 0.1);
         background: #fff;
         border-radius: 6px 6px 0px 0px;
-        padding: 22px 13px;
+        padding: 15px 22px;
         th.col{
           font-style: normal;
           font-weight: 600;
-          font-size: 20px;
+          font-size: 18px;
           line-height: 24px;
           color: #1F3C88;
           //display: flex;
           align-items: center;
           justify-content: start;
           text-align: center;
+          font-family: "Inter";
         }
         th.row{
           font-style: normal;
           font-weight: 600;
-          font-size: 20px;
+          font-size: 18px;
           line-height: 24px;
           color: #1F3C88;
           //display: flex;
           align-items: center;
           justify-content: start;
           text-align: center;
+          font-family: "Inter";
         }
       }
     }
@@ -69,7 +71,7 @@ const ExpensesTableWrapper=styled.div`
       tr{
         display: flex;
         justify-content: space-between;
-        padding: 10px 22px;
+        padding: 0px 22px;
         td.col{
           font-style: normal;
           font-weight: 400;
@@ -77,30 +79,46 @@ const ExpensesTableWrapper=styled.div`
           line-height: 24px;
           //display: flex;
           align-items: center;
-          justify-content: start;
+          justify-content: center;
           color: #000000;
           text-align: center;
+          font-family: "Inter";
 
-          .btns{
-            button{
+          .btns {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            button {
               background: transparent;
-              border: none;
+              border: 1px solid #000;
               cursor: pointer;
+              transition: 300ms;
+
+              &:hover {
+                background: rgba(31, 60, 136, 0.75);
+              }
+              svg {
+                fill: none;
+                stroke: none;
+              }
             }
-            //width: 40%;
-            //display: flex;
-            justify-content: space-between;
           }
+          
+          
+        }
+        &:nth-child(even) {
+          background-color: #f2f2f2;
         }
         td.row{
           font-style: normal;
-          font-weight: 600;
+          font-weight: 400;
           font-size: 18px;
           line-height: 24px;
           //display: flex;
           align-items: center;
           justify-content: start;
           text-align: center;
+          font-family: "Inter";
         }
       }
     }

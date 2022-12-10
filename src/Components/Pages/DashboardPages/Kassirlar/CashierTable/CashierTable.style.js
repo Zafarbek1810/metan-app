@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
-const CashierTableWrapper=styled.div`
-  .top{
+const CashierTableWrapper = styled.div`
+  .top {
     margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
+
     .title {
       font-style: normal;
       font-weight: 600;
@@ -14,123 +15,149 @@ const CashierTableWrapper=styled.div`
     }
   }
 
-  .table{
+  .table {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    thead{
+
+    thead {
       width: 100%;
-      tr{
+
+      tr {
         display: flex;
         //justify-content: space-between;
         //background: rgba(31, 60, 136, 0.1);
         background: #fff;
         border-radius: 6px 6px 0px 0px;
-        padding: 22px 13px;
-        th.col{
+        padding: 15px 22px;
+
+        th.col {
           font-style: normal;
           font-weight: 600;
-          font-size: 0.875rem;
+          font-size: 18px;
           line-height: 24px;
           color: #1F3C88;
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: start;
           text-align: center;
+          font-family: "Inter";
         }
-        th.row{
+
+        th.row {
           font-style: normal;
           font-weight: 600;
-          font-size: 0.875rem;
+          font-size: 18px;
           line-height: 24px;
           color: #1F3C88;
           display: flex;
           align-items: center;
           justify-content: start;
           text-align: start;
+          font-family: "Inter";
         }
       }
     }
 
-    tbody{
+    tbody {
       background: #fff;
-      tr{
+
+      tr {
         display: flex;
         justify-content: space-between;
         padding: 10px 22px;
-        td.col{
+
+        td.col {
           font-style: normal;
           font-weight: 400;
-          font-size: 0.8125rem;
-          line-height: 24px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #000000;
-          text-align: center;
-
-          img{
-            width: 50px;
-            height: 50px;
-          }
-
-          .btns{
-            button{
-              background: transparent;
-              border: none;
-              cursor: pointer;
-            }
-            width: 40%;
-            display: flex;
-            justify-content: center;
-          }
-        }
-        td.row{
-          font-style: normal;
-          font-weight: 600;
-          font-size: 0.8125rem;
+          font-size: 18px;
           line-height: 24px;
           display: flex;
           align-items: center;
           justify-content: start;
-          text-align: start;
+          color: #000000;
+          text-align: center;
+          font-family: "Inter";
         }
+
+        img {
+          width: 50px;
+          height: 50px;
+        }
+
+        .btns {
+          width: 50%;
+          display: flex;
+          justify-content: space-between;
+
+          button {
+            background: transparent;
+            border: 1px solid #000;
+            cursor: pointer;
+            transition: 300ms;
+
+            &:hover {
+              background: rgba(31, 60, 136, 0.75);
+
+            }
+
+            svg {
+              fill: rgba(0, 0, 0, 0.6);
+            }
+          }
+        }
+      }
+
+      td.row {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        text-align: start;
+        font-family: "Inter";
       }
     }
   }
+}
 `
 
-const ModalHeader=styled.header`
+const ModalHeader = styled.header`
   background: #fff;
   display: flex;
   align-items: center;
   border-bottom: 1px solid #f5f6f8;
   padding: 20px 20px 5px 20px;
-  h2.title{
+
+  h2.title {
     margin-bottom: 0;
     font-size: 25px !important;
   }
-    svg{
-      height: 20px;
-      width: 20px;
-      color:#000;
-    }
-  
-  button.closeSvg{
+
+  svg {
+    height: 20px;
+    width: 20px;
+    color: #000;
+  }
+
+  button.closeSvg {
     background: transparent;
     border: none;
   }
 `
 
 
-const ModalContent=styled.div`
+const ModalContent = styled.div`
   padding: 20px;
   border-bottom: 1px solid #f5f6f8;
   background: #fff;
-  
-  form{
+
+  form {
     background: #fff;
+
     .label {
       width: 100%;
       display: block;
@@ -168,30 +195,35 @@ const ModalContent=styled.div`
         left: 0;
         top: 70px;
       }
-      .select{
+
+      .select {
         font-style: normal;
         font-weight: 600;
         font-size: 1rem;
         line-height: 20px;
         color: #000000;
-        .css-319lph-ValueContainer{
+
+        .css-319lph-ValueContainer {
           padding: 15px 10px;
         }
-        .css-1s2u09g-control{
+
+        .css-1s2u09g-control {
           height: 60px;
         }
-        .css-1okebmr-indicatorSeparator{
+
+        .css-1okebmr-indicatorSeparator {
           display: none;
         }
       }
     }
-    
-    .btns{
+
+    .btns {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 30px;
-      button{
+
+      button {
         width: 100%;
         text-align: center;
         font-style: normal;
@@ -211,10 +243,10 @@ const ModalContent=styled.div`
       }
     }
   }
-  
+
 `
 
-export{
+export {
   CashierTableWrapper,
   ModalHeader,
   ModalContent,
