@@ -35,7 +35,7 @@ const CardsWrapper = styled.div`
       padding: 15px;
       width: 32%;
       margin-bottom: 20px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
       .left{
         background: #1F3C88;
         border-radius: 50%;

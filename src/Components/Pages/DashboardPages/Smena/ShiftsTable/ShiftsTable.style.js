@@ -19,10 +19,10 @@ const ShiftsTableWrapper=styled.div`
   }
   
   .table-responsive{
-    width: 1400px;
+    width: 1200px;
     background: #fff;
     overflow-x: scroll;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
 
   }
   .table {
@@ -103,7 +103,7 @@ const ShiftsTableWrapper=styled.div`
         }
 
         &:nth-child(even) {
-          background-color: #f2f2f2;
+          //background-color: #f2f2f2;
         }
 
         td.row {
