@@ -40,8 +40,9 @@ export default class OutletProvider{
   static async addExpence(body) {
     return await client.post("/outlet/addExpense", body);
   }
-  static async getExpenses(page = 0, size = 10) {
-    return await client.get(`/outlet/getExpenses?skip=${page}&take=${size}`);
+  static async getExpenses(page = 0, size = 10, params = {}) {
+    const {outletId, date} = params;
+    return await client.get(`/outlet/getExpenses?skip=${page}&take=${size}${outletId ? `&outletId=${outletId}` : ""}${date ? `&date=${date}` : ""}`);
   }
   static async updateExpense(body) {
     return await client.post("/outlet/editExpense", body);

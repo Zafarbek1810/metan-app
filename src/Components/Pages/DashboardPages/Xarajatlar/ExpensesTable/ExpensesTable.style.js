@@ -24,6 +24,25 @@ const ExpensesTableWrapper=styled.div`
       }
     }
   }
+  
+  .filter {
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 10px;
+  }
+
+  .filter-state {
+    padding: 10px 0;
+    &__inner {
+      padding: 10px;
+      border-radius: 15px;
+      background-color: #e9e9e9;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
 
   .table{
     margin-top: 20px;
@@ -271,9 +290,28 @@ const ModalFooter=styled.footer`
     }
 `
 
+
+const FilterWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+  
+  .filter-content {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+
+    min-width: 400px;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+`
+
 export{
   ExpensesTableWrapper,
   ModalHeader,
   ModalContent,
-  ModalFooter
+  ModalFooter,
+  FilterWrapper
 }

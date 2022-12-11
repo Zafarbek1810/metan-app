@@ -14,6 +14,7 @@ const GasColumnReport = () => {
   const startDateRef = useRef();
   const endDateRef = useRef();
 
+  const [forRender, setForRender] = useState([]);
   const [colsData, setColsData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -46,7 +47,7 @@ const GasColumnReport = () => {
       }, err => {
         console.log(err);
       })
-  }, [filterState])
+  }, [filterState, forRender])
 
   useEffect(() => {
     if (activeOutlet) {
@@ -126,7 +127,7 @@ const GasColumnReport = () => {
               footer={[null]}
             >
               <ModalContent>
-                <ReportModal/>
+                <ReportModal renderParent={setForRender}/>
               </ModalContent>
             </Modal>
           </div>
@@ -177,7 +178,7 @@ const GasColumnReport = () => {
             </div>
 
             <div className="d-flex gap-2">
-              <div className="btn btn-secondary" onClick={onFilterClear}>Bekor qilish 2</div>
+              <div className="btn btn-secondary" onClick={onFilterClear}>Bekor qilish</div>
               <div className="btn btn-success" onClick={onFilterSubmit}>Qo'llash</div>
             </div>
           </div>
@@ -209,7 +210,7 @@ const GasColumnReport = () => {
               <td style={{width: "15%"}} className="row">{index + 1}.{item.gasColumn.name}</td>
               <td style={{width: "15%"}} className="col">{item.currentValue}</td>
               <td style={{width: "15%"}} className="col">{item.lastValue}</td>
-              <td style={{width: "15%"}} className="col">0</td>
+              <td style={{width: "15%"}} className="col">{item.currentValue - item.lastValue}</td>
               <td style={{width: "15%"}} className="col">30.11.2022</td>
               <td style={{width: "15%"}} className="col">
                 <div className="btns">
@@ -242,9 +243,9 @@ const GasColumnReport = () => {
             </thead>
             <tbody>
             <tr>
-              <td>{editGazReport?.name}</td>
+              <td>{editGazReport?.gasColumn.name}</td>
               <td><input type="text" className="form-control w-75"/></td>
-              <td>Oxirgi ko'rsatgich</td>
+              <td>{editGazReport?.lastValue}</td>
               <td>Natija</td>
             </tr>
             </tbody>
@@ -264,7 +265,7 @@ const GasColumnReport = () => {
 export default GasColumnReport;
 
 
-function ReportModal() {
+function ReportModal({renderParent}) {
   const {register, handleSubmit, watch, reset} = useForm();
   const [outlets, setOutlets] = useState([]);
   const [activeOutlet, setActiveOutlet] = useState(null);
@@ -298,6 +299,7 @@ function ReportModal() {
         toast.success("Kolonka hisobotlari yuborildi");
         reset();
         setForRender(Math.random());
+        renderParent(Math.random());
       }, err => {
         console.log(err);
         toast.success("Kutilmagan xatolik yuz berdi!");
