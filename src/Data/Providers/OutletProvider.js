@@ -32,6 +32,15 @@ export default class OutletProvider{
       data: body
     });
   }
+  static async addCashbackOutlet(body) {
+    return await client.post("/cashback/addCashbackToOutlet", body);
+  }
+  static async deleteCashbackOutlet(body) {
+    return await client.delete(`/cashback/deleteCashbackFromOutlet`, {
+      data: body
+    });
+  }
+
   static async updateOutlet(body) {
     return await client.post("/outlet/editOutlet", body);
   }

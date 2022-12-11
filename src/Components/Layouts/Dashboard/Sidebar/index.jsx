@@ -181,7 +181,7 @@ const Sidebar = () => {
       <div className="wrapper">
         <div className="top">
           <MyLink className="logo" to="/">
-            <span>Logo</span>
+            <img src="/img/logo.jpeg" alt=""/>
           </MyLink>
 
           <Box sx={{width: '100%'}}>

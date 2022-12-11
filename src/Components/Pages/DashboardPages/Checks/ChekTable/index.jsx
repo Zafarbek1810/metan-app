@@ -36,7 +36,7 @@ const ChekTable = () => {
       <table className="table">
         <thead>
         <tr>
-          <th style={{width: "10%"}} className="row">Sana</th>
+          <th style={{width: "15%"}} className="row">Sana</th>
           <th style={{width: "10%"}} className="col">Summa</th>
           <th style={{width: "10%"}} className="col">To'langan ballar</th>
           <th style={{width: "10%"}} className="col">Bonus</th>
@@ -52,7 +52,7 @@ const ChekTable = () => {
             cheques.length ?
               cheques.map((obj, index) => (
                 <tr key={obj.id} className="edit_row">
-                  <td style={{width: "10%"}} className="row">1.12.12.2022</td>
+                  <td style={{width: "15%"}} className="row">{index+1}. {new Date(obj.date).toLocaleString("en-GB")}</td>
                   <td style={{width: "10%",color: "#43A047", fontWeight: 600}} className="col"
                       >{obj.amount}</td>
                   <td style={{width: "10%"}} className="col">0.00</td>

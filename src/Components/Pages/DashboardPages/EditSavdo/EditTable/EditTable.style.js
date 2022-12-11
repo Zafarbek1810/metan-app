@@ -5,6 +5,9 @@ const EditTableWrapper = styled.div`
     background: #fff;
     padding: 20px;
   }
+  .keshbekTitle{
+    font-size: 20px;
+  }
 
   .input {
     display: flex;
