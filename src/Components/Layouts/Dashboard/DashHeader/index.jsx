@@ -61,7 +61,7 @@ const DashboardHeader = ({title, RefObj, setIsOpen}) => {
         cc
       </div>
       <MyLink to="#" onClick={handleLogout} className="admin">
-        <p>{user.fullName} , {user.username}</p> <LogOutSvg/>
+        <h3>{user.fullName} </h3> <LogOutSvg/>
       </MyLink>
     </DashHeaderWrapper>
   );

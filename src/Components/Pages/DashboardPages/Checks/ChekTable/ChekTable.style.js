@@ -92,7 +92,7 @@ const ChekTableWrapper = styled.div`
           display: flex;
           align-items: center;
           justify-content: start;
-          text-align: center;
+          text-align: start;
           font-family: "Inter";
         }
       }

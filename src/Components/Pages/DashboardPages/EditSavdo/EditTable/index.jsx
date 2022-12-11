@@ -58,11 +58,10 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
   const [cashiers, setCashiers] = useState([]);
   const [directors, setDirectors] = useState([]);
   const [savdoNuqta, setSavoNuqta] = useState({})
-
+  const [cashback, setCashback]=useState([])
   const [cassirId, setcassirId] = useState(null)
   const [directorId, setDirectorId] = useState(null)
-  const [cashbackid, setCashbackid]=useState(null)
-  const [cashback, setCashback] = useState([])
+  const [keshbekId, setKeshbekId] = useState(null)
 
   useEffect(() => {
     UserProvider.getAllCashiers(0, 1000)
@@ -115,7 +114,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
       value: i.id
     }
   ))
-  const optionscashback = cashback.map((i) => (
+  const optionCashback = cashback.map((i)=>(
     {
       label: i.name,
       value: i.id
@@ -123,12 +122,13 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
   ))
 
 
+
   useEffect(() => {
     OutletProvider.getOneFullOutlet(id)
       .then(({data}) => {
         setValue("title", data.title);
         setSavoNuqta(data)
-        console.log(data)
+        console.log("ful data",data)
       })
       .catch(err => {
         console.log(err);
@@ -169,6 +169,24 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
       Message.serverError();
     }
   }
+  const addCashback = async () => {
+    const body = {
+      cashbackId: +keshbekId,
+      outletId: id
+    }
+    console.log(body)
+
+    try {
+      const {data} = await OutletProvider.addCashbackOutlet(body);
+      console.log(data)
+      setForRender(Math.random());
+    } catch (err) {
+      console.log(err)
+      Message.serverError();
+    }
+  }
+
+
 
   const handleCassirId = (value) => {
     setcassirId(value)
@@ -178,9 +196,11 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
     setDirectorId(value)
     console.log(value)
   }
-  const handleCashbackId = (value)=>{
-    console.log("handle", value)
+  const handleCashback = (value) => {
+    setKeshbekId(value)
+    console.log(value)
   }
+
 
   const removeCashier = async (cashid) => {
     RefObj.current.textContent = `Rostdan ham o'chirishni xoxlaysizmi?`
@@ -264,16 +284,6 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
                 />
               </label>
             </div>
-            {/*<div className="input">*/}
-            {/*  <label>*/}
-            {/*    <span className="label-text">Telefon</span>*/}
-            {/*    <input*/}
-            {/*      type="text"*/}
-            {/*      style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}*/}
-            {/*      {...register("tel", {required: true})}*/}
-            {/*    />*/}
-            {/*  </label>*/}
-            {/*</div>*/}
             <div className="input">
               <label>
                 <span>Manzil</span>
@@ -319,7 +329,6 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
             <img style={{width:"100%", height:"100%"}} src="/img/metan.png" alt=""/>
           </div>
           <div className="col-md-4 col-12 mb-5">
-
           </div>
           <div className="col-md-4 col-12">
             <div className="input">
@@ -376,6 +385,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
                     optionsdirektor
                   }
                   onChange={handleDirectorId}
+
                   value={directorId}
                 />
               </label>
@@ -409,33 +419,15 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
                   style={{
                     width: '90%',
                   }}
-                  placeholder="Tanlang"
-                  options={
-                    optionscashback
-                  }
-                  onChange={handleCashbackId}
-                  value={cashbackid}
+
+                  options={optionCashback}
+                  onChange={handleCashback}
+                  value={keshbekId}
                 />
               </label>
-              <button onClick={addDirector} type="button" className="btn btn-primary">Qo'shish</button>
+              <button onClick={addCashback} type="button" className="btn btn-primary">Qo'shish</button>
             </div>
-            <div className="box">
-              <table>
-                <tbody>
-                {
-                  cashback?.map((obj, i) => (
-                    <tr key={obj.id}>
-                      <td style={{width: "15%"}}>{i + 1}</td>
-                      <td style={{width: "70%"}}>{obj.name}</td>
-                      {/*<td style={{width: "15%"}}>*/}
-                      {/*  <button type="button" onClick={() => removeDirector(obj.id)}><DeleteSvg/></button>*/}
-                      {/*</td>*/}
-                    </tr>
-                  ))
-                }
-                </tbody>
-              </table>
-            </div>
+            {savdoNuqta?.cashback?<h3 className="keshbekTitle">Ishlayotgan keshbek: {savdoNuqta?.cashback?.name}</h3> :<h3 className="keshbekTitle">Kashbek ishlamayapdi</h3>}
           </div>
         </div>
         <div className="col-md-3 col-sm-6 col-12 mt-5 ms-auto">

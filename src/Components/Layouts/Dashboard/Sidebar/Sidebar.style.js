@@ -9,6 +9,7 @@ const SideBarWrapper=styled.div`
   .logo {
     display: flex;
     align-items: center;
+    justify-content: center;
     text-decoration: none;
     color: #000;
     margin-bottom: 30px;
@@ -23,6 +24,9 @@ const SideBarWrapper=styled.div`
       //width: 50%;
       font-size: 25px;
       font-weight: 600;
+    }
+    img{
+      width: 200px;
     }
   }
 
