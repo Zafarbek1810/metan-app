@@ -1,16 +1,23 @@
-import React, {useEffect, useState} from 'react';
-import {GasColumnReportWrapper} from "./GasColumnReport.style";
+import React, {useEffect, useRef, useState} from 'react';
+import {FilterWrapper, GasColumnReportWrapper} from "./GasColumnReport.style";
 import EditSvg from "../../../../Common/Svgs/EditSvg";
 import {Modal} from "antd";
 import {ModalContent} from "../../Xarajatlar/ExpensesTable/ExpensesTable.style";
 import OutletProvider from "../../../../../Data/Providers/OutletProvider";
 import GasBallonsProvider from "../../../../../Data/Providers/GasBallonsProvider";
 import {useForm} from "react-hook-form";
+import {toast} from "react-toastify";
 
 const GasColumnReport = () => {
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [filterState, setFilterState] = useState({});
+  const startDateRef = useRef();
+  const endDateRef = useRef();
+
   const [colsData, setColsData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // TODO
   const [] = useState(false);
   const [] = useState(false);
 
@@ -24,26 +31,24 @@ const GasColumnReport = () => {
   const [activeGazCol, setActiveGazCol] = useState(null);
 
   useEffect(() => {
-
-  }, [])
-
-  useEffect(() => {
     OutletProvider.getAllOutlets()
       .then(({data}) => {
         setOutlets(data.map(i => ({label: i.title, value: i.id})));
       }, err => {
         console.log(err);
       })
-    GasBallonsProvider.getGasColums()
+  }, [])
+
+  useEffect(() => {
+    GasBallonsProvider.getGasColumsReports(filterState)
       .then(({data}) => {
         setColsData(data);
       }, err => {
         console.log(err);
       })
-  }, [])
+  }, [filterState])
 
   useEffect(() => {
-    console.log(activeOutlet)
     if (activeOutlet) {
       GasBallonsProvider.getGasColumsByOutlet(+activeOutlet)
         .then(({data}) => {
@@ -78,6 +83,31 @@ const GasColumnReport = () => {
     setActiveGazCol(e.target.value);
   }
 
+  const onFilterSubmit = () => {
+    const startDate = startDateRef.current.value.split("-").reverse().join("-");
+    const endDate = endDateRef.current.value.split("-").reverse().join("-");
+
+    const body = {
+      outletId: activeOutlet,
+      gasColumnId: activeGazCol,
+      startDate,
+      endDate
+    }
+
+    setIsFilterOpen(false);
+    setFilterState(body);
+  }
+
+  const onFilterClear = () => {
+    setActiveOutlet(null);
+    setActiveGazCol(null);
+    setGazCols([]);
+    startDateRef.current.value = "";
+    endDateRef.current.value = "";
+    setFilterState({});
+    setIsFilterOpen(false);
+  }
+
   return (
     <GasColumnReportWrapper>
       <div className="top">
@@ -103,19 +133,19 @@ const GasColumnReport = () => {
         </div>
       </div>
       <div className="filter">
-        <div className="col-3">
+        <div className="col-3 me-2">
           <input type="text" className="form-control" placeholder="Izlash"/>
         </div>
-        <div className="dropdown">
-          <button type="button" className="btn btn-primary dropdown-toggle px-4" data-bs-toggle="dropdown"
-                  aria-expanded="false" data-bs-auto-close="outside">
+        <FilterWrapper>
+          <button className="btn btn-primary" onClick={() => setIsFilterOpen(p => !p)}>
             Filter
           </button>
-          <form className="dropdown-menu p-3 col-6">
+          <div className="filter-content" style={{visibility: isFilterOpen ? "visible" : "hidden"}}>
             <div className="row">
               <div className="select mb-3 col-6">
                 <label className="form-label">Savdo nuqtasi</label>
                 <select className="form-select" value={activeOutlet} onChange={handleOutletFilter}>
+                  <option value="null" disabled>Tanlang</option>
                   {
                     outlets.map(out => (
                       <option value={out.value} key={out.value}>{out.label}</option>
@@ -126,6 +156,7 @@ const GasColumnReport = () => {
               <div className="select mb-3 col-6">
                 <label className="form-label">Gaz kolonkalari</label>
                 <select className="form-select" value={activeGazCol} onChange={handleGazColFilter}>
+                  <option value="null" disabled>Tanlang</option>
                   {
                     gazCols.map(out => (
                       <option value={out.value} key={out.value}>{out.label}</option>
@@ -137,20 +168,28 @@ const GasColumnReport = () => {
             <div className="row">
               <div className="mb-3 col-6">
                 <label className="form-label">Davr</label>
-                <input type="date" className="form-control"/>
+                <input ref={startDateRef} name="startDate" type="date" className="form-control"/>
               </div>
               <div className="mb-3 mt-2 col-6">
                 <label className="form-label"></label>
-                <input type="date" className="form-control"/>
+                <input ref={endDateRef} name="endDate" type="date" className="form-control"/>
               </div>
             </div>
 
-            <div className="btns">
-              <button className="btn btn-secondary">Bekor qilish</button>
-              <button className="btn btn-success">Qo'llash</button>
+            <div className="d-flex gap-2">
+              <div className="btn btn-secondary" onClick={onFilterClear}>Bekor qilish 2</div>
+              <div className="btn btn-success" onClick={onFilterSubmit}>Qo'llash</div>
             </div>
-          </form>
-        </div>
+          </div>
+        </FilterWrapper>
+      </div>
+      <div className="filter-state col-12">
+        {
+          !!Object.keys(filterState).length && <div className="filter-state__inner">
+            <span>Filtrlangan</span>
+            <button className="btn btn-secondary" onClick={onFilterClear}>O'chirish</button>
+          </div>
+        }
       </div>
       <table className="table">
         <thead>
@@ -167,8 +206,8 @@ const GasColumnReport = () => {
         {
           colsData.map((item, index) => (
             <tr key={item.id}>
-              <td style={{width: "15%"}} className="row">{index + 1}.{item.name}</td>
-              <td style={{width: "15%"}} className="col">{item.lastValue}</td>
+              <td style={{width: "15%"}} className="row">{index + 1}.{item.gasColumn.name}</td>
+              <td style={{width: "15%"}} className="col">{item.currentValue}</td>
               <td style={{width: "15%"}} className="col">{item.lastValue}</td>
               <td style={{width: "15%"}} className="col">0</td>
               <td style={{width: "15%"}} className="col">30.11.2022</td>
@@ -211,7 +250,9 @@ const GasColumnReport = () => {
             </tbody>
           </table>
           <div className="d-flex justify-content-end gap-2 mb-2">
-            <button type="button" className="btn btn-danger dropdown-toggle px-4" onClick={handleEditModalCancel}>Bekor qilish</button>
+            <button type="button" className="btn btn-danger dropdown-toggle px-4" onClick={handleEditModalCancel}>Bekor
+              qilish
+            </button>
             <button type="button" className="btn btn-primary dropdown-toggle px-4">Tasdiqlayman</button>
           </div>
         </ModalContent>
@@ -223,11 +264,12 @@ const GasColumnReport = () => {
 export default GasColumnReport;
 
 
-function ReportModal () {
-  const {register, handleSubmit, watch} = useForm();
+function ReportModal() {
+  const {register, handleSubmit, watch, reset} = useForm();
   const [outlets, setOutlets] = useState([]);
   const [activeOutlet, setActiveOutlet] = useState(null);
   const [cols, setCols] = useState([]);
+  const [forRender, setForRender] = useState(123);
 
   let defaultDate = new Date()
   defaultDate.setDate(defaultDate.getDate())
@@ -253,8 +295,12 @@ function ReportModal () {
     GasBallonsProvider.addGasColumnReport(body)
       .then(res => {
         console.log(res);
+        toast.success("Kolonka hisobotlari yuborildi");
+        reset();
+        setForRender(Math.random());
       }, err => {
         console.log(err);
+        toast.success("Kutilmagan xatolik yuz berdi!");
       })
   }
 
@@ -278,8 +324,7 @@ function ReportModal () {
           console.log(err);
         })
     }
-  }, [activeOutlet])
-
+  }, [activeOutlet, forRender])
 
 
   return (
@@ -319,7 +364,7 @@ function ReportModal () {
   )
 }
 
-function ReportTr ({watch, register, item}) {
+function ReportTr({watch, register, item}) {
   const jami = watch(item.id + "") ? watch(item.id + "") - item.lastValue : 0;
 
   return (

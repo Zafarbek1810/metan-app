@@ -7,8 +7,8 @@ const GasColumnReportWrapper=styled.div`
     align-items: center;
     margin-bottom: 10px;
   }
-  
-  .title{
+
+  .title {
     font-style: normal;
     font-weight: 600;
     font-size: 30px;
@@ -16,34 +16,35 @@ const GasColumnReportWrapper=styled.div`
     color: #1F3C88;
   }
 
-  .filter{
+  .filter {
     display: flex;
     align-items: center;
     background: #fff;
     padding: 22px 13px 0;
 
-    .dropdown{
+    .dropdown {
       padding: 20px;
       width: 100%;
       display: flex;
       flex-wrap: wrap;
       background: #fff !important;
 
-      .dropdown-menu{
+      .dropdown-menu {
         box-shadow: 0 5px 25px 0 rgb(0 0 0 / 10%);
         border: none;
 
-        .btns{
+        .btns {
           display: flex;
           justify-content: end;
-          .btn{
+
+          .btn {
             margin: 0 10px;
           }
 
         }
       }
 
-      .select{
+      .select {
         padding: 0 10px;
         margin-bottom: 10px;
         width: 50%;
@@ -52,7 +53,7 @@ const GasColumnReportWrapper=styled.div`
         justify-content: center;
       }
 
-      .input{
+      .input {
         padding: 0 10px;
         margin-bottom: 10px;
         width: 50%;
@@ -64,24 +65,41 @@ const GasColumnReportWrapper=styled.div`
     }
   }
 
+  .filter-state {
+    background-color: #fff;
+    padding: 15px;
 
-  .table{
+    &__inner {
+      padding: 5px 10px;
+      border-radius: 15px;
+      background-color: #e9e9e9;
+      
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .table {
     margin-top: 20px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    thead{
+
+    thead {
       width: 100%;
-      tr{
+
+      tr {
         display: flex;
         //justify-content: space-between;
         //background: rgba(31, 60, 136, 0.1);
         background: #fff;
         border-radius: 6px 6px 0px 0px;
         padding: 22px 13px;
-        th.col{
+
+        th.col {
           font-style: normal;
           font-weight: 600;
           font-size: 0.875rem;
@@ -92,7 +110,8 @@ const GasColumnReportWrapper=styled.div`
           justify-content: center;
           text-align: center;
         }
-        th.row{
+
+        th.row {
           font-style: normal;
           font-weight: 600;
           font-size: 0.875rem;
@@ -106,13 +125,15 @@ const GasColumnReportWrapper=styled.div`
       }
     }
 
-    tbody{
+    tbody {
       background: #fff;
-      tr{
+
+      tr {
         display: flex;
         justify-content: space-between;
         padding: 10px 22px;
-        td.col{
+
+        td.col {
           font-style: normal;
           font-weight: 400;
           font-size: 0.8125rem;
@@ -123,23 +144,25 @@ const GasColumnReportWrapper=styled.div`
           color: #000000;
           text-align: center;
 
-          img{
+          img {
             width: 50px;
             height: 50px;
           }
 
-          .btns{
-            button{
+          .btns {
+            button {
               background: transparent;
               border: none;
               cursor: pointer;
             }
+
             width: 40%;
             display: flex;
             justify-content: center;
           }
         }
-        td.row{
+
+        td.row {
           font-style: normal;
           font-weight: 600;
           font-size: 0.8125rem;
@@ -152,8 +175,23 @@ const GasColumnReportWrapper=styled.div`
       }
     }
   }
-  
-  
 `
 
-export{GasColumnReportWrapper}
+const FilterWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+  
+  .filter-content {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+
+    min-width: 400px;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+`
+
+export{GasColumnReportWrapper, FilterWrapper}
