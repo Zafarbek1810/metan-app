@@ -195,13 +195,6 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
           outletId: +id
         }
         await OutletProvider.deleteCashierOutlet(body)
-        // axios.delete("http://178.159.39.206:3000/outlet/removeCashier", {
-        //   headers: {
-        //     Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InphZmFyIiwidXNlcklkIjoxLCJyb2xlIjoiU1VQRVJfQURNSU4iLCJ0eXBlIjoiQURNSU4iLCJpYXQiOjE2NzAzNDYwNDB9.hOKZgiuARpmlT7dohgpXqqlSBmB12XJVeOEYiMMme1Y"
-        //   },
-        //   data: body
-        // });
-
         setSavoNuqta(pre => ({
           ...pre, cashiers: pre.cashiers.filter(cash => cash.id !== cashid)
         }))
@@ -236,11 +229,18 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
 
   const onSubmit = async (values) => {
     const body = {}
+    body.id = id
+    body.isOpen = true
+    body.isActive = true
     body.title = values.title;
-
+    body.location = values.location
+    body.price1 = +values.price1
+    body.price2 = +values.price2
+    body.loss = +values.loss
     try {
       const {data} = await OutletProvider.updateOutlet(body);
-      console.log(data)
+      console.log("data",data)
+      handleSubmit()
     } catch (err) {
       console.log(err)
       Message.serverError();
@@ -250,7 +250,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
 
   return (
     <EditTableWrapper>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <h5>Sozlamalar</h5>
         <div className="row">
           <div className="col-md-4 col-12 mb-5">
@@ -264,73 +264,53 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
                 />
               </label>
             </div>
-            <div className="input">
-              <label>
-                <span className="label-text">Telefon</span>
-                <input
-                  type="text"
-                  style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
-                  {...register("tel", {required: true})}
-                />
-              </label>
-            </div>
+            {/*<div className="input">*/}
+            {/*  <label>*/}
+            {/*    <span className="label-text">Telefon</span>*/}
+            {/*    <input*/}
+            {/*      type="text"*/}
+            {/*      style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}*/}
+            {/*      {...register("tel", {required: true})}*/}
+            {/*    />*/}
+            {/*  </label>*/}
+            {/*</div>*/}
             <div className="input">
               <label>
                 <span>Manzil</span>
-                <Controller
-                  control={control}
-                  name="title"
-                  render={({
-                             field: { onChange, onBlur, value, name, ref },
-                             fieldState: { invalid, isTouched, isDirty, error },
-                             formState,
-                           }) => (
-                    <Input
-                      size="large"
-                    style={{
-                    width: '100%',
-                  }}
-                    onBlur={onBlur} // notify when input is touched
-                    onChange={onChange} // send value to hook form
-                    checked={value}
-                    inputRef={ref}
-                    />
-                  )}
-                />
-
-              </label>
-            </div>
-            <div className="input">
-              <label>
-                <span>Hudud</span>
-                <Select
-                  size="large"
-                  defaultValue={provinceData[0]}
-                  style={{
-                    width: "100%",
-                  }}
-                  onChange={handleProvinceChange}
-                  options={provinceData.map((province) => ({
-                    label: province,
-                    value: province,
-                  }))}
+                <input
+                  type="text"
+                  style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
+                  {...register("location", {required: true})}
                 />
               </label>
             </div>
             <div className="input">
               <label>
-                <span>Tuman</span>
-                <Select
-                  size="large"
-                  style={{
-                    width: "100%",
-                  }}
-                  value={secondCity}
-                  onChange={onSecondCityChange}
-                  options={cities.map((city) => ({
-                    label: city,
-                    value: city,
-                  }))}
+                <span>Narx1</span>
+                <input
+                  type="text"
+                  style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
+                  {...register("price1", {required: true})}
+                />
+              </label>
+            </div>
+            <div className="input">
+              <label>
+                <span>Narx2</span>
+                <input
+                  type="text"
+                  style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
+                  {...register("price2", {required: true})}
+                />
+              </label>
+            </div>
+            <div className="input">
+              <label>
+                <span>Yo'qotish</span>
+                <input
+                  type="text"
+                  style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
+                  {...register("loss", {required: true})}
                 />
               </label>
             </div>
@@ -461,7 +441,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
         <div className="col-md-3 col-sm-6 col-12 mt-5 ms-auto">
           <div className="btns">
             <button type="button" className="btn btn-outline-warning" onClick={handleCancel}>Bekor qilish</button>
-            <button type="button" className="btn btn-primary">Saqlash</button>
+            <button type="submit" className="btn btn-primary">Saqlash</button>
           </div>
         </div>
       </form>

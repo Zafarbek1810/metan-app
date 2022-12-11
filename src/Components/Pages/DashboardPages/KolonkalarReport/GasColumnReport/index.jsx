@@ -229,6 +229,15 @@ function ReportModal () {
   const [activeOutlet, setActiveOutlet] = useState(null);
   const [cols, setCols] = useState([]);
 
+  let defaultDate = new Date()
+  defaultDate.setDate(defaultDate.getDate())
+
+  const [date, setDate] = useState(defaultDate)
+
+  const onSetDate = (event) => {
+    setDate(new Date(event.target.value))
+  }
+
   const onSubmit = (values) => {
     const body = {
       outletId: +activeOutlet,
@@ -271,10 +280,12 @@ function ReportModal () {
     }
   }, [activeOutlet])
 
+
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="d-flex w-75 gap-2">
-        <input type="date" className="form-control"/>
+        <input disabled type="date" value={date.toLocaleDateString('en-CA')} onChange={onSetDate}/>
         <select className="form-control" value={activeOutlet} onChange={(e) => setActiveOutlet(e.target.value)}>
           {
             outlets.map(i => (

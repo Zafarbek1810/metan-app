@@ -14,7 +14,7 @@ const ShiftsTableWrapper=styled.div`
     }
     
     .modalWrapper{
-      margin-left: 800px;
+      margin-left: 200px;
     }
   }
   

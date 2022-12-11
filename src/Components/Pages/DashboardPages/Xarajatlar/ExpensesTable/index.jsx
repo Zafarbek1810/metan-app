@@ -118,7 +118,7 @@ const ExpensesTable = () => {
               <ModalContent>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <label className="label">
-                    <span className="label-text">Savdo nuqtalasi</span>
+                    <span className="label-text">Savdo nuqtalari</span>
                     <Select
                       placeholder="Tanlang"
                       size="large"

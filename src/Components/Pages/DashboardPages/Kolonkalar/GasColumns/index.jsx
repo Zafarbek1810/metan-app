@@ -38,9 +38,7 @@ const GasColumns = () => {
     setLoading2(true);
     GasBallonsProvider.getGasColums(0, 1000)
       .then(res => {
-        console.log("setBallon", res.data)
         setBallons(res.data)
-        console.log("ballon", ballons)
       })
       .catch(err => {
         console.log(err)
@@ -69,6 +67,7 @@ const GasColumns = () => {
     setoutletId(value)
     console.log("setoutletId", value)
   }
+
   const onSubmit = async (values) => {
     const body = {}
     body.outletId = outletId
@@ -108,7 +107,7 @@ const GasColumns = () => {
               <ModalContent>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <label className="label">
-                    <span className="label-text">Savdo nuqtalasi</span>
+                    <span className="label-text">Savdo nuqtalari</span>
                     <Select
                       placeholder="Tanlang"
                       size="large"
