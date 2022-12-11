@@ -32,7 +32,7 @@ const Tab1 = ({outletId, setMijozObj}) => {
   const [isPayPoints, setIsPayPoints] = useState(false)
 
   const handleFetchMijozByCode = (e) => {
-    if(e.code === "Enter" && e.target.value.length > 0) {
+    if (e.code === "Enter" && e.target.value.length > 0) {
       PaymentProvider.getQrInfo(e.target.value)
         .then(({data}) => {
           console.log(data)
@@ -47,7 +47,7 @@ const Tab1 = ({outletId, setMijozObj}) => {
   }
 
   const handleFetchMijozByAuto = (e) => {
-    if(e.code === "Enter" && e.target.value.length > 0) {
+    if (e.code === "Enter" && e.target.value.length > 0) {
       setMiniLoading(true)
       PaymentProvider.getQrInfo(0, e.target.value)
         .then(({data}) => {
@@ -69,25 +69,27 @@ const Tab1 = ({outletId, setMijozObj}) => {
       outletId
     }
 
-    setTimeout(()=>{
-      if(isPayPoints){
+    setTimeout(() => {
+      if (isPayPoints) {
         PaymentProvider.payByPoints(body)
           .then(({data}) => {
             console.log(data);
             toast.success("Muvaffaqiyatli yaratildi!")
             setValue("summa", "")
-          }).catch(err=>{
+          }).catch(err => {
+          toast.error(err?.response?.data?.message)
           console.log(err)
-        }).finally(()=>{
+        }).finally(() => {
           setIsPayPoints(false)
         })
-      }else{
+      } else {
         PaymentProvider.pay(body)
           .then(({data}) => {
             console.log(data);
             toast.success("Muvaffaqiyatli yaratildi!")
             setValue("summa", "")
           }, err => {
+            toast.error(err?.response?.data?.message)
             console.log(err);
           })
       }
@@ -140,12 +142,12 @@ const Tab1 = ({outletId, setMijozObj}) => {
       </div>
       <div className="row">
         <div className="col-md-6">
-          <button type="submit" disabled={loading} className="btn btn-danger w-100">
+          <button type="submit" onClick={()=>setIsPayPoints(true)} disabled={loading} className="btn btn-danger w-100">
             Hisobdan o'chirish
           </button>
         </div>
         <div className="col-md-6">
-          <button type="submit" disabled={loading}  className="btn btn-success w-100">
+          <button type="submit" onClick={()=>setIsPayPoints(false)} disabled={loading} className="btn btn-success w-100">
             To'lash
           </button>
         </div>
@@ -160,7 +162,7 @@ const Tab3 = ({outletId, setMijozObj}) => {
   });
 
   const handleFetchMijozByCode = (e) => {
-    if(e.code === "Enter" && e.target.value.length > 0) {
+    if (e.code === "Enter" && e.target.value.length > 0) {
       PaymentProvider.getQrInfo(e.target.value)
         .then(({data}) => {
           console.log(data)
@@ -168,6 +170,7 @@ const Tab3 = ({outletId, setMijozObj}) => {
           setData(data);
         }, err => {
           toast.error(err?.response?.data?.message);
+          setMijozObj({})
         })
     }
   }
@@ -196,12 +199,12 @@ const Tab3 = ({outletId, setMijozObj}) => {
         <label className="label ">
           <span className="label-text">Mijoz kodi</span>
           {errors.name && (
-            <span className="err-text">Majburiy maydon</span>
+            <span className="err-text"></span>
           )}
           <input
             placeholder="Izlash..."
             type="number"
-            {...register("name", {required: false})}
+            {...register("name", {required: true})}
             onKeyDown={handleFetchMijozByCode}
           />
         </label>
@@ -210,18 +213,18 @@ const Tab3 = ({outletId, setMijozObj}) => {
         <label className="label ">
           <span className="label-text">Qarz</span>
           {errors.qarz && (
-            <span className="err-text">Majburiy maydon</span>
+            <span className="err-text"></span>
           )}
           <input
             placeholder=""
             type="number"
-            {...register("qarz", {required: false})}
+            {...register("qarz", {required: true})}
           />
         </label>
         <label className="label ">
           <span className="label-text">Sana</span>
           {errors.date && (
-            <span className="err-text">Majburiy maydon</span>
+            <span className="err-text"></span>
           )}
           <input
             type="date"
@@ -469,7 +472,7 @@ const Cashbox = () => {
                 mijozObj?.cheques?.map((check, index) => (
                   <tr key={check.id}>
                     {/* TODO */}
-                    <td style={{width: "30%"}} className="row">{index+ 1}.</td>
+                    <td style={{width: "30%"}} className="row">{index + 1}.</td>
                     <td style={{width: "30%"}} className="col">{check.amount}</td>
                     <td style={{width: "10%"}} className="col">00</td>
                     <td style={{width: "10%"}} className="col">12.12.2022</td>
