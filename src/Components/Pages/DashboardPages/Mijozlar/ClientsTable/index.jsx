@@ -67,47 +67,30 @@ const ClientsTable = () => {
       <table className="table">
         <thead>
         <tr>
-          <th style={{width: "10%"}} className="row">Mijoz</th>
-          <th style={{width: "10%"}} className="col">Telefon</th>
+          <th style={{width: 150}} className="row">Mijoz</th>
+          <th style={{width: 150}} className="col">Telefon</th>
           <th style={{width: "8%"}} className="col">Avto raqami</th>
           <th style={{width: "8%"}} className="col">Chek summasi</th>
           <th style={{width: "8%"}} className="col">Balans</th>
-          {/*<th style={{width: "8%"}} className="col">Status</th>*/}
           <th style={{width: "8%"}} className="col">Qarz</th>
           <th style={{width: "8%"}} className="col">Oxirgi faoliyat</th>
           <th style={{width: "8%"}} className="col">Umumiy ballar</th>
           <th style={{width: "8%"}} className="col">Tashriflar soni</th>
-          {/*<th style={{width: "8%"}} className="col">Amallar</th>*/}
         </tr>
         </thead>
         <tbody>
         {
           user.map((obj, index)=>(
             <tr key={obj.id}>
-              <td style={{width: "10%"}} className="row">{index+1}.{obj.fullName}</td>
-              <td style={{width: "10%"}} className="col">{obj.phoneNumber}</td>
+              <td style={{width: 150}} className="row">{index+1}.{obj.fullName}</td>
+              <td style={{width: 150}} className="col">{obj.phoneNumber}</td>
               <td style={{width: "8%"}} className="col">{obj.plateNumber}</td>
               <td style={{width: "8%"}} className="col">{obj.totalSpendings}</td>
               <td style={{width: "8%"}} className="col">{obj.balance}</td>
-            {/*  <td style={{width: "8%"}} className="col">*/}
-            {/*<span style={{background:"#43A047",borderRadius:5, color:"white", padding:10}}>*/}
-            {/*  Silver*/}
-            {/*</span>*/}
-            {/*  </td>*/}
               <td style={{width: "8%"}} className="col">{obj.totalDebt}</td>
               <td style={{width: "8%"}} className="col">{new Date(obj.lastVisit).toLocaleString("en-GB")}</td>
               <td style={{width: "8%"}} className="col">{obj.totalPoints}</td>
               <td style={{width: "8%"}} className="col">{obj.numberOfVisits}</td>
-              {/*<td style={{width: "8%"}} className="col">*/}
-              {/*  <div className="btns">*/}
-              {/*    <button>*/}
-              {/*      <DeleteSvg/>*/}
-              {/*    </button>*/}
-              {/*    <button>*/}
-              {/*      <EditSvg/>*/}
-              {/*    </button>*/}
-              {/*  </div>*/}
-              {/*</td>*/}
             </tr>
           ))
         }

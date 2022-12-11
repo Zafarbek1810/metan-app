@@ -231,7 +231,7 @@ function ReportModal () {
 
   const onSubmit = (values) => {
     const body = {
-      outletId: activeOutlet,
+      outletId: +activeOutlet,
       gasColumnReports: []
     };
     cols.forEach(col => {
