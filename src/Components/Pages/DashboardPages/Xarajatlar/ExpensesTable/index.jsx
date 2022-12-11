@@ -25,6 +25,8 @@ const ExpensesTable = () => {
   const [outletId, setoutletId] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [summ, setSumm] = useState([])
+
   useEffect(() => {
     OutletProvider.getAllOutlets(0, 1000)
       .then(res => {
@@ -34,15 +36,20 @@ const ExpensesTable = () => {
         console.log(err)
         Message.serverError()
       })
+    OutletProvider.getExpensesSum()
+      .then(res => {
+        console.log(res)
+        setSumm(res.data)
+      })
   }, [])
 
   useEffect(() => {
     setLoading2(true);
     OutletProvider.getExpenses(0, 1000)
       .then(res => {
-        console.log("setExpenses",res.data)
+        console.log("setExpenses", res.data)
         setExpenses(res.data)
-        console.log("expenses",expenses)
+        console.log("expenses", expenses)
       })
       .catch(err => {
         console.log(err)
@@ -65,7 +72,7 @@ const ExpensesTable = () => {
     body.amount = +values.summ;
 
     setLoading(true)
-    if(editingExpence){
+    if (editingExpence) {
       try {
         body.expenseId = editingExpence.id
         const {data} = await OutletProvider.updateExpense(body);
@@ -77,7 +84,7 @@ const ExpensesTable = () => {
         console.log(err)
         Message.serverError();
       }
-    }else{
+    } else {
       try {
         const {data} = await OutletProvider.addExpence(body);
         console.log(data.res)
@@ -91,13 +98,13 @@ const ExpensesTable = () => {
     setLoading(false)
   }
 
-  useEffect(()=>{
-    if(editingExpence){
+  useEffect(() => {
+    if (editingExpence) {
       setValue("outlet", editingExpence.expenseId)
       setValue("name", editingExpence.name)
       setValue("summ", editingExpence.amount)
     }
-  },[isModalOpen])
+  }, [isModalOpen])
 
   const optionExpense = outlet.map((i) => (
     {
@@ -108,7 +115,7 @@ const ExpensesTable = () => {
 
   const handleOutletId = (value) => {
     setoutletId(value)
-    console.log("setoutletId",value)
+    console.log("setoutletId", value)
   }
 
   const showModal = () => {
@@ -120,18 +127,16 @@ const ExpensesTable = () => {
   };
 
 
-
-
-
-
   return (
     <ExpensesTableWrapper>
       <div className="top">
         <h3 className="title">Xarajatlar</h3>
-        <div className="summ">
-          <h3>Umumiy summa:</h3>
-          <p>48 411 960.00</p>
-        </div>
+        {summ.map((obj,index)=>(
+          <div className="summ" key={obj.id}>
+            <h3>Umumiy summa:</h3>
+            <p>{obj.expensesAmountSum}</p>
+          </div>
+        ))}
         <div className="modal-wrapper">
           {/*====MODAL====*/}
           <div className="modal-wrapper">
@@ -153,8 +158,8 @@ const ExpensesTable = () => {
                       control={control}
                       name="outlet"
                       render={({
-                                 field: { onChange, onBlur, value, name, ref },
-                                 fieldState: { invalid, isTouched, isDirty, error },
+                                 field: {onChange, onBlur, value, name, ref},
+                                 fieldState: {invalid, isTouched, isDirty, error},
                                  formState,
                                }) => (
                         <Select
@@ -195,7 +200,8 @@ const ExpensesTable = () => {
                     />
                   </label>
                   <div className="btns">
-                    <button type="button" className="btn btn-outline-warning" onClick={handleCancel}>Bekor qilish</button>
+                    <button type="button" className="btn btn-outline-warning" onClick={handleCancel}>Bekor qilish
+                    </button>
                     <button type="submit" className="btn btn-primary" disabled={loading}>Saqlash {loading &&
                     <ButtonLoader/>}</button>
                   </div>
@@ -209,7 +215,7 @@ const ExpensesTable = () => {
 
       <table className="table">
         <thead>
-        <tr style={{width:"100%"}}>
+        <tr style={{width: "100%"}}>
           <th style={{width: "30%"}} className="row">Nomi</th>
           <th style={{width: "20%"}} className="col">Savdo nuqtasi</th>
           <th style={{width: "10%"}} className="col">Admin</th>
@@ -224,12 +230,12 @@ const ExpensesTable = () => {
             expenses.length
               ? expenses.map((obj, index) => (
                 <tr key={obj.id}>
-                  <td style={{width: "30%"}} className="row">{index+1}. {obj.name}</td>
+                  <td style={{width: "30%"}} className="row">{index + 1}. {obj.name}</td>
                   <td style={{width: "30%"}} className="col">{obj.outlet.title}</td>
                   <td style={{width: "10%"}} className="col" title={obj.admin.fullName}>{obj.admin.fullName}</td>
                   <td style={{width: "10%"}} className="col">12.12.2022</td>
-                  <td style={{width: "20%",color:"red", fontWeight:600}} className="col">
-                      {obj.amount}
+                  <td style={{width: "20%", color: "red", fontWeight: 600}} className="col">
+                    {obj.amount}
                   </td>
                   <td style={{width: "10%"}} className="col">
                     <div className="btns">

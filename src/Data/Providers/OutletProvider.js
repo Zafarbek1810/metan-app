@@ -55,6 +55,9 @@ export default class OutletProvider{
   static async updateExpense(body) {
     return await client.post("/outlet/editExpense", body);
   }
+  static async getExpensesSum(body) {
+    return await client.get('/outlet/getExpensesSum', body);
+  }
 
 
   static async addShift(body) {
