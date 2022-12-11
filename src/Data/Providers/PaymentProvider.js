@@ -11,6 +11,9 @@ export default class PaymentProvider{
   static async pay(body) {
     return await client.post(`payment/pay`, body);
   }
+  static async payByPoints(body) {
+    return await client.post(`payment/payByPoints`, body);
+  }
   static async addDebt(body) {
     return await client.post(`payment/addDebt`, body);
   }

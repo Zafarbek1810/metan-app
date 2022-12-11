@@ -245,7 +245,7 @@ const ShiftsTable = () => {
               shifts.length
                 ? shifts.map((obj, index) => (
                   <tr key={obj.id}>
-                    <td className="col">{new Date(obj.date).toLocaleString("en-GB")}</td>
+                    <td className="col">{new Date(obj.date).getDate() + "-" + (new Date(obj.date).getMonth() + 1) + "-" + new Date(obj.date).getFullYear()} </td>
                     <td className="col">{obj.amountOfGasColumn}</td>
                     <td className="col">{obj.autopilot}</td>
                     <td className="col">{obj.loss}</td>

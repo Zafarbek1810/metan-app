@@ -82,7 +82,7 @@ const GasColumnReportWrapper=styled.div`
 
   .table {
     margin-top: 20px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
     width: 100%;
     display: flex;
     flex-direction: column;

@@ -4,17 +4,18 @@ import DeleteSvg from "../../../../Common/Svgs/DeleteSvg";
 import EditSvg from "../../../../Common/Svgs/EditSvg";
 import ButtonLoader from "../../../../Common/ButtonLoader";
 import Message from "../../../../../utils/Message";
-import {useForm} from "react-hook-form";
+import {useForm, Controller} from "react-hook-form";
 import OutletProvider from "../../../../../Data/Providers/OutletProvider";
 import {Select, Modal} from "antd";
 import MinLoader from "../../../../Common/MinLoader";
+import {toast} from "react-toastify";
 
 
 const ExpensesTable = () => {
   const {register, formState: {errors}, handleSubmit, setValue, reset, control} = useForm({
     defaultValues: {}
   });
-
+  const [modalIsOpen, setIsOpen] = React.useState(false);
   const [loading, setLoading] = useState(false);
   const [outlet, setOutlet] = useState([])
   const [loading2, setLoading2] = useState(false);
@@ -22,6 +23,7 @@ const ExpensesTable = () => {
   const [forRender, setForRender] = useState(null)
   const [expenses, setExpenses] = useState([])
   const [outletId, setoutletId] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     OutletProvider.getAllOutlets(0, 1000)
@@ -50,6 +52,11 @@ const ExpensesTable = () => {
     })
   }, [forRender])
 
+  const handleEdit = (obj) => {
+    setEditingExpence(obj)
+    setIsModalOpen(true)
+  }
+
 
   const onSubmit = async (values) => {
     const body = {}
@@ -58,17 +65,39 @@ const ExpensesTable = () => {
     body.amount = +values.summ;
 
     setLoading(true)
-    try {
-      const {data} = await OutletProvider.addExpence(body);
-      console.log(data.res)
-      setForRender(Math.random());
-      handleCancel()
-    } catch (err) {
-      console.log(err)
-      Message.serverError();
+    if(editingExpence){
+      try {
+        body.expenseId = editingExpence.id
+        const {data} = await OutletProvider.updateExpense(body);
+        console.log(data.res)
+        toast.success("Muvaffaqiyatli o'zgartirildi!")
+        setForRender(Math.random());
+        handleCancel()
+      } catch (err) {
+        console.log(err)
+        Message.serverError();
+      }
+    }else{
+      try {
+        const {data} = await OutletProvider.addExpence(body);
+        console.log(data.res)
+        setForRender(Math.random());
+        handleCancel()
+      } catch (err) {
+        console.log(err)
+        Message.serverError();
+      }
     }
     setLoading(false)
   }
+
+  useEffect(()=>{
+    if(editingExpence){
+      setValue("outlet", editingExpence.expenseId)
+      setValue("name", editingExpence.name)
+      setValue("summ", editingExpence.amount)
+    }
+  },[isModalOpen])
 
   const optionExpense = outlet.map((i) => (
     {
@@ -82,7 +111,6 @@ const ExpensesTable = () => {
     console.log("setoutletId",value)
   }
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -90,6 +118,8 @@ const ExpensesTable = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+
 
 
 
@@ -119,19 +149,30 @@ const ExpensesTable = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <label className="label">
                     <span className="label-text">Savdo nuqtalari</span>
-                    <Select
-                      placeholder="Tanlang"
-                      size="large"
-                      allowClear
-                      style={{
-                        width: "100%",
-                        marginTop: "10px",
-                        marginBottom: "10px",
-                      }}
-                      onChange={handleOutletId}
-                      options={optionExpense}
-                      value={outletId}
+                    <Controller
+                      control={control}
+                      name="outlet"
+                      render={({
+                                 field: { onChange, onBlur, value, name, ref },
+                                 fieldState: { invalid, isTouched, isDirty, error },
+                                 formState,
+                               }) => (
+                        <Select
+                          placeholder="Tanlang"
+                          size="large"
+                          allowClear
+                          style={{
+                            width: "100%",
+                            marginTop: "10px",
+                            marginBottom: "10px",
+                          }}
+                          onChange={handleOutletId}
+                          options={optionExpense}
+                          value={outletId}
+                        />
+                      )}
                     />
+
                   </label>
                   <label className="label">
                     <span className="label-text">Nomi</span>
@@ -185,14 +226,14 @@ const ExpensesTable = () => {
                 <tr key={obj.id}>
                   <td style={{width: "30%"}} className="row">{index+1}. {obj.name}</td>
                   <td style={{width: "30%"}} className="col">{obj.outlet.title}</td>
-                  <td style={{width: "10%"}} className="col" title={obj.admin.fullName}>{obj.admin.username}</td>
+                  <td style={{width: "10%"}} className="col" title={obj.admin.fullName}>{obj.admin.fullName}</td>
                   <td style={{width: "10%"}} className="col">12.12.2022</td>
                   <td style={{width: "20%",color:"red", fontWeight:600}} className="col">
                       {obj.amount}
                   </td>
                   <td style={{width: "10%"}} className="col">
                     <div className="btns">
-                      <button>
+                      <button onClick={() => handleEdit(obj)}>
                         <EditSvg/>
                       </button>
                     </div>
