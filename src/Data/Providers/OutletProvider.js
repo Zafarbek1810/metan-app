@@ -43,6 +43,9 @@ export default class OutletProvider{
   static async getExpenses(page = 0, size = 10) {
     return await client.get(`/outlet/getExpenses?skip=${page}&take=${size}`);
   }
+  static async updateExpense(body) {
+    return await client.post("/outlet/editExpense", body);
+  }
 
 
   static async addShift(body) {
