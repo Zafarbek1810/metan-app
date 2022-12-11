@@ -1,12 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {ExpensesTableWrapper, ModalContent, ModalFooter, ModalHeader} from "./ExpensesTable.style";
-import DeleteSvg from "../../../../Common/Svgs/DeleteSvg";
+import React, {useEffect, useRef, useState} from 'react';
+import {ExpensesTableWrapper, FilterWrapper, ModalContent} from "./ExpensesTable.style";
 import EditSvg from "../../../../Common/Svgs/EditSvg";
 import ButtonLoader from "../../../../Common/ButtonLoader";
 import Message from "../../../../../utils/Message";
-import {useForm, Controller} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
 import OutletProvider from "../../../../../Data/Providers/OutletProvider";
-import {Select, Modal} from "antd";
+import {Modal, Select} from "antd";
 import MinLoader from "../../../../Common/MinLoader";
 import {toast} from "react-toastify";
 
@@ -24,6 +23,10 @@ const ExpensesTable = () => {
   const [expenses, setExpenses] = useState([])
   const [outletId, setoutletId] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [filterState, setFilterState] = useState({});
+  const filSelectRef = useRef();
+  const filDateRef = useRef();
 
   const [summ, setSumm] = useState([])
 
@@ -39,17 +42,16 @@ const ExpensesTable = () => {
     OutletProvider.getExpensesSum()
       .then(res => {
         console.log(res)
-        setSumm(res.data)
+        setSumm(res)
       })
   }, [])
 
   useEffect(() => {
     setLoading2(true);
-    OutletProvider.getExpenses(0, 1000)
-      .then(res => {
-        console.log("setExpenses", res.data)
-        setExpenses(res.data)
-        console.log("expenses", expenses)
+    OutletProvider.getExpenses(0, 1000, filterState)
+      .then(({data}) => {
+        console.log("setExpenses", data);
+        setExpenses(data);
       })
       .catch(err => {
         console.log(err)
@@ -57,7 +59,7 @@ const ExpensesTable = () => {
       }).finally(() => {
       setLoading2(false);
     })
-  }, [forRender])
+  }, [filterState, forRender])
 
   const handleEdit = (obj) => {
     setEditingExpence(obj)
@@ -126,17 +128,30 @@ const ExpensesTable = () => {
     setIsModalOpen(false);
   };
 
+  const onOnFilter = () => {
+    const date = filDateRef.current?.value?.split("-").reverse().join("-");
+    const outletId = filSelectRef.current?.value
+    setFilterState({date, outletId});
+    setIsFilterOpen(false);
+  }
+
+  const onOffFilter = () => {
+    if(Object.keys(filterState).length) {
+      setFilterState({});
+    }
+    filDateRef.current.value = "";
+    filSelectRef.current.value = "";
+    setIsFilterOpen(false);
+  }
 
   return (
     <ExpensesTableWrapper>
       <div className="top">
         <h3 className="title">Xarajatlar</h3>
-        {summ.map((obj,index)=>(
-          <div className="summ" key={obj.id}>
+          <div className="summ" >
             <h3>Umumiy summa:</h3>
-            <p>{obj.expensesAmountSum}</p>
+            <p>{summ.expensesAmountSum}</p>
           </div>
-        ))}
         <div className="modal-wrapper">
           {/*====MODAL====*/}
           <div className="modal-wrapper">
@@ -203,14 +218,52 @@ const ExpensesTable = () => {
                     <button type="button" className="btn btn-outline-warning" onClick={handleCancel}>Bekor qilish
                     </button>
                     <button type="submit" className="btn btn-primary" disabled={loading}>Saqlash {loading &&
-                    <ButtonLoader/>}</button>
+                      <ButtonLoader/>}</button>
                   </div>
                 </form>
               </ModalContent>
             </Modal>
           </div>
         </div>
+      </div>
 
+      <div className="filter">
+        <FilterWrapper>
+          <button className="btn btn-primary" onClick={() => setIsFilterOpen(p => !p)}>Filtr</button>
+          <div className="filter-content" style={{visibility: isFilterOpen ? "visible" : "hidden"}}>
+            <div className="row">
+              <div className="mb-3 col-6">
+                <label className="form-label">Savdo nuqtasi</label>
+                <select ref={filSelectRef} className="form-control">
+                  <option value={"null"} disabled>Tanlang</option>
+                  {
+                    optionExpense.map(i => (
+                      <option value={i.value} key={i.value}>{i.label}</option>
+                    ))
+                  }
+                </select>
+              </div>
+              <div className="mb-3 col-6">
+                <label className="form-label">Davr</label>
+                <input ref={filDateRef} name="startDate" type="date" className="form-control"/>
+              </div>
+              <div className="d-flex gap-2">
+                <button className="btn btn-danger" onClick={onOffFilter}>Bekor qilish</button>
+                <button className="btn btn-primary" onClick={onOnFilter}>Qo'llash</button>
+              </div>
+            </div>
+          </div>
+        </FilterWrapper>
+        {
+          !!Object.keys(filterState).length && (
+            <div className="filter-state col-12">
+              <div className="filter-state__inner">
+                <span>Filtrlangan</span>
+                <button className="btn btn-secondary" onClick={onOffFilter}>O'chirish</button>
+              </div>
+            </div>
+          )
+        }
       </div>
 
       <table className="table">
