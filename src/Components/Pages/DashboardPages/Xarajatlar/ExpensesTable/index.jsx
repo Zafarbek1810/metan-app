@@ -41,10 +41,10 @@ const ExpensesTable = () => {
       })
     OutletProvider.getExpensesSum()
       .then(res => {
-        console.log(res)
-        setSumm(res)
+        console.log("sum",res)
+        setSumm(res.data)
       })
-  }, [])
+  }, [forRender])
 
   useEffect(() => {
     setLoading2(true);
@@ -150,7 +150,7 @@ const ExpensesTable = () => {
         <h3 className="title">Xarajatlar</h3>
           <div className="summ" >
             <h3>Umumiy summa:</h3>
-            <p>{summ.expensesAmountSum}</p>
+            <h3 style={{color:"red"}}>{summ?.expensesAmountSum}</h3>
           </div>
         <div className="modal-wrapper">
           {/*====MODAL====*/}
@@ -286,7 +286,7 @@ const ExpensesTable = () => {
                   <td style={{width: "30%"}} className="row">{index + 1}. {obj.name}</td>
                   <td style={{width: "30%"}} className="col">{obj.outlet.title}</td>
                   <td style={{width: "10%"}} className="col" title={obj.admin.fullName}>{obj.admin.fullName}</td>
-                  <td style={{width: "10%"}} className="col">12.12.2022</td>
+                  <td style={{width: "10%"}} className="col">{new Date(obj.date).toLocaleString("en-GB")}</td>
                   <td style={{width: "20%", color: "red", fontWeight: 600}} className="col">
                     {obj.amount}
                   </td>

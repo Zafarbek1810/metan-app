@@ -127,7 +127,7 @@ const GasColumnReport = () => {
               footer={[null]}
             >
               <ModalContent>
-                <ReportModal renderParent={setForRender}/>
+                <ReportModal renderParent={setForRender} handleCancel={handleCancel}/>
               </ModalContent>
             </Modal>
           </div>
@@ -265,7 +265,7 @@ const GasColumnReport = () => {
 export default GasColumnReport;
 
 
-function ReportModal({renderParent}) {
+function ReportModal({renderParent, handleCancel}) {
   const {register, handleSubmit, watch, reset} = useForm();
   const [outlets, setOutlets] = useState([]);
   const [activeOutlet, setActiveOutlet] = useState(null);
@@ -298,11 +298,12 @@ function ReportModal({renderParent}) {
         console.log(res);
         toast.success("Kolonka hisobotlari yuborildi");
         reset();
+        handleCancel();
         setForRender(Math.random());
         renderParent(Math.random());
       }, err => {
         console.log(err);
-        toast.success("Kutilmagan xatolik yuz berdi!");
+        toast.error("Kutilmagan xatolik yuz berdi!");
       })
   }
 
@@ -359,7 +360,7 @@ function ReportModal({renderParent}) {
       </table>
 
       <div className="d-flex gap-2 justify-content-end">
-        <button className="btn btn-danger" type="button">Bekor qilish</button>
+        <button className="btn btn-danger" type="button" onClick={()=>handleCancel()}>Bekor qilish</button>
         <button className="btn btn-primary">Saqlash</button>
       </div>
     </form>

@@ -59,7 +59,6 @@ const Tab1 = ({outletId, setMijozObj}) => {
         })
       setMiniLoading(false)
     }
-    textRef.current.focus()
   }
 
   const onSubmit = (values) => {

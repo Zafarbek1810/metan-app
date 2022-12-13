@@ -4,6 +4,7 @@ const ShiftsTableWrapper=styled.div`
   .top{
     min-width: 100% !important;
     display: flex;
+    justify-content: space-between;
     margin-bottom: 30px;
     .title{
       font-style: normal;
@@ -14,19 +15,18 @@ const ShiftsTableWrapper=styled.div`
     }
     
     .modalWrapper{
-      margin-left: 200px;
     }
   }
   
   .table-responsive{
-    width: 1200px;
+    //width: 1200px;
     background: #fff;
     overflow-x: scroll;
     box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
 
   }
   .table {
-    width: 100%;
+    width: 100% !important;
     margin-top: 20px;
     display: flex;
     flex-direction: column;
@@ -39,7 +39,7 @@ const ShiftsTableWrapper=styled.div`
         display: flex;
         background: #fff;
         border-radius: 6px 6px 0px 0px;
-        padding: 15px 22px;
+        //padding: 0px 12px;
 
         th.col {
           min-width: 10% !important;
@@ -59,11 +59,13 @@ const ShiftsTableWrapper=styled.div`
 
     tbody {
       background: #fff;
+      width: 100%;
 
       tr {
         display: flex;
         justify-content: space-between;
-        padding: 0px 22px;
+        //padding: 0px 12px;
+        width: 100% !important;
 
         td.col {
           min-width: 10% !important;
@@ -101,10 +103,12 @@ const ShiftsTableWrapper=styled.div`
             }
           }
         }
+        //&:hover{
+        //  background-color: #f2f2f2;
+        //}
 
-        &:nth-child(even) {
-          //background-color: #f2f2f2;
-        }
+        //&:nth-child(even) {
+        //}
 
         td.row {
           font-style: normal;

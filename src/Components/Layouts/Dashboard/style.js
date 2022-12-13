@@ -21,9 +21,12 @@ const Wrapper=styled.div`
 
   .layout__main {
     margin-top: 50px;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 50px);
     overflow-y: auto;
     padding: 20px 20px 10px;
+    background-image: url("/img/mountain2.jpg");
+    background-attachment: fixed;
+    background-size: cover;
 
     &::-webkit-scrollbar-track {
       //-webkit-box-shadow: inset 0 0 6px rgba(187, 187, 187, 0.3);

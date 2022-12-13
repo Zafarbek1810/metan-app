@@ -32,7 +32,7 @@ const PosTableWrapper = styled.div`
         //background: rgba(31, 60, 136, 0.1);
         background: #fff;
         border-radius: 6px 6px 0px 0px;
-        padding: 15px 22px;
+        padding: 0px 12px;
 
         th.col {
           font-style: normal;
@@ -69,7 +69,7 @@ const PosTableWrapper = styled.div`
       tr {
         display: flex;
         justify-content: space-between;
-        padding: 0px 22px;
+        padding: 0px 12px;
 
         td.col {
           font-style: normal;

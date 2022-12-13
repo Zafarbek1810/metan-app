@@ -14,6 +14,13 @@ const EditTableWrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 0;
+    
+    button{
+      &:disabled {
+        cursor: not-allowed !important;
+        opacity: 0.8;
+      }
+    }
 
     label {
       width: 100%;

@@ -9,6 +9,7 @@ import OutletProvider from "../../../../../Data/Providers/OutletProvider";
 import Message from "../../../../../utils/Message";
 import GasBallonsProvider from "../../../../../Data/Providers/GasBallonsProvider";
 import MinLoader from "../../../../Common/MinLoader";
+import {toast} from "react-toastify";
 
 
 const GasColumns = () => {
@@ -22,6 +23,8 @@ const GasColumns = () => {
   const [loading2, setLoading2] = useState(false);
   const [forRender, setForRender] = useState(null)
   const [ballons, setBallons] = useState([])
+
+  const [editingColumn, setEditingColumn] = useState(null)
 
   useEffect(() => {
     OutletProvider.getAllOutlets(0, 1000)
@@ -55,6 +58,7 @@ const GasColumns = () => {
 
   const handleCancel = () => {
     setIsModalOpen(false);
+    setValue("name", "")
   };
   const optionExpense = outlet.map((i) => (
     {
@@ -62,6 +66,10 @@ const GasColumns = () => {
       value: i.id
     }
   ))
+  const handleEdit = (obj) => {
+    setEditingColumn(obj)
+    setIsModalOpen(true)
+  }
 
   const handleOutletId = (value) => {
     setoutletId(value)
@@ -74,17 +82,40 @@ const GasColumns = () => {
     body.name = values.name;
 
     setLoading(true)
-    try {
-      const {data} = await GasBallonsProvider.addGasColumn(body);
-      console.log(data)
-      setForRender(Math.random());
-      handleCancel()
-    } catch (err) {
-      console.log(err)
-      Message.serverError();
+    if(editingColumn){
+      try {
+        body.gasColumnId=editingColumn.id
+        const {data} = await GasBallonsProvider.editGasColumn(body);
+        console.log(data)
+        setForRender(Math.random());
+        toast.success("Muvaffaqiyatli o'zgartirildi!")
+        handleCancel()
+      } catch (err) {
+        console.log(err)
+        Message.serverError();
+      }
+    }else{
+      try {
+        const {data} = await GasBallonsProvider.addGasColumn(body);
+        console.log(data)
+        setForRender(Math.random());
+        toast.success("Qo'shildi!")
+        handleCancel()
+      } catch (err) {
+        console.log(err)
+        Message.serverError();
+      }
     }
+
     setLoading(false)
   }
+
+  useEffect(()=>{
+    if(editingColumn){
+      setValue("name", editingColumn.name)
+      setValue("outlet", editingColumn.gasColumnId)
+    }
+  }, [isModalOpen])
 
 
   return (
@@ -163,7 +194,7 @@ const GasColumns = () => {
                   <td style={{width: "30%"}} className="col">{obj.outlet.title}</td>
                   <td style={{width: "30%"}} className="col">
                     <div className="btns">
-                      <button>
+                      <button onClick={() => handleEdit(obj)}>
                         <EditSvg/>
                       </button>
                     </div>

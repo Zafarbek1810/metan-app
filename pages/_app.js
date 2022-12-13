@@ -8,6 +8,7 @@ import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NewLoader from "../src/Components/Common/NewLoader";
 import GlobalProvider from "../src/Context/GlobalContext/Provider";
+import {GlobalStyle} from "../styles/globalStyle";
 
 function MyApp({Component, pageProps}) {
   const [loading, setLoading] = useState(false);
@@ -45,6 +46,7 @@ function MyApp({Component, pageProps}) {
             pauseOnHover
           />
         </UserContextProvider>
+        <GlobalStyle/>
       </GlobalProvider>
     </>
   )

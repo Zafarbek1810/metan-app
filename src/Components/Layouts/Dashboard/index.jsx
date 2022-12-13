@@ -1,10 +1,10 @@
 import React, {useRef, useState} from 'react';
 import {Wrapper} from "./style";
-import Sidebar from "./Sidebar";
+import NewSidebar from "./NewSidebar";
 import DashboardHeader from "./DashHeader";
 import {ModalContextProvider} from "../../../Context/ModalContext";
 import ConfirmModal from "../../Common/ConfirmModal";
-import NewSidebar from "../NewSidebar";
+import Sidebar from "./Sidebar";
 
 const DashboardLayout = ({children, title}) => {
   const RefObj = useRef({resolve(){}, reject(){}});

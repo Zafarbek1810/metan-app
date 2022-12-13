@@ -63,7 +63,7 @@ const PosTable = ({RefObj, setIsOpen}) => {
     setLoading2(true);
     OutletProvider.getAllOutlets(0, 1000)
       .then(res => {
-        console.log(res)
+        console.log("out",res)
         setOutlet(res.data)
       })
       .catch(err => {
@@ -153,12 +153,7 @@ const PosTable = ({RefObj, setIsOpen}) => {
           </Modal>
         </div>
       </div>
-      {/*<div className="filter">*/}
-      {/*  <div className="col-3 mb-2">*/}
-      {/*    <input type="text" className="form-control" placeholder="Izlash"/>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
-      <table className="table">
+      <table className="table table-hover">
         <thead>
         <tr>
           <th style={{width: "3%"}} className="row">ID</th>
@@ -166,10 +161,6 @@ const PosTable = ({RefObj, setIsOpen}) => {
           <th style={{width: "10%"}} className="col">Savdo nuqtasi nomi</th>
           <th style={{width: "8%"}} className="col">Ochiq</th>
           <th style={{width: "8%"}} className="col">Faollashtirilgan</th>
-          {/*<th style={{width: "10%"}} className="col">Balans</th>*/}
-          {/*<th style={{width: "10%"}} className="col">Tarif</th>*/}
-          {/*<th style={{width: "30%"}} className="col">Kalit</th>*/}
-          <th style={{width: "30%"}} className="col">Sana</th>
           <th style={{width: "10%"}} className="col">Amallar</th>
         </tr>
         </thead>
@@ -180,7 +171,6 @@ const PosTable = ({RefObj, setIsOpen}) => {
               ? outlet.map((obj, index) => (
                 <tr key={obj.id}>
                   <td style={{width: "5%"}} className="row">{index + 1}</td>
-                  {/*<td style={{width: "10%"}} className="col"><img src="/img/metan.png" alt=""/></td>*/}
                   <td style={{width: "10%", justifyContent:"start"}} className="col">{obj.title}</td>
                   <td style={{width: "8%"}} className="col">
                     <span style={{background:"#43A047",borderRadius:5, color:"white", padding:"5px 10px"}}>Ha</span>
@@ -188,10 +178,6 @@ const PosTable = ({RefObj, setIsOpen}) => {
                   <td style={{width: "8%"}} className="col">
                     <span style={{background:"#43A047",borderRadius:5, color:"white", padding:"5px 10px"}}>Ha</span>
                   </td>
-                  {/*<td style={{width: "10%"}} className="col">0.00</td>*/}
-                  {/*<td style={{width: "10%"}} className="col">500.000</td>*/}
-                  {/*<td style={{width: "30%"}} className="col">946b1920-68ab-11ed-87b8-0242ac12000c</td>*/}
-                  <td style={{width: "10%"}} className="col">12.12.2022</td>
                   <td style={{width: "10%"}} className="col">
                     <div className="btns">
                       <button onClick={() => handleDeleteOutlet(obj.id)}>
