@@ -110,7 +110,7 @@ const ClientsTableWrapper=styled.div`
         //background: rgba(31, 60, 136, 0.1);
         background: #fff;
         border-radius: 6px 6px 0px 0px;
-        padding: 15px 22px;
+        //padding: 15px 22px;
 
         th.col {
           font-style: normal;
@@ -123,6 +123,7 @@ const ClientsTableWrapper=styled.div`
           justify-content: center;
           text-align: center;
           font-family: "Inter";
+          padding: 15px 12px 10px;
         }
 
         th.row {
@@ -146,7 +147,6 @@ const ClientsTableWrapper=styled.div`
       tr {
         display: flex;
         justify-content: space-between;
-        padding: 0px 22px;
 
         td.col {
           font-style: normal;
@@ -182,22 +182,6 @@ const ClientsTableWrapper=styled.div`
               }
             }
           }
-        }
-
-        &:nth-child(even) {
-          background-color: #f2f2f2;
-        }
-
-        td.row {
-          font-style: normal;
-          font-weight: 400;
-          font-size: 18px;
-          line-height: 24px;
-          display: flex;
-          align-items: center;
-          justify-content: start;
-          text-align: center;
-          font-family: "Inter";
         }
       }
     }

@@ -139,11 +139,11 @@ const ServicesTable = () => {
           </Modal>
         </div>
       </div>
-      <table className="table">
+      <table className="table table table-striped table-hover">
         <thead>
         <tr>
-          <th style={{width: "10%"}} className="row">Nomi</th>
-          <th style={{width: "50%"}} className="col">Faol savdo nuqtalari</th>
+          <th style={{width: "10%"}} className="col">Nomi</th>
+          <th style={{width: "50%", display: "flex", justifyContent:"start"}} className="col">Faol savdo nuqtalari</th>
           <th style={{width: "10%"}} className="col">Boshlanish  sanasi</th>
           <th style={{width: "10%"}} className="col">To'xtash sanasi</th>
           <th style={{width: "10%"}} className="col">Status</th>
@@ -156,7 +156,7 @@ const ServicesTable = () => {
             cashback.length
             ? cashback.map((obj, index)=>(
                 <tr key={obj.id}>
-                  <td style={{width: "10%"}} className="row">{obj.name}</td>
+                  <td style={{width: "10%"}} className="col">{obj.name}</td>
                   <td style={{width: "50%"}} className="col">Guliston Metan, Saidkent Metan, Propan Metan, 24/25 Avtobaza Metan, </td>
                   <td style={{width: "10%"}} className="col">20.11.2022 22:06</td>
                   <td style={{width: "10%"}} className="col">{obj.endedDate} </td>

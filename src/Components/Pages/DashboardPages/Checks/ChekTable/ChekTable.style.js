@@ -26,7 +26,7 @@ const ChekTableWrapper = styled.div`
       tr {
         display: flex;
         background: #fff;
-        padding: 15px 22px;
+        //padding: 10px 12px 0px;
         border-radius: 6px 6px 0px 0px;
 
         th.col {
@@ -39,6 +39,7 @@ const ChekTableWrapper = styled.div`
           align-items: center;
           justify-content: center;
           text-align: center;
+          padding: 15px 12px 10px;
           font-family: "Inter";
 
         }
@@ -64,7 +65,7 @@ const ChekTableWrapper = styled.div`
       tr {
         display: flex;
         justify-content: space-between;
-        padding: 0px 22px;
+        //padding: 0px 12px;
 
         td.col {
           font-size: 18px;
@@ -80,11 +81,6 @@ const ChekTableWrapper = styled.div`
             text-decoration: underline !important;
           }
         }
-
-        &:nth-child(even) {
-          background-color: #f2f2f2;
-        }
-
 
         td.row {
           font-size: 18px;

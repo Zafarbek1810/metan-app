@@ -64,16 +64,16 @@ const ClientsTable = () => {
 
       </div>
 
-      <table className="table">
+      <table className="table table-striped table-hover">
         <thead>
         <tr>
-          <th style={{width: 150}} className="row">Mijoz</th>
-          <th style={{width: 150}} className="col">Telefon</th>
+          <th style={{width: "15%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">Mijoz</th>
+          <th style={{width: "15%"}} className="col">Telefon</th>
           <th style={{width: "8%"}} className="col">Avto raqami</th>
           <th style={{width: "8%"}} className="col">Chek summasi</th>
           <th style={{width: "8%"}} className="col">Balans</th>
           <th style={{width: "8%"}} className="col">Qarz</th>
-          <th style={{width: "8%"}} className="col">Oxirgi faoliyat</th>
+          <th style={{width: "15%"}} className="col">Oxirgi faoliyat</th>
           <th style={{width: "8%"}} className="col">Umumiy ballar</th>
           <th style={{width: "8%"}} className="col">Tashriflar soni</th>
         </tr>
@@ -82,13 +82,13 @@ const ClientsTable = () => {
         {
           user.map((obj, index)=>(
             <tr key={obj.id}>
-              <td style={{width: 150}} className="row">{index+1}.{obj.fullName}</td>
-              <td style={{width: 150}} className="col">{obj.phoneNumber}</td>
+              <td style={{width: "15%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">{index+1}.{obj.fullName}</td>
+              <td style={{width: "15%"}} className="col">{obj.phoneNumber}</td>
               <td style={{width: "8%"}} className="col">{obj.plateNumber}</td>
               <td style={{width: "8%"}} className="col">{obj.totalSpendings}</td>
               <td style={{width: "8%"}} className="col">{obj.balance}</td>
               <td style={{width: "8%"}} className="col">{obj.totalDebt}</td>
-              <td style={{width: "8%"}} className="col">{new Date(obj.lastVisit).toLocaleString("en-GB")}</td>
+              <td style={{width: "15%"}} className="col">{new Date(obj.lastVisit).toLocaleString("en-GB")}</td>
               <td style={{width: "8%"}} className="col">{obj.totalPoints}</td>
               <td style={{width: "8%"}} className="col">{obj.numberOfVisits}</td>
             </tr>

@@ -78,13 +78,14 @@ const GasColumns = () => {
 
   const onSubmit = async (values) => {
     const body = {}
-    body.outletId = outletId
+    body.outletId = +outletId
     body.name = values.name;
 
     setLoading(true)
     if(editingColumn){
       try {
         body.gasColumnId=editingColumn.id
+        body.newOutletId = +outletId
         const {data} = await GasBallonsProvider.editGasColumn(body);
         console.log(data)
         setForRender(Math.random());
@@ -176,10 +177,10 @@ const GasColumns = () => {
         </div>
 
       </div>
-      <table className="table">
+      <table className="table table-striped table-hover">
         <thead>
         <tr>
-          <th style={{width: "30%"}} className="row">Nomi</th>
+          <th style={{width: "30%"}} className="col">Nomi</th>
           <th style={{width: "30%"}} className="col">Savdo nuqtasi</th>
           <th style={{width: "30%"}} className="col">Amallar</th>
         </tr>
@@ -190,7 +191,7 @@ const GasColumns = () => {
             ballons.length
               ? ballons.map((obj, index) => (
                 <tr key={obj.id}>
-                  <td style={{width: "30%"}} className="row">{index+1}. {obj.name}</td>
+                  <td style={{width: "30%"}} className="col">{index+1}. {obj.name}</td>
                   <td style={{width: "30%"}} className="col">{obj.outlet.title}</td>
                   <td style={{width: "30%"}} className="col">
                     <div className="btns">

@@ -176,10 +176,10 @@ const CashierTable = () => {
         </div>
 
       </div>
-      <table className="table">
+      <table className="table table-striped table-hover">
         <thead>
         <tr>
-          <th style={{width: "40%"}} className="row">To'liq ismi</th>
+          <th style={{width: "40%"}} className="col">To'liq ismi</th>
           <th style={{width: "30%"}} className="col">Login</th>
           <th style={{width: "30%"}} className="col">Amallar</th>
         </tr>
@@ -190,7 +190,7 @@ const CashierTable = () => {
             cashiers.length
               ? cashiers.map((obj, index) => (
                 <tr key={obj.id}>
-                  <td style={{width: "40%"}} className="row">{index+1}. {obj.fullName} </td>
+                  <td style={{width: "40%"}} className="col">{index+1}. {obj.fullName} </td>
                   <td style={{width: "30%"}} className="col">{obj.username}</td>
                   <td style={{width: "30%"}} className="col">
                     <div className="btns">

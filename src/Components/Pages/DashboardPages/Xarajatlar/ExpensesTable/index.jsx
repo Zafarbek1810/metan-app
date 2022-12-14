@@ -266,10 +266,10 @@ const ExpensesTable = () => {
         }
       </div>
 
-      <table className="table">
+      <table className="table table-striped table-hover">
         <thead>
         <tr style={{width: "100%"}}>
-          <th style={{width: "30%"}} className="row">Nomi</th>
+          <th style={{width: "30%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">Nomi</th>
           <th style={{width: "20%"}} className="col">Savdo nuqtasi</th>
           <th style={{width: "10%"}} className="col">Admin</th>
           <th style={{width: "10%"}} className="col">Sana</th>
@@ -283,7 +283,7 @@ const ExpensesTable = () => {
             expenses.length
               ? expenses.map((obj, index) => (
                 <tr key={obj.id}>
-                  <td style={{width: "30%"}} className="row">{index + 1}. {obj.name}</td>
+                  <td style={{width: "30%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">{index + 1}. {obj.name}</td>
                   <td style={{width: "30%"}} className="col">{obj.outlet.title}</td>
                   <td style={{width: "10%"}} className="col" title={obj.admin.fullName}>{obj.admin.fullName}</td>
                   <td style={{width: "10%"}} className="col">{new Date(obj.date).toLocaleString("en-GB")}</td>

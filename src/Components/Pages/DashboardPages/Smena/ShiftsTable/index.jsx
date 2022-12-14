@@ -249,7 +249,7 @@ const ShiftsTable = () => {
                     <td className="col">{obj.amountOfGasColumn}</td>
                     <td className="col">{obj.autopilot}</td>
                     <td className="col">{obj.loss}</td>
-                      <td className="col" style={{color:"#FDD835", fontWeight:600}}>{obj.realization}</td>
+                      <td className="col" style={{color:"#FB8C00", fontWeight:600}}>{obj.realization}</td>
                     <td className="col" style={{color:"#F4511E", fontWeight:600}}>{obj.gasColumnSumm}</td>
                     <td className="col" style={{color:"#7CB342", fontWeight:600}}>{obj.autopilotSumm}</td>
                     <td className="col">{obj.fact}</td>
@@ -259,7 +259,7 @@ const ShiftsTable = () => {
                     <td className="col">{obj.total}</td>
                     <td className="col">{obj.debts}</td>
                     <td className="col">{obj.expenses}</td>
-                    <td className="col" style={{color:"#FDD835", fontWeight:600}}>{obj.pnl}</td>
+                    <td className="col" style={{color:"#FB8C00", fontWeight:600}}>{obj.pnl}</td>
                     <td className="col" style={{color:"#F4511E", fontWeight:600}}>{obj.bonus}</td>
                     <td className="col" style={{color:"#7CB342", fontWeight:600}}>{obj.paidPoints}</td>
                   </tr>

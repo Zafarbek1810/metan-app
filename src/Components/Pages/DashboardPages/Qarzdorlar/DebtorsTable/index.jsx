@@ -28,10 +28,10 @@ const DebtorsTable = () => {
   return (
     <DebtorsTableWrapper>
       <h3 className="title">Qarzdorlar</h3>
-      <table className="table">
+      <table className="table table-striped table-hover">
         <thead>
         <tr>
-          <th style={{width: "10%"}} className="row">Ism</th>
+          <th style={{width: "10%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">Ism</th>
           <th style={{width: "10%"}} className="col">Telefon</th>
           <th style={{width: "8%"}} className="col">Avto raqami</th>
           <th style={{width: "8%"}} className="col">Balans</th>
@@ -45,7 +45,7 @@ const DebtorsTable = () => {
             deptors.length ?
               deptors.map((obj, index)=>(
                 <tr key={obj.id}>
-                  <td style={{width: "10%"}} className="row">{index+1}. {obj.fullName}</td>
+                  <td style={{width: "10%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">{index+1}. {obj.fullName}</td>
                   <td style={{width: "10%"}} className="col">{obj.phoneNumber}</td>
                   <td style={{width: "10%"}} className="col">{obj.plateNumber}</td>
                   <td style={{width: "15%"}} className="col">{obj.balance}</td>

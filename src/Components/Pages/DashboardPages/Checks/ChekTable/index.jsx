@@ -33,16 +33,16 @@ const ChekTable = () => {
     <ChekTableWrapper>
       <h3 className="title">Cheklar</h3>
 
-      <table className="table">
+      <table className="table table-striped table-hover">
         <thead>
         <tr>
-          <th style={{width: "15%"}} className="row">Sana</th>
+          <th style={{width: "15%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">Sana</th>
           <th style={{width: "10%"}} className="col">Summa</th>
           <th style={{width: "10%"}} className="col">To'langan ballar</th>
           <th style={{width: "10%"}} className="col">Bonus</th>
           <th style={{width: "15%"}} className="col">Mijoz</th>
           <th style={{width: "15%"}} className="col">Kassir</th>
-          <th style={{width: "10%"}} className="col">Savdo nuqtasi</th>
+          <th style={{width: "15%"}} className="col">Savdo nuqtasi</th>
           <th style={{width: "10%"}} className="col">Status</th>
         </tr>
         </thead>
@@ -52,7 +52,7 @@ const ChekTable = () => {
             cheques.length ?
               cheques.map((obj, index) => (
                 <tr key={obj.id} className="edit_row">
-                  <td style={{width: "15%"}} className="row">{index+1}. {new Date(obj.date).toLocaleString("en-GB")}</td>
+                  <td style={{width: "15%", display:"flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">{index+1}. {new Date(obj.date).toLocaleString("en-GB")}</td>
                   <td style={{width: "10%",color: "#43A047", fontWeight: 600}} className="col"
                       >{obj.amount}</td>
                   <td style={{width: "10%"}} className="col">0.00</td>
@@ -65,7 +65,7 @@ const ChekTable = () => {
                     }}>{obj.client?.fullName}</Link>
                   </td>
                   <td style={{width: "15%", fontWeight: 600}} className="col" >{obj.cashier?.fullName}</td>
-                  <td style={{width: "10%", fontWeight: 600}} className="col" >{obj.outlet.title}</td>
+                  <td style={{width: "15%", fontWeight: 600}} className="col" >{obj.outlet.title}</td>
                   {obj.type === "PAID_BY_MONEY" ?
                     <td style={{width: "10%"}} className="col">
                     <span style={{background: "#43A047", color: "white", borderRadius: 5, padding: 10}}>

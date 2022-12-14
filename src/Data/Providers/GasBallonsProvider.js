@@ -10,7 +10,7 @@ export default class GasBallonsProvider {
   }
 
   static async editGasColumn(body) {
-    return await client.post("/gas-column/editGasColumn", body);
+    return await client.post("/gascolumn/editGasColumn", body);
   }
 
   static async getGasColums(page = 0, size = 10) {

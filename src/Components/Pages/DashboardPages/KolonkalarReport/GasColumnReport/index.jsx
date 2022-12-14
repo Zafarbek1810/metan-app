@@ -192,10 +192,10 @@ const GasColumnReport = () => {
           </div>
         }
       </div>
-      <table className="table">
+      <table className="table table-striped table-hover">
         <thead>
         <tr>
-          <th style={{width: "15%"}} className="row">ID</th>
+          <th style={{width: "15%"}} className="col">Nomi</th>
           <th style={{width: "15%"}} className="col">Ko'rsatgich</th>
           <th style={{width: "15%"}} className="col">Oxirgi ko'rsatgich</th>
           <th style={{width: "15%"}} className="col">Farqi</th>
@@ -207,7 +207,7 @@ const GasColumnReport = () => {
         {
           colsData.map((item, index) => (
             <tr key={item.id}>
-              <td style={{width: "15%"}} className="row">{index + 1}.{item.gasColumn.name}</td>
+              <td style={{width: "15%"}} className="col">{index + 1}.{item.gasColumn.name}</td>
               <td style={{width: "15%"}} className="col">{item.currentValue}</td>
               <td style={{width: "15%"}} className="col">{item.lastValue}</td>
               <td style={{width: "15%"}} className="col">{item.currentValue - item.lastValue}</td>
@@ -232,7 +232,7 @@ const GasColumnReport = () => {
         footer={[null]}
       >
         <ModalContent>
-          <table className="table">
+          <table className="table ">
             <thead>
             <tr>
               <th>Nomi</th>
@@ -343,13 +343,13 @@ function ReportModal({renderParent, handleCancel}) {
         </select>
       </div>
 
-      <table className="table">
+      <table className="table table-striped table-hover">
         <thead>
         <tr>
-          <th>Nomi</th>
-          <th>Ko'rsatgich</th>
-          <th>Oxirgi Ko'rsatgich</th>
-          <th>Jami</th>
+          <th className="col">Nomi</th>
+          <th className="col">Ko'rsatgich</th>
+          <th className="col">Oxirgi Ko'rsatgich</th>
+          <th className="col">Jami</th>
         </tr>
         </thead>
         <tbody>
@@ -372,12 +372,12 @@ function ReportTr({watch, register, item}) {
 
   return (
     <tr>
-      <th>{item?.name}</th>
-      <th>
+      <th className="col">{item?.name}</th>
+      <th className="col">
         <input type="number" {...register(item.id + "")}/>
       </th>
-      <th>{item.lastValue}</th>
-      <th>{jami}</th>
+      <th className="col">{item.lastValue}</th>
+      <th className="col">{jami}</th>
     </tr>
   )
 }

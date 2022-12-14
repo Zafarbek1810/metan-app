@@ -15,26 +15,23 @@ const CashierTableWrapper = styled.div`
     }
   }
 
-  .table {
+  .table{
     margin-top: 20px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
-    thead {
+    thead{
       width: 100%;
-
-      tr {
+      tr{
         display: flex;
         //justify-content: space-between;
         //background: rgba(31, 60, 136, 0.1);
         background: #fff;
         border-radius: 6px 6px 0px 0px;
-        padding: 15px 22px;
-
-        th.col {
+        //padding: 15px 22px;
+        th.col{
           font-style: normal;
           font-weight: 600;
           font-size: 18px;
@@ -45,9 +42,10 @@ const CashierTableWrapper = styled.div`
           justify-content: start;
           text-align: center;
           font-family: "Inter";
-        }
+          padding: 15px 12px 10px;
 
-        th.row {
+        }
+        th.row{
           font-style: normal;
           font-weight: 600;
           font-size: 18px;
@@ -56,20 +54,16 @@ const CashierTableWrapper = styled.div`
           display: flex;
           align-items: center;
           justify-content: start;
-          text-align: start;
           font-family: "Inter";
         }
       }
     }
 
-    tbody {
+    tbody{
       background: #fff;
-
-      tr {
+      tr{
         display: flex;
         justify-content: space-between;
-        padding: 10px 22px;
-
         td.col {
           font-style: normal;
           font-weight: 400;
@@ -82,8 +76,19 @@ const CashierTableWrapper = styled.div`
           text-align: center;
           font-family: "Inter";
         }
+        td.row{
+          font-style: normal;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: start;
+          text-align: center;
+          font-family: "Inter";
+        }
 
-        img {
+        img{
           width: 50px;
           height: 50px;
         }
@@ -96,35 +101,25 @@ const CashierTableWrapper = styled.div`
           button {
             background: transparent;
             border: 1px solid #000;
+            border-radius: 10px;
             cursor: pointer;
             transition: 300ms;
 
             &:hover {
               background: rgba(31, 60, 136, 0.75);
-
             }
 
             svg {
-              fill: rgba(0, 0, 0, 0.6);
+              fill: none;
+              stroke: none;
             }
           }
         }
       }
 
-      td.row {
-        font-style: normal;
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        text-align: start;
-        font-family: "Inter";
-      }
     }
   }
-}
+
 `
 
 const ModalHeader = styled.header`

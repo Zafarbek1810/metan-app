@@ -35,7 +35,7 @@ const DirectorTableWrapper=styled.div`
         //background: rgba(31, 60, 136, 0.1);
         background: #fff;
         border-radius: 6px 6px 0px 0px;
-        padding: 15px 22px;
+        //padding: 15px 22px;
         th.col{
           font-style: normal;
           font-weight: 600;
@@ -47,6 +47,8 @@ const DirectorTableWrapper=styled.div`
           justify-content: start;
           text-align: center;
           font-family: "Inter";
+          padding: 15px 12px 10px;
+
         }
         th.row{
           font-style: normal;
@@ -67,7 +69,6 @@ const DirectorTableWrapper=styled.div`
       tr{
         display: flex;
         justify-content: space-between;
-        padding: 0px 22px;
         td.col {
           font-style: normal;
           font-weight: 400;
@@ -105,12 +106,12 @@ const DirectorTableWrapper=styled.div`
             button {
               background: transparent;
               border: 1px solid #000;
+              border-radius: 10px;
               cursor: pointer;
               transition: 300ms;
 
               &:hover {
                 background: rgba(31, 60, 136, 0.75);
-
               }
 
               svg {
@@ -123,7 +124,7 @@ const DirectorTableWrapper=styled.div`
        
       }
     }
-  }
+  
 `
 
 const ModalHeader=styled.header`

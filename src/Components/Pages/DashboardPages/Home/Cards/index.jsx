@@ -74,7 +74,7 @@ const Cards = () => {
                 <AwardSvg/>
               </div>
               <div className="right">
-                <span>data</span>
+                <span>{data.amountOfAllClientPoints?data.amountOfAllClientPoints  : "Ma'lumot yoq"}</span>
                 <p>Mijoz ballari</p>
               </div>
             </div>
@@ -92,8 +92,8 @@ const Cards = () => {
                 <UserCardSvg/>
               </div>
               <div className="right">
-                <span>data</span>
-                <p>O'rtacha yosh</p>
+                <span>{data.totalCheques?data.totalCheques : "Ma'lumot yo'q"}</span>
+                <p>Cheklar</p>
               </div>
             </div>
           </div>
