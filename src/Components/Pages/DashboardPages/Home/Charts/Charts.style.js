@@ -7,16 +7,19 @@ const ChartsWrapper=styled.div`
   h4{
     font-size: 20px;
     font-weight: 500;
+    font-family: "Inter";
   }
   .wrap{
     display: flex;
     & > div{
       margin-right: 20px;
       p{
+        font-family: "Inter";
         font-size: 16px;
         margin-bottom: 0;
       }
       span{
+        font-family: "Inter";
         font-size: 20px;        
       }
       .first{

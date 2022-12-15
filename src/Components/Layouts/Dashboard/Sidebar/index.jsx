@@ -46,12 +46,12 @@ const SidebarItemsMenu = [
     Svg: UsersSvg,
     role: ["CASHIER", "SUPER_ADMIN", "DIRECTOR"]
   },
-  {
-    title: "Kolonkalar",
-    path: "/dashboard/gas-columns",
-    Svg: FireSvg,
-    role: ["CASHIER"]
-  },
+  // {
+  //   title: "Kolonkalar",
+  //   path: "/dashboard/gas-columns",
+  //   Svg: FireSvg,
+  //   role: ["CASHIER"]
+  // },
   {
     title: "Qarzdorlar",
     path: "/dashboard/debtors",
@@ -102,7 +102,7 @@ const SidebarItemsSetting = [
     title: "Kolonkalar",
     path: "/dashboard/gas-columns",
     Svg: FireSvg,
-    role: ["SUPER_ADMIN", "DIRECTOR"]
+    role: ["SUPER_ADMIN", "DIRECTOR", "CASHIER"]
   },
   {
     title: "Kolonkalar hisoboti",
@@ -207,7 +207,7 @@ const Sidebar = () => {
                 })
               }
             </TabPanel>
-            <TabPanel value={value} index={1}>
+            <TabPanel value={value} index={1} >
               {
                 NavListSetting.map(({title, Svg, path}, idx) => {
                   return (

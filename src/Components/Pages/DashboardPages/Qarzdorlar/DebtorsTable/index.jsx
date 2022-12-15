@@ -5,17 +5,25 @@ import {DebtorsTableWrapper} from "./DebtorsTable.style";
 import PaymentProvider from "../../../../../Data/Providers/PaymentProvider";
 import Message from "../../../../../utils/Message";
 import MinLoader from "../../../../Common/MinLoader";
+import Pagination from "rc-pagination";
 
 const DebtorsTable = () => {
   const [deptors, setDeptors]=useState([])
   const [loading2, setLoading2] = useState(false)
 
+  const [totalElements, setTotalElements]=useState(10)
+  const [currentPage, setCurrentPage] = useState(1);
+  const onChange = page => {
+    setCurrentPage(page);
+  };
+
+
   useEffect(()=>{
     setLoading2(true);
-    PaymentProvider.getDeptors(0, 1000)
-      .then(res => {
-        console.log("dep", res)
-        setDeptors(res.data.data)
+    PaymentProvider.getDeptors(currentPage-1, 10)
+      .then(({data}) => {
+        setDeptors(data.data)
+        setTotalElements(data.count)
       })
       .catch(err => {
         console.log(err)
@@ -23,7 +31,7 @@ const DebtorsTable = () => {
       }).finally(() => {
       setLoading2(false);
     })
-  }, [])
+  }, [currentPage])
 
   return (
     <DebtorsTableWrapper>
@@ -61,11 +69,16 @@ const DebtorsTable = () => {
                   textAlign: "center",
                   padding: 30,
                 }
-              }><h3>Qarzdorlar mavjud emas!</h3></div>
+              }><h3 style={{fontFamily:"Inter"}}>Qarzdorlar mavjud emas!</h3></div>
             : <MinLoader/>
         }
         </tbody>
       </table>
+      <Pagination
+        onChange={onChange}
+        current={currentPage}
+        total={totalElements}
+      />
     </DebtorsTableWrapper>
   );
 };

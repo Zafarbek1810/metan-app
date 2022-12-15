@@ -5,12 +5,14 @@ const ExpensesTableWrapper=styled.div`
     margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
+    margin-top: 15px;
     .title{
       font-style: normal;
       font-weight: 600;
       font-size: 30px;
       line-height: 25px;
       color: #1F3C88;
+      font-family: "Inter";
     }
     
     .summ{
@@ -18,9 +20,11 @@ const ExpensesTableWrapper=styled.div`
       align-items: center;
       h3{
         margin: 0 15px 0 0;
+        font-family: "Inter";
       }
       p{
         margin: 0;
+        font-family: "Inter";
       }
     }
   }
@@ -170,6 +174,7 @@ const ModalContent=styled.div`
   
   form{
     background: #fff;
+    font-family: "Inter";
     .label {
       width: 100%;
       display: block;
@@ -242,6 +247,7 @@ const ModalContent=styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        font-family: "Inter";
 
         &:disabled {
           cursor: not-allowed;

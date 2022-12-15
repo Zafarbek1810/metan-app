@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const CashboxWrapper = styled.div`
+  font-family: "Inter";
   .top {
 
   }
@@ -35,6 +36,7 @@ const CashboxWrapper = styled.div`
           h4 {
             font-size: 18px;
             font-weight: 400;
+            font-family: "Inter";
           }
 
           svg {
@@ -48,6 +50,7 @@ const CashboxWrapper = styled.div`
         .right {
           p {
             font-size: 16px;
+            font-family: "Inter";
           }
         }
       }
@@ -59,6 +62,7 @@ const CashboxWrapper = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      font-family: "Inter";
 
       thead {
         width: 100%;
@@ -81,6 +85,7 @@ const CashboxWrapper = styled.div`
             align-items: center;
             justify-content: start;
             text-align: center;
+            font-family: "Inter";
           }
 
           th.row {
@@ -93,6 +98,7 @@ const CashboxWrapper = styled.div`
             align-items: center;
             justify-content: start;
             text-align: center;
+            font-family: "Inter";
           }
         }
       }
@@ -115,6 +121,7 @@ const CashboxWrapper = styled.div`
             justify-content: start;
             color: #000000;
             text-align: center;
+            font-family: "Inter";
 
             .btns {
               button {
@@ -138,6 +145,7 @@ const CashboxWrapper = styled.div`
             align-items: center;
             justify-content: start;
             text-align: center;
+            font-family: "Inter";
           }
         }
       }
@@ -166,6 +174,7 @@ const Tab1Wrapper = styled.form`
       line-height: 18px;
       color: #000000;
       margin-bottom: 8px;
+      font-family: "Inter";
     }
 
     input {
@@ -177,6 +186,7 @@ const Tab1Wrapper = styled.form`
       border: 2px solid rgba(31, 60, 136, 0.4);
       border-radius: 6px;
       padding: 10px 10px;
+      font-family: "Inter";
     }
 
     span.err-text {
@@ -184,6 +194,7 @@ const Tab1Wrapper = styled.form`
       position: absolute;
       left: 0;
       top: 70px;
+      font-family: "Inter";
     }
 
     .select {
@@ -192,6 +203,7 @@ const Tab1Wrapper = styled.form`
       font-size: 1rem;
       line-height: 20px;
       color: #000000;
+      font-family: "Inter";
 
       .css-319lph-ValueContainer {
         padding: 15px 10px;
@@ -210,7 +222,7 @@ const Tab2Wrapper = styled.div`
   background: #fff;
   padding: 15px;
   border: 1px solid #1F3C88;
-}
+
   .label {
     width: 100%;
     position: relative;
@@ -271,6 +283,7 @@ const Tab3Wrapper = styled.form`
   background: #fff;
   padding: 15px;
   border: 1px solid #1F3C88;
+  font-family: "Inter";
 
   .label {
     width: 100%;

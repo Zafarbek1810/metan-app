@@ -51,7 +51,7 @@ export default class OutletProvider{
   }
   static async getExpenses(page = 0, size = 10, params = {}) {
     const {outletId, date} = params;
-    return await client.get(`/outlet/getExpenses?skip=${page}&take=${size}${outletId ? `&outletId=${outletId}` : ""}${date ? `&date=${date}` : ""}`);
+    return await client.get(`/outlet/getExpenses?skip=${page*size}&take=${size}${outletId ? `&outletId=${outletId}` : ""}${date ? `&date=${date}` : ""}`);
   }
   static async updateExpense(body) {
     return await client.post("/outlet/editExpense", body);
@@ -65,7 +65,7 @@ export default class OutletProvider{
     return await client.post("/outlet/addShift", body);
   }
   static async getShifts(page = 0, size = 10) {
-    return await client.get(`/outlet/getShifts?skip=${page}&take=${size}`);
+    return await client.get(`/outlet/getShifts?skip=${page*size}&take=${size}`);
   }
 
 }

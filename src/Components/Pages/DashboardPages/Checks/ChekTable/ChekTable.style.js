@@ -10,6 +10,7 @@ const ChekTableWrapper = styled.div`
     line-height: 25px;
     color: #1F3C88;
     font-family: "Inter";
+    margin-top: 15px;
   }
 
   .table {

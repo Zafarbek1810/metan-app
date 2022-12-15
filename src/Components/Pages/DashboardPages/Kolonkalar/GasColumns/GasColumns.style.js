@@ -1,18 +1,22 @@
 import styled from "styled-components";
 
 const GasColumnsWrapper=styled.div`
+  font-family: "Inter";
   .top{
     margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
+    margin-top: 15px;
     .title{
       font-style: normal;
       font-weight: 600;
       font-size: 30px;
       line-height: 25px;
       color: #1F3C88;
+      font-family: "Inter";
     }
     .modal-wrapper{
+      font-family: "Inter";
       .modal-body{
         .input, .select{
           margin-bottom: 20px;

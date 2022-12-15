@@ -4,11 +4,16 @@ const DashHeaderWrapper=styled.div`
   padding: 10px;
   display: flex;
   position: relative;
+  justify-content: space-between;
   
-  h3.storeName{
-    width: 100%;
+  .storeName{
+    width: 550px;
     display: flex;
-    align-items: center;
+    
+    h3{
+      color: #0d6efd;
+      font-family: "Inter";
+    }
     svg{
       fill: #0d6efd;
       margin-right: 20px;
@@ -32,13 +37,17 @@ const DashHeaderWrapper=styled.div`
   .admin{
     display: flex;
     justify-content: end;
-    align-items: center;
-    width: 100%;
+    //align-items: center;
+    width: 30%;
     padding-right: 30px ;
     text-decoration: none;
+    background: transparent;
+    border: none;
+    font-family: "Inter";
     p{
       margin-bottom: 0;
       color: #000;
+      font-family: "Inter";
     }
     svg{
       margin-left: 10px;

@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 const GasColumnReportWrapper=styled.div`
+  font-family: "Inter" !important;
   .top {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+    margin-top: 15px;
   }
 
   .title {
@@ -14,6 +16,7 @@ const GasColumnReportWrapper=styled.div`
     font-size: 30px;
     line-height: 25px;
     color: #1F3C88;
+    font-family: "Inter";
   }
 
   .filter {
@@ -172,6 +175,7 @@ const GasColumnReportWrapper=styled.div`
 const FilterWrapper = styled.div`
   position: relative;
   display: inline-block;
+  font-family: "Inter";
   
   .filter-content {
     position: absolute;

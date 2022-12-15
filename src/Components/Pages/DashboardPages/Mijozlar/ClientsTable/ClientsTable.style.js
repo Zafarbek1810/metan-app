@@ -12,9 +12,12 @@ const ClientsTableWrapper=styled.div`
       font-size: 30px;
       line-height: 25px;
       color: #1F3C88;
+      font-family: "Inter";
+      margin-top: 15px;
     }
 
     .modal-wrapper {
+      margin-top: 15px;
       .modal-body {
         .input {
           margin-bottom: 30px;

@@ -119,7 +119,7 @@ const DirectorTable = () => {
       <div className="top">
         <h3 className="title">Ish boshqaruvchi</h3>
         <div className="modal-wrapper">
-          <button className="btn btn-primary" onClick={openModal}>
+          <button className="btn btn-primary" onClick={openModal} style={{fontFamily:"Inter"}}>
             + Qo'shish
           </button>
           {/*====MODAL====*/}

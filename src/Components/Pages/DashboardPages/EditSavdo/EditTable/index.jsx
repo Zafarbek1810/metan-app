@@ -376,7 +376,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
           <div className="col-md-4 col-12">
             <div className="input">
               <label>
-                <span>Kassirlar</span>
+                <span style={{fontFamily:"Inter"}}>Kassirlar</span>
                 <Select
                   size="large"
                   // mode="multiple"
@@ -392,7 +392,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
                   onChange={handleCassirId}
                 />
               </label>
-              <button onClick={addCashier} type="button" className="btn btn-primary" disabled={spinLoading1}>Qo'shish{spinLoading1 && <ButtonLoader/>}</button>
+              <button onClick={addCashier} type="button" style={{fontFamily:"Inter"}} className="btn btn-primary" disabled={spinLoading1}>Qo'shish{spinLoading1 && <ButtonLoader/>}</button>
             </div>
             <div className="box">
               <Spin spinning={spinLoading1} style={{marginTop: 100}}>
@@ -417,7 +417,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
           <div className="col-md-4 col-12">
             <div className="input">
               <label>
-                <span>Ish boshqaruvchi</span>
+                <span style={{fontFamily:"Inter"}}>Ish boshqaruvchi</span>
                 <Select
                   size="large"
                   // mode="multiple"
@@ -434,7 +434,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
                   value={directorId}
                 />
               </label>
-              <button onClick={addDirector} type="button" className="btn btn-primary" disabled={spinLoading2}>Qo'shish {spinLoading2 && <ButtonLoader/>}</button>
+              <button onClick={addDirector} type="button" style={{fontFamily:"Inter"}} className="btn btn-primary" disabled={spinLoading2}>Qo'shish {spinLoading2 && <ButtonLoader/>}</button>
             </div>
             <div className="box">
               <Spin spinning={spinLoading2} style={{marginTop: 100}}>
@@ -459,7 +459,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
           <div className="col-md-4 col-12">
             <div className="input">
               <label>
-                <span>Keshbek turi</span>
+                <span style={{fontFamily:"Inter"}}>Keshbek turi</span>
                 <Select
                   size="large"
                   allowClear
@@ -472,7 +472,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
                   value={keshbekId}
                 />
               </label>
-              <button onClick={addCashback} type="button" className="btn btn-primary" disabled={spinLoading3}>Qo'shish {spinLoading3 && <ButtonLoader/>}</button>
+              <button onClick={addCashback} type="button" className="btn btn-primary" style={{fontFamily:"Inter"}} disabled={spinLoading3}>Qo'shish {spinLoading3 && <ButtonLoader/>}</button>
             </div>
             <Spin spinning={spinLoading3} style={{display:"flex"}}>
               {savdoNuqta?.cashback?<h3 className="keshbekTitle">Ishlayotgan keshbek: {savdoNuqta?.cashback?.name}</h3> :<h3 className="keshbekTitle">Keshbek ishlamayapdi</h3>}

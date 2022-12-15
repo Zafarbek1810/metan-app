@@ -10,9 +10,9 @@ import Pagination from "rc-pagination";
 
 const ChekTable = () => {
   const [loading2, setLoading2] = useState(false);
-  const [cheques, setCheques] = useState({})
-  const [totalElements, setTotalElements]=useState(10)
+  const [cheques, setCheques] = useState([])
 
+  const [totalElements, setTotalElements]=useState(10)
   const [currentPage, setCurrentPage] = useState(1);
   const onChange = page => {
     setCurrentPage(page);
@@ -22,10 +22,10 @@ const ChekTable = () => {
   useEffect(() => {
     setLoading2(true);
     PaymentProvider.getAllCheques(currentPage-1, 10)
-      .then(res => {
-        console.log("chek", res)
-        setCheques(res.data.data)
-        setTotalElements(res.data.count)
+      .then(({data}) => {
+        console.log("chek", data)
+        setCheques(data.data)
+        setTotalElements(data.count)
       })
       .catch(err => {
         console.log(err)
@@ -33,7 +33,7 @@ const ChekTable = () => {
       }).finally(() => {
       setLoading2(false);
     })
-  }, [])
+  }, [currentPage])
 
 
   console.log(cheques)
@@ -106,7 +106,7 @@ const ChekTable = () => {
                   textAlign: "center",
                   padding: 30,
                 }
-              }><h3>Cheklar mavjud emas!</h3></div>
+              }><h3 style={{fontFamily:"Inter"}}>Cheklar mavjud emas!</h3></div>
             : <MinLoader/>
         }
 

@@ -77,6 +77,7 @@ const SideBarWrapper=styled.div`
     align-items: center;
     justify-content: start;
     text-decoration: none;
+    font-family: "Inter";
   }
 
   svg {
@@ -99,6 +100,7 @@ const SideBarWrapper=styled.div`
     justify-content: start;
     text-decoration: none;
     background: rgba(31, 60, 136, 0.15) !important;
+    font-family: "Inter";
 
     svg {
       fill: none !important;

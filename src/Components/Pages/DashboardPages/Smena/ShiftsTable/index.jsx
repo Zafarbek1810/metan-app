@@ -8,6 +8,7 @@ import ButtonLoader from "../../../../Common/ButtonLoader";
 import EditSvg from "../../../../Common/Svgs/EditSvg";
 import MinLoader from "../../../../Common/MinLoader";
 import {toast} from "react-toastify";
+import Pagination from "rc-pagination";
 
 
 const ShiftsTable = () => {
@@ -38,6 +39,13 @@ const ShiftsTable = () => {
   const [outletId, setoutletId] = useState(null)
   const [outlet, setOutlet] = useState([])
   const [shifts, setShifts] = useState([])
+
+  const [totalElements, setTotalElements]=useState(10)
+  const [currentPage, setCurrentPage] = useState(1);
+  const onChange = page => {
+    setCurrentPage(page);
+  };
+
 
   useEffect(() => {
     OutletProvider.getAllOutlets(0, 1000)
@@ -93,10 +101,11 @@ const ShiftsTable = () => {
 
   useEffect(() => {
     setLoading2(true)
-    OutletProvider.getShifts(0, 1000)
-      .then(res => {
-        console.log(res)
-        setShifts(res.data.data)
+    OutletProvider.getShifts(currentPage-1, 10)
+      .then(({data}) => {
+        console.log(data)
+        setShifts(data.data)
+        setTotalElements(data.count)
       })
       .catch(err => {
         console.log(err)
@@ -104,7 +113,7 @@ const ShiftsTable = () => {
       }).finally(() => {
       setLoading2(false);
     })
-  }, [forRender])
+  }, [forRender, currentPage])
 
 
   return (
@@ -112,7 +121,7 @@ const ShiftsTable = () => {
       <div className="top">
         <h3 className="title">Smena</h3>
         <div className="modalWrapper">
-          <button type="button" className="btn btn-primary" onClick={showModal}>
+          <button type="button" className="btn btn-primary" onClick={showModal} style={{fontFamily:"Inter"}}>
             + Qo'shish
           </button>
           <Modal
@@ -275,6 +284,11 @@ const ShiftsTable = () => {
           </tbody>
         </table>
       </div>
+      <Pagination
+        onChange={onChange}
+        current={currentPage}
+        total={totalElements}
+      />
     </ShiftsTableWrapper>
   );
 };

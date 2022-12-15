@@ -5,6 +5,7 @@ const CashierTableWrapper = styled.div`
     margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
+    margin-top: 15px;
 
     .title {
       font-style: normal;
@@ -12,6 +13,7 @@ const CashierTableWrapper = styled.div`
       font-size: 30px;
       line-height: 25px;
       color: #1F3C88;
+      font-family: "Inter"; 
     }
   }
 
@@ -154,6 +156,7 @@ const ModalContent = styled.div`
 
   form {
     background: #fff;
+    font-family: "Inter";
 
     .label {
       width: 100%;

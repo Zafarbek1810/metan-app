@@ -89,7 +89,7 @@ const EditCashbackTable = ({cashId}) => {
           <hr/>
           <br/>
 
-          <h5>Nomi <sup style={{color: "red"}}>*</sup></h5>
+          <h5 >Nomi <sup style={{color: "red"}}>*</sup></h5>
           <input className="input" value={cashName} onChange={handleChangeCashName}/>
           <hr/>
 

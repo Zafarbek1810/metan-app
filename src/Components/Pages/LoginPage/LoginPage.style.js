@@ -80,6 +80,7 @@ const LoginPageWrapper=styled.div`
 
         label {
           font-style: normal;
+          font-family: "Inter";
           font-weight: 600;
           font-size: 20px;
           color: #000;
@@ -100,6 +101,7 @@ const LoginPageWrapper=styled.div`
           padding: 15px;
           font-size: 1rem;
           font-weight: 600;
+          font-family: "Inter";
         }
       }
 
@@ -135,12 +137,12 @@ const LoginPageWrapper=styled.div`
     font-weight: 300;
     font-size: 0.75rem;
     line-height: 18px;
-    color: rgba(0, 0, 0, 0.5);
+    color: #fff;
     text-align: center;
     margin-bottom: 30px;
 
     .crlink {
-      color: #1f3c88;
+      color: #fff;
       text-decoration: none;
     }
   }

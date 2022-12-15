@@ -1,8 +1,8 @@
 import client from "../../HHTP/client";
 
 export default class PaymentProvider{
-  static async getAllCheques(page = 0, size = 10, sort = "asc") {
-    return await client.get(`/payment/getCheques?page=${page}&size=${size}&sort=${sort}`);
+  static async getAllCheques(page = 0, size = 10) {
+    return await client.get(`/payment/getCheques?skip=${page*size}&take=${size}`);
   }
   static async getQrInfo(id=0, plateNum="") {
     let query = id ? `qrCode=${id}`: `plateNumber=${plateNum}`;
@@ -18,7 +18,7 @@ export default class PaymentProvider{
     return await client.post(`payment/addDebt`, body);
   }
 
-  static async getDeptors(page = 0, size = 10, sort = "asc") {
-    return await client.get(`/payment/getDebtors?page=${page}&size=${size}&sort=${sort}`);
+  static async getDeptors(page = 0, size = 10) {
+    return await client.get(`/payment/getDebtors?skip=${page*size}&take=${size}`);
   }
 }

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  font-family: "Inter";
   .title {
     font-style: normal;
     font-weight: 600;
@@ -9,6 +10,8 @@ const Wrapper = styled.div`
     color: #1F3C88;
     margin-top: 0;
     margin-bottom: 30px;
+    margin-top: 15px;
+    font-family: "Inter";
   }
 
   .content {

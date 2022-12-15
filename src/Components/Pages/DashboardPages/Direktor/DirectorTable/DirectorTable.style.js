@@ -5,12 +5,14 @@ const DirectorTableWrapper=styled.div`
     margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
+    margin-top: 15px;
     .title{
       font-style: normal;
       font-weight: 600;
       font-size: 30px;
       line-height: 25px;
       color: #1F3C88;
+      font-family: "Inter";
     }
   }
   .filter{
@@ -27,6 +29,7 @@ const DirectorTableWrapper=styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    font-family: "Inter";
     thead{
       width: 100%;
       tr{
@@ -154,6 +157,7 @@ const ModalContent=styled.div`
   padding: 20px;
   border-bottom: 1px solid #f5f6f8;
   background: #fff;
+  font-family: "Inter" !important;
   
   form{
     background: #fff;
@@ -229,6 +233,7 @@ const ModalContent=styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        font-family: "Inter";
 
         &:disabled {
           cursor: not-allowed;

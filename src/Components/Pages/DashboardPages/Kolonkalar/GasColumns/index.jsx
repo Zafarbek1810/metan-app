@@ -10,6 +10,7 @@ import Message from "../../../../../utils/Message";
 import GasBallonsProvider from "../../../../../Data/Providers/GasBallonsProvider";
 import MinLoader from "../../../../Common/MinLoader";
 import {toast} from "react-toastify";
+import Pagination from "rc-pagination";
 
 
 const GasColumns = () => {
@@ -26,6 +27,13 @@ const GasColumns = () => {
 
   const [editingColumn, setEditingColumn] = useState(null)
 
+  const [totalElements, setTotalElements]=useState(10)
+  const [currentPage, setCurrentPage] = useState(1);
+  const onChange = page => {
+    setCurrentPage(page);
+  };
+
+
   useEffect(() => {
     OutletProvider.getAllOutlets(0, 1000)
       .then(res => {
@@ -39,9 +47,10 @@ const GasColumns = () => {
 
   useEffect(() => {
     setLoading2(true);
-    GasBallonsProvider.getGasColums(0, 1000)
-      .then(res => {
-        setBallons(res.data.data)
+    GasBallonsProvider.getGasColums(currentPage-1, 10)
+      .then(({data}) => {
+        setBallons(data.data)
+        setTotalElements(data.count)
       })
       .catch(err => {
         console.log(err)
@@ -49,7 +58,7 @@ const GasColumns = () => {
       }).finally(() => {
       setLoading2(false);
     })
-  }, [forRender])
+  }, [forRender, currentPage])
 
 
   const showModal = () => {
@@ -126,7 +135,7 @@ const GasColumns = () => {
         <div className="modal-wrapper">
           {/*====MODAL====*/}
           <div className="modal-wrapper">
-            <button className="btn btn-primary" onClick={showModal}>
+            <button className="btn btn-primary" style={{fontFamily:"Inter"}} onClick={showModal}>
               + Qo'shish
             </button>
             <Modal
@@ -214,6 +223,11 @@ const GasColumns = () => {
 
         </tbody>
       </table>
+      <Pagination
+        onChange={onChange}
+        current={currentPage}
+        total={totalElements}
+      />
     </GasColumnsWrapper>
   );
 };

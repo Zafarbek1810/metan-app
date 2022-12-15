@@ -5,12 +5,14 @@ const CardsWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     margin-bottom: 30px;
+    margin-top: 15px;
     .title {
       font-style: normal;
       font-weight: 600;
       font-size: 30px;
       line-height: 25px;
       color: #1F3C88;
+      font-family: "Inter";
     }
     
     .filter{
@@ -61,8 +63,11 @@ const CardsWrapper = styled.div`
           font-size: 21px;
           font-weight: 700;
           color: #495057;
+          font-family: "Inter";
+
         }
         p{
+          font-family: "Inter";
           font-size: 15px;
           color: #74788d;
         }
@@ -110,6 +115,8 @@ const CardsWrapper = styled.div`
         span{
           font-weight: 700;
           font-size: 20px;
+          font-family: "Inter";
+
         }
         svg{
           margin: 0 10px;
@@ -122,6 +129,7 @@ const CardsWrapper = styled.div`
           font-size: 16px;
           font-weight: 700;
           color: green;
+          font-family: "Inter";
         }
       }
     }

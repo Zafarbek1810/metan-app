@@ -1,17 +1,20 @@
 import styled from "styled-components";
 
 const ShiftsTableWrapper=styled.div`
+  font-family: "Inter";
   .top{
     min-width: 100% !important;
     display: flex;
     justify-content: space-between;
     margin-bottom: 30px;
+    margin-top: 15px;
     .title{
       font-style: normal;
       font-weight: 600;
       font-size: 30px;
       line-height: 25px;
       color: #1F3C88;
+      font-family: "Inter";
     }
     
     .modalWrapper{

@@ -40,6 +40,7 @@ const ExpensesTable = () => {
   useEffect(() => {
     OutletProvider.getAllOutlets(0, 1000)
       .then(res => {
+        console.log(res)
         setOutlet(res.data)
       })
       .catch(err => {
@@ -67,7 +68,7 @@ const ExpensesTable = () => {
       }).finally(() => {
       setLoading2(false);
     })
-  }, [filterState, forRender])
+  }, [filterState, forRender, currentPage])
 
   const handleEdit = (obj) => {
     setEditingExpence(obj)
@@ -167,7 +168,7 @@ const ExpensesTable = () => {
         <div className="modal-wrapper">
           {/*====MODAL====*/}
           <div className="modal-wrapper">
-            <button className="btn btn-primary" onClick={showModal}>
+            <button className="btn btn-primary" onClick={showModal} style={{fontFamily:"Inter"}}>
               + Qo'shish
             </button>
             <Modal
@@ -295,7 +296,9 @@ const ExpensesTable = () => {
             expenses.length
               ? expenses.map((obj, index) => (
                 <tr key={obj.id}>
-                  <td style={{width: "30%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">{index + 1}. {obj.name}</td>
+                  <td style={{width: "30%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">
+                    {index + 1}. {obj.name}
+                  </td>
                   <td style={{width: "30%"}} className="col">{obj.outlet.title}</td>
                   <td style={{width: "10%"}} className="col" title={obj.admin.fullName}>{obj.admin.fullName}</td>
                   <td style={{width: "10%"}} className="col">{new Date(obj.date).toLocaleString("en-GB")}</td>

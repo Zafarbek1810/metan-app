@@ -5,6 +5,8 @@ import EditSvg from "../../../../Common/Svgs/EditSvg";
 import {Input} from "antd";
 import UserProvider from "../../../../../Data/Providers/UserProvider";
 import Message from "../../../../../utils/Message";
+import Pagination from "rc-pagination";
+import MinLoader from "../../../../Common/MinLoader";
 
 const Modal=()=>{
   return(
@@ -38,24 +40,35 @@ const Modal=()=>{
 
 const ClientsTable = () => {
   const [user, setUser] = useState([])
+  const [loading2, setLoading2] = useState(false);
+
+  const [totalElements, setTotalElements]=useState(10)
+  const [currentPage, setCurrentPage] = useState(1);
+  const onChange = page => {
+    setCurrentPage(page);
+  };
+
 
   useEffect(()=>{
-    UserProvider.getClients()
-      .then(res=>{
-        console.log("clients",res.data)
-        setUser(res.data.data)
+    setLoading2(true)
+    UserProvider.getClients(currentPage-1, 10)
+      .then(({data})=>{
+        console.log("clients",data)
+        setUser(data.data)
       })
       .catch(err => {
         console.log(err)
         Message.serverError()
-      })
+      }).finally(() => {
+      setLoading2(false);
+    })
   }, [])
   return (
     <ClientsTableWrapper>
       <div className="top">
         <h3 className="title">Mijozlar</h3>
         <div className="modal-wrapper">
-          <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          <button className="btn btn-primary" style={{fontFamily:"Inter"}} data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             Barcha mijozlarga push-xabarnoma yuborish
           </button>
           {/*====MODAL====*/}
@@ -80,23 +93,36 @@ const ClientsTable = () => {
         </thead>
         <tbody>
         {
-          user.map((obj, index)=>(
-            <tr key={obj.id}>
-              <td style={{width: "15%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">{index+1}.{obj.fullName}</td>
-              <td style={{width: "15%"}} className="col">{obj.phoneNumber}</td>
-              <td style={{width: "8%"}} className="col">{obj.plateNumber}</td>
-              <td style={{width: "8%"}} className="col">{obj.totalSpendings}</td>
-              <td style={{width: "8%"}} className="col">{obj.balance}</td>
-              <td style={{width: "8%"}} className="col">{obj.totalDebt}</td>
-              <td style={{width: "15%"}} className="col">{new Date(obj.lastVisit).toLocaleString("en-GB")}</td>
-              <td style={{width: "8%"}} className="col">{obj.totalPoints}</td>
-              <td style={{width: "8%"}} className="col">{obj.numberOfVisits}</td>
-            </tr>
-          ))
+          !loading2 ?
+            user.length ?
+              user.map((obj, index)=>(
+                <tr key={obj.id}>
+                  <td style={{width: "15%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">{index+1}.{obj.fullName}</td>
+                  <td style={{width: "15%"}} className="col">{obj.phoneNumber}</td>
+                  <td style={{width: "8%"}} className="col">{obj.plateNumber}</td>
+                  <td style={{width: "8%"}} className="col">{obj.totalSpendings}</td>
+                  <td style={{width: "8%"}} className="col">{obj.balance}</td>
+                  <td style={{width: "8%"}} className="col">{obj.totalDebt}</td>
+                  <td style={{width: "15%"}} className="col">{new Date(obj.lastVisit).toLocaleString("en-GB")}</td>
+                  <td style={{width: "8%"}} className="col">{obj.totalPoints}</td>
+                  <td style={{width: "8%"}} className="col">{obj.numberOfVisits}</td>
+                </tr>
+              )): <div style={
+                {
+                  textAlign: "center",
+                  padding: 30,
+                }
+              }><h3 style={{fontFamily:"Inter"}}>Cheklar mavjud emas!</h3></div>
+            : <MinLoader/>
         }
 
         </tbody>
       </table>
+      <Pagination
+        onChange={onChange}
+        current={currentPage}
+        total={totalElements}
+      />
     </ClientsTableWrapper>
   );
 };

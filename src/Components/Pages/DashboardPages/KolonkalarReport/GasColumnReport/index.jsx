@@ -7,6 +7,7 @@ import OutletProvider from "../../../../../Data/Providers/OutletProvider";
 import GasBallonsProvider from "../../../../../Data/Providers/GasBallonsProvider";
 import {useForm} from "react-hook-form";
 import {toast} from "react-toastify";
+import Pagination from "rc-pagination";
 
 const GasColumnReport = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -31,6 +32,13 @@ const GasColumnReport = () => {
   const [gazCols, setGazCols] = useState([]);
   const [activeGazCol, setActiveGazCol] = useState(null);
 
+  const [totalElements, setTotalElements] = useState(10)
+  const [currentPage, setCurrentPage] = useState(1);
+  const onChange = page => {
+    setCurrentPage(page);
+  };
+
+
   useEffect(() => {
     OutletProvider.getAllOutlets()
       .then(({data}) => {
@@ -41,13 +49,14 @@ const GasColumnReport = () => {
   }, [])
 
   useEffect(() => {
-    GasBallonsProvider.getGasColumsReports(filterState)
+    GasBallonsProvider.getGasColumsReports(currentPage - 1, 10, filterState)
       .then(({data}) => {
         setColsData(data.data);
+        setTotalElements(data.count)
       }, err => {
         console.log(err);
       })
-  }, [filterState, forRender])
+  }, [filterState, forRender, currentPage])
 
   useEffect(() => {
     if (activeOutlet) {
@@ -116,7 +125,7 @@ const GasColumnReport = () => {
         <div className="modal-wrapper">
           {/*====MODAL====*/}
           <div className="modal-wrapper">
-            <button className="btn btn-primary" onClick={showModal}>
+            <button className="btn btn-primary" onClick={showModal} style={{fontFamily:"Inter"}}>
               + Qo'shish
             </button>
             <Modal
@@ -138,7 +147,7 @@ const GasColumnReport = () => {
           <input type="text" className="form-control" placeholder="Izlash"/>
         </div>
         <FilterWrapper>
-          <button className="btn btn-primary" onClick={() => setIsFilterOpen(p => !p)}>
+          <button className="btn btn-primary" onClick={() => setIsFilterOpen(p => !p)} style={{fontFamily:"Inter"}}>
             Filter
           </button>
           <div className="filter-content" style={{visibility: isFilterOpen ? "visible" : "hidden"}}>
@@ -224,6 +233,11 @@ const GasColumnReport = () => {
         }
         </tbody>
       </table>
+      <Pagination
+        onChange={onChange}
+        current={currentPage}
+        total={totalElements}
+      />
       <Modal
         title=""
         open={editModal}
@@ -360,7 +374,7 @@ function ReportModal({renderParent, handleCancel}) {
       </table>
 
       <div className="d-flex gap-2 justify-content-end">
-        <button className="btn btn-danger" type="button" onClick={()=>handleCancel()}>Bekor qilish</button>
+        <button className="btn btn-danger" type="button" onClick={() => handleCancel()}>Bekor qilish</button>
         <button className="btn btn-primary">Saqlash</button>
       </div>
     </form>

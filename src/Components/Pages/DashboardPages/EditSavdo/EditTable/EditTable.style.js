@@ -4,9 +4,13 @@ const EditTableWrapper = styled.div`
   form {
     background: #fff;
     padding: 20px;
+    font-family: "Inter";
+
   }
   .keshbekTitle{
     font-size: 20px;
+    font-family: "Inter";
+
   }
 
   .input {
@@ -14,7 +18,9 @@ const EditTableWrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 0;
-    
+    font-family: "Inter";
+
+
     button{
       &:disabled {
         cursor: not-allowed !important;
@@ -31,6 +37,7 @@ const EditTableWrapper = styled.div`
       position: relative;
       margin-bottom: 25px;
 
+
       input {
         font-style: normal;
         font-weight: 600;
@@ -40,6 +47,8 @@ const EditTableWrapper = styled.div`
         border: 2px solid rgba(31, 60, 136, 0.4);
         border-radius: 6px;
         padding: 10px 10px;
+        font-family: "Inter";
+
       }
     }
   }
@@ -50,9 +59,12 @@ const EditTableWrapper = styled.div`
     border: 1px solid #0d6efd;
     min-height: 300px;
     border-radius: 6px;
+    style={{fontFamily:"Inter"}}
 
     table {
       width: 100%;
+      font-family: "Inter";
+
 
       tbody {
         tr {

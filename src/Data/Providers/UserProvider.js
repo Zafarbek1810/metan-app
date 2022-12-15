@@ -29,8 +29,8 @@ export default class UserProvider {
     return await client.get("/admin/getStatistics");
   }
 
-  static async getClients() {
-    return await client.get("/client/getClients");
+  static async getClients(page = 0, size = 10) {
+    return await client.get(`/client/getClients/?skip=${page*size}&take=${size}`);
   }
 
 

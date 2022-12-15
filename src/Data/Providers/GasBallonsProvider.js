@@ -14,15 +14,15 @@ export default class GasBallonsProvider {
   }
 
   static async getGasColums(page = 0, size = 10) {
-    return await client.get(`/gascolumn/getGasColumns?skip=${page}&take=${size}`);
+    return await client.get(`/gascolumn/getGasColumns?skip=${page*size}&take=${size}`);
   }
 
   static async getGasColumsByOutlet(outletId) {
     return await client.get(`/gascolumn/getGasColumnsByOutlet/${outletId}`);
   }
 
-  static async getGasColumsReports(params, page = 0, size = 10) {
+  static async getGasColumsReports(page = 0, size = 10, params) {
     const {outletId, gasColumnId, startDate, endDate} = params;
-    return await client.get(`gascolumn/getGasColumnReports?take=${size}&skip=${page}${outletId ? `&outletId=${outletId}` : ""}${gasColumnId ? `&colId=${gasColumnId}` : ""}${startDate ? `&startDate=${startDate}` : ""}${endDate ? `&endDate=${endDate}` : ""}`);
+    return await client.get(`gascolumn/getGasColumnReports?take=${size}&skip=${page*size}${outletId ? `&outletId=${outletId}` : ""}${gasColumnId ? `&colId=${gasColumnId}` : ""}${startDate ? `&startDate=${startDate}` : ""}${endDate ? `&endDate=${endDate}` : ""}`);
   }
 }

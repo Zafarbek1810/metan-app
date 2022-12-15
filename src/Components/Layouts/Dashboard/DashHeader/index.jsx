@@ -8,7 +8,6 @@ import UserContext from "../../../../Context/UserContext";
 import MyLink from "../../../Common/MyLink";
 import UserProvider from "../../../../Data/Providers/UserProvider";
 import Message from "../../../../utils/Message";
-import {Store} from "@mui/icons-material";
 import StoreSvg from "../../../Common/Svgs/StoreSvg";
 
 const DashboardHeader = ({title, RefObj, setIsOpen}) => {
@@ -49,19 +48,15 @@ const DashboardHeader = ({title, RefObj, setIsOpen}) => {
 
   return (
     <DashHeaderWrapper>
-      <button className="sidebarBtn">
-        <MenuSvg className="menuSvg"/>
-      </button>
-      <div className="sidebarMenu" style={{display: "none"}}>
-        cc
-      </div>
       <div className="storeName">
-        <h3 ><StoreSvg/>{user?.outletAsCashier?.title}</h3>
-        <h3 >{user?.outletAsDirector?.title}</h3>
+        {user.outletAsCashier!==null ? <StoreSvg/> : ""}
+        {user.outletAsDirector!==null ? <StoreSvg/> : ""}
+        <h3>{user?.outletAsCashier?.title}</h3>
+        <h3>{user?.outletAsDirector?.title}</h3>
       </div>
-      <MyLink to="#" onClick={handleLogout} className="admin">
+      <button  onClick={handleLogout} className="admin">
         <h3>{user.fullName} </h3> <LogOutSvg/>
-      </MyLink>
+      </button>
     </DashHeaderWrapper>
   );
 };

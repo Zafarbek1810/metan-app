@@ -5,6 +5,7 @@ const ServicesTableWrapper = styled.div`
     margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
+    margin-top: 15px;
 
     .title {
       font-style: normal;
@@ -12,6 +13,7 @@ const ServicesTableWrapper = styled.div`
       font-size: 30px;
       line-height: 25px;
       color: #1F3C88;
+      font-family: "Inter";
     }
   }
 

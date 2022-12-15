@@ -11,17 +11,18 @@ import AwardSvg from "../../../../Common/Svgs/AwardSvg";
 import CashSvg from "../../../../Common/Svgs/CashSvg";
 import CalendarSvg from "../../../../Common/Svgs/CalendarSvg";
 import GasBallonSvg from "../../../../Common/Svgs/GasBallonSvg";
-import {message, Modal, Select, Tabs} from "antd";
+import {message, Modal, Select, Spin, Tabs} from "antd";
 import {ModalContent} from "../../Xarajatlar/ExpensesTable/ExpensesTable.style";
 import ButtonLoader from "../../../../Common/ButtonLoader";
-import {useForm} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
 import {useContextSelector} from "use-context-selector";
 import UserContext from "../../../../../Context/UserContext";
 import UserProvider from "../../../../../Data/Providers/UserProvider";
 import PaymentProvider from "../../../../../Data/Providers/PaymentProvider";
 import {toast} from "react-toastify";
+import CashbackProvider from "../../../../../Data/Providers/CashbackProvider";
 
-const Tab1 = ({outletId, setMijozObj}) => {
+const Tab1 = ({outletId, setMijozObj, setSpinning}) => {
   const [data, setData] = useState({});
   const [miniLoading, setMiniLoading] = useState(false)
   const {register, formState: {errors}, handleSubmit, setValue, reset, control} = useForm({
@@ -29,10 +30,12 @@ const Tab1 = ({outletId, setMijozObj}) => {
   });
 
   const [loading, setLoading] = useState(false)
+  const [loading2, setLoading2] = useState(false)
   const [isPayPoints, setIsPayPoints] = useState(false)
 
   const handleFetchMijozByCode = (e) => {
     if (e.code === "Enter" && e.target.value.length > 0) {
+      setSpinning(true)
       PaymentProvider.getQrInfo(e.target.value)
         .then(({data}) => {
           console.log(data)
@@ -43,12 +46,13 @@ const Tab1 = ({outletId, setMijozObj}) => {
           setMijozObj({})
           toast.error(err?.response?.data?.message);
         })
+      setSpinning(false)
     }
   }
 
   const handleFetchMijozByAuto = (e) => {
     if (e.code === "Enter" && e.target.value.length > 0) {
-      setMiniLoading(true)
+      setSpinning(true)
       PaymentProvider.getQrInfo(0, e.target.value)
         .then(({data}) => {
           console.log(data)
@@ -57,7 +61,7 @@ const Tab1 = ({outletId, setMijozObj}) => {
         }, err => {
           toast.error(err?.response?.data?.message);
         })
-      setMiniLoading(false)
+      setSpinning(false)
     }
   }
 
@@ -70,6 +74,7 @@ const Tab1 = ({outletId, setMijozObj}) => {
 
     setTimeout(() => {
       if (isPayPoints) {
+        setLoading(true)
         PaymentProvider.payByPoints(body)
           .then(({data}) => {
             console.log(data);
@@ -80,8 +85,10 @@ const Tab1 = ({outletId, setMijozObj}) => {
           console.log(err)
         }).finally(() => {
           setIsPayPoints(false)
+          setLoading(false)
         })
       } else {
+        setLoading2(true)
         PaymentProvider.pay(body)
           .then(({data}) => {
             console.log(data);
@@ -90,13 +97,16 @@ const Tab1 = ({outletId, setMijozObj}) => {
           }, err => {
             toast.error(err?.response?.data?.message)
             console.log(err);
-          })
+          }).finally(()=>{
+          setLoading2(false)
+        })
       }
     }, 100)
   }
 
   return (
     <Tab1Wrapper onSubmit={handleSubmit(onSubmit)}>
+      <Spin spinning={miniLoading}>
       <div className="row">
         <div className="col-md-6">
           <label className="label ">
@@ -141,16 +151,17 @@ const Tab1 = ({outletId, setMijozObj}) => {
       </div>
       <div className="row">
         <div className="col-md-6">
-          <button type="submit" onClick={()=>setIsPayPoints(true)} disabled={loading} className="btn btn-danger w-100">
-            Hisobdan o'chirish
+          <button type="submit" onClick={()=>setIsPayPoints(true)} disabled={loading} className="btn btn-danger w-100 d-flex justify-content-center">
+            Hisobdan o'chirish {loading && <ButtonLoader/>}
           </button>
         </div>
         <div className="col-md-6">
-          <button type="submit" onClick={()=>setIsPayPoints(false)} disabled={loading} className="btn btn-success w-100">
-            To'lash
+          <button type="submit" onClick={()=>setIsPayPoints(false)} disabled={loading2} className="btn btn-success w-100 d-flex justify-content-center">
+            To'lash{loading2 && <ButtonLoader/>}
           </button>
         </div>
       </div>
+      </Spin>
     </Tab1Wrapper>
   )
 }
@@ -179,7 +190,7 @@ const Tab3 = ({outletId, setMijozObj}) => {
       amount: +values.qarz,
       clientId: data.id,
       outletId: +outletId,
-      returnDate: values.date
+      returnDate: values.sana
     }
 
     PaymentProvider.addDebt(body)
@@ -222,12 +233,12 @@ const Tab3 = ({outletId, setMijozObj}) => {
         </label>
         <label className="label ">
           <span className="label-text">Sana</span>
-          {errors.date && (
+          {errors.sana && (
             <span className="err-text"></span>
           )}
           <input
             type="date"
-            {...register("date", {required: true})}
+            {...register("sana", {required: true})}
           />
         </label>
       </div>
@@ -253,8 +264,11 @@ const Cashbox = () => {
   const {register, formState: {errors}, handleSubmit, setValue, reset, control} = useForm({
     defaultValues: {}
   });
-  const [loading, setLoading] = useState(false);
+  const [loadingBtn, setLoadingBtn] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isspinning, setSpinning] = useState(false)
+  const [carType, setCarType] = useState([])
+  const [carid, setCarid] = useState(null)
 
   useEffect(() => {
     UserProvider.getMe()
@@ -264,6 +278,17 @@ const Cashbox = () => {
         console.log(err);
       })
   })
+
+  useEffect(()=>{
+    CashbackProvider.getCarTypes()
+      .then(res=>{
+        console.log("car", res)
+        setCarType(res.data.map(type => ({label: type, value: type})))
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+  }, [])
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -331,18 +356,28 @@ const Cashbox = () => {
                     </label>
                     <label className="label">
                       <span className="label-text">Avto turi</span>
-                      <Select
-                        placeholder="Tanlang"
-                        size="large"
-                        allowClear
-                        style={{
-                          width: "100%",
-                          marginTop: "10px",
-                          marginBottom: "10px",
-                        }}
-                        // onChange={handleOutletId}
-                        // options={optionExpense}
-                        // value={outletId}
+                      <Controller
+                        control={control}
+                        name="carType"
+                        render={({
+                                   field: {onChange, onBlur, value, name, ref},
+                                   fieldState: {invalid, isTouched, isDirty, error},
+                                   formState,
+                                 }) => (
+                          <Select
+                            placeholder="Tanlang"
+                            size="large"
+                            allowClear
+                            style={{
+                              width: "100%",
+                              marginTop: "10px",
+                              marginBottom: "10px",
+                            }}
+                            onChange={onChange}
+                            options={carType}
+                            value={value}
+                          />
+                        )}
                       />
                     </label>
                     <label className="label">
@@ -368,7 +403,7 @@ const Cashbox = () => {
                     <div className="btns">
                       <button type="button" className="btn btn-outline-warning" onClick={handleCancel}>Bekor qilish
                       </button>
-                      <button type="submit" className="btn btn-primary" disabled={loading}>Saqlash {loading &&
+                      <button type="submit" className="btn btn-primary" disabled={loadingBtn}>Saqlash {loadingBtn &&
                       <ButtonLoader/>}</button>
                     </div>
                   </form>
@@ -376,111 +411,113 @@ const Cashbox = () => {
               </Modal>
             </div>
           </div>
-          <div className="bottom">
-            <div className="box">
-              <div className="head">
-                <h3>Balans: {mijozObj.balance}</h3>
-                <button onClick={showModal}><EditSvg/></button>
-              </div>
-              <div className="body">
-                <div className="wrapper">
-                  <div className="col">
-                    <div className="left">
-                      <UserSvg/>
-                      <h4>Mijoz</h4>
+          <Spin spinning={isspinning}>
+            <div className="bottom">
+              <div className="box">
+                <div className="head">
+                  <h3>Balans: {mijozObj.balance}</h3>
+                  <button onClick={showModal}><EditSvg/></button>
+                </div>
+                <div className="body">
+                  <div className="wrapper">
+                    <div className="col">
+                      <div className="left">
+                        <UserSvg/>
+                        <h4>Mijoz</h4>
+                      </div>
+                      <div className="right"><p>{mijozObj.fullName}</p></div>
                     </div>
-                    <div className="right"><p>{mijozObj.fullName}</p></div>
-                  </div>
-                  <div className="col">
-                    <div className="left">
-                      <PhoneSvg/>
-                      <h4>Telefon raqami</h4>
+                    <div className="col">
+                      <div className="left">
+                        <PhoneSvg/>
+                        <h4>Telefon raqami</h4>
+                      </div>
+                      <div className="right"><p>{mijozObj.phoneNumber}</p></div>
                     </div>
-                    <div className="right"><p>{mijozObj.phoneNumber}</p></div>
-                  </div>
-                  <div className="col">
-                    <div className="left">
-                      <CarNumberSvg/>
-                      <h4>Avto raqami</h4>
+                    <div className="col">
+                      <div className="left">
+                        <CarNumberSvg/>
+                        <h4>Avto raqami</h4>
+                      </div>
+                      <div className="right"><p>{mijozObj.plateNumber}</p></div>
                     </div>
-                    <div className="right"><p>{mijozObj.plateNumber}</p></div>
-                  </div>
-                  <div className="col">
-                    <div className="left">
-                      <CarSvg/>
-                      <h4>Avto turi</h4>
+                    <div className="col">
+                      <div className="left">
+                        <CarSvg/>
+                        <h4>Avto turi</h4>
+                      </div>
+                      <div className="right"><p>{mijozObj.cartype?.title}</p></div>
                     </div>
-                    <div className="right"><p>{mijozObj.cartype?.title}</p></div>
-                  </div>
-                  <div className="col">
-                    <div className="left">
-                      <CheckSvg/>
-                      <h4>Maksimal summa</h4>
+                    <div className="col">
+                      <div className="left">
+                        <CheckSvg/>
+                        <h4>Maksimal summa</h4>
+                      </div>
+                      <div className="right"><p>{mijozObj.fullName}</p></div>
                     </div>
-                    <div className="right"><p>{mijozObj.fullName}</p></div>
-                  </div>
-                  <div className="col">
-                    <div className="left">
-                      <StatusSvg/>
-                      <h4>Status</h4>
+                    <div className="col">
+                      <div className="left">
+                        <StatusSvg/>
+                        <h4>Status</h4>
+                      </div>
+                      <div className="right"><p>{mijozObj.fullName}</p></div>
                     </div>
-                    <div className="right"><p>{mijozObj.fullName}</p></div>
-                  </div>
-                  <div className="col">
-                    <div className="left">
-                      <AwardSvg/>
-                      <h4>Bonus</h4>
+                    <div className="col">
+                      <div className="left">
+                        <AwardSvg/>
+                        <h4>Bonus</h4>
+                      </div>
+                      <div className="right"><p>{mijozObj.fullName}</p></div>
                     </div>
-                    <div className="right"><p>{mijozObj.fullName}</p></div>
-                  </div>
-                  <div className="col">
-                    <div className="left">
-                      <CashSvg/>
-                      <h4>Qarz</h4>
+                    <div className="col">
+                      <div className="left">
+                        <CashSvg/>
+                        <h4>Qarz</h4>
+                      </div>
+                      <div className="right"><p>{mijozObj.fullName}</p></div>
                     </div>
-                    <div className="right"><p>{mijozObj.fullName}</p></div>
-                  </div>
-                  <div className="col">
-                    <div className="left">
-                      <CalendarSvg/>
-                      <h4>Qaytarish kuni</h4>
+                    <div className="col">
+                      <div className="left">
+                        <CalendarSvg/>
+                        <h4>Qaytarish kuni</h4>
+                      </div>
+                      <div className="right"><p>{mijozObj.fullName}</p></div>
                     </div>
-                    <div className="right"><p>{mijozObj.fullName}</p></div>
-                  </div>
-                  <div className="col">
-                    <div className="left">
-                      <GasBallonSvg/>
-                      <h4>Gaz ballon</h4>
+                    <div className="col">
+                      <div className="left">
+                        <GasBallonSvg/>
+                        <h4>Gaz ballon</h4>
+                      </div>
+                      <div className="right"><p>{mijozObj.fullName}</p></div>
                     </div>
-                    <div className="right"><p>{mijozObj.fullName}</p></div>
                   </div>
                 </div>
               </div>
+              <table className="table">
+                <thead>
+                <tr style={{width: "100%"}}>
+                  <th style={{width: "30%"}} className="row">Savdo nuqtasi</th>
+                  <th style={{width: "20%"}} className="col">Summa</th>
+                  <th style={{width: "10%"}} className="col">Hisobdan o'chirish</th>
+                  <th style={{width: "10%"}} className="col">Sana</th>
+                </tr>
+                </thead>
+                <tbody>
+                {
+                  mijozObj?.cheques?.map((check, index) => (
+                    <tr key={check.id}>
+                      {/* TODO */}
+                      <td style={{width: "30%"}} className="row">{index + 1}.</td>
+                      <td style={{width: "30%"}} className="col">{check.amount}</td>
+                      <td style={{width: "10%"}} className="col">00</td>
+                      <td style={{width: "10%"}} className="col">12.12.2022</td>
+                    </tr>
+                  ))
+                }
+                </tbody>
+              </table>
             </div>
-            <table className="table">
-              <thead>
-              <tr style={{width: "100%"}}>
-                <th style={{width: "30%"}} className="row">Savdo nuqtasi</th>
-                <th style={{width: "20%"}} className="col">Summa</th>
-                <th style={{width: "10%"}} className="col">Hisobdan o'chirish</th>
-                <th style={{width: "10%"}} className="col">Sana</th>
-              </tr>
-              </thead>
-              <tbody>
-              {
-                mijozObj?.cheques?.map((check, index) => (
-                  <tr key={check.id}>
-                    {/* TODO */}
-                    <td style={{width: "30%"}} className="row">{index + 1}.</td>
-                    <td style={{width: "30%"}} className="col">{check.amount}</td>
-                    <td style={{width: "10%"}} className="col">00</td>
-                    <td style={{width: "10%"}} className="col">12.12.2022</td>
-                  </tr>
-                ))
-              }
-              </tbody>
-            </table>
-          </div>
+          </Spin>
         </div>
         <div className="col-md-6 col-12">
           <Tabs
@@ -491,7 +528,7 @@ const Cashbox = () => {
               {
                 label: `Kassa`,
                 key: '1',
-                children: <Tab1 setMijozObj={setMijozObj} outletId={outletId}/>,
+                children: <Tab1 setSpinning={setSpinning} setMijozObj={setMijozObj} outletId={outletId}/>,
               },
               {
                 label: `Qarz`,
