@@ -1,4 +1,4 @@
-import '../styles/globals.css'
+import '../styles/globals.scss'
 import {UserContextProvider} from "../src/Context/UserContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useEffect, useState} from "react";

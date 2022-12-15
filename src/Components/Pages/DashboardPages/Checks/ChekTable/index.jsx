@@ -5,19 +5,27 @@ import Message from "../../../../../utils/Message";
 import PaymentProvider from "../../../../../Data/Providers/PaymentProvider";
 import MinLoader from "../../../../Common/MinLoader";
 import Link from "next/link";
+import Pagination from "rc-pagination";
 
 
 const ChekTable = () => {
   const [loading2, setLoading2] = useState(false);
   const [cheques, setCheques] = useState({})
+  const [totalElements, setTotalElements]=useState(10)
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const onChange = page => {
+    setCurrentPage(page);
+  };
 
 
   useEffect(() => {
     setLoading2(true);
-    PaymentProvider.getAllCheques(0, 1000)
+    PaymentProvider.getAllCheques(currentPage-1, 10)
       .then(res => {
         console.log("chek", res)
         setCheques(res.data.data)
+        setTotalElements(res.data.count)
       })
       .catch(err => {
         console.log(err)
@@ -52,7 +60,7 @@ const ChekTable = () => {
             cheques.length ?
               cheques.map((obj, index) => (
                 <tr key={obj.id} className="edit_row">
-                  <td style={{width: "15%", display:"flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">{index+1}. {new Date(obj.date).toLocaleString("en-GB")}</td>
+                  <td style={{width: "15%", display:"flex", justifyContent:"start", alignItems:"center", textAlign:"start", fontWeight:500, fontFamily:"Inter"}} className="col">{index+1}. {new Date(obj.date).toLocaleString("en-GB")}</td>
                   <td style={{width: "10%",color: "#43A047", fontWeight: 600}} className="col"
                       >{obj.amount}</td>
                   <td style={{width: "10%"}} className="col">0.00</td>
@@ -104,6 +112,11 @@ const ChekTable = () => {
 
         </tbody>
       </table>
+      <Pagination
+        onChange={onChange}
+        current={currentPage}
+        total={totalElements}
+      />
     </ChekTableWrapper>
   );
 };

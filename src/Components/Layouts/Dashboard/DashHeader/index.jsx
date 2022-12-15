@@ -55,8 +55,10 @@ const DashboardHeader = ({title, RefObj, setIsOpen}) => {
       <div className="sidebarMenu" style={{display: "none"}}>
         cc
       </div>
-      <h3 className="storeName"><StoreSvg/>{user?.outletAsCashier?.title}</h3>
-      <h3 className="storeName">{user?.outletAsDirector?.title}</h3>
+      <div className="storeName">
+        <h3 ><StoreSvg/>{user?.outletAsCashier?.title}</h3>
+        <h3 >{user?.outletAsDirector?.title}</h3>
+      </div>
       <MyLink to="#" onClick={handleLogout} className="admin">
         <h3>{user.fullName} </h3> <LogOutSvg/>
       </MyLink>

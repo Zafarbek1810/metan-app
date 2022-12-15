@@ -8,6 +8,7 @@ import OutletProvider from "../../../../../Data/Providers/OutletProvider";
 import {Modal, Select} from "antd";
 import MinLoader from "../../../../Common/MinLoader";
 import {toast} from "react-toastify";
+import Pagination from "rc-pagination";
 
 
 const ExpensesTable = () => {
@@ -27,6 +28,12 @@ const ExpensesTable = () => {
   const [filterState, setFilterState] = useState({});
   const filSelectRef = useRef();
   const filDateRef = useRef();
+
+  const [totalElements, setTotalElements]=useState(10)
+  const [currentPage, setCurrentPage] = useState(1);
+  const onChange = page => {
+    setCurrentPage(page);
+  };
 
   const [summ, setSumm] = useState([])
 
@@ -48,10 +55,11 @@ const ExpensesTable = () => {
 
   useEffect(() => {
     setLoading2(true);
-    OutletProvider.getExpenses(0, 1000, filterState)
+    OutletProvider.getExpenses(currentPage-1, 10, filterState)
       .then(({data}) => {
         console.log("setExpenses", data);
         setExpenses(data.data);
+        setTotalElements(data.count)
       })
       .catch(err => {
         console.log(err)
@@ -90,6 +98,7 @@ const ExpensesTable = () => {
       try {
         const {data} = await OutletProvider.addExpence(body);
         console.log(data.res)
+        toast.success("Muvaffaqiyatli yaratildi!")
         setForRender(Math.random());
         handleCancel()
       } catch (err) {
@@ -126,6 +135,9 @@ const ExpensesTable = () => {
 
   const handleCancel = () => {
     setIsModalOpen(false);
+    setValue("outlet", '')
+    setValue("name", "")
+    setValue("summ", "")
   };
 
   const onOnFilter = () => {
@@ -310,6 +322,12 @@ const ExpensesTable = () => {
 
         </tbody>
       </table>
+      <Pagination
+        onChange={onChange}
+        current={currentPage}
+        total={totalElements}
+      />
+
     </ExpensesTableWrapper>
   );
 };

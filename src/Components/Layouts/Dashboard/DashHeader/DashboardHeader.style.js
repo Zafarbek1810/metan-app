@@ -6,7 +6,7 @@ const DashHeaderWrapper=styled.div`
   position: relative;
   
   h3.storeName{
-    width: 50%;
+    width: 100%;
     display: flex;
     align-items: center;
     svg{
