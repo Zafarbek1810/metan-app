@@ -17,7 +17,7 @@ const ChekTable = () => {
     PaymentProvider.getAllCheques(0, 1000)
       .then(res => {
         console.log("chek", res)
-        setCheques(res.data)
+        setCheques(res.data.data)
       })
       .catch(err => {
         console.log(err)

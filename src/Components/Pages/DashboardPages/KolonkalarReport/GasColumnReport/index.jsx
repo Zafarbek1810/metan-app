@@ -43,7 +43,7 @@ const GasColumnReport = () => {
   useEffect(() => {
     GasBallonsProvider.getGasColumsReports(filterState)
       .then(({data}) => {
-        setColsData(data);
+        setColsData(data.data);
       }, err => {
         console.log(err);
       })

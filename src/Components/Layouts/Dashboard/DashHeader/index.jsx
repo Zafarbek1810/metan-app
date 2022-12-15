@@ -8,6 +8,8 @@ import UserContext from "../../../../Context/UserContext";
 import MyLink from "../../../Common/MyLink";
 import UserProvider from "../../../../Data/Providers/UserProvider";
 import Message from "../../../../utils/Message";
+import {Store} from "@mui/icons-material";
+import StoreSvg from "../../../Common/Svgs/StoreSvg";
 
 const DashboardHeader = ({title, RefObj, setIsOpen}) => {
   const router = useRouter();
@@ -53,8 +55,8 @@ const DashboardHeader = ({title, RefObj, setIsOpen}) => {
       <div className="sidebarMenu" style={{display: "none"}}>
         cc
       </div>
-      <h3>{user?.outletAsCashier?.title}</h3>
-      <h3>{user?.outletAsDirector?.title}</h3>
+      <h3 className="storeName"><StoreSvg/>{user?.outletAsCashier?.title}</h3>
+      <h3 className="storeName">{user?.outletAsDirector?.title}</h3>
       <MyLink to="#" onClick={handleLogout} className="admin">
         <h3>{user.fullName} </h3> <LogOutSvg/>
       </MyLink>

@@ -41,7 +41,7 @@ const GasColumns = () => {
     setLoading2(true);
     GasBallonsProvider.getGasColums(0, 1000)
       .then(res => {
-        setBallons(res.data)
+        setBallons(res.data.data)
       })
       .catch(err => {
         console.log(err)

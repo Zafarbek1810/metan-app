@@ -96,7 +96,7 @@ const ShiftsTable = () => {
     OutletProvider.getShifts(0, 1000)
       .then(res => {
         console.log(res)
-        setShifts(res.data)
+        setShifts(res.data.data)
       })
       .catch(err => {
         console.log(err)

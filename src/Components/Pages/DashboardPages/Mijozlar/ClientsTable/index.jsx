@@ -42,8 +42,8 @@ const ClientsTable = () => {
   useEffect(()=>{
     UserProvider.getClients()
       .then(res=>{
-        console.log("clients",res)
-        setUser(res.data)
+        console.log("clients",res.data)
+        setUser(res.data.data)
       })
       .catch(err => {
         console.log(err)

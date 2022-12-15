@@ -15,7 +15,7 @@ const DebtorsTable = () => {
     PaymentProvider.getDeptors(0, 1000)
       .then(res => {
         console.log("dep", res)
-        setDeptors(res.data)
+        setDeptors(res.data.data)
       })
       .catch(err => {
         console.log(err)

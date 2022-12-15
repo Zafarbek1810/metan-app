@@ -4,6 +4,16 @@ const DashHeaderWrapper=styled.div`
   padding: 10px;
   display: flex;
   position: relative;
+  
+  h3.storeName{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    svg{
+      fill: #0d6efd;
+      margin-right: 20px;
+    }
+  }
 
   .sidebarBtn{
     display: none;

@@ -51,7 +51,7 @@ const ExpensesTable = () => {
     OutletProvider.getExpenses(0, 1000, filterState)
       .then(({data}) => {
         console.log("setExpenses", data);
-        setExpenses(data);
+        setExpenses(data.data);
       })
       .catch(err => {
         console.log(err)

@@ -11,6 +11,7 @@ import CheckSvg from "../../../../Common/Svgs/CheckSvg";
 import UserCardSvg from "../../../../Common/Svgs/UserCardSvg";
 import UserProvider from "../../../../../Data/Providers/UserProvider";
 import {toast} from "react-toastify";
+import TopSvg from "../../../../Common/Svgs/TopSvg";
 
 
 const Cards = () => {
@@ -32,71 +33,106 @@ const Cards = () => {
       <div className="top">
         <h3 className="title">Statistika</h3>
       </div>
-          <div className="cards">
-            <div>
-              <div className="left">
-                <UsersSvg/>
-              </div>
-              <div className="right">
-                <span>{data.numberOfClients}</span>
-                <p>Umumiy mijozlar</p>
-              </div>
+      <div className="wrapper">
+        <div className="cards">
+          <div>
+            <div className="left">
+              <UsersSvg/>
             </div>
-            <div>
-              <div className="left">
-                <CardSvg/>
-              </div>
-              <div className="right">
-                <span>{data.amountOfAllExpenses?data.amountOfAllExpenses  : "Ma'lumot yo'q"}</span>
-                <p>Xaridlar</p>
-              </div>
-            </div>
-            <div>
-              <div className="left">
-                <DollarSvg/>
-              </div>
-              <div className="right">
-                <span>{data.amountOfAllPayments?data.amountOfAllPayments  : "Ma'lumot yo'q"}</span>
-                <p>To'langan summa</p>
-              </div>
-            </div>
-            <div>
-              <div className="left">
-                <DollarSvg2/>
-              </div>
-              <div className="right">
-                <span>{data.amountOfAllPaidPoints?data.amountOfAllPaidPoints  : "Ma'lumot yoq"}</span>
-                <p>To'langan ballar</p>
-              </div>
-            </div>
-            <div>
-              <div className="left">
-                <AwardSvg/>
-              </div>
-              <div className="right">
-                <span>{data.amountOfAllClientPoints?data.amountOfAllClientPoints  : "Ma'lumot yoq"}</span>
-                <p>Mijoz ballari</p>
-              </div>
-            </div>
-            <div>
-              <div className="left">
-                <CheckSvg/>
-              </div>
-              <div className="right">
-                <span>{data.amountOfAverageCheque?data.amountOfAverageCheque  : "Ma'lumot yo'q"}</span>
-                <p>O'rtacha chek</p>
-              </div>
-            </div>
-            <div>
-              <div className="left">
-                <UserCardSvg/>
-              </div>
-              <div className="right">
-                <span>{data.totalCheques?data.totalCheques : "Ma'lumot yo'q"}</span>
-                <p>Cheklar</p>
-              </div>
+            <div className="right">
+              <span>{data.numberOfClients}</span>
+              <p>Umumiy mijozlar</p>
             </div>
           </div>
+          <div>
+            <div className="left">
+              <CardSvg/>
+            </div>
+            <div className="right">
+              <span>{data.amountOfAllExpenses ? data.amountOfAllExpenses : "Ma'lumot yo'q"}</span>
+              <p>Xaridlar</p>
+            </div>
+          </div>
+          <div>
+            <div className="left">
+              <DollarSvg/>
+            </div>
+            <div className="right">
+              <span>{data.amountOfAllPayments ? data.amountOfAllPayments : "Ma'lumot yo'q"}</span>
+              <p>To'langan summa</p>
+            </div>
+          </div>
+          <div>
+            <div className="left">
+              <DollarSvg2/>
+            </div>
+            <div className="right">
+              <span>{data.amountOfAllPaidPoints ? data.amountOfAllPaidPoints : "Ma'lumot yoq"}</span>
+              <p>To'langan ballar</p>
+            </div>
+          </div>
+          <div>
+            <div className="left">
+              <AwardSvg/>
+            </div>
+            <div className="right">
+              <span>{data.amountOfAllClientPoints ? data.amountOfAllClientPoints : "Ma'lumot yoq"}</span>
+              <p>Mijoz ballari</p>
+            </div>
+          </div>
+          <div>
+            <div className="left">
+              <CheckSvg/>
+            </div>
+            <div className="right">
+              <span>{data.amountOfAverageCheque ? data.amountOfAverageCheque : "Ma'lumot yo'q"}</span>
+              <p>O'rtacha chek</p>
+            </div>
+          </div>
+        </div>
+        <div className="statistic">
+          <div>
+            <div className="left">
+              <UsersSvg/>
+            </div>
+            <div className="right">
+              <p className="title">Yangi foydalanuvchilar</p>
+              <span>1000</span>
+              <TopSvg/>
+              <span className="persent">
+                25.8%
+              </span>
+            </div>
+          </div>
+          <div>
+            <div className="left">
+              <DollarSvg/>
+            </div>
+            <div className="right">
+              <p className="title">Jami daromad</p>
+              <span>3000000</span>
+              <TopSvg/>
+              <span className="persent">
+                25.8%
+              </span>
+            </div>
+          </div>
+          <div>
+            <div className="left">
+              <UsersSvg/>
+            </div>
+            <div className="right">
+              <p className="title">Yangi foydalanuvchilar</p>
+              <span>1000</span>
+              <TopSvg/>
+              <span className="persent">
+                25.8%
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </CardsWrapper>
   );
 };

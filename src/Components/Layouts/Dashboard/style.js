@@ -24,7 +24,7 @@ const Wrapper=styled.div`
     height: calc(100vh - 50px);
     overflow-y: auto;
     padding: 20px 20px 10px;
-    background-image: url("/img/mountain2.jpg");
+    //background-image: url("/img/mountain2.jpg");
     background-attachment: fixed;
     background-size: cover;
 
