@@ -20,7 +20,7 @@ class Charts extends Component {
       },
       series: [{
         name: 'series-1',
-        data: [30, 40, 35, 50, 49, 60, 70, 91, 125, 100, 30, 90]
+        data: [30, 40, 35, 50, 49, 60, 70, 91, 65, 60, 80, 90]
       }]
     }
   }

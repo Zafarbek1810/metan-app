@@ -21,6 +21,8 @@ import UserProvider from "../../../../../Data/Providers/UserProvider";
 import PaymentProvider from "../../../../../Data/Providers/PaymentProvider";
 import {toast} from "react-toastify";
 import CashbackProvider from "../../../../../Data/Providers/CashbackProvider";
+import GasBallonsProvider from "../../../../../Data/Providers/GasBallonsProvider";
+import Message from "../../../../../utils/Message";
 
 const Tab1 = ({outletId, setMijozObj, setSpinning}) => {
   const [data, setData] = useState({});
@@ -45,8 +47,9 @@ const Tab1 = ({outletId, setMijozObj, setSpinning}) => {
         }, err => {
           setMijozObj({})
           toast.error(err?.response?.data?.message);
-        })
-      setSpinning(false)
+        }).finally(() => {
+        setSpinning(false)
+      })
     }
   }
 
@@ -60,8 +63,9 @@ const Tab1 = ({outletId, setMijozObj, setSpinning}) => {
           setData(data);
         }, err => {
           toast.error(err?.response?.data?.message);
-        })
-      setSpinning(false)
+        }).finally(() => {
+        setSpinning(false)
+      })
     }
   }
 
@@ -97,7 +101,7 @@ const Tab1 = ({outletId, setMijozObj, setSpinning}) => {
           }, err => {
             toast.error(err?.response?.data?.message)
             console.log(err);
-          }).finally(()=>{
+          }).finally(() => {
           setLoading2(false)
         })
       }
@@ -107,60 +111,62 @@ const Tab1 = ({outletId, setMijozObj, setSpinning}) => {
   return (
     <Tab1Wrapper onSubmit={handleSubmit(onSubmit)}>
       <Spin spinning={miniLoading}>
-      <div className="row">
-        <div className="col-md-6">
+        <div className="row">
+          <div className="col-md-6">
+            <label className="label ">
+              <span className="label-text">Mijoz kodi</span>
+              {errors.name && (
+                <span className="err-text">Majburiy maydon</span>
+              )}
+              <input
+                placeholder="Izlash..."
+                type="number"
+                {...register("name", {required: false})}
+                onKeyDown={handleFetchMijozByCode}
+              />
+            </label>
+          </div>
+          <div className="col-md-6">
+            <label className="label col-md-6 col-12">
+              <span className="label-text">Avto raqami</span>
+              {errors.carNum && (
+                <span className="err-text">Majburiy maydon</span>
+              )}
+              <input
+                type="text"
+                {...register("carNum", {required: false})}
+                onKeyDown={handleFetchMijozByAuto}
+              />
+            </label>
+          </div>
+        </div>
+        <div className="col-md-12">
           <label className="label ">
-            <span className="label-text">Mijoz kodi</span>
-            {errors.name && (
-              <span className="err-text">Majburiy maydon</span>
+            <span className="label-text">Summa</span>
+            {errors.summa && (
+              <span className="err-text"></span>
             )}
             <input
-              placeholder="Izlash..."
+              placeholder=""
               type="number"
-              {...register("name", {required: false})}
-              onKeyDown={handleFetchMijozByCode}
+              {...register("summa", {required: true})}
             />
           </label>
         </div>
-        <div className="col-md-6">
-          <label className="label col-md-6 col-12">
-            <span className="label-text">Avto raqami</span>
-            {errors.carNum && (
-              <span className="err-text">Majburiy maydon</span>
-            )}
-            <input
-              type="text"
-              {...register("carNum", {required: false})}
-              onKeyDown={handleFetchMijozByAuto}
-            />
-          </label>
+        <div className="row">
+          <div className="col-md-6">
+            <button type="submit" onClick={() => setIsPayPoints(true)} disabled={loading}
+                    className="btn btn-danger w-100 d-flex justify-content-center">
+              Hisobdan o'chirish {loading && <ButtonLoader/>}
+            </button>
+          </div>
+          <div className="col-md-6">
+            <button type="submit" onClick={() => setIsPayPoints(false)} disabled={loading2}
+                    className="btn btn-success w-100 d-flex justify-content-center">
+              To'lash{loading2 && <ButtonLoader/>}
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="col-md-12">
-        <label className="label ">
-          <span className="label-text">Summa</span>
-          {errors.summa && (
-            <span className="err-text"></span>
-          )}
-          <input
-            placeholder=""
-            type="number"
-            {...register("summa", {required: true})}
-          />
-        </label>
-      </div>
-      <div className="row">
-        <div className="col-md-6">
-          <button type="submit" onClick={()=>setIsPayPoints(true)} disabled={loading} className="btn btn-danger w-100 d-flex justify-content-center">
-            Hisobdan o'chirish {loading && <ButtonLoader/>}
-          </button>
-        </div>
-        <div className="col-md-6">
-          <button type="submit" onClick={()=>setIsPayPoints(false)} disabled={loading2} className="btn btn-success w-100 d-flex justify-content-center">
-            To'lash{loading2 && <ButtonLoader/>}
-          </button>
-        </div>
-      </div>
       </Spin>
     </Tab1Wrapper>
   )
@@ -279,13 +285,13 @@ const Cashbox = () => {
       })
   })
 
-  useEffect(()=>{
+  useEffect(() => {
     CashbackProvider.getCarTypes()
-      .then(res=>{
+      .then(res => {
         console.log("car", res)
         setCarType(res.data.map(type => ({label: type, value: type})))
       })
-      .catch(err=>{
+      .catch(err => {
         console.log(err)
       })
   }, [])
@@ -298,8 +304,25 @@ const Cashbox = () => {
     setIsModalOpen(false);
   };
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit =async (values) => {
+    const body = {}
+    body.fullName = values.name
+    body.password = values.password
+    body.phoneNumber = values.phoneNumber
+    body.plateNumber = values.avtoNum
+    body.carType = values.carType
+
+
+    try {
+      const {data} = await  UserProvider.addClient(body);
+      console.log(data)
+      toast.success("Qo'shildi!")
+      handleCancel()
+    } catch (err) {
+      console.log(err)
+      Message.serverError();
+    }
+
   }
 
   return (
@@ -334,13 +357,13 @@ const Cashbox = () => {
                       />
                     </label>
                     <label className="label">
-                      <span className="label-text">Login</span>
-                      {errors.login && (
+                      <span className="label-text">Telefon</span>
+                      {errors.phoneNumber && (
                         <span className="err-text">Majburiy maydon</span>
                       )}
                       <input
                         type="number"
-                        {...register("login", {required: true})}
+                        {...register("phoneNumber", {required: true})}
                       />
                     </label>
                     <label className="label">
@@ -350,7 +373,7 @@ const Cashbox = () => {
                       )}
                       <input
                         placeholder="01X000XX"
-                        type="number"
+                        type="text"
                         {...register("avtoNum", {required: true})}
                       />
                     </label>
@@ -378,16 +401,6 @@ const Cashbox = () => {
                             value={value}
                           />
                         )}
-                      />
-                    </label>
-                    <label className="label">
-                      <span className="label-text">Karta raqami</span>
-                      {errors.cardNum && (
-                        <span className="err-text">Majburiy maydon</span>
-                      )}
-                      <input
-                        type="number"
-                        {...register("cardNum", {required: true})}
                       />
                     </label>
                     <label className="label">

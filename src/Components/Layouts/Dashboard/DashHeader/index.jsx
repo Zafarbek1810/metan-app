@@ -12,9 +12,9 @@ import StoreSvg from "../../../Common/Svgs/StoreSvg";
 
 const DashboardHeader = ({title, RefObj, setIsOpen}) => {
   const router = useRouter();
-  // const userName = useContextSelector(UserContext, ctx => ctx.state.user);
+  const user = useContextSelector(UserContext, ctx => ctx.state.user) || [];
   const logoutContext = useContextSelector(UserContext, ctx => ctx.actions.logout);
-  const [user, setUser] = useState([])
+  // const [user, setUser] = useState({})
 
 
   const handleLogout = () => {
@@ -32,19 +32,6 @@ const DashboardHeader = ({title, RefObj, setIsOpen}) => {
         console.log(err);
       })
   }
-
-  useEffect(() => {
-    UserProvider.getMe()
-      .then(res => {
-        console.log("getme", res)
-        setUser(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-        Message.serverError()
-      })
-
-  }, [])
 
   return (
     <DashHeaderWrapper>

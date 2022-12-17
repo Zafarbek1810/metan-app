@@ -25,6 +25,7 @@ const CardsWrapper = styled.div`
   
   .wrapper{
     display: flex;
+    justify-content: space-between;
   }
   
   .cards{
@@ -84,13 +85,24 @@ const CardsWrapper = styled.div`
     & > div{
       width: 90%;
       box-shadow: 0px 2px 10px rgba(58, 53, 65, 0.1);
-      border: 1px solid rgba(58, 53, 65, 0.12);
+      //border: 1px solid rgba(58, 53, 65, 0.12);
       border-radius: 12px;
       margin-bottom: 20px;
       display: flex;
       align-items: center;
       padding: 15px;
-      background: #fff;
+      //background: #fff;
+      //background:linear-gradient(135deg, #42e695 0%,#3bb2b8 100%);
+      
+      &:nth-child(1){
+        background:linear-gradient(135deg, #0FF0B3 0%,#036ED9 100%);
+      }
+      &:nth-child(2){
+        background:linear-gradient(135deg, #184e68 0%,#57ca85 100%);
+      }
+      &:nth-child(3){
+        background:linear-gradient(135deg, #5b247a 0%,#1bcedf 100%);
+      }
       
       .left {
         background: #fff;
@@ -111,11 +123,14 @@ const CardsWrapper = styled.div`
         .title{
           font-size: 16px;
           font-family: "Inter";
+          color: #fff;
         }
         span{
           font-weight: 700;
           font-size: 20px;
           font-family: "Inter";
+          color: #fff;
+
 
         }
         svg{

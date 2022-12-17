@@ -47,12 +47,12 @@ const ExpensesTable = () => {
         console.log(err)
         Message.serverError()
       })
-    OutletProvider.getExpensesSum()
+    OutletProvider.getExpensesSum(currentPage-1, 20, filterState)
       .then(res => {
         console.log("sum",res)
         setSumm(res.data)
       })
-  }, [forRender])
+  }, [forRender, filterState])
 
   useEffect(() => {
     setLoading2(true);

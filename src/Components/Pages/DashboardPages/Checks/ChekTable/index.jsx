@@ -6,33 +6,44 @@ import PaymentProvider from "../../../../../Data/Providers/PaymentProvider";
 import MinLoader from "../../../../Common/MinLoader";
 import Link from "next/link";
 import Pagination from "rc-pagination";
+import {useContextSelector} from "use-context-selector";
+import UserContext from "../../../../../Context/UserContext";
 
 
 const ChekTable = () => {
   const [loading2, setLoading2] = useState(false);
   const [cheques, setCheques] = useState([])
 
-  const [totalElements, setTotalElements]=useState(10)
+  const user = useContextSelector(UserContext, ctx => ctx.state.user)
+
+  const [totalElements, setTotalElements] = useState(20)
   const [currentPage, setCurrentPage] = useState(1);
   const onChange = page => {
     setCurrentPage(page);
   };
 
+  console.log(totalElements)
+  console.log(user)
+
 
   useEffect(() => {
     setLoading2(true);
-    PaymentProvider.getAllCheques(currentPage-1, 10)
-      .then(({data}) => {
-        console.log("chek", data)
-        setCheques(data.data)
-        setTotalElements(data.count)
+    let params = {outletId: user?.outletAsCashier?.id, cashierId: user.id};
+    if(user?.role==="SUPER_ADMIN"){
+      params={}
+    }
+      PaymentProvider.getAllCheques(currentPage - 1, 20, params)
+        .then(({data}) => {
+          console.log("chek", data)
+          setCheques(data.data)
+          setTotalElements(data.count)
+        })
+        .catch(err => {
+          console.log(err)
+          Message.serverError()
+        }).finally(() => {
+        setLoading2(false);
       })
-      .catch(err => {
-        console.log(err)
-        Message.serverError()
-      }).finally(() => {
-      setLoading2(false);
-    })
   }, [currentPage])
 
 
@@ -44,7 +55,9 @@ const ChekTable = () => {
       <table className="table table-striped table-hover">
         <thead>
         <tr>
-          <th style={{width: "15%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">Sana</th>
+          <th style={{width: "15%", display: "flex", justifyContent: "start", alignItems: "center", textAlign: "start"}}
+              className="col">Sana
+          </th>
           <th style={{width: "10%"}} className="col">Summa</th>
           <th style={{width: "10%"}} className="col">To'langan ballar</th>
           <th style={{width: "10%"}} className="col">Bonus</th>
@@ -60,20 +73,33 @@ const ChekTable = () => {
             cheques.length ?
               cheques.map((obj, index) => (
                 <tr key={obj.id} className="edit_row">
-                  <td style={{width: "15%", display:"flex", justifyContent:"start", alignItems:"center", textAlign:"start", fontWeight:500, fontFamily:"Inter"}} className="col">{index+1}. {new Date(obj.date).toLocaleString("en-GB")}</td>
-                  <td style={{width: "10%",color: "#43A047", fontWeight: 600}} className="col"
-                      >{obj.amount}</td>
+                  <td
+                    style={{
+                      width: "15%",
+                      display: "flex",
+                      justifyContent: "start",
+                      alignItems: "center",
+                      textAlign: "start",
+                      fontWeight: 500,
+                      fontFamily: "Inter"
+                    }}
+                    className="col">
+                    {(currentPage - 1) * 20 + index + 1}. {new Date(obj.date).toLocaleString("en-GB")}
+                  </td>
+                  <td style={{width: "10%", color: "#43A047", fontWeight: 600}} className="col">
+                    {obj.amount}
+                  </td>
                   <td style={{width: "10%"}} className="col">0.00</td>
                   <td style={{width: "10%"}} className="col">{obj.giftedPoints}</td>
-                  <td style={{width: "15%",fontWeight: 600}} className="col" >
+                  <td style={{width: "15%", fontWeight: 600}} className="col">
                     <Link href="#" className="link" style={{
                       fontWeight: 600,
                       textDecoration: "none",
                       color: "#43A047"
                     }}>{obj.client?.fullName}</Link>
                   </td>
-                  <td style={{width: "15%", fontWeight: 600}} className="col" >{obj.cashier?.fullName}</td>
-                  <td style={{width: "15%", fontWeight: 600}} className="col" >{obj.outlet.title}</td>
+                  <td style={{width: "15%", fontWeight: 600}} className="col">{obj.cashier?.fullName}</td>
+                  <td style={{width: "15%", fontWeight: 600}} className="col">{obj.outlet.title}</td>
                   {obj.type === "PAID_BY_MONEY" ?
                     <td style={{width: "10%"}} className="col">
                     <span style={{background: "#43A047", color: "white", borderRadius: 5, padding: 10}}>
@@ -106,7 +132,7 @@ const ChekTable = () => {
                   textAlign: "center",
                   padding: 30,
                 }
-              }><h3 style={{fontFamily:"Inter"}}>Cheklar mavjud emas!</h3></div>
+              }><h3 style={{fontFamily: "Inter"}}>Cheklar mavjud emas!</h3></div>
             : <MinLoader/>
         }
 
@@ -116,6 +142,8 @@ const ChekTable = () => {
         onChange={onChange}
         current={currentPage}
         total={totalElements}
+        pageSize={20}
+        style={{textAlign:"center"}}
       />
     </ChekTableWrapper>
   );

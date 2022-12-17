@@ -20,6 +20,8 @@ const ChekTableWrapper = styled.div`
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
+    border-style: hidden;
+    border-radius: 20px !important;
 
     thead {
       width: 100%;
@@ -28,7 +30,7 @@ const ChekTableWrapper = styled.div`
         display: flex;
         background: #fff;
         //padding: 10px 12px 0px;
-        border-radius: 6px 6px 0px 0px;
+        border-radius: 24px 24px 0px 0px;
 
         th.col {
           font-style: normal;
@@ -80,6 +82,11 @@ const ChekTableWrapper = styled.div`
 
           .link:hover {
             text-decoration: underline !important;
+          }
+          
+          td.col:last-child{
+            border-radius: 0px 0px 24px 24px ;
+
           }
         }
 

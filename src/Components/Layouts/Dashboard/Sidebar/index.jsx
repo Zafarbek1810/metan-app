@@ -80,12 +80,12 @@ const SidebarItemsSetting = [
     Svg: UsersSvg,
     role: ["SUPER_ADMIN"]
   },
-  // {
-  //   title: "Hujjatlar",
-  //   path: "/dashboard/documents",
-  //   Svg: FileSvg,
-  //   role: ["SUPER_ADMIN", "DIRECTOR"]
-  // },
+  {
+    title: "Hujjatlar",
+    path: "/dashboard/documents",
+    Svg: FileSvg,
+    role: ["SUPER_ADMIN", "DIRECTOR"]
+  },
   {
     title: "Kassirlar",
     path: "/dashboard/cashiers",

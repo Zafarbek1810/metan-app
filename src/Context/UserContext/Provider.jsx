@@ -1,15 +1,17 @@
 import React, {useLayoutEffect, useState} from 'react';
 import jwtDecode from "jwt-decode";
 import UserContext from "./Context";
+import UserProvider from "../../Data/Providers/UserProvider";
 
 const Provider = ({children}) => {
   const [userData, setUserData] = useState({isAuth: false, user: null});
   const [actions] = useState({login, logout});
 
   function login() {
-    const token = localStorage.getItem("token");
-    const data = token && (jwtDecode(token) || null);
-    setUserData({isAuth: true, user: {name: data.name, role: data.role, type: data.type}});
+    UserProvider.getMe()
+      .then(({data}) => {
+        setUserData({isAuth: true, user: data});
+      })
   }
 
   function logout() {
@@ -20,10 +22,10 @@ const Provider = ({children}) => {
   useLayoutEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      const data = token && (jwtDecode(token) || null);
-      if (data) {
-        setUserData({isAuth: true, user: data})
-      }
+      UserProvider.getMe()
+        .then(({data}) => {
+          setUserData({isAuth: true, user: data})
+        })
     }
   }, [])
 

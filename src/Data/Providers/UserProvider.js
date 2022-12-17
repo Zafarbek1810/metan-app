@@ -34,5 +34,10 @@ export default class UserProvider {
   }
 
 
+  static async addClient(body){
+    return await client.post("/client/signUp", body)
+  }
+
+
 
 }

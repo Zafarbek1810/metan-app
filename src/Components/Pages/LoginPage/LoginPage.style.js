@@ -62,11 +62,14 @@ const LoginPageWrapper=styled.div`
 
     form {
       width: 50%;
-      background: #fff;
+      background: transparent;
       padding: 35px 40px;
       border-radius: 24px;
       margin: auto;
       margin-bottom: 50px;
+      backdrop-filter: blur(5px);
+      //backdrop-filter: invert(70%);
+      //backdrop-filter: sepia(70%);
 
       display: flex;
       flex-direction: column;
@@ -135,7 +138,7 @@ const LoginPageWrapper=styled.div`
     font-family: 'Inter';
     font-style: normal;
     font-weight: 300;
-    font-size: 0.75rem;
+    font-size: 10px;
     line-height: 18px;
     color: #fff;
     text-align: center;

@@ -10,6 +10,7 @@ import {useRouter} from "next/router";
 import AuthProvider from "../../../Data/Providers/AuthProvider";
 import Message from "../../../utils/Message";
 import ButtonLoader from "../../Common/ButtonLoader";
+import UserProvider from "../../../Data/Providers/UserProvider";
 
 const LoginPage = () => {
   const {register, formState: {errors}, handleSubmit, reset, setValue} = useForm();
@@ -35,7 +36,7 @@ const LoginPage = () => {
       }
       switch (currentUser.role) {
         case "CASHIER": {
-          router.replace("/dashboard/home")
+          router.replace("/dashboard/cashbox")
           break;
         }
       }
@@ -47,6 +48,7 @@ const LoginPage = () => {
     const body = {username: values.name, password: values.password}
     setLoading(true);
     AuthProvider.login(body).then(({data}) => {
+      console.log("data", data)
       localStorage.setItem("token", data.accessToken);
       loginContext({isAuth: true});
     }).catch(err => {
