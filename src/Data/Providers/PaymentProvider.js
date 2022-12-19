@@ -1,17 +1,15 @@
 import client from "../../HHTP/client";
 
 export default class PaymentProvider {
-  static async getAllCheques(page = 0, size = 20, {cashierId, outletId} = {}) {
-    const params = {
+  static async getAllCheques(page = 0, size = 20, params) {
+    const {
       outletId,
       cashierId,
-      skip: page * size,
-      take: size,
-    }
+      startDate,
+      endDate
+    } = params
 
-    return await client.get(`/payment/getCheques`, {
-      params
-    });
+    return await client.get(`/payment/getCheques?take=${size}&skip=${page * size}${outletId ? `&outletId=${outletId}` : ""}${cashierId ? `&cashierId=${cashierId}` : ""}${startDate ? `&startDate=${startDate}` : ""}${endDate ? `&endDate=${endDate}` : ""}`);
   }
 
   static async getQrInfo(id = 0, plateNum = "") {

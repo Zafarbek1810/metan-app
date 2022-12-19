@@ -68,6 +68,7 @@ const LoginPageWrapper=styled.div`
       margin: auto;
       margin-bottom: 50px;
       backdrop-filter: blur(5px);
+      border: 1px solid #fff;
       //backdrop-filter: invert(70%);
       //backdrop-filter: sepia(70%);
 
@@ -95,11 +96,11 @@ const LoginPageWrapper=styled.div`
 
         input {
           width: 100% !important;
-          background: transparent;
+          background: #fff !important;
           //background: rgba(31, 60, 136, 0.05);
           border: 2px solid #000;
           //border: 1px solid rgba(31, 60, 136, 0.2);
-          border-radius: 6px;
+          border-radius: 24px;
           margin-bottom: 35px;
           padding: 15px;
           font-size: 1rem;

@@ -62,6 +62,7 @@ const GasColumnReport = () => {
     if (activeOutlet) {
       GasBallonsProvider.getGasColumsByOutlet(+activeOutlet)
         .then(({data}) => {
+          console.log(data)
           setGazCols(data.map(i => ({label: i.name, value: i.id})));
         }, err => {
           console.log(err);
@@ -143,9 +144,6 @@ const GasColumnReport = () => {
         </div>
       </div>
       <div className="filter">
-        <div className="col-3 me-2">
-          <input type="text" className="form-control" placeholder="Izlash"/>
-        </div>
         <FilterWrapper>
           <button className="btn btn-primary" onClick={() => setIsFilterOpen(p => !p)} style={{fontFamily:"Inter"}}>
             Filter

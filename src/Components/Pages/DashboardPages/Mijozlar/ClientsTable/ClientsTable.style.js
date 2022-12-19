@@ -103,6 +103,12 @@ const ClientsTableWrapper=styled.div`
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
+    
+    .link{
+      &:hover{
+        text-decoration: underline !important;
+      }
+    }
 
     thead {
       width: 100%;

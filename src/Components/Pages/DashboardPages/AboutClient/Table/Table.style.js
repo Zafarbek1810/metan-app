@@ -1,39 +1,6 @@
 import styled from "styled-components";
 
-const ChekTableWrapper = styled.div`
-  //padding: 40px 30px;
-
-  .title {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 30px;
-    line-height: 25px;
-    color: #1F3C88;
-    font-family: "Inter";
-    margin-top: 15px;
-  }
-  .filter {
-    display: flex;
-    align-items: center;
-    background: #fff;
-    padding: 22px 13px;
-  }
-
-  .filter-state {
-    background-color: #fff;
-    padding: 15px;
-
-    &__inner {
-      padding: 5px 10px;
-      border-radius: 15px;
-      background-color: #e9e9e9;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-  }
-
+const TableWrapper=styled.div`
   .table {
     margin-top: 20px;
     width: 100%;
@@ -104,7 +71,7 @@ const ChekTableWrapper = styled.div`
           .link:hover {
             text-decoration: underline !important;
           }
-          
+
           td.col:last-child{
             border-radius: 0px 0px 24px 24px ;
 
@@ -124,23 +91,4 @@ const ChekTableWrapper = styled.div`
     }
   }
 `
-
-const FilterWrapper = styled.div`
-  position: relative;
-  display: inline-block;
-  font-family: "Inter";
-
-  .filter-content {
-    position: absolute;
-    top: calc(100% + 4px);
-    left: 0;
-
-    min-width: 400px;
-    background-color: #fff;
-    border-radius: 6px;
-    padding: 10px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  }
-`
-
-export {ChekTableWrapper, FilterWrapper}
+export{ TableWrapper }

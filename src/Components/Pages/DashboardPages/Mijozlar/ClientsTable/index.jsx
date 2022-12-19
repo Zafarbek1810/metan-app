@@ -7,6 +7,8 @@ import UserProvider from "../../../../../Data/Providers/UserProvider";
 import Message from "../../../../../utils/Message";
 import Pagination from "rc-pagination";
 import MinLoader from "../../../../Common/MinLoader";
+import MyLink from "../../../../Common/MyLink";
+import Link from "next/link";
 
 const Modal=()=>{
   return(
@@ -97,7 +99,15 @@ const ClientsTable = () => {
             user.length ?
               user.map((obj, index)=>(
                 <tr key={obj.id}>
-                  <td style={{width: "15%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">{index+1}.{obj.fullName}</td>
+                  <td style={{width: "15%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}}
+                      className="col">
+                    <Link href="/dashboard/aboutClient" className="link" style={{
+                      fontWeight: 600,
+                      textDecoration: "none",
+                      color: "#43A047"
+                    }}>{index+1}.{obj.fullName}</Link>
+                    {/*<MyLink className="link" to="/dashboard/aboutClient"></MyLink>*/}
+                  </td>
                   <td style={{width: "15%"}} className="col">{obj.phoneNumber}</td>
                   <td style={{width: "8%"}} className="col">{obj.plateNumber}</td>
                   <td style={{width: "8%"}} className="col">{obj.totalSpendings}</td>

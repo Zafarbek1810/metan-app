@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {ChekTableWrapper} from "./ChekTable.style";
+import React, {useEffect, useRef, useState} from 'react';
+import {ChekTableWrapper, FilterWrapper} from "./ChekTable.style";
 import UserProvider from "../../../../../Data/Providers/UserProvider";
 import Message from "../../../../../utils/Message";
 import PaymentProvider from "../../../../../Data/Providers/PaymentProvider";
@@ -8,9 +8,20 @@ import Link from "next/link";
 import Pagination from "rc-pagination";
 import {useContextSelector} from "use-context-selector";
 import UserContext from "../../../../../Context/UserContext";
+import OutletProvider from "../../../../../Data/Providers/OutletProvider";
 
 
 const ChekTable = () => {
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [filterState, setFilterState] = useState({});
+  const startDateRef = useRef();
+  const endDateRef = useRef();
+  const [activeOutlet, setActiveOutlet] = useState(null);
+  const [outlets, setOutlets] = useState([]);
+  const [cashiers, setCashiers] = useState([]);
+  const [activeCashiers, setActiveCashiers] = useState(null);
+
+
   const [loading2, setLoading2] = useState(false);
   const [cheques, setCheques] = useState([])
 
@@ -25,6 +36,26 @@ const ChekTable = () => {
   console.log(totalElements)
   console.log(user)
 
+  useEffect(() => {
+    OutletProvider.getAllOutlets()
+      .then(({data}) => {
+        setOutlets(data.map(i => ({label: i.title, value: i.id})));
+      }, err => {
+        console.log(err);
+      })
+  }, [])
+
+  useEffect(() => {
+    if(activeOutlet){
+      OutletProvider.getOneOutlet(+activeOutlet)
+        .then(({data}) => {
+          console.log("data", data)
+          setCashiers(data.map(i => ({label: i.fullName, value: i.id})));
+        }, err => {
+          console.log(err);
+        })
+    }
+  }, [currentPage])
 
   useEffect(() => {
     setLoading2(true);
@@ -32,7 +63,7 @@ const ChekTable = () => {
     if(user?.role==="SUPER_ADMIN"){
       params={}
     }
-      PaymentProvider.getAllCheques(currentPage - 1, 20, params)
+      PaymentProvider.getAllCheques(currentPage - 1, 20, filterState)
         .then(({data}) => {
           console.log("chek", data)
           setCheques(data.data)
@@ -44,13 +75,101 @@ const ChekTable = () => {
         }).finally(() => {
         setLoading2(false);
       })
-  }, [currentPage])
+  }, [currentPage, filterState])
 
+  const handleOutletFilter = (e) => {
+    setActiveOutlet(e.target.value);
+  }
 
-  console.log(cheques)
+  const handleCashiersFilter = (e) => {
+    setActiveCashiers(e.target.value);
+  }
+
+  const onFilterSubmit = () => {
+    const startDate = startDateRef.current.value.split("-").reverse().join("-");
+    const endDate = endDateRef.current.value.split("-").reverse().join("-");
+
+    const body = {
+      outletId: activeOutlet,
+      cashierId: activeCashiers,
+      startDate,
+      endDate
+    }
+
+    setIsFilterOpen(false);
+    setFilterState(body);
+  }
+
+  const onFilterClear = () => {
+    setActiveOutlet(null);
+    setActiveCashiers(null);
+    // setCashiers([]);
+    startDateRef.current.value = "";
+    endDateRef.current.value = "";
+    setFilterState({});
+    setIsFilterOpen(false);
+  }
+
   return (
     <ChekTableWrapper>
       <h3 className="title">Cheklar</h3>
+      {/*filter*/}
+      <div className="filter">
+        <FilterWrapper>
+          <button className="btn btn-primary" onClick={() => setIsFilterOpen(p => !p)} style={{fontFamily:"Inter"}}>
+            Filter
+          </button>
+          <div className="filter-content" style={{visibility: isFilterOpen ? "visible" : "hidden"}}>
+            <div className="row">
+              <div className="select mb-3 col-6">
+                <label className="form-label">Savdo nuqtasi</label>
+                <select className="form-select" value={activeOutlet} onChange={handleOutletFilter}>
+                  <option value="null" disabled>Tanlang</option>
+                  {
+                    outlets.map(out => (
+                      <option value={out.value} key={out.value}>{out.label}</option>
+                    ))
+                  }
+                </select>
+              </div>
+              <div className="select mb-3 col-6">
+                <label className="form-label">Kassirlar</label>
+                <select className="form-select" value={activeCashiers} onChange={handleCashiersFilter}>
+                  <option value="null" disabled>Tanlang</option>
+                  {
+                    cashiers.map(out => (
+                      <option value={out.value} key={out.value}>{out.label}</option>
+                    ))
+                  }
+                </select>
+              </div>
+            </div>
+            <div className="row">
+              <div className="mb-3 col-6">
+                <label className="form-label">Davr</label>
+                <input ref={startDateRef} name="startDate" type="date" className="form-control"/>
+              </div>
+              <div className="mb-3 mt-2 col-6">
+                <label className="form-label"></label>
+                <input ref={endDateRef} name="endDate" type="date" className="form-control"/>
+              </div>
+            </div>
+
+            <div className="d-flex gap-2">
+              <div className="btn btn-secondary" onClick={onFilterClear}>Bekor qilish</div>
+              <div className="btn btn-success" onClick={onFilterSubmit}>Qo'llash</div>
+            </div>
+          </div>
+        </FilterWrapper>
+      </div>
+      <div className="filter-state col-12">
+        {
+          !!Object.keys(filterState).length && <div className="filter-state__inner">
+            <span>Filtrlangan</span>
+            <button className="btn btn-secondary" onClick={onFilterClear}>O'chirish</button>
+          </div>
+        }
+      </div>
 
       <table className="table table-striped table-hover">
         <thead>
@@ -92,11 +211,7 @@ const ChekTable = () => {
                   <td style={{width: "10%"}} className="col">0.00</td>
                   <td style={{width: "10%"}} className="col">{obj.giftedPoints}</td>
                   <td style={{width: "15%", fontWeight: 600}} className="col">
-                    <Link href="#" className="link" style={{
-                      fontWeight: 600,
-                      textDecoration: "none",
-                      color: "#43A047"
-                    }}>{obj.client?.fullName}</Link>
+                    {obj.client?.fullName}
                   </td>
                   <td style={{width: "15%", fontWeight: 600}} className="col">{obj.cashier?.fullName}</td>
                   <td style={{width: "15%", fontWeight: 600}} className="col">{obj.outlet.title}</td>

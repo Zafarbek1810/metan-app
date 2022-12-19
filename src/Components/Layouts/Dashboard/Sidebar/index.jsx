@@ -64,6 +64,12 @@ const SidebarItemsMenu = [
     Svg: CashSvg,
     role: ["CASHIER", "SUPER_ADMIN", "DIRECTOR"]
   },
+  {
+    title: "example",
+    path: "/dashboard/example",
+    Svg: CashSvg,
+    role: ["CASHIER", "SUPER_ADMIN", "DIRECTOR"]
+  },
 
 ];
 
@@ -196,7 +202,7 @@ const Sidebar = () => {
                 NavListMenu.map(({title, Svg, path}, idx) => {
                   return (
                     <MyLink
-                      className={router.pathname === path ? "activelink" : "link"}
+                      className={router.pathname === path ?  "activelink" : "link"}
                       to={path}
                       key={idx}
                     >

@@ -25,47 +25,6 @@ const GasColumnReportWrapper=styled.div`
     background: #fff;
     padding: 22px 13px 0;
 
-    .dropdown {
-      padding: 20px;
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      background: #fff !important;
-
-      .dropdown-menu {
-        box-shadow: 0 5px 25px 0 rgb(0 0 0 / 10%);
-        border: none;
-
-        .btns {
-          display: flex;
-          justify-content: end;
-
-          .btn {
-            margin: 0 10px;
-          }
-
-        }
-      }
-
-      .select {
-        padding: 0 10px;
-        margin-bottom: 10px;
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-
-      .input {
-        padding: 0 10px;
-        margin-bottom: 10px;
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-      }
-
-
-    }
   }
 
   .filter-state {

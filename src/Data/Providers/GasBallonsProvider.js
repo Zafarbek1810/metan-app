@@ -13,8 +13,9 @@ export default class GasBallonsProvider {
     return await client.post("/gascolumn/editGasColumn", body);
   }
 
-  static async getGasColums(page = 0, size = 10) {
-    return await client.get(`/gascolumn/getGasColumns?skip=${page*size}&take=${size}`);
+  static async getGasColums(page = 0, size = 10, params) {
+    const {outletId} = params;
+    return await client.get(`/gascolumn/getGasColumns?skip=${page*size}&take=${size}${outletId ? `&outletId=${outletId}` : ""}`);
   }
 
   static async getGasColumsByOutlet(outletId) {

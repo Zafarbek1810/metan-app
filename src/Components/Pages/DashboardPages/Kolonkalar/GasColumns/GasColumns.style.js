@@ -15,6 +15,7 @@ const GasColumnsWrapper=styled.div`
       color: #1F3C88;
       font-family: "Inter";
     }
+    
     .modal-wrapper{
       font-family: "Inter";
       .modal-body{
@@ -38,6 +39,29 @@ const GasColumnsWrapper=styled.div`
           font-weight: 600;
         }
       }
+    }
+  }
+
+  .filter {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 22px 13px 0;
+
+  }
+
+  .filter-state {
+    background-color: #fff;
+    padding: 15px;
+
+    &__inner {
+      padding: 5px 10px;
+      border-radius: 15px;
+      background-color: #e9e9e9;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
   }
 

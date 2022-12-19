@@ -11,6 +11,7 @@ import GasBallonsProvider from "../../../../../Data/Providers/GasBallonsProvider
 import MinLoader from "../../../../Common/MinLoader";
 import {toast} from "react-toastify";
 import Pagination from "rc-pagination";
+import {FilterWrapper} from "../../KolonkalarReport/GasColumnReport/GasColumnReport.style";
 
 
 const GasColumns = () => {
@@ -33,6 +34,11 @@ const GasColumns = () => {
     setCurrentPage(page);
   };
 
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [filterState, setFilterState] = useState({});
+  const [outlets, setOutlets] = useState([]);
+  const [activeOutlet, setActiveOutlet] = useState(null);
+
 
   useEffect(() => {
     OutletProvider.getAllOutlets(0, 1000)
@@ -46,10 +52,20 @@ const GasColumns = () => {
   }, [])
 
   useEffect(() => {
+    OutletProvider.getAllOutlets()
+      .then(({data}) => {
+        setOutlets(data.map(i => ({label: i.title, value: i.id})));
+      }, err => {
+        console.log(err);
+      })
+  }, [])
+
+  useEffect(() => {
     setLoading2(true);
-    GasBallonsProvider.getGasColums(currentPage-1, 10)
+    GasBallonsProvider.getGasColums(currentPage-1, 10, filterState)
       .then(({data}) => {
         setBallons(data.data)
+        console.log("data", data)
         setTotalElements(data.count)
       })
       .catch(err => {
@@ -58,7 +74,8 @@ const GasColumns = () => {
       }).finally(() => {
       setLoading2(false);
     })
-  }, [forRender, currentPage])
+  }, [filterState, forRender, currentPage])
+
 
 
   const showModal = () => {
@@ -84,6 +101,8 @@ const GasColumns = () => {
     setoutletId(value)
     console.log("setoutletId", value)
   }
+
+
 
   const onSubmit = async (values) => {
     const body = {}
@@ -127,6 +146,27 @@ const GasColumns = () => {
     }
   }, [isModalOpen])
 
+
+  const handleOutletFilter = (e) => {
+    console.log(e.target.value)
+    setActiveOutlet(e.target.value);
+  }
+
+  const onFilterSubmit = () => {
+
+    const body = {
+      outletId: activeOutlet,
+    }
+
+    setIsFilterOpen(false);
+    setFilterState(body);
+  }
+
+  const onFilterClear = () => {
+    setActiveOutlet(null);
+    setFilterState({});
+    setIsFilterOpen(false);
+  }
 
   return (
     <GasColumnsWrapper>
@@ -184,7 +224,41 @@ const GasColumns = () => {
             </Modal>
           </div>
         </div>
-
+      </div>
+      {/*filter*/}
+      <div className="filter">
+        <FilterWrapper>
+          <button className="btn btn-primary" onClick={() => setIsFilterOpen(p => !p)} style={{fontFamily:"Inter"}}>
+            Filter
+          </button>
+          <div className="filter-content" style={{visibility: isFilterOpen ? "visible" : "hidden"}}>
+            <div className="row">
+              <div className="select mb-3 col-6">
+                <label className="form-label">Savdo nuqtasi</label>
+                <select className="form-select" value={activeOutlet} onChange={handleOutletFilter}>
+                  <option value="null" disabled>Tanlang</option>
+                  {
+                    outlets.map(out => (
+                      <option value={out.value} key={out.value}>{out.label}</option>
+                    ))
+                  }
+                </select>
+              </div>
+            </div>
+            <div className="d-flex gap-2">
+              <div className="btn btn-secondary" onClick={onFilterClear}>Bekor qilish</div>
+              <div className="btn btn-success" onClick={onFilterSubmit}>Qo'llash</div>
+            </div>
+          </div>
+        </FilterWrapper>
+      </div>
+      <div className="filter-state col-12">
+        {
+          !!Object.keys(filterState).length && <div className="filter-state__inner">
+            <span>Filtrlangan</span>
+            <button className="btn btn-secondary" onClick={onFilterClear}>O'chirish</button>
+          </div>
+        }
       </div>
       <table className="table table-striped table-hover">
         <thead>
@@ -201,7 +275,7 @@ const GasColumns = () => {
               ? ballons.map((obj, index) => (
                 <tr key={obj.id}>
                   <td style={{width: "30%"}} className="col">{index+1}. {obj.name}</td>
-                  <td style={{width: "30%"}} className="col">{obj.outlet.title}</td>
+                  <td style={{width: "30%"}} className="col">{obj?.outlet?.title}</td>
                   <td style={{width: "30%"}} className="col">
                     <div className="btns">
                       <button onClick={() => handleEdit(obj)}>
