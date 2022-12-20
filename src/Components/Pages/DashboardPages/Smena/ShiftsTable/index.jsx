@@ -40,7 +40,7 @@ const ShiftsTable = () => {
   const [outlet, setOutlet] = useState([])
   const [shifts, setShifts] = useState([])
 
-  const [totalElements, setTotalElements]=useState(10)
+  const [totalElements, setTotalElements]=useState(20)
   const [currentPage, setCurrentPage] = useState(1);
   const onChange = page => {
     setCurrentPage(page);
@@ -101,7 +101,7 @@ const ShiftsTable = () => {
 
   useEffect(() => {
     setLoading2(true)
-    OutletProvider.getShifts(currentPage-1, 10)
+    OutletProvider.getShifts(currentPage-1, 20)
       .then(({data}) => {
         console.log(data)
         setShifts(data.data)
@@ -254,7 +254,7 @@ const ShiftsTable = () => {
               shifts.length
                 ? shifts.map((obj, index) => (
                   <tr key={obj.id}>
-                    <td className="col">{index+1}. {new Date(obj.date).getDate() + "-" + (new Date(obj.date).getMonth() + 1) + "-" + new Date(obj.date).getFullYear()} </td>
+                    <td className="col">{(currentPage - 1) * 20 + index + 1}. {new Date(obj.date).getDate() + "-" + (new Date(obj.date).getMonth() + 1) + "-" + new Date(obj.date).getFullYear()} </td>
                     <td className="col">{obj.amountOfGasColumn}</td>
                     <td className="col">{obj.autopilot}</td>
                     <td className="col">{obj.loss}</td>
@@ -288,6 +288,7 @@ const ShiftsTable = () => {
         onChange={onChange}
         current={currentPage}
         total={totalElements}
+        pageSize={20}
       />
     </ShiftsTableWrapper>
   );

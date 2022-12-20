@@ -60,7 +60,7 @@ export default class OutletProvider {
     return await client.post("/outlet/addExpense", body);
   }
 
-  static async getExpenses(page = 0, size = 10, params = {}) {
+  static async getExpenses(page = 0, size = 20, params = {}) {
     const {outletId, date} = params;
     return await client.get(`/outlet/getExpenses?skip=${page * size}&take=${size}${outletId ? `&outletId=${outletId}` : ""}${date ? `&date=${date}` : ""}`);
   }
@@ -86,7 +86,7 @@ export default class OutletProvider {
     return await client.post("/outlet/addShift", body);
   }
 
-  static async getShifts(page = 0, size = 10) {
+  static async getShifts(page = 0, size = 20) {
     return await client.get(`/outlet/getShifts?skip=${page * size}&take=${size}`);
   }
 

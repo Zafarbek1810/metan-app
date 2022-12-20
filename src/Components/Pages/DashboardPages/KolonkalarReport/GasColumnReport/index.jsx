@@ -32,7 +32,7 @@ const GasColumnReport = () => {
   const [gazCols, setGazCols] = useState([]);
   const [activeGazCol, setActiveGazCol] = useState(null);
 
-  const [totalElements, setTotalElements] = useState(10)
+  const [totalElements, setTotalElements] = useState(20)
   const [currentPage, setCurrentPage] = useState(1);
   const onChange = page => {
     setCurrentPage(page);
@@ -49,7 +49,7 @@ const GasColumnReport = () => {
   }, [])
 
   useEffect(() => {
-    GasBallonsProvider.getGasColumsReports(currentPage - 1, 10, filterState)
+    GasBallonsProvider.getGasColumsReports(currentPage - 1, 20, filterState)
       .then(({data}) => {
         setColsData(data.data);
         setTotalElements(data.count)
@@ -214,7 +214,7 @@ const GasColumnReport = () => {
         {
           colsData.map((item, index) => (
             <tr key={item.id}>
-              <td style={{width: "15%"}} className="col">{index + 1}.{item.gasColumn.name}</td>
+              <td style={{width: "15%"}} className="col">{(currentPage - 1) * 20 + index + 1}.{item.gasColumn.name}</td>
               <td style={{width: "15%"}} className="col">{item.currentValue}</td>
               <td style={{width: "15%"}} className="col">{item.lastValue}</td>
               <td style={{width: "15%"}} className="col">{item.currentValue - item.lastValue}</td>
@@ -235,6 +235,7 @@ const GasColumnReport = () => {
         onChange={onChange}
         current={currentPage}
         total={totalElements}
+        pageSize={20}
       />
       <Modal
         title=""

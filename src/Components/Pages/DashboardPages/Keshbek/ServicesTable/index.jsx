@@ -157,7 +157,7 @@ const ServicesTable = () => {
             ? cashback.map((obj, index)=>(
                 <tr key={obj.id}>
                   <td style={{width: "10%"}} className="col">{obj.name}</td>
-                  <td style={{width: "50%"}} className="col">Guliston Metan, Saidkent Metan, Propan Metan, 24/25 Avtobaza Metan, </td>
+                  <td style={{width: "50%"}} className="col">{obj?.outlets.map((idx)=>idx.title+", ")}</td>
                   <td style={{width: "10%"}} className="col">20.11.2022 22:06</td>
                   <td style={{width: "10%"}} className="col">{obj.endedDate} </td>
                   <td style={{width: "10%"}} className="col">

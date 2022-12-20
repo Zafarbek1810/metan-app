@@ -11,7 +11,7 @@ const DebtorsTable = () => {
   const [deptors, setDeptors]=useState([])
   const [loading2, setLoading2] = useState(false)
 
-  const [totalElements, setTotalElements]=useState(10)
+  const [totalElements, setTotalElements]=useState(20)
   const [currentPage, setCurrentPage] = useState(1);
   const onChange = page => {
     setCurrentPage(page);
@@ -20,7 +20,7 @@ const DebtorsTable = () => {
 
   useEffect(()=>{
     setLoading2(true);
-    PaymentProvider.getDeptors(currentPage-1, 10)
+    PaymentProvider.getDeptors(currentPage-1, 20)
       .then(({data}) => {
         setDeptors(data.data)
         setTotalElements(data.count)
@@ -53,7 +53,7 @@ const DebtorsTable = () => {
             deptors.length ?
               deptors.map((obj, index)=>(
                 <tr key={obj.id}>
-                  <td style={{width: "10%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">{index+1}. {obj.fullName}</td>
+                  <td style={{width: "10%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">{(currentPage - 1) * 20 + index + 1}. {obj.fullName}</td>
                   <td style={{width: "10%"}} className="col">{obj.phoneNumber}</td>
                   <td style={{width: "10%"}} className="col">{obj.plateNumber}</td>
                   <td style={{width: "15%"}} className="col">{obj.balance}</td>
@@ -78,6 +78,7 @@ const DebtorsTable = () => {
         onChange={onChange}
         current={currentPage}
         total={totalElements}
+        pageSize={20}
       />
     </DebtorsTableWrapper>
   );

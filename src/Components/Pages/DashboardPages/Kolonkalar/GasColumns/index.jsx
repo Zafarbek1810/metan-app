@@ -28,7 +28,7 @@ const GasColumns = () => {
 
   const [editingColumn, setEditingColumn] = useState(null)
 
-  const [totalElements, setTotalElements]=useState(10)
+  const [totalElements, setTotalElements]=useState(20)
   const [currentPage, setCurrentPage] = useState(1);
   const onChange = page => {
     setCurrentPage(page);
@@ -60,9 +60,10 @@ const GasColumns = () => {
       })
   }, [])
 
+
   useEffect(() => {
     setLoading2(true);
-    GasBallonsProvider.getGasColums(currentPage-1, 10, filterState)
+    GasBallonsProvider.getGasColums(currentPage-1, 20, filterState)
       .then(({data}) => {
         setBallons(data.data)
         console.log("data", data)
@@ -274,7 +275,7 @@ const GasColumns = () => {
             ballons.length
               ? ballons.map((obj, index) => (
                 <tr key={obj.id}>
-                  <td style={{width: "30%"}} className="col">{index+1}. {obj.name}</td>
+                  <td style={{width: "30%"}} className="col">{(currentPage - 1) * 20 + index + 1}. {obj.name}</td>
                   <td style={{width: "30%"}} className="col">{obj?.outlet?.title}</td>
                   <td style={{width: "30%"}} className="col">
                     <div className="btns">
@@ -301,6 +302,7 @@ const GasColumns = () => {
         onChange={onChange}
         current={currentPage}
         total={totalElements}
+        pageSize={20}
       />
     </GasColumnsWrapper>
   );

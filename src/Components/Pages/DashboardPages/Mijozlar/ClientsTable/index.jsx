@@ -44,7 +44,7 @@ const ClientsTable = () => {
   const [user, setUser] = useState([])
   const [loading2, setLoading2] = useState(false);
 
-  const [totalElements, setTotalElements]=useState(10)
+  const [totalElements, setTotalElements]=useState(20)
   const [currentPage, setCurrentPage] = useState(1);
   const onChange = page => {
     setCurrentPage(page);
@@ -53,7 +53,7 @@ const ClientsTable = () => {
 
   useEffect(()=>{
     setLoading2(true)
-    UserProvider.getClients(currentPage-1, 10)
+    UserProvider.getClients(currentPage-1, 20)
       .then(({data})=>{
         console.log("clients",data)
         setUser(data.data)
@@ -105,7 +105,7 @@ const ClientsTable = () => {
                       fontWeight: 600,
                       textDecoration: "none",
                       color: "#43A047"
-                    }}>{index+1}.{obj.fullName}</Link>
+                    }}>{(currentPage - 1) * 20 + index + 1}.{obj.fullName}</Link>
                     {/*<MyLink className="link" to="/dashboard/aboutClient"></MyLink>*/}
                   </td>
                   <td style={{width: "15%"}} className="col">{obj.phoneNumber}</td>
@@ -132,6 +132,7 @@ const ClientsTable = () => {
         onChange={onChange}
         current={currentPage}
         total={totalElements}
+        pageSize={20}
       />
     </ClientsTableWrapper>
   );

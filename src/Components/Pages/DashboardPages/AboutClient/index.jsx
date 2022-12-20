@@ -6,7 +6,7 @@ import Table from "./Table";
 const AboutClient = () => {
   return (
     <DashboardLayout>
-      <Statistic/>
+      {/* <Statistic/> */}
       <Table/>
     </DashboardLayout>
   );

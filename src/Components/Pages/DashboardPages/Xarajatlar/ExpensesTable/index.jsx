@@ -29,7 +29,7 @@ const ExpensesTable = () => {
   const filSelectRef = useRef();
   const filDateRef = useRef();
 
-  const [totalElements, setTotalElements]=useState(10)
+  const [totalElements, setTotalElements]=useState(20)
   const [currentPage, setCurrentPage] = useState(1);
   const onChange = page => {
     setCurrentPage(page);
@@ -56,7 +56,7 @@ const ExpensesTable = () => {
 
   useEffect(() => {
     setLoading2(true);
-    OutletProvider.getExpenses(currentPage-1, 10, filterState)
+    OutletProvider.getExpenses(currentPage-1, 20, filterState)
       .then(({data}) => {
         console.log("setExpenses", data);
         setExpenses(data.data);
@@ -297,7 +297,7 @@ const ExpensesTable = () => {
               ? expenses.map((obj, index) => (
                 <tr key={obj.id}>
                   <td style={{width: "30%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">
-                    {index + 1}. {obj.name}
+                  {(currentPage - 1) * 20 + index + 1}. {obj.name}
                   </td>
                   <td style={{width: "30%"}} className="col">{obj.outlet.title}</td>
                   <td style={{width: "10%"}} className="col" title={obj.admin.fullName}>{obj.admin.fullName}</td>
@@ -329,6 +329,7 @@ const ExpensesTable = () => {
         onChange={onChange}
         current={currentPage}
         total={totalElements}
+        pageSize={20}
       />
 
     </ExpensesTableWrapper>
