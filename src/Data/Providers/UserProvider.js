@@ -33,6 +33,10 @@ export default class UserProvider {
     return await client.get(`/client/getClients/?skip=${page*size}&take=${size}`);
   }
 
+  static async getOneClient(id) {
+    return await client.get(`/client/getClient/${id}`);
+  }
+
 
   static async addClient(body){
     return await client.post("/client/signUp", body)

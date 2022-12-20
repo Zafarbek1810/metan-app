@@ -6,8 +6,8 @@ import AboutClient from "../../../src/Components/Pages/DashboardPages/AboutClien
 
 
 export default function Home() {
-  const outletId = useContextSelector(GlobalContext, value => value.state.savdo_id)
-  console.log(outletId)
+  const clientId = useContextSelector(GlobalContext, value => value.state.client_id)
+  console.log("clientid",clientId)
   return (
     <>
       <Head>
@@ -16,7 +16,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico"/>
       </Head>
       <WithAuthComponent>
-        <AboutClient/>
+        <AboutClient clientId={clientId}/>
       </WithAuthComponent>
     </>
   )

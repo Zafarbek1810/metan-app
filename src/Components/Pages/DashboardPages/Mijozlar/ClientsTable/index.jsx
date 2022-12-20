@@ -9,6 +9,9 @@ import Pagination from "rc-pagination";
 import MinLoader from "../../../../Common/MinLoader";
 import MyLink from "../../../../Common/MyLink";
 import Link from "next/link";
+import {useContextSelector} from "use-context-selector";
+import GlobalContext from "../../../../../Context/GlobalContext/Context";
+import {useRouter} from "next/router";
 
 const Modal=()=>{
   return(
@@ -41,6 +44,9 @@ const Modal=()=>{
 }
 
 const ClientsTable = () => {
+  const router = useRouter();
+  const client_about = useContextSelector(GlobalContext, (state)=>state.client_about)
+
   const [user, setUser] = useState([])
   const [loading2, setLoading2] = useState(false);
 
@@ -49,6 +55,11 @@ const ClientsTable = () => {
   const onChange = page => {
     setCurrentPage(page);
   };
+
+  const handleClickAbout = (clientId) => {
+    client_about(clientId)
+    router.push("/dashboard/aboutClient/");
+  }
 
 
   useEffect(()=>{
@@ -101,11 +112,12 @@ const ClientsTable = () => {
                 <tr key={obj.id}>
                   <td style={{width: "15%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}}
                       className="col">
-                    <Link href="/dashboard/aboutClient" className="link" style={{
+                    <button onClick={()=>handleClickAbout(obj.id)} className="link" style={{
                       fontWeight: 600,
                       textDecoration: "none",
                       color: "#43A047"
-                    }}>{(currentPage - 1) * 20 + index + 1}.{obj.fullName}</Link>
+                    }}>{(currentPage - 1) * 20 + index + 1}.{obj.fullName}
+                    </button>
                     {/*<MyLink className="link" to="/dashboard/aboutClient"></MyLink>*/}
                   </td>
                   <td style={{width: "15%"}} className="col">{obj.phoneNumber}</td>

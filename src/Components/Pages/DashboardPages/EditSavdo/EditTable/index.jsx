@@ -127,8 +127,6 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
     }
   ))
 
-
-
   useEffect(() => {
     OutletProvider.getOneFullOutlet(id)
       .then(({data}) => {

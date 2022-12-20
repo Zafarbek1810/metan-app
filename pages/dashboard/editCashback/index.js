@@ -7,7 +7,6 @@ import EditCashback from "../../../src/Components/Pages/DashboardPages/EditCashb
 
 export default function Home() {
   const cashbackId = useContextSelector(GlobalContext, value => value.state.keshbek_id)
-
   return (
     <>
       <Head>
