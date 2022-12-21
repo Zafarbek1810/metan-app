@@ -1,6 +1,16 @@
 import styled from "styled-components";
 
 const TableWrapper=styled.div`
+  .title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 25px;
+    color: #1F3C88;
+    font-family: "Inter";
+    margin-top: 15px;
+  }
+  
   .table {
     margin-top: 20px;
     width: 100%;

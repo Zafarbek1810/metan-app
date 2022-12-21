@@ -266,6 +266,7 @@ const GasColumns = () => {
         <tr>
           <th style={{width: "30%"}} className="col">Nomi</th>
           <th style={{width: "30%"}} className="col">Savdo nuqtasi</th>
+          <th style={{width: "30%"}} className="col">Oxirki ko'rsatgich</th>
           <th style={{width: "30%"}} className="col">Amallar</th>
         </tr>
         </thead>
@@ -277,6 +278,7 @@ const GasColumns = () => {
                 <tr key={obj.id}>
                   <td style={{width: "30%"}} className="col">{(currentPage - 1) * 20 + index + 1}. {obj.name}</td>
                   <td style={{width: "30%"}} className="col">{obj?.outlet?.title}</td>
+                  <td style={{width: "30%"}} className="col">{obj.lastValue}</td>
                   <td style={{width: "30%"}} className="col">
                     <div className="btns">
                       <button onClick={() => handleEdit(obj)}>

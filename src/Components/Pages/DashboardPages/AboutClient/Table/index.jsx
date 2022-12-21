@@ -28,6 +28,7 @@ const Table = ({id}) => {
 
     return (
         <TableWrapper>
+            <h3 className="title">Mijoz haqida</h3>
             <table className="table table-striped table-hover">
                 <thead>
                 <tr>

@@ -38,8 +38,9 @@ const DocumentsTableWrapper=styled.div`
   }
 
   .table{
-    width: 100%;
+    margin-top: 20px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -51,28 +52,31 @@ const DocumentsTableWrapper=styled.div`
         //background: rgba(31, 60, 136, 0.1);
         background: #fff;
         border-radius: 6px 6px 0px 0px;
-        padding: 22px 13px;
+        //padding: 15px 22px;
         th.col{
           font-style: normal;
           font-weight: 600;
-          font-size: 0.875rem;
-          line-height: 24px;
-          color: #1F3C88;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-        }
-        th.row{
-          font-style: normal;
-          font-weight: 600;
-          font-size: 0.875rem;
+          font-size: 18px;
           line-height: 24px;
           color: #1F3C88;
           display: flex;
           align-items: center;
           justify-content: start;
           text-align: center;
+          font-family: "Inter";
+          padding: 15px 12px 10px;
+
+        }
+        th.row{
+          font-style: normal;
+          font-weight: 600;
+          font-size: 18px;
+          line-height: 24px;
+          color: #1F3C88;
+          display: flex;
+          align-items: center;
+          justify-content: start;
+          font-family: "Inter";
         }
       }
     }
@@ -82,40 +86,60 @@ const DocumentsTableWrapper=styled.div`
       tr{
         display: flex;
         justify-content: space-between;
-        padding: 10px 22px;
-        td.col{
+        td.col {
           font-style: normal;
           font-weight: 400;
-          font-size: 0.8125rem;
+          font-size: 18px;
           line-height: 24px;
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: start;
           color: #000000;
-          text-align: center;
-
-          .btns{
-            button{
-              background: transparent;
-              border: none;
-              cursor: pointer;
-            }
-            width: 40%;
-            display: flex;
-            justify-content: space-between;
-          }
+          text-align: start;
+          font-family: "Inter";
         }
         td.row{
           font-style: normal;
-          font-weight: 600;
-          font-size: 0.8125rem;
+          font-weight: 400;
+          font-size: 18px;
           line-height: 24px;
           display: flex;
           align-items: center;
           justify-content: start;
           text-align: center;
+          font-family: "Inter";
+        }
+
+        img{
+          width: 50px;
+          height: 50px;
+        }
+
+        .btns {
+          width: 40%;
+          display: flex;
+          justify-content: center;
+          text-align: center;
+
+          button {
+            background: transparent;
+            border: 1px solid #000;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 300ms;
+
+            &:hover {
+              background: rgba(31, 60, 136, 0.75);
+            }
+
+            svg {
+              fill: none;
+              stroke: none;
+            }
+          }
         }
       }
+
     }
   }
 `

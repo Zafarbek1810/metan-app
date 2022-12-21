@@ -74,10 +74,10 @@ const DocumentsTable = () => {
         </div>
 
       </div>
-      <table className="table">
+      <table className="table table-hover table-striped">
         <thead>
         <tr>
-          <th style={{width: "16%"}} className="row">Savdo nuqtasi</th>
+          <th style={{width: "16%"}} className="col">Savdo nuqtasi</th>
           <th style={{width: "16%"}} className="col">Hujjat turi</th>
           <th style={{width: "16%"}} className="col">Hujjat raqami</th>
           <th style={{width: "16%"}} className="col">Berilgan sanasi</th>
@@ -87,7 +87,7 @@ const DocumentsTable = () => {
         </thead>
         <tbody>
         <tr>
-          <td style={{width: "16%"}} className="row">Guliston Metan</td>
+          <td style={{width: "16%"}} className="col">Guliston Metan</td>
           <td style={{width: "16%"}} className="col">aaa</td>
           <td style={{width: "16%"}} className="col">124</td>
           <td style={{width: "16%"}} className="col">12.12.2022</td>
@@ -105,7 +105,7 @@ const DocumentsTable = () => {
 
         </tr>
         <tr>
-          <td style={{width: "16%"}} className="row">Guliston Metan</td>
+          <td style={{width: "16%"}} className="col">Guliston Metan</td>
           <td style={{width: "16%"}} className="col">aaa</td>
           <td style={{width: "16%"}} className="col">124</td>
           <td style={{width: "16%"}} className="col">12.12.2022</td>

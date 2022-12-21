@@ -134,7 +134,7 @@ const ClientsTable = () => {
                   textAlign: "center",
                   padding: 30,
                 }
-              }><h3 style={{fontFamily:"Inter"}}>Cheklar mavjud emas!</h3></div>
+              }><h3 style={{fontFamily:"Inter"}}>Mijozlar mavjud emas!</h3></div>
             : <MinLoader/>
         }
 
