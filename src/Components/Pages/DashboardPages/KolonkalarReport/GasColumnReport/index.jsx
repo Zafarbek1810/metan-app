@@ -51,6 +51,7 @@ const GasColumnReport = () => {
   useEffect(() => {
     GasBallonsProvider.getGasColumsReports(currentPage - 1, 20, filterState)
       .then(({data}) => {
+        console.log(data)
         setColsData(data.data);
         setTotalElements(data.count)
       }, err => {
@@ -62,7 +63,6 @@ const GasColumnReport = () => {
     if (activeOutlet) {
       GasBallonsProvider.getGasColumsByOutlet(+activeOutlet)
         .then(({data}) => {
-          console.log(data)
           setGazCols(data.map(i => ({label: i.name, value: i.id})));
         }, err => {
           console.log(err);

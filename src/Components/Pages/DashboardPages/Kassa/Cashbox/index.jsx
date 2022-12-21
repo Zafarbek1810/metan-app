@@ -73,7 +73,7 @@ const Tab1 = ({outletId, setMijozObj, setSpinning}) => {
     const body = {
       amount: +values.summa,
       clientId: data.id,
-      outletId
+      outletId: +outletId
     }
 
     setTimeout(() => {

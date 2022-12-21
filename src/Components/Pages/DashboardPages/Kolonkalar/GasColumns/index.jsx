@@ -133,7 +133,7 @@ const GasColumns = () => {
         handleCancel()
       } catch (err) {
         console.log(err)
-        Message.serverError();
+        toast.error(err?.response?.data?.message)
       }
     }
 
