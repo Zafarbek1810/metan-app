@@ -38,7 +38,7 @@ const DashHeaderWrapper=styled.div`
     display: flex;
     justify-content: end;
     //align-items: center;
-    width: 50%;
+    width: 70%;
     padding-right: 30px ;
     text-decoration: none;
     background: transparent;

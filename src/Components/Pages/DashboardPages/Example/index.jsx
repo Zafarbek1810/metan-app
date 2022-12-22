@@ -4,8 +4,8 @@ import LocationPicker from 'react-location-picker';
 
 
 const defaultPosition = {
-  lat: 40.16666,
-  lng: 63.666664
+  lat: 40.051209,
+  lng: 64.883849
 };
 
 class Example extends Component {
