@@ -64,12 +64,6 @@ const SidebarItemsMenu = [
     Svg: CashSvg,
     role: ["CASHIER", "SUPER_ADMIN", "DIRECTOR"]
   },
-  {
-    title: "example",
-    path: "/dashboard/example",
-    Svg: CashSvg,
-    role: ["CASHIER", "SUPER_ADMIN", "DIRECTOR"]
-  },
 
 ];
 
