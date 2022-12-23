@@ -110,9 +110,9 @@ const ClientsTable = () => {
       <div className="top">
         <h3 className="title">Mijozlar</h3>
         <div className="modal-wrapper">
-          <button className="btn btn-primary"onClick={showModal} style={{fontFamily:"Inter"}} data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            Barcha mijozlarga push-xabarnoma yuborish
-          </button>
+          {/*<button className="btn btn-primary"onClick={showModal} style={{fontFamily:"Inter"}} data-bs-toggle="modal" data-bs-target="#staticBackdrop">*/}
+          {/*  Barcha mijozlarga push-xabarnoma yuborish*/}
+          {/*</button>*/}
           {/*====MODAL====*/}
           <Modal
               title="Qo'shish"
