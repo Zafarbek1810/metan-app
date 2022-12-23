@@ -82,6 +82,7 @@ const ShiftsTableWrapper=styled.div`
           color: #000000;
           text-align: center;
           font-family: "Inter";
+          
 
 
           .btns {

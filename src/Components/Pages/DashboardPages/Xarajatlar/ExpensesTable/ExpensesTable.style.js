@@ -61,11 +61,8 @@ const ExpensesTableWrapper=styled.div`
 
       tr {
         display: flex;
-        //justify-content: space-between;
-        //background: rgba(31, 60, 136, 0.1);
         background: #fff;
         border-radius: 6px 6px 0px 0px;
-        //padding: 15px 22px;
 
         th.col {
           font-style: normal;
@@ -78,7 +75,7 @@ const ExpensesTableWrapper=styled.div`
           justify-content: center;
           text-align: center;
           font-family: "Inter";
-          padding: 15px 12px 10px;
+          padding: 15px 12px 10px 20px;
         }
 
         th.row {
@@ -114,6 +111,8 @@ const ExpensesTableWrapper=styled.div`
           color: #000000;
           text-align: center;
           font-family: "Inter";
+          padding-left: 20px;
+          
 
 
           .btns {
@@ -258,9 +257,6 @@ const ModalContent=styled.div`
   }
   
 `
-
-
-
 
 const ModalFooter=styled.footer`
   padding: 20px;

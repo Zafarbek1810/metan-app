@@ -9,6 +9,7 @@ import Pagination from "rc-pagination";
 import {useContextSelector} from "use-context-selector";
 import UserContext from "../../../../../Context/UserContext";
 import OutletProvider from "../../../../../Data/Providers/OutletProvider";
+import {toast} from "react-toastify";
 
 
 const ChekTable = () => {
@@ -71,7 +72,7 @@ const ChekTable = () => {
         })
         .catch(err => {
           console.log(err)
-          Message.serverError()
+          toast.error(err?.response?.data?.message);
         }).finally(() => {
         setLoading2(false);
       })

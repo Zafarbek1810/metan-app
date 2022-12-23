@@ -75,9 +75,11 @@ const Table = ({id}) => {
                                     <td style={{width: "10%"}} className="col">{obj.paidPoints}</td>
                                     <td style={{width: "10%"}} className="col">{obj.giftedPoints}</td>
                                     <td style={{width: "15%", fontWeight: 600}} className="col">
-                                        Telmonov Timur
+                                        {obj?.cashier?.fullName}
                                     </td>
-                                    <td style={{width: "15%", fontWeight: 600}} className="col">Zarangari Metan</td>
+                                    <td style={{width: "15%", fontWeight: 600}} className="col">
+                                        {obj?.outlet?.title}
+                                    </td>
                                     {/*                <td style={{width: "10%"}} className="col">*/}
                                     {/*<span style={{background: "#43A047", color: "white", borderRadius: 5, padding: 10}}>*/}
                                     {/*  Muvaffaqiyatli*/}

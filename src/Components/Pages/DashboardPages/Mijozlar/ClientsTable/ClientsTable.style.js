@@ -18,6 +18,7 @@ const ClientsTableWrapper=styled.div`
 
     .modal-wrapper {
       margin-top: 15px;
+
       .modal-body {
         .input {
           margin-bottom: 30px;
@@ -102,12 +103,13 @@ const ClientsTableWrapper=styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
-    
-    .link{
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.03);
+
+    .link {
       background: transparent;
       border: none;
-      &:hover{
+
+      &:hover {
         text-decoration: underline !important;
       }
     }
@@ -134,7 +136,7 @@ const ClientsTableWrapper=styled.div`
           justify-content: center;
           text-align: center;
           font-family: "Inter";
-          padding: 15px 12px 10px;
+          padding: 15px 12px 10px 20px;
         }
 
         th.row {
@@ -170,21 +172,21 @@ const ClientsTableWrapper=styled.div`
           color: #000000;
           text-align: center;
           font-family: "Inter";
+          padding-left: 20px;
 
 
           .btns {
             width: 100%;
-            display: flex;
-            justify-content: space-between;
+
             button {
-              background: transparent;
-              border: 1px solid #000;
+              background: #fff;
+              border: 1px solid rgba(0, 0, 0, 0.5);
               cursor: pointer;
               transition: 300ms;
 
-              &:hover {
-                background: rgba(31, 60, 136, 0.75);
-
+              img {
+                width: 30px;
+                height: 30px;
               }
 
               svg {
@@ -199,4 +201,96 @@ const ClientsTableWrapper=styled.div`
   }
 `
 
-export{ClientsTableWrapper}
+const ModalContent=styled.div`
+  //padding: 20px;
+  border-bottom: 1px solid #f5f6f8;
+  background: #fff;
+  
+  form{
+    background: #fff;
+    font-family: "Inter";
+    .label {
+      width: 100%;
+      display: block;
+      margin-bottom: 10px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      margin-bottom: 30px;
+
+      span.label-text {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 0.875rem;
+        line-height: 18px;
+        color: #000000;
+        margin-bottom: 8px;
+      }
+
+      input {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 16px;
+        color: #000000;
+        border: 2px solid rgba(31, 60, 136, 0.4);
+        border-radius: 6px;
+        padding: 10px 10px;
+      }
+
+      span.err-text {
+        color: red !important;
+        position: absolute;
+        left: 0;
+        top: 70px;
+      }
+      .select{
+        font-style: normal;
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 20px;
+        color: #000000;
+        .css-319lph-ValueContainer{
+          padding: 15px 10px;
+        }
+        .css-1s2u09g-control{
+          height: 60px;
+        }
+        .css-1okebmr-indicatorSeparator{
+          display: none;
+        }
+      }
+    }
+    
+    .btns{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      button{
+        width: 100%;
+        text-align: center;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 0.875rem;
+        line-height: 18px;
+        border-radius: 4px;
+        padding: 12px 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Inter";
+
+        &:disabled {
+          cursor: not-allowed;
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+  
+`
+
+export{ClientsTableWrapper , ModalContent}

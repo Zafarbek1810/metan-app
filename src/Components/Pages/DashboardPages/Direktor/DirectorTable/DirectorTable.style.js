@@ -50,7 +50,7 @@ const DirectorTableWrapper=styled.div`
           justify-content: start;
           text-align: center;
           font-family: "Inter";
-          padding: 15px 12px 10px;
+          padding: 15px 12px 10px 20px;
 
         }
         th.row{
@@ -83,6 +83,8 @@ const DirectorTableWrapper=styled.div`
           color: #000000;
           text-align: center;
           font-family: "Inter";
+          padding-left: 20px;
+
         }
           td.row{
             font-style: normal;

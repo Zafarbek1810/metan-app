@@ -19,6 +19,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import UserContext from "../../../../Context/UserContext";
 import {useContextSelector} from "use-context-selector";
+import LogoSvg from "../../../Common/Svgs/LogoSvg";
 
 
 const SidebarItemsMenu = [
@@ -80,12 +81,12 @@ const SidebarItemsSetting = [
     Svg: UsersSvg,
     role: ["SUPER_ADMIN"]
   },
-  {
-    title: "Hujjatlar",
-    path: "/dashboard/documents",
-    Svg: FileSvg,
-    role: ["SUPER_ADMIN", "DIRECTOR"]
-  },
+  // {
+  //   title: "Hujjatlar",
+  //   path: "/dashboard/documents",
+  //   Svg: FileSvg,
+  //   role: ["SUPER_ADMIN", "DIRECTOR"]
+  // },
   {
     title: "Kassirlar",
     path: "/dashboard/cashiers",
@@ -181,10 +182,10 @@ const Sidebar = () => {
       <div className="wrapper">
         <div className="top">
           <MyLink className="logo" to="/">
-            <img src="/img/logo.jpeg" alt=""/>
+            <LogoSvg className="logoSvg"/>
           </MyLink>
 
-          <Box sx={{width: '100%'}}>
+          <Box sx={{width: '100%'}} className="tabBottom">
             <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
               <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                 <Tab label="Menu" {...a11yProps(0)}  />

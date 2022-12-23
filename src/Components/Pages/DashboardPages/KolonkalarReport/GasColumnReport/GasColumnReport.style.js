@@ -70,7 +70,7 @@ const GasColumnReportWrapper=styled.div`
           justify-content: start;
           text-align: center;
           font-family: "Inter";
-          padding: 15px 12px 10px;
+          padding: 15px 12px 10px 20px;
 
         }
       }
@@ -93,6 +93,8 @@ const GasColumnReportWrapper=styled.div`
           text-align: start;
           font-family: "Inter";
           //padding: 0px 30px;
+          padding-left: 20px;
+          
 
         }
         

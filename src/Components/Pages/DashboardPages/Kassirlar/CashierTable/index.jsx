@@ -8,6 +8,7 @@ import CloseSvg from "../../../../Common/Svgs/CloseSvg";
 import ButtonLoader from "../../../../Common/ButtonLoader";
 import Modal from "react-modal";
 import MinLoader from "../../../../Common/MinLoader";
+import {toast} from "react-toastify";
 
 const customStyles = {
   content: {
@@ -83,6 +84,7 @@ const CashierTable = () => {
 
         const {data} = await UserProvider.updateCashier(body);
         setForRender(Math.random());
+        toast.success("Muvaffaqiyatli o'zgartirildi")
         closeModal()
       } catch (err) {
         console.log(err)
@@ -92,6 +94,7 @@ const CashierTable = () => {
       try {
         const {data} = await UserProvider.createCashier(body);
         setForRender(Math.random())
+        toast.success("Muvaffaqiyatli qo'shildi")
         closeModal()
       } catch (err) {
         console.log(err)

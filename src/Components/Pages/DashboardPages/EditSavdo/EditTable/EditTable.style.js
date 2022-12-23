@@ -50,6 +50,10 @@ const EditTableWrapper = styled.div`
         font-family: "Inter";
 
       }
+      
+      textarea{
+        min-height: 100px;
+      }
     }
   }
 

@@ -91,25 +91,22 @@ const CardsWrapper = styled.div`
     & > div {
       width: 90%;
       box-shadow: 0px 2px 10px rgba(58, 53, 65, 0.1);
-      //border: 1px solid rgba(58, 53, 65, 0.12);
       border-radius: 24px;
       margin-bottom: 20px;
       display: flex;
       align-items: center;
       padding: 15px;
-      //background: #fff;
-      //background:linear-gradient(135deg, #42e695 0%,#3bb2b8 100%);
 
       &:nth-child(1) {
-        background: linear-gradient(135deg, #0FF0B3 0%, #036ED9 100%);
+        background: linear-gradient(135deg, #8E2DE2, #4A00E0 100%);
       }
 
       &:nth-child(2) {
-        background: linear-gradient(135deg, #184e68 0%, #57ca85 100%);
+        background: linear-gradient(135deg, #f12711 0%, #f5af19 100%);
       }
 
       &:nth-child(3) {
-        background: linear-gradient(135deg, #5b247a 0%, #1bcedf 100%);
+        background: linear-gradient(135deg, #4facfe 50%, #00f2fe 100%);
       }
 
       .left {
@@ -140,22 +137,25 @@ const CardsWrapper = styled.div`
           font-size: 20px;
           font-family: "Inter";
           color: #fff;
-
-
         }
 
         svg {
-          margin: 0 10px;
           width: 25px;
           height: 25px;
-          stroke: rgb(76, 255, 36);
+          fill: #fff;
           stroke-width: 2;
         }
 
         .persent {
+          margin-left: 50px;
           font-size: 16px;
           font-weight: 700;
-          color: rgb(76, 255, 36);
+          color: #fff;
+          padding: 5px;
+          border-radius: 5px;
+          border: none;
+          background: #4BB543;
+          //background: #F4362B; danger
           font-family: "Inter";
         }
       }

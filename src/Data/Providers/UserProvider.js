@@ -41,6 +41,9 @@ export default class UserProvider {
   static async addClient(body){
     return await client.post("/client/signUp", body)
   }
+  static async sendNotification(body){
+    return await client.post("/client/sendNotification", body)
+  }
 
 
 

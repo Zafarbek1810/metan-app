@@ -122,6 +122,8 @@ const CashboxWrapper = styled.div`
             color: #000000;
             text-align: center;
             font-family: "Inter";
+            padding-left: 20px;
+            
 
             .btns {
               button {

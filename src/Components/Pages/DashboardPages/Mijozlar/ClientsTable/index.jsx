@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {ClientsTableWrapper} from "./ClientsTable.style";
+import {ClientsTableWrapper, ModalContent} from "./ClientsTable.style";
 import DeleteSvg from "../../../../Common/Svgs/DeleteSvg";
 import EditSvg from "../../../../Common/Svgs/EditSvg";
-import {Input} from "antd";
+import {Input, Modal, Select} from "antd";
 import UserProvider from "../../../../../Data/Providers/UserProvider";
 import Message from "../../../../../utils/Message";
 import Pagination from "rc-pagination";
@@ -12,43 +12,25 @@ import Link from "next/link";
 import {useContextSelector} from "use-context-selector";
 import GlobalContext from "../../../../../Context/GlobalContext/Context";
 import {useRouter} from "next/router";
+import {Controller, useForm} from "react-hook-form";
+import ButtonLoader from "../../../../Common/ButtonLoader";
+import OutletProvider from "../../../../../Data/Providers/OutletProvider";
+import {toast} from "react-toastify";
 
-const Modal=()=>{
-  return(
-    <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1"
-         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div className="modal-dialog modal-dialog-centered">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h1 className="modal-title fs-5" id="staticBackdropLabel">Barcha mijozlarga push-xabarnoma yuborish</h1>
-            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
-          </div>
-          <div className="modal-body">
-            <div className="input">
-              <label>Nomi<span>*</span></label>
-              <Input size="large"/>
-            </div>
-            <div className="input">
-              <label>Ta'rif<span>*</span></label>
-              <Input size="large"/>
-            </div>
-          </div>
-          <div className="modal-footer">
-            <button type="button" className="btn btn-outline-warning" data-bs-dismiss="modal">Bekor qilish</button>
-            <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Yuborish</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
 
 const ClientsTable = () => {
   const router = useRouter();
+  const {register, formState: {errors}, handleSubmit, setValue, reset, control} = useForm({
+    defaultValues: {}
+  });
   const client_about = useContextSelector(GlobalContext, (state)=>state.client_about)
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [user, setUser] = useState([])
   const [loading2, setLoading2] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [sending, setSending] = useState(null)
+  const [forRender, setForRender] = useState(null)
 
   const [totalElements, setTotalElements]=useState(20)
   const [currentPage, setCurrentPage] = useState(1);
@@ -59,6 +41,19 @@ const ClientsTable = () => {
   const handleClickAbout = (clientId) => {
     client_about(clientId)
     router.push("/dashboard/aboutClient/");
+  }
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    setValue("message", "")
+  };
+
+  const handleSend = (obj) => {
+    setSending(obj)
+    setIsModalOpen(true)
   }
 
 
@@ -75,17 +70,78 @@ const ClientsTable = () => {
       }).finally(() => {
       setLoading2(false);
     })
-  }, [])
+  }, [forRender])
+
+  const onSubmit = async (values) => {
+    const body = {}
+    body.message = values.message;
+
+    setLoading(true)
+    if (sending) {
+      try {
+        body.clientId = sending.id
+        const {data} = await UserProvider.sendNotification(body);
+        console.log(data.res)
+        toast.success("Muvaffaqiyatli yuborildi!")
+        setForRender(Math.random());
+        handleCancel()
+      } catch (err) {
+        console.log(err)
+        Message.serverError();
+      }
+    }
+    // else {
+    //   try {
+    //     const {data} = await UserProvider.sendNotification(body);
+    //     console.log(data.res)
+    //     toast.success("Muvaffaqiyatli yaratildi!")
+    //     setForRender(Math.random());
+    //     handleCancel()
+    //   } catch (err) {
+    //     console.log(err)
+    //     Message.serverError();
+    //   }
+    // }
+    setLoading(false)
+  }
+
   return (
     <ClientsTableWrapper>
       <div className="top">
         <h3 className="title">Mijozlar</h3>
         <div className="modal-wrapper">
-          <button className="btn btn-primary" style={{fontFamily:"Inter"}} data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          <button className="btn btn-primary"onClick={showModal} style={{fontFamily:"Inter"}} data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             Barcha mijozlarga push-xabarnoma yuborish
           </button>
           {/*====MODAL====*/}
-          <Modal/>
+          <Modal
+              title="Qo'shish"
+              open={isModalOpen}
+              onCancel={handleCancel}
+              width={700}
+              footer={[null]}
+          >
+            <ModalContent>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <label className="label">
+                  <span className="label-text">Xabar nomi</span>
+                  {errors.message && (
+                      <span className="err-text">Majburiy maydon</span>
+                  )}
+                  <input
+                      type="text"
+                      {...register("message", {required: true})}
+                  />
+                </label>
+                <div className="btns">
+                  <button type="button" className="btn btn-outline-warning" onClick={handleCancel}>Bekor qilish
+                  </button>
+                  <button type="submit" className="btn btn-primary" disabled={loading}>Saqlash {loading &&
+                      <ButtonLoader/>}</button>
+                </div>
+              </form>
+            </ModalContent>
+          </Modal>
         </div>
 
       </div>
@@ -102,6 +158,7 @@ const ClientsTable = () => {
           <th style={{width: "15%"}} className="col">Oxirgi faoliyat</th>
           <th style={{width: "8%"}} className="col">Umumiy ballar</th>
           <th style={{width: "8%"}} className="col">Tashriflar soni</th>
+          <th style={{width: "8%"}} className="col">Amallar</th>
         </tr>
         </thead>
         <tbody>
@@ -128,6 +185,13 @@ const ClientsTable = () => {
                   <td style={{width: "15%"}} className="col">{new Date(obj.lastVisit).toLocaleString("en-GB")}</td>
                   <td style={{width: "8%"}} className="col">{obj.totalPoints}</td>
                   <td style={{width: "8%"}} className="col">{obj.numberOfVisits}</td>
+                  <td style={{width: "8%"}} className="col">
+                    <div className="btns">
+                      <button  onClick={() => handleSend(obj)}>
+                        <img src="/img/message.gif" alt=""/>
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               )): <div style={
                 {

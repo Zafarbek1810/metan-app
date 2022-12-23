@@ -40,7 +40,7 @@ const TableWrapper=styled.div`
           align-items: center;
           justify-content: center;
           text-align: center;
-          padding: 15px 12px 10px;
+          padding: 15px 12px 10px 20px;
           font-family: "Inter";
 
         }
@@ -77,6 +77,8 @@ const TableWrapper=styled.div`
           color: rgba(0, 0, 0, 0.7);
           //text-align: center;
           font-family: "Inter";
+          padding-left: 20px;
+          
 
           .link:hover {
             text-decoration: underline !important;

@@ -47,7 +47,7 @@ const DebtorsTableWrapper=styled.div`
           justify-content: center;
           text-align: center;
           font-family: "Inter";
-          padding: 15px 12px 10px;
+          padding: 15px 12px 10px 20px;
         }
 
         th.row {
@@ -73,6 +73,7 @@ const DebtorsTableWrapper=styled.div`
         justify-content: space-between;
 
         td.col {
+          padding-left: 20px;
           font-style: normal;
           font-weight: 400;
           font-size: 18px;

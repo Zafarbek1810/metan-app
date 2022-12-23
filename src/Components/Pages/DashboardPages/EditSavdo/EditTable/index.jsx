@@ -135,6 +135,8 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
         setValue("price1", data.price1);
         setValue("price2", data.price2);
         setValue("loss", data.loss);
+        setValue("defaultCashbackValue", data.defaultCashbackValue);
+        setValue("description", data.description);
         setSavoNuqta(data)
         console.log("ful data",data)
       })
@@ -154,6 +156,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
     try {
       const {data} = await OutletProvider.addCashierOutlet(body);
       console.log(data)
+      toast.success("Kassir savdo nuqtasiga biriktirildi")
       setForRender(Math.random());
     } catch (err) {
       console.log(err)
@@ -171,6 +174,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
     try {
       const {data} = await OutletProvider.addDirektorOutlet(body);
       console.log(data)
+      toast.success("Direktor savdo nuqtasiga biriktirildi")
       setForRender(Math.random());
     } catch (err) {
       console.log(err)
@@ -293,6 +297,8 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
     body.price1 = +values.price1
     body.price2 = +values.price2
     body.loss = +values.loss
+    body.defaultCashbackValue = values.defaultCashbackValue
+    body.description = values.description
     setLoading(true)
     try {
       const {data} = await OutletProvider.updateOutlet(body);
@@ -305,9 +311,6 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
     }
     setLoading(false)
   }
-
-
-
 
   return (
     <EditTableWrapper>
@@ -335,33 +338,57 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
                 />
               </label>
             </div>
-            <div className="input">
-              <label>
-                <span>Narx1</span>
-                <input
-                  type="text"
-                  style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
-                  {...register("price1", {required: false})}
-                />
-              </label>
+            <div className="d-flex">
+              <div className="input w-50 me-1">
+                <label>
+                  <span>Narx1</span>
+                  <input
+                      type="text"
+                      style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
+                      {...register("price1", {required: true})}
+                  />
+                </label>
+              </div>
+              <div className="input w-50 ms-1">
+                <label>
+                  <span>Narx2</span>
+                  <input
+                      type="text"
+                      style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
+                      {...register("price2", {required: true})}
+                  />
+                </label>
+              </div>
+            </div>
+            <div className="d-flex">
+              <div className="input w-50 me-1">
+                <label>
+                  <span>Yo'qotish</span>
+                  <input
+                      type="text"
+                      style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
+                      {...register("loss", {required: true})}
+                  />
+                </label>
+              </div>
+              <div className="input w-50 ms-1">
+                <label>
+                  <span>Keshbek</span>
+                  <input
+                      type="text"
+                      style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
+                      {...register("defaultCashbackValue", {required: false})}
+                  />
+                </label>
+              </div>
             </div>
             <div className="input">
               <label>
-                <span>Narx2</span>
-                <input
-                  type="text"
-                  style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
-                  {...register("price2", {required: false})}
-                />
-              </label>
-            </div>
-            <div className="input">
-              <label>
-                <span>Yo'qotish</span>
-                <input
-                  type="text"
-                  style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
-                  {...register("loss", {required: false})}
+                <span>Shahobcha haqida</span>
+                <textarea
+                    type="text"
+                    style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
+                    {...register("description", {required: false})}
                 />
               </label>
             </div>
@@ -370,6 +397,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
             <img style={{width:"100%", height:"100%"}} src="/img/metan.png" alt=""/>
           </div>
           <div className="col-md-4 col-12 mb-5">
+            <YMap/>
           </div>
           <div className="col-md-4 col-12">
             <div className="input">
@@ -492,3 +520,54 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
 };
 
 export default EditTable;
+
+
+import { Component } from 'react'
+import { YMaps, Map, ZoomControl, FullscreenControl, SearchControl, GeolocationControl, Placemark } from "react-yandex-maps";
+
+class YMap extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      coords: [],
+      mapState: {
+        center: [40.051208, 64.883850],
+        zoom: 9
+      },
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.oldCoords !== this.props.oldCoords) {
+      this.setState({ coords: this.props.oldCoords })
+    }
+  }
+
+  onMapClick = (e) => {
+    const coords = e.get("coords");
+    this.setState({ coords: coords })
+    console.log(coords)
+  };
+
+  render() {
+    return (
+        <div>
+          <YMaps query={{ apikey: "" }}>
+            <Map
+                modules={["Placemark", "geocode", "geoObject.addon.balloon"]}
+                onClick={this.onMapClick}
+                state={this.state.mapState}
+                width='100%'
+                height='500px'
+            >
+              {this.state.coords ? <Placemark geometry={this.state.coords} /> : null}
+              <ZoomControl />
+              <FullscreenControl />
+              <SearchControl />
+              <GeolocationControl />
+            </Map>
+          </YMaps>
+        </div>
+    )
+  }
+}

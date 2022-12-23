@@ -1,14 +1,12 @@
 import React from 'react';
 
 const TopSvg = () => {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-up" width="64" height="64"
-         viewBox="0 0 24 24" strokeWidth="1.5" stroke="#9e9e9e" fill="none" strokeLinecap="round"
-         strokeLinejoin="round">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-      <polyline points="6 15 12 9 18 15"/>
-    </svg>
-  );
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" id="Bold" viewBox="0 0 24 24" width="512" height="512">
+            <path
+                d="M6.414,15.586H17.586a1,1,0,0,0,.707-1.707L12.707,8.293a1,1,0,0,0-1.414,0L5.707,13.879A1,1,0,0,0,6.414,15.586Z"/>
+        </svg>
+    );
 };
 
 export default TopSvg;
