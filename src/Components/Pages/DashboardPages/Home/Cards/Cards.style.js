@@ -43,8 +43,9 @@ const CardsWrapper = styled.div`
       padding: 15px;
       width: 48%;
       margin-bottom: 20px;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.03);
+      /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.03); */
       //box-shadow: 0px 2px 10px rgba(58, 53, 65, 0.1);
+      box-shadow: rgb(20 21 33 / 18%) 0px 2px 10px 0px;
       border: 1px solid rgba(58, 53, 65, 0.12);
       border-radius: 24px;
     
