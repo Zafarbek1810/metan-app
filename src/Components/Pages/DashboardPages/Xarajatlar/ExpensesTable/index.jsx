@@ -328,7 +328,7 @@ const ExpensesTable = () => {
                   textAlign: "center",
                   padding: 30,
                 }
-              }><h3>Xarajatlar mavjud emas!</h3></div>
+              }><h3 style={{color:"#D2D3E8"}}>Xarajatlar mavjud emas!</h3></div>
             : <MinLoader/>
         }
 

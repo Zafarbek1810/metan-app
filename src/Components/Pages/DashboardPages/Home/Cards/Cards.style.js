@@ -173,7 +173,7 @@ const CardsWrapper = styled.div`
       }
 
       .right {
-        margin-left: 20px;
+        margin-left: 10px;
         width: 75%;
 
         .title {

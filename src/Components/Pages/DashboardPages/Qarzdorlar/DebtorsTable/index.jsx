@@ -72,7 +72,7 @@ const DebtorsTable = () => {
                   textAlign: "center",
                   padding: 30,
                 }
-              }><h3 style={{fontFamily:"Inter"}}>Qarzdorlar mavjud emas!</h3></div>
+              }><h3 style={{fontFamily:"Inter", color:"#D2D3E8"}}>Qarzdorlar mavjud emas!</h3></div>
             : <MinLoader/>
         }
         </tbody>

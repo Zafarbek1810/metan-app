@@ -315,7 +315,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
   return (
     <EditTableWrapper>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h5>Sozlamalar</h5>
+        <h5 style={{color:"#D2D3E8" , fontFamily:"Rubik"}}>Sozlamalar</h5>
         <div className="row">
           <div className="col-md-4 col-12 mb-5">
             <div className="input">
@@ -323,7 +323,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
                 <span className="label-text">Savdo nuqtasi nomi</span>
                 <input
                   type="text"
-                  style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
+                  style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9", background:"#30334E"}}
                   {...register("title", {required: false})}
                 />
               </label>
@@ -333,7 +333,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
                 <span>Manzil</span>
                 <input
                   type="text"
-                  style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
+                  style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9", background:"#30334E"}}
                   {...register("location", {required: false})}
                 />
               </label>
@@ -344,7 +344,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
                   <span>Narx1</span>
                   <input
                       type="text"
-                      style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
+                      style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9", background:"#30334E"}}
                       {...register("price1", {required: true})}
                   />
                 </label>
@@ -354,7 +354,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
                   <span>Narx2</span>
                   <input
                       type="text"
-                      style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
+                      style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9", background:"#30334E"}}
                       {...register("price2", {required: true})}
                   />
                 </label>
@@ -366,7 +366,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
                   <span>Yo'qotish</span>
                   <input
                       type="text"
-                      style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
+                      style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9", background:"#30334E"}}
                       {...register("loss", {required: true})}
                   />
                 </label>
@@ -376,7 +376,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
                   <span>Keshbek</span>
                   <input
                       type="text"
-                      style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
+                      style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9", background:"#30334E"}}
                       {...register("defaultCashbackValue", {required: false})}
                   />
                 </label>
@@ -387,7 +387,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
                 <span>Shahobcha haqida</span>
                 <textarea
                     type="text"
-                    style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9"}}
+                    style={{width: "100%", borderRadius: "6px", borderColor: "#d9d9d9", background:"#30334E"}}
                     {...register("description", {required: false})}
                 />
               </label>
@@ -449,7 +449,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
                   // mode="multiple"
                   allowClear
                   style={{
-                    width: '90%',
+                    width: '90%'
                   }}
                   placeholder="Tanlang"
                   options={

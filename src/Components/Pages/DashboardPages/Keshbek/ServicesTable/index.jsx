@@ -181,7 +181,7 @@ const ServicesTable = () => {
                   textAlign: "center",
                   padding: 30,
                 }
-              }><h3>Keshbek mavjud emas</h3></div>
+              }><h3 style={{color:"#D2D3E8"}}>Keshbek mavjud emas</h3></div>
             : <MinLoader/>
         }
         </tbody>

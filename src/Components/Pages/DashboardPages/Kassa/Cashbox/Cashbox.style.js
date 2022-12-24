@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 const CashboxWrapper = styled.div`
   font-family: "Inter";
+  margin-top: 20px;
   .top {
 
   }
 
   .bottom {
-    background: #fff;
+    background: #282A42;
     padding: 10px;
     border: 1px solid #1F3C88;
 
@@ -21,6 +22,13 @@ const CashboxWrapper = styled.div`
         margin-left: auto;
         background: transparent;
         border: none;
+
+        svg {
+          fill: none;
+          width: 20px;
+          height: 20px;
+          fill: rgb(253, 181, 40);
+        }
       }
     }
 
@@ -37,12 +45,13 @@ const CashboxWrapper = styled.div`
             font-size: 18px;
             font-weight: 400;
             font-family: "Inter";
+            color: #D1D0E7;
           }
 
           svg {
             width: 20px;
             height: 20px;
-            stroke: rgba(0, 0, 0, 0.6);
+            stroke: #D1D0E7;
             margin-right: 10px;
           }
         }

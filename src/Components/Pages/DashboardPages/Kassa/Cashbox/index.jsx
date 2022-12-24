@@ -23,6 +23,8 @@ import {toast} from "react-toastify";
 import CashbackProvider from "../../../../../Data/Providers/CashbackProvider";
 import GasBallonsProvider from "../../../../../Data/Providers/GasBallonsProvider";
 import Message from "../../../../../utils/Message";
+import EditIcon from "@mui/icons-material/Edit";
+import {IconButton} from "@mui/material";
 
 const Tab1 = ({outletId, setMijozObj, setSpinning}) => {
   const [data, setData] = useState({});
@@ -428,8 +430,10 @@ const Cashbox = () => {
             <div className="bottom">
               <div className="box">
                 <div className="head">
-                  <h3>Balans: {mijozObj.balance}</h3>
-                  <button onClick={showModal}><EditSvg/></button>
+                  <h3 style={{color:"#D1D0E7"}}>Balans: {mijozObj.balance}</h3>
+                  <IconButton style={{background:"rgb(253, 181, 40, 0.12)"}} onClick={() => handleEdit(obj)} >
+                    <EditIcon />
+                  </IconButton>
                 </div>
                 <div className="body">
                   <div className="wrapper">

@@ -300,7 +300,7 @@ const GasColumns = () => {
                   textAlign: "center",
                   padding: 30,
                 }
-              }><h3>Kolonka mavjud emas!</h3></div>
+              }><h3 style={{color:"#D2D3E8"}}>Kolonka mavjud emas!</h3></div>
             : <MinLoader/>
         }
 

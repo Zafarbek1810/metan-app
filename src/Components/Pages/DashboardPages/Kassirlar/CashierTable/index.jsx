@@ -217,7 +217,7 @@ const CashierTable = () => {
                   textAlign: "center",
                   padding: 30,
                 }
-              }><h3>Kassirlar mavjud emas!</h3></div>
+              }><h3 style={{color:"#D2D3E8"}}>Kassirlar mavjud emas!</h3></div>
             : <MinLoader/>
         }
         </tbody>

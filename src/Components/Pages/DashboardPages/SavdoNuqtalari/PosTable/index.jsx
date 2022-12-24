@@ -203,7 +203,7 @@ const PosTable = ({RefObj, setIsOpen}) => {
                   textAlign: "center",
                   padding: 30,
                 }
-              }><h3>Savdo nuqtasi mavjud emas!</h3></div>
+              }><h3 style={{color:"#D2D3E8"}}>Savdo nuqtasi mavjud emas!</h3></div>
             : <MinLoader/>
         }
 

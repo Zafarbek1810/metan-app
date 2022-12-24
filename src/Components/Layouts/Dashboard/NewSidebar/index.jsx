@@ -126,7 +126,8 @@ const NewSidebar = () => {
     return (
         <SidebarWrap>
                 <MyLink className="logo" to="/">
-                    <LogoSvg className="logoSvg"/>
+                    {/*<LogoSvg className="logoSvg"/>*/}
+                    <img src="/img/logo.png" alt=""/>
                 </MyLink>
                 <Collapse bordered={false} defaultActiveKey={['1']}>
                     <Panel header="Metan shahobchalar" key="1">

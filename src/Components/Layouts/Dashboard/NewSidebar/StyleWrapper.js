@@ -10,6 +10,10 @@ const SidebarWrap=styled.div`
       height: 100px;
       padding: 0 10px;
     }
+    img{
+      margin-top: 30px;
+      height: 40px;
+    }
   }
 
   .sidebar-menu{

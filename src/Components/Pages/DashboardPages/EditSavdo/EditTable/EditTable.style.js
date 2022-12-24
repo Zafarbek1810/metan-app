@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const EditTableWrapper = styled.div`
   form {
-    background: #fff;
+    background: #30334E;
     padding: 20px;
     font-family: "Inter";
 
@@ -10,6 +10,7 @@ const EditTableWrapper = styled.div`
   .keshbekTitle{
     font-size: 20px;
     font-family: "Inter";
+    color: #D2D3E8;
 
   }
 
@@ -19,6 +20,10 @@ const EditTableWrapper = styled.div`
     justify-content: space-between;
     padding: 0;
     font-family: "Inter";
+    
+    span{
+      color: #D2D3E8;
+    }
 
 
     button{
@@ -43,7 +48,7 @@ const EditTableWrapper = styled.div`
         font-weight: 600;
         font-size: 1rem;
         line-height: 16px;
-        color: #000000;
+        color: #D2D3E8 !important;
         border: 2px solid rgba(31, 60, 136, 0.4);
         border-radius: 6px;
         padding: 10px 10px;
@@ -51,7 +56,16 @@ const EditTableWrapper = styled.div`
 
       }
       
+      .ant-select-selector{
+        color: #D2D3E8 !important;
+        background-color: #30334E;
+      }
+      
       textarea{
+        font-style: normal;
+        font-weight: 600;
+        font-size: 1rem;
+        color: #D2D3E8;
         min-height: 100px;
       }
     }
@@ -77,6 +91,7 @@ const EditTableWrapper = styled.div`
           justify-content: space-between;
 
           td {
+            color: #D2D3E8;
             button {
               background: transparent;
               border: none;

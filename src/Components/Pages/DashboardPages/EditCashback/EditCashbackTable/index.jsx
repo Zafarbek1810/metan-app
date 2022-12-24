@@ -84,12 +84,12 @@ const EditCashbackTable = ({cashId}) => {
     <Spin spinning={loading}>
       <Wrapper>
         <h2 className="title">Qo'shish</h2>
-        <div className="content">
+        <div className="content" >
           <h3 className="title">Qoidalar</h3>
           <hr/>
           <br/>
 
-          <h5 >Nomi <sup style={{color: "red"}}>*</sup></h5>
+          <h5 style={{color:"#D2D3E8"}}>Nomi <sup style={{color: "red"}}>*</sup></h5>
           <input className="input" value={cashName} onChange={handleChangeCashName}/>
           <hr/>
 

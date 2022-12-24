@@ -2,21 +2,21 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   font-family: "Inter";
+  
   .title {
     font-style: normal;
     font-weight: 600;
     font-size: 30px;
     line-height: 25px;
-    color: #1F3C88;
-    margin-top: 0;
+    color: #D2D3E8;
     margin-bottom: 30px;
     margin-top: 15px;
     font-family: "Inter";
   }
 
   .content {
-    background-color: #fff;
-    border-radius: 2px;
+    background-color: #30334E;
+    border-radius: 12px;
     padding: 20px;
   }
 
@@ -41,13 +41,16 @@ const Wrapper = styled.div`
 
   .edit_row {
     td, th {
+      color: #D2D3E8;
       width: 20%;
       padding: 10px;
+      border-bottom: 1px solid rgba(159, 160, 184, 0.3);
+      
     }
-
-    &:nth-child(even) {
-      background-color: #f2f2f2;
-    }
+    //
+    //&:nth-child(even) {
+    //  background-color: #f2f2f2;
+    //}
   }
 
   .delete-btn {

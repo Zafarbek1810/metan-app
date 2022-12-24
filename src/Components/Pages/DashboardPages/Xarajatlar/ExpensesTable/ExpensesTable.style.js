@@ -30,12 +30,11 @@ const ExpensesTableWrapper=styled.div`
       }
     }
   }
-  
+
   .filter {
-    display: flex;
-    align-items: center;
-    background: #30334E;
-    padding: 22px 13px 0;
+    background-color: #30334E;
+    border-radius: 4px;
+    padding: 10px;
   }
 
   .filter-state {

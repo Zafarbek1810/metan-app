@@ -115,7 +115,7 @@ const Table = ({id}) => {
                                     textAlign: "center",
                                     padding: 30,
                                 }
-                            }><h3>Ma'lumot mavjud emas!</h3></div>
+                            }><h3 style={{color:"#D2D3E8"}}>Ma'lumot mavjud emas!</h3></div>
                         : <MinLoader/>
                 }
                 </tbody>

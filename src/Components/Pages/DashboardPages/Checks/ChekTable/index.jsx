@@ -274,7 +274,7 @@ const ChekTable = () => {
                                     textAlign: "center",
                                     padding: 30,
                                 }
-                            }><h3 style={{fontFamily: "Inter"}}>Cheklar mavjud emas!</h3></div>
+                            }><h3 style={{color:"#D2D3E8",fontFamily: "Inter"}}>Cheklar mavjud emas!</h3></div>
                         : <MinLoader/>
                 }
 
