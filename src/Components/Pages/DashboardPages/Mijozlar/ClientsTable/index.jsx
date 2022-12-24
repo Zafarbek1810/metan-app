@@ -16,6 +16,9 @@ import {Controller, useForm} from "react-hook-form";
 import ButtonLoader from "../../../../Common/ButtonLoader";
 import OutletProvider from "../../../../../Data/Providers/OutletProvider";
 import {toast} from "react-toastify";
+import SendIcon from '@mui/icons-material/Send';
+import {Button, IconButton} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 
 const ClientsTable = () => {
@@ -146,19 +149,20 @@ const ClientsTable = () => {
 
       </div>
 
-      <table className="table table-striped table-hover">
+      <table className="table table-borderless table-hover">
         <thead>
         <tr>
-          <th style={{width: "15%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">Mijoz</th>
-          <th style={{width: "15%"}} className="col">Telefon</th>
-          <th style={{width: "8%"}} className="col">Avto raqami</th>
-          <th style={{width: "8%"}} className="col">Chek summasi</th>
-          <th style={{width: "8%"}} className="col">Balans</th>
-          <th style={{width: "8%"}} className="col">Qarz</th>
-          <th style={{width: "15%"}} className="col">Oxirgi faoliyat</th>
-          <th style={{width: "8%"}} className="col">Umumiy ballar</th>
-          <th style={{width: "8%"}} className="col">Tashriflar soni</th>
-          <th style={{width: "8%"}} className="col">Amallar</th>
+          <th style={{minWidth: "5%"}} className="col">Id</th>
+          <th style={{minWidth: "10%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">Mijoz</th>
+          <th style={{minWidth: "10%"}} className="col">Telefon</th>
+          <th style={{minWidth: "8%"}} className="col">Avto raqami</th>
+          <th style={{minWidth: "8%"}} className="col">Chek summasi</th>
+          <th style={{minWidth: "8%"}} className="col">Balans</th>
+          <th style={{minWidth: "8%"}} className="col">Qarz</th>
+          <th style={{minWidth: "15%"}} className="col">Oxirgi faoliyat</th>
+          <th style={{minWidth: "8%"}} className="col">Umumiy ballar</th>
+          <th style={{minWidth: "8%"}} className="col">Tashriflar soni</th>
+          <th style={{minWidth: "8%"}} className="col">Amallar</th>
         </tr>
         </thead>
         <tbody>
@@ -167,29 +171,31 @@ const ClientsTable = () => {
             user.length ?
               user.map((obj, index)=>(
                 <tr key={obj.id}>
-                  <td style={{width: "15%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}}
+                  <td style={{minWidth: "5%"}} className="col">{(currentPage - 1) * 20 + index + 1}</td>
+                  <td style={{minWidth: "10%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}}
                       className="col">
                     <button onClick={()=>handleClickAbout(obj.id)} className="link" style={{
                       fontWeight: 600,
                       textDecoration: "none",
-                      color: "#43A047"
-                    }}>{(currentPage - 1) * 20 + index + 1}.{obj.fullName}
+                      color: "#9FA0B8"
+                    }}>{obj.fullName}
                     </button>
                     {/*<MyLink className="link" to="/dashboard/aboutClient"></MyLink>*/}
                   </td>
-                  <td style={{width: "15%"}} className="col">{obj.phoneNumber}</td>
-                  <td style={{width: "8%"}} className="col">{obj.plateNumber}</td>
-                  <td style={{width: "8%"}} className="col">{obj.totalSpendings}</td>
-                  <td style={{width: "8%"}} className="col">{obj.balance}</td>
-                  <td style={{width: "8%"}} className="col">{obj.totalDebt}</td>
-                  <td style={{width: "15%"}} className="col">{new Date(obj.lastVisit).toLocaleString("en-GB")}</td>
-                  <td style={{width: "8%"}} className="col">{obj.totalPoints}</td>
-                  <td style={{width: "8%"}} className="col">{obj.numberOfVisits}</td>
-                  <td style={{width: "8%"}} className="col">
+                  <td style={{minWidth: "10%"}} className="col">{obj.phoneNumber}</td>
+                  <td style={{minWidth: "8%"}} className="col">{obj.plateNumber}</td>
+                  <td style={{minWidth: "8%"}} className="col">{obj.totalSpendings}</td>
+                  <td style={{minWidth: "8%"}} className="col">{obj.balance}</td>
+                  <td style={{minWidth: "8%"}} className="col">{obj.totalDebt}</td>
+                  <td style={{minWidth: "15%"}} className="col">{new Date(obj.lastVisit).toLocaleString("en-GB")}</td>
+                  <td style={{minWidth: "8%"}} className="col">{obj.totalPoints}</td>
+                  <td style={{minWidth: "8%"}} className="col">{obj.numberOfVisits}</td>
+                  <td style={{minWidth: "8%"}} className="col">
                     <div className="btns">
-                      <button  onClick={() => handleSend(obj)}>
-                        <img src="/img/message.gif" alt=""/>
-                      </button>
+                      <IconButton style={{background:"rgb(38, 198, 249, 0.12)", color:"rgb(38, 198, 249)"}}
+                                  onClick={() => handleSend(obj)} aria-label="send">
+                        <SendIcon />
+                      </IconButton>
                     </div>
                   </td>
                 </tr>

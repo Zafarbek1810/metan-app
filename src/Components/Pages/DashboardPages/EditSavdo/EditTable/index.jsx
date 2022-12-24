@@ -394,7 +394,7 @@ const EditTable = ({id, RefObj, setIsOpen}) => {
             </div>
           </div>
           <div className="col-md-4 col-12 mb-5">
-            <img style={{width:"100%", height:"100%"}} src="/img/metan.png" alt=""/>
+            <img style={{width:"100%", height:"100%", objectFit:"cover"}} src="/img/metan.jpg" alt=""/>
           </div>
           <div className="col-md-4 col-12 mb-5">
             <YMap/>

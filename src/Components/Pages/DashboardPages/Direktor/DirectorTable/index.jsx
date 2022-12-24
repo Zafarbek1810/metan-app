@@ -8,6 +8,8 @@ import ButtonLoader from "../../../../Common/ButtonLoader";
 import UserProvider from "../../../../../Data/Providers/UserProvider";
 import Message from "../../../../../utils/Message";
 import MinLoader from "../../../../Common/MinLoader";
+import {Avatar, Button, IconButton} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 
 const customStyles = {
   content: {
@@ -119,9 +121,10 @@ const DirectorTable = () => {
       <div className="top">
         <h3 className="title">Ish boshqaruvchi</h3>
         <div className="modal-wrapper">
-          <button className="btn btn-primary" onClick={openModal} style={{fontFamily:"Inter"}}>
+          <Button variant="contained" onClick={openModal}
+                  style={{fontFamily: "Inter",color:"#fff", background:"#787EFF"}}>
             + Qo'shish
-          </button>
+          </Button>
           {/*====MODAL====*/}
           <Modal
             isOpen={modalIsOpen}
@@ -175,10 +178,11 @@ const DirectorTable = () => {
         </div>
 
       </div>
-      <table className="table table-striped table-hover">
+      <table className="table table-borderless table-hover">
         <thead>
         <tr>
-          <th style={{width: "40%"}} className="col">To'liq ismi</th>
+          <th style={{width: "10%"}} className="col">Rasm</th>
+          <th style={{width: "30%"}} className="col">To'liq ismi</th>
           <th style={{width: "30%"}} className="col">Login</th>
           <th style={{width: "30%"}} className="col">Amallar</th>
         </tr>
@@ -189,13 +193,18 @@ const DirectorTable = () => {
             directors.length
               ? directors.map((obj, index) => (
                 <tr key={obj.id}>
-                  <td style={{width: "40%"}} className="col">{index+1}.{obj.fullName} </td>
+                  <td style={{width: "10%"}} className="col">
+                    <Avatar alt='Victor Anderson' src='/img/3.png' />
+                  </td>
+                  <td style={{width: "30%"}} className="col">{obj.fullName} </td>
                   <td style={{width: "30%"}} className="col">{obj.username}</td>
                   <td style={{width: "30%"}} className="col">
                     <div className="btns">
-                      <button onClick={() => handleEdit(obj)}>
-                        <EditSvg/>
-                      </button>
+                      <IconButton
+                          style={{background:"rgb(253, 181, 40, 0.12)"}}
+                          onClick={() => handleEdit(obj)}>
+                        <EditIcon />
+                      </IconButton>
                     </div>
                   </td>
                 </tr>

@@ -7,13 +7,14 @@ const GasColumnsWrapper=styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 15px;
+    
     .title{
       font-style: normal;
       font-weight: 600;
       font-size: 30px;
       line-height: 25px;
-      color: #1F3C88;
-      font-family: "Inter";
+      color: #D2D3E8;
+      font-family: "Rubik";
     }
     
     .modal-wrapper{
@@ -43,21 +44,17 @@ const GasColumnsWrapper=styled.div`
   }
 
   .filter {
-    display: flex;
-    align-items: center;
-    background: #fff;
-    padding: 22px 13px 0;
-
+    background-color: #30334E;
+    border-radius: 4px;
+    padding: 10px;
   }
 
   .filter-state {
-    background-color: #fff;
-    padding: 15px;
-
+    padding: 10px 0;
     &__inner {
-      padding: 5px 10px;
+      padding: 10px;
       border-radius: 15px;
-      background-color: #e9e9e9;
+      background-color: #30334E;
 
       display: flex;
       align-items: center;
@@ -72,21 +69,22 @@ const GasColumnsWrapper=styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    
     thead{
       width: 100%;
       tr{
         display: flex;
-        //justify-content: space-between;
-        //background: rgba(31, 60, 136, 0.1);
-        background: #fff;
+        background: rgb(58,62,91);
         border-radius: 6px 6px 0px 0px;
-        //padding: 15px 22px;
+        border-bottom: 1px solid rgba(159, 160, 184, 0.3);
+        padding: 5px 0;
+        
         th.col{
           font-style: normal;
           font-weight: 600;
           font-size: 18px;
           line-height: 24px;
-          color: #1F3C88;
+          color: #D4D4EA;
           display: flex;
           align-items: center;
           justify-content: start;
@@ -95,25 +93,16 @@ const GasColumnsWrapper=styled.div`
           padding: 15px 12px 10px 20px;
 
         }
-        th.row{
-          font-style: normal;
-          font-weight: 600;
-          font-size: 18px;
-          line-height: 24px;
-          color: #1F3C88;
-          display: flex;
-          align-items: center;
-          justify-content: start;
-          font-family: "Inter";
-        }
       }
     }
 
     tbody{
-      background: #fff;
+      background: #30334E;
       tr{
         display: flex;
         justify-content: space-between;
+        border-bottom: 1px solid rgba(159, 160, 184, 0.3);
+        
         td.col {
           font-style: normal;
           font-weight: 400;
@@ -122,22 +111,11 @@ const GasColumnsWrapper=styled.div`
           display: flex;
           align-items: center;
           justify-content: start;
-          color: #000000;
+          color: #9FA0B8;
           text-align: start;
           font-family: "Inter";
           padding-left: 20px;
           
-        }
-        td.row{
-          font-style: normal;
-          font-weight: 400;
-          font-size: 18px;
-          line-height: 24px;
-          display: flex;
-          align-items: center;
-          justify-content: start;
-          text-align: center;
-          font-family: "Inter";
         }
 
         img{
@@ -146,25 +124,20 @@ const GasColumnsWrapper=styled.div`
         }
 
         .btns {
-          width: 40%;
+          width: 60%;
           display: flex;
-          justify-content: center;
-          text-align: center;
+          justify-content: start;
 
           button {
-            background: transparent;
-            border: 1px solid #000;
-            border-radius: 10px;
             cursor: pointer;
             transition: 300ms;
-
-            &:hover {
-              background: rgba(31, 60, 136, 0.75);
-            }
+            background: transparent;
 
             svg {
               fill: none;
-              stroke: none;
+              width: 20px;
+              height: 20px;
+              fill: rgb(253, 181, 40);
             }
           }
         }

@@ -9,6 +9,8 @@ import {Modal, Select} from "antd";
 import MinLoader from "../../../../Common/MinLoader";
 import {toast} from "react-toastify";
 import Pagination from "rc-pagination";
+import {Button, Chip, IconButton} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 
 
 const ExpensesTable = () => {
@@ -163,14 +165,15 @@ const ExpensesTable = () => {
         <h3 className="title">Xarajatlar</h3>
           <div className="summ" >
             <h3>Umumiy summa:</h3>
-            <h3 style={{color:"red"}}>{summ?.expensesAmountSum}</h3>
+            <h3 style={{color:"rgb(255, 77, 73)"}}>{summ?.expensesAmountSum}</h3>
           </div>
         <div className="modal-wrapper">
           {/*====MODAL====*/}
           <div className="modal-wrapper">
-            <button className="btn btn-primary" onClick={showModal} style={{fontFamily:"Inter"}}>
+            <Button variant="contained" onClick={showModal}
+                    style={{fontFamily: "Inter",color:"#fff", background:"#787EFF"}}>
               + Qo'shish
-            </button>
+            </Button>
             <Modal
               title="Qo'shish"
               open={isModalOpen}
@@ -242,7 +245,11 @@ const ExpensesTable = () => {
 
       <div className="filter">
         <FilterWrapper>
-          <button className="btn btn-primary" onClick={() => setIsFilterOpen(p => !p)}>Filtr</button>
+          <Button variant="contained" onClick={() => setIsFilterOpen(p => !p)}
+                  style={{fontFamily: "Inter",color:"#fff", background:"#787EFF"}}>
+            Filter
+          </Button>
+
           <div className="filter-content" style={{visibility: isFilterOpen ? "visible" : "hidden"}}>
             <div className="row">
               <div className="mb-3 col-6">
@@ -261,8 +268,9 @@ const ExpensesTable = () => {
                 <input ref={filDateRef} name="startDate" type="date" className="form-control"/>
               </div>
               <div className="d-flex gap-2">
-                <button className="btn btn-danger" onClick={onOffFilter}>Bekor qilish</button>
-                <button className="btn btn-primary" onClick={onOnFilter}>Qo'llash</button>
+                <Button variant="outlined" onClick={onOffFilter}>Bekor qilish</Button>
+                <Button variant="contained" color="success" onClick={onOnFilter}>Qo'llash</Button>
+
               </div>
             </div>
           </div>
@@ -279,7 +287,7 @@ const ExpensesTable = () => {
         }
       </div>
 
-      <table className="table table-striped table-hover">
+      <table className="table table-borderless table-hover">
         <thead>
         <tr style={{width: "100%"}}>
           <th style={{width: "30%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">Nomi</th>
@@ -303,13 +311,15 @@ const ExpensesTable = () => {
                   <td style={{width: "10%"}} className="col" title={obj.admin.fullName}>{obj.admin.fullName}</td>
                   <td style={{width: "10%"}} className="col">{new Date(obj.date).toLocaleString("en-GB")}</td>
                   <td style={{width: "20%", color: "red", fontWeight: 600}} className="col">
-                    {obj.amount}
+                    <span >
+                      <Chip label={obj.amount} variant="outlined" style={{fontSize:18, background:"rgb(255, 77, 73, 0.12)", color:"rgb(255, 77, 73)",border:"none"}} />
+                    </span>
                   </td>
                   <td style={{width: "10%"}} className="col">
                     <div className="btns">
-                      <button onClick={() => handleEdit(obj)}>
-                        <EditSvg/>
-                      </button>
+                      <IconButton style={{background:"rgb(253, 181, 40, 0.12)"}} onClick={() => handleEdit(obj)} >
+                        <EditIcon />
+                      </IconButton>
                     </div>
                   </td>
                 </tr>

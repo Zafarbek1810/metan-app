@@ -121,9 +121,10 @@ const ShiftsTable = () => {
       <div className="top">
         <h3 className="title">Smena</h3>
         <div className="modalWrapper">
-          <button type="button" className="btn btn-primary" onClick={showModal} style={{fontFamily:"Inter"}}>
+          <Button variant="contained" onClick={showModal}
+                  style={{fontFamily: "Inter",color:"#fff", background:"#787EFF"}}>
             + Qo'shish
-          </button>
+          </Button>
           <Modal
             style={{top: 10}}
             title="Qo'shish"
@@ -226,7 +227,7 @@ const ShiftsTable = () => {
       </div>
 
       <div className="table-responsive">
-        <table className="table table-striped table-hover">
+        <table className="table table-borderless table-hover">
           <thead>
           <tr>
             <th className="col">Sana</th>
@@ -258,7 +259,7 @@ const ShiftsTable = () => {
                     <td className="col">{obj.amountOfGasColumn}</td>
                     <td className="col">{obj.autopilot}</td>
                     <td className="col">{obj.loss}</td>
-                      <td className="col" style={{color:"#FB8C00", fontWeight:600}}>{obj.realization}</td>
+                    <td className="col" style={{color:"#FB8C00", fontWeight:600}}>{obj.realization}</td>
                     <td className="col" style={{color:"#F4511E", fontWeight:600}}>{obj.gasColumnSumm}</td>
                     <td className="col" style={{color:"#7CB342", fontWeight:600}}>{obj.autopilotSumm}</td>
                     <td className="col">{obj.fact}</td>

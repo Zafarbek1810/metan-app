@@ -24,7 +24,7 @@ const SideBarWrapper=styled.div`
     }
   }
   
-  .tabBottom{
+  .sidebar-menu{
     .links {
       display: flex;
       flex-direction: column;
@@ -49,6 +49,21 @@ const SideBarWrapper=styled.div`
       justify-content: start;
       text-decoration: none;
       font-family: "Inter";
+      transition: 300ms;
+      
+      &:hover{
+        padding: 10px;
+        font-style: normal;
+        font-size: 15px;
+        line-height: 18px;
+        color: #1F3C88;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        text-decoration: none;
+        background: rgba(31, 60, 136, 0.15) !important;
+        font-family: "Inter";
+      }
       svg {
         fill: none !important;
         stroke: #1F3C88 !important;

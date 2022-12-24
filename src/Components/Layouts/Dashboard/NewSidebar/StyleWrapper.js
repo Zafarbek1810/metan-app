@@ -1,60 +1,123 @@
 import styled from "styled-components";
 
 const SidebarWrap=styled.div`
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 320px;
-    background-color: #fff;
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    svg {
+      height: 100px;
+      padding: 0 10px;
+    }
+  }
 
-    &__logo {
-      display: grid;
-      place-items: center;
-      height: 120px;
-      font-size: 1.5rem;
-      font-weight: 700;
-      font-family: 'Mochiy Pop P one', sans-serif;
+  .sidebar-menu{
+    //background-color: #282A42;
+    .links {
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
     }
 
-    &__menu {
-      position: relative;
+    .wrapper {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between !important;
+    }
+    .link {
+      padding: 10px;
+      margin-bottom: 5px;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 18px;
+      color: #D1D0E7;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      text-decoration: none;
+      font-family: "Inter";
+      transition: 300ms;
 
-      &__item {
+      &:hover{
+        padding: 10px;
+        font-style: normal;
+        font-size: 17px;
+        line-height: 18px;
+        color: #D1D0E7;
+        border-radius: 12px;
         display: flex;
         align-items: center;
-        place-content: flex-start;
-        padding: 1rem 3rem;
-        font-size: 1.25rem;
-        font-weight: 500;
-        color: #555555;
-        transition: color 0.3s ease-in-out;
-
-        &.active {
-          color: #fff;
-        }
-
-        &__icon {
-          margin-right: 1rem;
-
-          i {
-            font-size: 1.75rem;
-          }
-        }
+        justify-content: start;
+        text-decoration: none;
+        background: #373951 !important;
+        font-family: "Inter";
       }
-
-      &__indicator {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        width: calc(100% - 40px);
-        border-radius: 10px;
-        background-color: #308efe;
-        z-index: -1;
-        transform: translateX(-50%);
-        transition: 0.3s ease-in-out;
+      svg {
+        fill: none !important;
+        stroke: #D1D0E7 !important;
+        margin-right: 8px;
+        width: 25px;
+        height: 25px;
       }
+    }
+    svg {
+      fill: none !important;
+      stroke: #D1D0E7 !important;
+      margin-right: 8px;
+      width: 25px;
+      height: 25px;
+    }
+    .activelink {
+      padding: 10px;
+      margin-bottom: 5px;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 17px;
+      line-height: 18px;
+      color: #D1D0E7;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      text-decoration: none;
+      background: #787EFF !important;
+      border-radius: 12px;
+      font-family: "Inter";
+
+      svg {
+        fill: none !important;
+        stroke: #D1D0E7 !important;
+        margin-right: 8px;
+        width: 25px;
+        height: 25px;
+      }
+    }
+  }
+  .ant-collapse-header{
+    .ant-collapse-expand-icon{
+        svg {
+          fill: #D1D0E7 !important;
+          stroke: #D1D0E7 !important;
+          margin-right: 8px;
+          width: 15px;
+          height: 15px;
+        }
+    }
+    .ant-collapse-header-text{
+      font-style: normal;
+      font-weight: 600;
+      font-size: 17px;
+      line-height: 18px;
+      color: #D1D0E7;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      text-decoration: none;
+      border-radius: 12px;
+      font-family: "Inter";
+      
     }
   }
 `

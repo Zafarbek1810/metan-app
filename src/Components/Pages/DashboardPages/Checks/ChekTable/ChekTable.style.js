@@ -8,19 +8,19 @@ const ChekTableWrapper = styled.div`
     font-weight: 600;
     font-size: 30px;
     line-height: 25px;
-    color: #1F3C88;
-    font-family: "Inter";
+    color: #D2D3E8;
+    font-family: "Rubik";
     margin-top: 15px;
   }
   .filter {
     display: flex;
     align-items: center;
-    background: #fff;
+    background: #30334E;
     padding: 22px 13px;
   }
 
   .filter-state {
-    background-color: #fff;
+    background-color: #30334E;
     padding: 15px;
 
     &__inner {
@@ -49,16 +49,18 @@ const ChekTableWrapper = styled.div`
 
       tr {
         display: flex;
-        background: #fff;
+        background: rgb(58,62,91);
         //padding: 10px 12px 0px;
         border-radius: 24px 24px 0px 0px;
+        border-bottom: 1px solid rgba(159, 160, 184, 0.3);
+        padding: 5px 0;
 
         th.col {
           font-style: normal;
           font-weight: 600;
           font-size: 18px;
           line-height: 24px;
-          color: #1F3C88;
+          color: #D4D4EA;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -68,36 +70,26 @@ const ChekTableWrapper = styled.div`
 
         }
 
-        th.row {
-          font-style: normal;
-          font-weight: 600;
-          font-size: 18px;
-          line-height: 24px;
-          color: #1F3C88;
-          display: flex;
-          justify-content: start;
-          text-align: center;
-          font-family: "Inter";
-
-        }
       }
     }
 
     tbody {
-      background: #fff;
+      background: #30334E;
 
       tr {
         display: flex;
         justify-content: space-between;
         //padding: 0px 12px;
+        border-bottom: 1px solid rgba(159, 160, 184, 0.3);
 
         td.col {
           font-size: 18px;
           line-height: 18px;
+          font-weight: 500;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: rgba(0, 0, 0, 0.7);
+          color: #9FA0B8;
           //text-align: center;
           font-family: "Inter";
           padding-left: 20px;

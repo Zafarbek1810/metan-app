@@ -1,13 +1,15 @@
 import styled from "styled-components";
 
 const ChartsWrapper=styled.div`
-  background: #fff;
-  padding: 10px;
+  background: #30334E;
+  padding: 20px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
   border-radius: 24px;
   
   .apexcharts-text tspan{
     font-size: 16px;
+    color: #fff;
+    z-index: 3;
     font-family: "Inter";
     font-weight: 600;
   }
@@ -15,29 +17,32 @@ const ChartsWrapper=styled.div`
   h4{
     font-size: 20px;
     font-weight: 500;
-    font-family: "Inter";
+    color: #D2D3E8;
+    font-family: "Rubik";
   }
   .wrap{
+    margin-top: 20px;
     display: flex;
     & > div{
       margin-right: 20px;
       p{
-        font-family: "Inter";
+        font-family: "Rubik";
         font-size: 16px;
+        color: #D2D3E8;
         margin-bottom: 0;
       }
       span{
-        font-family: "Inter";
+        font-family: "Rubik";
         font-size: 20px;        
       }
       .first{
-        color: green;
+        color: rgb(114, 225, 40);
       }
       .second{
-        color: orange;
+        color: rgb(253, 181, 40);
       }
       .third{
-        color: #1F3C88;
+        color: rgb(38, 198, 249);
       }
 
     }

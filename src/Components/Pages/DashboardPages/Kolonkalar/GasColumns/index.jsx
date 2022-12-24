@@ -12,6 +12,8 @@ import MinLoader from "../../../../Common/MinLoader";
 import {toast} from "react-toastify";
 import Pagination from "rc-pagination";
 import {FilterWrapper} from "../../KolonkalarReport/GasColumnReport/GasColumnReport.style";
+import {Button, IconButton} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 
 
 const GasColumns = () => {
@@ -176,9 +178,10 @@ const GasColumns = () => {
         <div className="modal-wrapper">
           {/*====MODAL====*/}
           <div className="modal-wrapper">
-            <button className="btn btn-primary" style={{fontFamily:"Inter"}} onClick={showModal}>
+            <Button variant="contained" onClick={showModal}
+                    style={{fontFamily: "Inter",color:"#fff", background:"#787EFF"}}>
               + Qo'shish
-            </button>
+            </Button>
             <Modal
               title="Qo'shish"
               open={isModalOpen}
@@ -229,9 +232,10 @@ const GasColumns = () => {
       {/*filter*/}
       <div className="filter">
         <FilterWrapper>
-          <button className="btn btn-primary" onClick={() => setIsFilterOpen(p => !p)} style={{fontFamily:"Inter"}}>
+          <Button variant="contained" onClick={() => setIsFilterOpen(p => !p)}
+                  style={{fontFamily: "Inter",color:"#fff", background:"#787EFF"}}>
             Filter
-          </button>
+          </Button>
           <div className="filter-content" style={{visibility: isFilterOpen ? "visible" : "hidden"}}>
             <div className="row">
               <div className="select mb-3 col-6">
@@ -261,13 +265,14 @@ const GasColumns = () => {
           </div>
         }
       </div>
-      <table className="table table-striped table-hover">
+      <table className="table table-borderless table-hover">
         <thead>
         <tr>
-          <th style={{width: "30%"}} className="col">Nomi</th>
-          <th style={{width: "30%"}} className="col">Savdo nuqtasi</th>
-          <th style={{width: "30%"}} className="col">Oxirki ko'rsatgich</th>
-          <th style={{width: "30%"}} className="col">Amallar</th>
+          <th style={{minWidth: "10%"}} className="col">Id</th>
+          <th style={{minWidth: "20%"}} className="col">Nomi</th>
+          <th style={{minWidth: "30%"}} className="col">Savdo nuqtasi</th>
+          <th style={{minWidth: "20%"}} className="col">Oxirki ko'rsatgich</th>
+          <th style={{minWidth: "20%"}} className="col">Amallar</th>
         </tr>
         </thead>
         <tbody>
@@ -276,14 +281,16 @@ const GasColumns = () => {
             ballons.length
               ? ballons.map((obj, index) => (
                 <tr key={obj.id}>
-                  <td style={{width: "30%"}} className="col">{(currentPage - 1) * 20 + index + 1}. {obj.name}</td>
-                  <td style={{width: "30%"}} className="col">{obj?.outlet?.title}</td>
-                  <td style={{width: "30%"}} className="col">{obj.lastValue}</td>
-                  <td style={{width: "30%"}} className="col">
+                  <td style={{minWidth: "10%"}} className="col">{(currentPage - 1) * 20 + index + 1}</td>
+                  <td style={{minWidth: "20%"}} className="col">{obj.name}</td>
+                  <td style={{minWidth: "30%"}} className="col">{obj?.outlet?.title}</td>
+                  <td style={{minWidth: "20%"}} className="col">{obj.lastValue}</td>
+                  <td style={{minWidth: "30%"}} className="col">
                     <div className="btns">
-                      <button onClick={() => handleEdit(obj)}>
-                        <EditSvg/>
-                      </button>
+                      <IconButton style={{background:"rgb(253, 181, 40, 0.12)"}}
+                                  onClick={() => handleEdit(obj)} >
+                        <EditIcon />
+                      </IconButton>
                     </div>
                   </td>
                 </tr>
@@ -293,7 +300,7 @@ const GasColumns = () => {
                   textAlign: "center",
                   padding: 30,
                 }
-              }><h3>Gaz ballon mavjud emas!</h3></div>
+              }><h3>Kolonka mavjud emas!</h3></div>
             : <MinLoader/>
         }
 

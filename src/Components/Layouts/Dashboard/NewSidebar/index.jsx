@@ -1,73 +1,161 @@
-import React, {useState} from "react";
+import React, {useState} from 'react';
+import {Layout, Menu, theme} from 'antd';
+import {useContextSelector} from "use-context-selector";
+import {SettingOutlined} from '@ant-design/icons';
+import {Collapse, Select} from 'antd';
+import UserContext from "../../../../Context/UserContext";
+import CheckSvg from "../../../Common/Svgs/CheckSvg";
+import MyLink from "../../../Common/MyLink";
+import LogoSvg from "../../../Common/Svgs/LogoSvg";
 import {SidebarWrap} from "./StyleWrapper";
-import {
-  AppstoreOutlined,
-  ContainerOutlined,
-  DesktopOutlined,
-  MailOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  PieChartOutlined,
-} from '@ant-design/icons';
-import { Button, Menu } from 'antd';
-function getItem(label, key, icon, children, type) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    type,
-  };
-}
-const items = [
-  getItem('Option 1', '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('Option 3', '3', <ContainerOutlined />),
-  getItem('Navigation One', 'sub1', <MailOutlined />, [
-    getItem('Option 5', '5'),
-    getItem('Option 6', '6'),
-    getItem('Option 7', '7'),
-    getItem('Option 8', '8'),
-  ]),
-  getItem('Navigation Two', 'sub2', <AppstoreOutlined />, [
-    getItem('Option 9', '9'),
-    getItem('Option 10', '10'),
-    getItem('Submenu', 'sub3', null, [getItem('Option 11', '11'), getItem('Option 12', '12')]),
-  ]),
+import {useRouter} from "next/router";
+import HomeSvg from "../../../Common/Svgs/HomeSvg";
+import UsersSvg from "../../../Common/Svgs/UsersSvg";
+import CashSvg from "../../../Common/Svgs/CashSvg";
+import ShopSvg from "../../../Common/Svgs/ShopSvg";
+import CashbackSvg from "../../../Common/Svgs/CashbackSvg";
+import FireSvg from "../../../Common/Svgs/FireSvg";
+import ClockSvg from "../../../Common/Svgs/ClockSvg";
+
+const {Panel} = Collapse;
+const {Option} = Select;
+const text = `
+  A dog is a type of domesticated animal.
+  Known for its loyalty and faithfulness,
+  it can be found as a welcome guest in many households across the world.
+`;
+
+const SidebarItemsMenu = [
+    {
+        title: "Kassa",
+        path: "/dashboard/cashbox",
+        Svg: HomeSvg,
+        role: ["CASHIER"]
+    },
+    {
+        title: "Bosh Sahifa",
+        path: "/dashboard/home",
+        Svg: HomeSvg,
+        role: ["SUPER_ADMIN", "DIRECTOR"]
+    },
+    {
+        title: "Cheklar",
+        path: "/dashboard/cheks",
+        Svg: CheckSvg,
+        role: ["CASHIER", "SUPER_ADMIN", "DIRECTOR"]
+    },
+    {
+        title: "Mijozlar",
+        path: "/dashboard/clients",
+        Svg: UsersSvg,
+        role: ["CASHIER", "SUPER_ADMIN", "DIRECTOR"]
+    },
+    {
+        title: "Qarzdorlar",
+        path: "/dashboard/debtors",
+        Svg: UsersSvg,
+        role: ["SUPER_ADMIN", "DIRECTOR"]
+    },
+    {
+        title: "Xarajatlar",
+        path: "/dashboard/expenses",
+        Svg: CashSvg,
+        role: ["CASHIER", "SUPER_ADMIN", "DIRECTOR"]
+    },
+    {
+        title: "Savdo nuqtalari",
+        path: "/dashboard/pos",
+        Svg: ShopSvg,
+        role: ["SUPER_ADMIN", "DIRECTOR"]
+    },
+    {
+        title: "Direktor",
+        path: "/dashboard/directors",
+        Svg: UsersSvg,
+        role: ["SUPER_ADMIN"]
+    },
+    // {
+    //   title: "Hujjatlar",
+    //   path: "/dashboard/documents",
+    //   Svg: FileSvg,
+    //   role: ["SUPER_ADMIN", "DIRECTOR"]
+    // },
+    {
+        title: "Kassirlar",
+        path: "/dashboard/cashiers",
+        Svg: UsersSvg,
+        role: ["SUPER_ADMIN", "DIRECTOR"]
+    },
+    {
+        title: "Keshbek",
+        path: "/dashboard/services",
+        Svg: CashbackSvg,
+        role: ["SUPER_ADMIN", "DIRECTOR"]
+    },
+    {
+        title: "Kolonkalar",
+        path: "/dashboard/gas-columns",
+        Svg: FireSvg,
+        role: ["SUPER_ADMIN", "DIRECTOR", "CASHIER"]
+    },
+    {
+        title: "Kolonkalar hisoboti",
+        path: "/dashboard/gas-columns-report",
+        Svg: FireSvg,
+        role: ["SUPER_ADMIN", "DIRECTOR"]
+    },
+    {
+        title: "Smena",
+        path: "/dashboard/shifts",
+        Svg: ClockSvg,
+        role: ["SUPER_ADMIN", "DIRECTOR"]
+    },
+
 ];
 
-const Sidebar = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
-  return (
-    <SidebarWrap>
-      <div
-        style={{
-          width: 256,
-        }}
-      >
-        <Button
-          type="primary"
-          onClick={toggleCollapsed}
-          style={{
-            marginBottom: 16,
-          }}
-        >
-          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        </Button>
-        <Menu
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
-          mode="inline"
-          // theme="dark"
-          inlineCollapsed={collapsed}
-          items={items}
-        />
-      </div>
-    </SidebarWrap>
-  );
+const NewSidebar = () => {
+    const router = useRouter();
+    const [expandIconPosition, setExpandIconPosition] = useState('start');
+    const onPositionChange = (newExpandIconPosition) => {
+        setExpandIconPosition(newExpandIconPosition);
+    };
+    const userRole = useContextSelector(UserContext, ctx => ctx.state.user.role);
+
+
+    const NavListMenu = SidebarItemsMenu.filter(({role}) => role.includes(userRole));
+    return (
+        <SidebarWrap>
+                <MyLink className="logo" to="/">
+                    <LogoSvg className="logoSvg"/>
+                </MyLink>
+                <Collapse bordered={false} defaultActiveKey={['1']}>
+                    <Panel header="Metan shahobchalar" key="1">
+                        <div className="sidebar-menu">
+                        {
+                            NavListMenu.map(({title, Svg, path}, idx) => {
+                                return (
+                                    <MyLink
+                                        className={router.pathname === path ?  "activelink" : "link"}
+                                        to={path}
+                                        key={idx}
+                                    >
+                                        <Svg/>
+                                        {title}
+                                    </MyLink>
+                                )
+                            })
+                        }
+                        </div>
+                    </Panel>
+                    <Panel header="This is panel header 2" key="2">
+                        {text}
+                    </Panel>
+                    <Panel header="This is panel header 3" key="3">
+                        {text}
+                    </Panel>
+                </Collapse>
+        </SidebarWrap>
+    );
 };
 
-export default Sidebar;
+export default NewSidebar;

@@ -12,8 +12,8 @@ const CardsWrapper = styled.div`
       font-weight: 600;
       font-size: 30px;
       line-height: 25px;
-      color: #1F3C88;
-      font-family: "Inter";
+      color: #D2D3E8;
+      font-family: "Rubik";
     }
 
     .filter {
@@ -36,7 +36,7 @@ const CardsWrapper = styled.div`
     flex-wrap: wrap;
 
     & > div {
-      background: #fff;
+      background: #30334E;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -47,16 +47,63 @@ const CardsWrapper = styled.div`
       //box-shadow: 0px 2px 10px rgba(58, 53, 65, 0.1);
       border: 1px solid rgba(58, 53, 65, 0.12);
       border-radius: 24px;
+    
+      &:nth-child(2){
+        .left {
+          background: rgb(255, 77, 73, 0.12);
+          border-radius: 12px;
+          padding: 10px;
+        }
+      }
+      &:nth-child(3){
+        .left {
+          background: rgb(253, 181, 40, 0.12);
+          border-radius: 12px;
+          padding: 10px;
+
+          svg {
+            width: 30px;
+            height: 30px;
+            stroke: rgb(102, 108, 255);
+          }
+        }
+      }
+      &:nth-child(4){
+        .left {
+          background: rgb(114, 225, 40, 0.12);
+          border-radius: 12px;
+          padding: 10px;
+
+          svg {
+            width: 30px;
+            height: 30px;
+            stroke: rgb(102, 108, 255);
+          }
+        }
+      }
+      &:nth-child(6){
+        .left {
+          background: rgb(102, 108, 255, 0.12);
+          border-radius: 12px;
+          padding: 10px;
+        
+          svg {
+            width: 30px;
+            height: 30px;
+            stroke: rgb(102, 108, 255);
+          }
+        }
+      }
 
       .left {
-        background: #1F3C88;
-        border-radius: 50%;
+        background: rgb(38, 198, 249, 0.12);
+        border-radius: 12px;
         padding: 10px;
 
         svg {
           width: 30px;
           height: 30px;
-          stroke: #fff;
+          stroke: rgb(38, 198, 249);
         }
       }
 
@@ -64,19 +111,21 @@ const CardsWrapper = styled.div`
         display: flex;
         flex-direction: column;
         align-items: end;
+        justify-content: center;
 
         span {
           font-size: 21px;
           font-weight: 700;
-          color: #495057;
-          font-family: "Inter";
+          color: #D2D3E8;
+          font-family: "Rubik";
 
         }
 
         p {
-          font-family: "Inter";
+          font-family: "Rubik";
           font-size: 15px;
-          color: #74788d;
+          color: #9FA0B8;
+          margin-bottom: 0;
         }
       }
     }
@@ -124,18 +173,24 @@ const CardsWrapper = styled.div`
       }
 
       .right {
-        margin-left: 30px;
+        margin-left: 20px;
+        width: 75%;
 
         .title {
           font-size: 16px;
-          font-family: "Inter";
+          font-family: "Rubik";
           color: #fff;
+        }
+        
+        .bot{
+          display: flex;
+          justify-content: space-between;
         }
 
         span {
           font-weight: 700;
           font-size: 20px;
-          font-family: "Inter";
+          font-family: "Rubik";
           color: #fff;
         }
 
@@ -149,14 +204,15 @@ const CardsWrapper = styled.div`
         .persent {
           margin-left: 50px;
           font-size: 16px;
-          font-weight: 700;
+          font-weight: 600;
           color: #fff;
           padding: 5px;
           border-radius: 5px;
           border: none;
           background: #4BB543;
+          display: flex;
           //background: #F4362B; danger
-          font-family: "Inter";
+          font-family: "Rubik";
         }
       }
     }

@@ -1,28 +1,17 @@
 import React, {useState} from 'react';
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  HomeOutlined
-} from '@ant-design/icons';
 import {Layout, Menu, theme} from 'antd';
-import HomeSvg from "../Common/Svgs/HomeSvg";
-import CheckSvg from "../Common/Svgs/CheckSvg";
-import UsersSvg from "../Common/Svgs/UsersSvg";
-import FireSvg from "../Common/Svgs/FireSvg";
-import CashSvg from "../Common/Svgs/CashSvg";
-import ShopSvg from "../Common/Svgs/ShopSvg";
-import CashbackSvg from "../Common/Svgs/CashbackSvg";
-import ClockSvg from "../Common/Svgs/ClockSvg";
 import {useContextSelector} from "use-context-selector";
 import UserContext from "../../Context/UserContext";
-import MyLink from "../Common/MyLink";
-import {useRouter} from "next/router";
-import {NewLayoutWrapper} from "./NewLayout.style";
+import { SettingOutlined } from '@ant-design/icons';
+import { Collapse, Select } from 'antd';
+const { Panel } = Collapse;
+const { Option } = Select;
+const text = `
+  A dog is a type of domesticated animal.
+  Known for its loyalty and faithfulness,
+  it can be found as a welcome guest in many households across the world.
+`;
 
-const {Header, Sider, Content} = Layout;
 const SidebarItemsMenu = [
   {
     title: "Kassa",
@@ -119,77 +108,56 @@ const SidebarItemsMenu = [
 
 
 const NewLayout = ({children}) => {
-  const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: {colorBgContainer},
-  } = theme.useToken();
+  const [expandIconPosition, setExpandIconPosition] = useState('start');
+  const onPositionChange = (newExpandIconPosition) => {
+    setExpandIconPosition(newExpandIconPosition);
+  };
+  const onChange = (key) => {
+    console.log(key);
+  };
+  const genExtra = () => (
+      <SettingOutlined
+          onClick={(event) => {
+            // If you don't want click extra trigger collapse, you can prevent this:
+            event.stopPropagation();
+          }}
+      />
+  );
   const userRole = useContextSelector(UserContext, ctx => ctx.state.user.role);
 
 
   const NavListMenu = SidebarItemsMenu.filter(({role}) => role.includes(userRole));
 
   return (
-    <NewLayoutWrapper>
-      <Layout>
-        <Sider trigger={null} collapsible collapsed={collapsed} style={{
-          padding: 0,
-          background: colorBgContainer,
-        }}>
-          <div className="logo"><img src="/img/logo.jpeg" alt=""/></div>
-          <Menu
-            // theme="dark"
-            mode="inline"
-            defaultSelectedKeys={['1']}
-            items={[
-              {
-                key: '1',
-                icon: <HomeSvg/>,
-                label: 'nav 1',
-              },
-              {
-                key: '2',
-                icon: <HomeOutlined/>,
-                label: 'nav 1',
-              },
-              {
-                key: '3',
-                icon: <HomeOutlined/>,
-                label: 'nav 1',
-              },
-              {
-                key: '4',
-                icon: <HomeOutlined/>,
-                label: 'nav 1',
-              },
-            ]}
-
-          />
-        </Sider>
-        <Layout className="site-layout">
-          <Header
+      <>
+        <Collapse
+            defaultActiveKey={['1']}
+            onChange={onChange}
+            expandIconPosition={expandIconPosition}
+        >
+          <Panel header="This is panel header 1" key="1" extra={genExtra()}>
+            <div>{text}</div>
+          </Panel>
+          <Panel header="This is panel header 2" key="2" extra={genExtra()}>
+            <div>{text}</div>
+          </Panel>
+          <Panel header="This is panel header 3" key="3" extra={genExtra()}>
+            <div>{text}</div>
+          </Panel>
+        </Collapse>
+        <br />
+        <span>Expand Icon Position: </span>
+        <Select
+            value={expandIconPosition}
             style={{
-              padding: 0,
-              background: colorBgContainer,
+              margin: '0 8px',
             }}
-          >
-            {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-              className: 'trigger',
-              onClick: () => setCollapsed(!collapsed),
-            })}
-          </Header>
-          <Content
-            style={{
-              margin: '24px 16px',
-              padding: 24,
-              minHeight: 280,
-              // background: colorBgContainer,
-            }}
-          >
-            {children}
-          </Content>
-        </Layout>
-      </Layout>
-    </NewLayoutWrapper>
+            onChange={onPositionChange}
+        >
+          <Option value="start">start</Option>
+          <Option value="end">end</Option>
+        </Select>
+      </>
   );
 };
 

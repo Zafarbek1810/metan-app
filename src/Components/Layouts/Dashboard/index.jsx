@@ -14,8 +14,8 @@ const DashboardLayout = ({children, title}) => {
     <>
       <Wrapper>
         <div className="layout__sidebar">
-          <Sidebar/>
-          {/*<NewSidebar/>*/}
+          {/*<Sidebar/>*/}
+          <NewSidebar/>
         </div>
         <div className="layout__right">
           <div className="layout__top">

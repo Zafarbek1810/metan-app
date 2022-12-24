@@ -14,6 +14,8 @@ import MinLoader from "../../../../Common/MinLoader";
 import {useContextSelector} from "use-context-selector";
 import GlobalContext from "../../../../../Context/GlobalContext/Context";
 import {useRouter} from "next/router";
+import {Button, Chip, IconButton} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 
 const customStyles = {
   content: {
@@ -104,9 +106,10 @@ const ServicesTable = () => {
       <div className="top">
         <h3 className="title">Keshbeklar</h3>
         <div className="modal-wrapper">
-          <button className="btn btn-primary" onClick={openModal} style={{fontFamily:"Inter"}}>
+          <Button variant="contained" onClick={openModal}
+                  style={{fontFamily: "Inter",color:"#fff", background:"#787EFF"}}>
             + Qo'shish
-          </button>
+          </Button>
           {/*====MODAL====*/}
           <Modal
             isOpen={modalIsOpen}
@@ -139,13 +142,11 @@ const ServicesTable = () => {
           </Modal>
         </div>
       </div>
-      <table className="table table table-striped table-hover">
+      <table className="table table-borderless table-hover">
         <thead>
         <tr>
           <th style={{width: "10%"}} className="col">Nomi</th>
           <th style={{width: "50%", display: "flex", justifyContent:"start"}} className="col">Faol savdo nuqtalari</th>
-          <th style={{width: "10%"}} className="col">Boshlanish  sanasi</th>
-          <th style={{width: "10%"}} className="col">To'xtash sanasi</th>
           <th style={{width: "10%"}} className="col">Status</th>
           <th style={{width: "10%"}} className="col">Amallar</th>
         </tr>
@@ -158,19 +159,20 @@ const ServicesTable = () => {
                 <tr key={obj.id}>
                   <td style={{width: "10%"}} className="col">{obj.name}</td>
                   <td style={{width: "50%"}} className="col">{obj?.outlets.map((idx)=>idx.title+", ")}</td>
-                  <td style={{width: "10%"}} className="col">20.11.2022 22:06</td>
-                  <td style={{width: "10%"}} className="col">{new Date(obj.endedDate).toLocaleString("en-GB")} </td>
                   <td style={{width: "10%"}} className="col">
-                    <span style={{background:"#43A047", color:"white",borderRadius:5, padding:10}}>Ishga tushirildi</span>
+                    <Chip label="Ishga tushirildi" variant="outlined" style={{
+                      background: "rgb(114, 225, 40, 0.12)",
+                      color: "rgb(114, 225, 40)",
+                      border: "none"
+                    }}/>
                   </td>
                   <td style={{width: "10%"}} className="col">
                     <div className="btns">
-                      {/*<button>*/}
-                      {/*  <DeleteSvg/>*/}
-                      {/*</button>*/}
-                      <button onClick={() => handleEditCash(obj.id)}>
-                        <EditSvg/>
-                      </button>
+                      <IconButton
+                          style={{background:"rgb(253, 181, 40, 0.12)"}}
+                          onClick={() => handleEditCash(obj.id)}>
+                        <EditIcon />
+                      </IconButton>
                     </div>
                   </td>
                 </tr>

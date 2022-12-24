@@ -11,6 +11,7 @@ import AuthProvider from "../../../Data/Providers/AuthProvider";
 import Message from "../../../utils/Message";
 import ButtonLoader from "../../Common/ButtonLoader";
 import UserProvider from "../../../Data/Providers/UserProvider";
+import LogoSvg from "../../Common/Svgs/LogoSvg";
 
 const LoginPage = () => {
   const {register, formState: {errors}, handleSubmit, reset, setValue} = useForm();
@@ -66,7 +67,7 @@ const LoginPage = () => {
       <Container>
         <div className="wrapper">
           <MyLink className="logo" to="/">
-            <span>LOGO</span>
+            <LogoSvg/>
           </MyLink>
           <div className="main">
             <h4>Kirish</h4>

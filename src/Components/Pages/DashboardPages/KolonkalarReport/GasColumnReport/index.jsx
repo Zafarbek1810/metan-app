@@ -8,6 +8,8 @@ import GasBallonsProvider from "../../../../../Data/Providers/GasBallonsProvider
 import {useForm} from "react-hook-form";
 import {toast} from "react-toastify";
 import Pagination from "rc-pagination";
+import {Button, IconButton} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 
 const GasColumnReport = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -126,9 +128,10 @@ const GasColumnReport = () => {
         <div className="modal-wrapper">
           {/*====MODAL====*/}
           <div className="modal-wrapper">
-            <button className="btn btn-primary" onClick={showModal} style={{fontFamily:"Inter"}}>
+            <Button variant="contained" onClick={showModal}
+                    style={{fontFamily: "Inter",color:"#fff", background:"#787EFF"}}>
               + Qo'shish
-            </button>
+            </Button>
             <Modal
               title="Qo'shish"
               open={isModalOpen}
@@ -145,9 +148,10 @@ const GasColumnReport = () => {
       </div>
       <div className="filter">
         <FilterWrapper>
-          <button className="btn btn-primary" onClick={() => setIsFilterOpen(p => !p)} style={{fontFamily:"Inter"}}>
+          <Button variant="contained" onClick={() => setIsFilterOpen(p => !p)}
+                  style={{fontFamily: "Inter",color:"#fff", background:"#787EFF"}}>
             Filter
-          </button>
+          </Button>
           <div className="filter-content" style={{visibility: isFilterOpen ? "visible" : "hidden"}}>
             <div className="row">
               <div className="select mb-3 col-6">
@@ -199,31 +203,34 @@ const GasColumnReport = () => {
           </div>
         }
       </div>
-      <table className="table table-striped table-hover">
+      <table className="table table-borderless table-hover">
         <thead>
         <tr>
-          <th style={{width: "15%"}} className="col">Nomi</th>
-          <th style={{width: "15%"}} className="col">Ko'rsatgich</th>
-          <th style={{width: "15%"}} className="col">Oxirgi ko'rsatgich</th>
-          <th style={{width: "15%"}} className="col">Farqi</th>
-          <th style={{width: "15%"}} className="col">Sana</th>
-          <th style={{width: "15%"}} className="col">Amallar</th>
+          <th style={{minWidth: "10%"}} className="col">Id</th>
+          <th style={{minWidth: "15%"}} className="col">Nomi</th>
+          <th style={{minWidth: "15%"}} className="col">Ko'rsatgich</th>
+          <th style={{minWidth: "15%"}} className="col">Oxirgi ko'rsatgich</th>
+          <th style={{minWidth: "15%"}} className="col">Farqi</th>
+          <th style={{minWidth: "15%"}} className="col">Sana</th>
+          <th style={{minWidth: "15%"}} className="col">Amallar</th>
         </tr>
         </thead>
         <tbody>
         {
           colsData.map((item, index) => (
             <tr key={item.id}>
-              <td style={{width: "15%"}} className="col">{(currentPage - 1) * 20 + index + 1}.{item.gasColumn.name}</td>
-              <td style={{width: "15%"}} className="col">{item.currentValue}</td>
-              <td style={{width: "15%"}} className="col">{item.lastValue}</td>
-              <td style={{width: "15%"}} className="col">{item.currentValue - item.lastValue}</td>
-              <td style={{width: "15%"}} className="col">30.11.2022</td>
-              <td style={{width: "15%"}} className="col">
+              <td style={{minWidth: "10%"}} className="col">{(currentPage - 1) * 20 + index + 1}</td>
+              <td style={{minWidth: "15%"}} className="col">{item.gasColumn.name}</td>
+              <td style={{minWidth: "15%"}} className="col">{item.currentValue}</td>
+              <td style={{minWidth: "15%"}} className="col">{item.lastValue}</td>
+              <td style={{minWidth: "15%"}} className="col">{item.currentValue - item.lastValue}</td>
+              <td style={{minWidth: "15%"}} className="col">30.11.2022</td>
+              <td style={{minWidth: "15%"}} className="col">
                 <div className="btns">
-                  <button onClick={() => openEditModal(item)}>
-                    <EditSvg/>
-                  </button>
+                  <IconButton style={{background:"rgb(253, 181, 40, 0.12)"}}
+                              onClick={() => openEditModal(item)} >
+                    <EditIcon />
+                  </IconButton>
                 </div>
               </td>
             </tr>

@@ -47,12 +47,6 @@ const SidebarItemsMenu = [
     Svg: UsersSvg,
     role: ["CASHIER", "SUPER_ADMIN", "DIRECTOR"]
   },
-  // {
-  //   title: "Kolonkalar",
-  //   path: "/dashboard/gas-columns",
-  //   Svg: FireSvg,
-  //   role: ["CASHIER"]
-  // },
   {
     title: "Qarzdorlar",
     path: "/dashboard/debtors",
@@ -65,10 +59,6 @@ const SidebarItemsMenu = [
     Svg: CashSvg,
     role: ["CASHIER", "SUPER_ADMIN", "DIRECTOR"]
   },
-
-];
-
-const SidebarItemsSetting = [
   {
     title: "Savdo nuqtalari",
     path: "/dashboard/pos",
@@ -117,6 +107,11 @@ const SidebarItemsSetting = [
     Svg: ClockSvg,
     role: ["SUPER_ADMIN", "DIRECTOR"]
   },
+
+];
+
+const SidebarItemsSetting = [
+
 
 ];
 
@@ -185,52 +180,64 @@ const Sidebar = () => {
             <LogoSvg className="logoSvg"/>
           </MyLink>
 
-          <Box sx={{width: '100%'}} className="tabBottom">
-            <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
-              <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                <Tab label="Menu" {...a11yProps(0)}  />
-                <Tab label={<SettingSvg/>} {...a11yProps(1)} />
-              </Tabs>
-            </Box>
-            <TabPanel value={value} index={0}>
-              {
-                NavListMenu.map(({title, Svg, path}, idx) => {
-                  return (
+          {/*<Box sx={{width: '100%'}} className="tabBottom">*/}
+          {/*  <Box sx={{borderBottom: 1, borderColor: 'divider'}}>*/}
+          {/*    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">*/}
+          {/*      <Tab label="Menu" {...a11yProps(0)}  />*/}
+          {/*      <Tab label={<SettingSvg/>} {...a11yProps(1)} />*/}
+          {/*    </Tabs>*/}
+          {/*  </Box>*/}
+          {/*  <TabPanel value={value} index={0}>*/}
+          {/*    {*/}
+          {/*      NavListMenu.map(({title, Svg, path}, idx) => {*/}
+          {/*        return (*/}
+          {/*          <MyLink*/}
+          {/*            className={router.pathname === path ?  "activelink" : "link"}*/}
+          {/*            to={path}*/}
+          {/*            key={idx}*/}
+          {/*          >*/}
+          {/*            <Svg/>*/}
+          {/*            {title}*/}
+          {/*          </MyLink>*/}
+          {/*        )*/}
+          {/*      })*/}
+          {/*    }*/}
+          {/*  </TabPanel>*/}
+          {/*  <TabPanel value={value} index={1} >*/}
+          {/*    {*/}
+          {/*      NavListSetting.map(({title, Svg, path}, idx) => {*/}
+          {/*        return (*/}
+          {/*          <MyLink*/}
+          {/*            className={router.pathname === path ? "activelink" : "link"}*/}
+          {/*            to={path}*/}
+          {/*            key={idx}*/}
+          {/*          >*/}
+          {/*            <Svg/>*/}
+          {/*            {title}*/}
+          {/*          </MyLink>*/}
+          {/*        )*/}
+          {/*      })*/}
+          {/*    }*/}
+          {/*  </TabPanel>*/}
+          {/*</Box>*/}
+          <div className="sidebar-menu">
+            {
+              NavListMenu.map(({title, Svg, path}, idx) => {
+                return (
                     <MyLink
-                      className={router.pathname === path ?  "activelink" : "link"}
-                      to={path}
-                      key={idx}
+                        className={router.pathname === path ?  "activelink" : "link"}
+                        to={path}
+                        key={idx}
                     >
                       <Svg/>
                       {title}
                     </MyLink>
-                  )
-                })
-              }
-            </TabPanel>
-            <TabPanel value={value} index={1} >
-              {
-                NavListSetting.map(({title, Svg, path}, idx) => {
-                  return (
-                    <MyLink
-                      className={router.pathname === path ? "activelink" : "link"}
-                      to={path}
-                      key={idx}
-                    >
-                      <Svg/>
-                      {title}
-                    </MyLink>
-                  )
-                })
-              }
-            </TabPanel>
-          </Box>
+                )
+              })
+            }
+          </div>
         </div>
         <div className="bottom">
-          {/*<div className="exit">*/}
-          {/*  <MyLink className="link" to="#" > Тизимдан чиқиш</MyLink>*/}
-          {/*</div>*/}
-
           <div className="created">
             Created by <MyLink className="crlink" to="https://jdsystems.uz/" target="_blank">JDSystems</MyLink>
           </div>

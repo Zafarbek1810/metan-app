@@ -15,20 +15,20 @@ const GasColumnReportWrapper=styled.div`
     font-weight: 600;
     font-size: 30px;
     line-height: 25px;
-    color: #1F3C88;
-    font-family: "Inter";
+    color: #D2D3E8;
+    font-family: "Rubik";
   }
 
   .filter {
     display: flex;
     align-items: center;
-    background: #fff;
+    background: #30334E;
     padding: 22px 13px 0;
 
   }
 
   .filter-state {
-    background-color: #fff;
+    background-color: #30334E;
     padding: 15px;
 
     &__inner {
@@ -54,21 +54,21 @@ const GasColumnReportWrapper=styled.div`
 
       tr{
         display: flex;
-        //justify-content: space-between;
-        //background: rgba(31, 60, 136, 0.1);
-        background: #fff;
+        background: rgb(58,62,91);
         border-radius: 6px 6px 0px 0px;
-        //padding: 15px 22px;
+        border-bottom: 1px solid rgba(159, 160, 184, 0.3);
+        padding: 5px 0;
+        
         th.col{
           font-style: normal;
           font-weight: 600;
           font-size: 18px;
           line-height: 24px;
-          color: #1F3C88;
+          color: #D4D4EA;
           display: flex;
           align-items: center;
           justify-content: start;
-          text-align: center;
+          text-align: start;
           font-family: "Inter";
           padding: 15px 12px 10px 20px;
 
@@ -77,10 +77,13 @@ const GasColumnReportWrapper=styled.div`
     }
 
     tbody{
-      background: #fff;
+      background: #30334E;
       tr{
         display: flex;
         justify-content: space-between;
+        border-bottom: 1px solid rgba(159, 160, 184, 0.3);
+        
+        
         td.col {
           font-style: normal;
           font-weight: 400;
@@ -89,7 +92,7 @@ const GasColumnReportWrapper=styled.div`
           display: flex;
           align-items: center;
           justify-content: start;
-          color: #000000;
+          color: #9FA0B8;
           text-align: start;
           font-family: "Inter";
           //padding: 0px 30px;
@@ -105,25 +108,20 @@ const GasColumnReportWrapper=styled.div`
         }
 
         .btns {
-          width: 40%;
+          width: 60%;
           display: flex;
           justify-content: center;
-          text-align: center;
 
           button {
-            background: transparent;
-            border: 1px solid #000;
-            border-radius: 10px;
             cursor: pointer;
             transition: 300ms;
-
-            &:hover {
-              background: rgba(31, 60, 136, 0.75);
-            }
+            background: transparent;
 
             svg {
               fill: none;
-              stroke: none;
+              width: 20px;
+              height: 20px;
+              fill: rgb(253, 181, 40);
             }
           }
         }

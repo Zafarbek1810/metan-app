@@ -11,8 +11,8 @@ const ClientsTableWrapper=styled.div`
       font-weight: 600;
       font-size: 30px;
       line-height: 25px;
-      color: #1F3C88;
-      font-family: "Inter";
+      color: #D2D3E8;
+      font-family: "Rubik";
       margin-top: 15px;
     }
 
@@ -110,7 +110,8 @@ const ClientsTableWrapper=styled.div`
       border: none;
 
       &:hover {
-        text-decoration: underline !important;
+        color: #787EFF !important;
+        //text-decoration: underline !important;
       }
     }
 
@@ -119,18 +120,17 @@ const ClientsTableWrapper=styled.div`
 
       tr {
         display: flex;
-        //justify-content: space-between;
-        //background: rgba(31, 60, 136, 0.1);
-        background: #fff;
+        background: rgb(58, 62, 91);
         border-radius: 6px 6px 0px 0px;
-        //padding: 15px 22px;
+        border-bottom: 1px solid rgba(159, 160, 184, 0.3);
+        padding: 5px 0;
 
         th.col {
           font-style: normal;
           font-weight: 600;
           font-size: 18px;
           line-height: 24px;
-          color: #1F3C88;
+          color: #D4D4EA;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -155,10 +155,11 @@ const ClientsTableWrapper=styled.div`
     }
 
     tbody {
-      background: #fff;
+      background: #30334E;
 
       tr {
         display: flex;
+        border-bottom: 1px solid rgba(159, 160, 184, 0.3);
         justify-content: space-between;
 
         td.col {
@@ -169,7 +170,7 @@ const ClientsTableWrapper=styled.div`
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #000000;
+          color: #9FA0B8;
           text-align: center;
           font-family: "Inter";
           padding-left: 20px;
@@ -179,26 +180,15 @@ const ClientsTableWrapper=styled.div`
             width: 100%;
 
             button {
-              background: #fff;
-              border: 1px solid rgba(0, 0, 0, 0.5);
+              width: 50%;
               cursor: pointer;
-              transition: 300ms;
-
-              img {
-                width: 30px;
-                height: 30px;
-              }
-
-              svg {
-                fill: none;
-                stroke: none;
-              }
             }
           }
         }
       }
     }
   }
+}
 `
 
 const ModalContent=styled.div`

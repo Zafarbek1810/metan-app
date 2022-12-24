@@ -11,7 +11,7 @@ const DashHeaderWrapper=styled.div`
     display: flex;
     
     h3{
-      color: #0d6efd;
+      color: #D1D1E7;
       font-family: "Inter";
     }
     svg{
@@ -37,22 +37,24 @@ const DashHeaderWrapper=styled.div`
   .admin{
     display: flex;
     justify-content: end;
-    //align-items: center;
+    align-items: center;
     width: 70%;
     padding-right: 30px ;
     text-decoration: none;
     background: transparent;
     border: none;
     font-family: "Inter";
-    p{
+    h3{
+      color: #D1D1E7;
+      font-size: 20px;
       margin-bottom: 0;
-      color: #000;
-      font-family: "Inter";
+      font-family: "Rubik";
     }
     svg{
+      stroke: #D1D1E7;
       margin-left: 10px;
-      width: 30px;
-      height: 30px;
+      width: 20px;
+      height: 20px;
     }
   }
   

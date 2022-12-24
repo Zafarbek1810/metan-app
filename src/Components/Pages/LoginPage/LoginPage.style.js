@@ -30,23 +30,17 @@ const LoginPageWrapper=styled.div`
   //}
 
   .logo {
-    width: 25%;
     display: flex;
     align-items: center;
+    justify-content: center;
     color: #000;
     text-decoration: none;
-
-    span {
-      text-transform: uppercase;
-      margin-left: 10px;
-      width: 80%;
-      font-size: 0.6875rem;
-      line-height: 18px;
-      font-family: "Inter";
-      letter-spacing: 0.5px;
-      font-weight: 600;
-      margin-right: -50px;
+    
+    svg{
+      width: 150px;
+      height: 150px;
     }
+
   }
 
   .main {

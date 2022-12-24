@@ -6,6 +6,7 @@ import PaymentProvider from "../../../../../Data/Providers/PaymentProvider";
 import Message from "../../../../../utils/Message";
 import MinLoader from "../../../../Common/MinLoader";
 import Pagination from "rc-pagination";
+import {Chip} from "@mui/material";
 
 const DebtorsTable = () => {
   const [deptors, setDeptors]=useState([])
@@ -36,7 +37,7 @@ const DebtorsTable = () => {
   return (
     <DebtorsTableWrapper>
       <h3 className="title">Qarzdorlar</h3>
-      <table className="table table-striped table-hover">
+      <table className="table table-borderless table-hover">
         <thead>
         <tr>
           <th style={{width: "10%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">Ism</th>
@@ -58,7 +59,9 @@ const DebtorsTable = () => {
                   <td style={{width: "10%"}} className="col">{obj.plateNumber}</td>
                   <td style={{width: "15%"}} className="col">{obj.balance}</td>
                   <td style={{width: "15%"}} className="col">
-                    <span style={{color:"red", fontWeight:600}}>{obj.totalDebt}</span>
+                    <span >
+                      <Chip label={obj.totalDebt} variant="outlined" style={{fontSize:18, background:"rgb(255, 77, 73, 0.12)", color:"rgb(255, 77, 73)",border:"none"}} />
+                    </span>
                   </td>
                   <td style={{width: "10%"}} className="col">{new Date(obj.lastVisit).toLocaleString("en-GB")}</td>
 

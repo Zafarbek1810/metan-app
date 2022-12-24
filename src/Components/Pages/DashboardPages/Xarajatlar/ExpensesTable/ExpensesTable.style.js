@@ -6,33 +6,36 @@ const ExpensesTableWrapper=styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 15px;
+
     .title{
       font-style: normal;
       font-weight: 600;
       font-size: 30px;
       line-height: 25px;
-      color: #1F3C88;
-      font-family: "Inter";
+      color: #D2D3E8;
+      font-family: "Rubik";
     }
     
     .summ{
       display: flex;
       align-items: center;
       h3{
+        color: #D2D3E8;
         margin: 0 15px 0 0;
-        font-family: "Inter";
+        font-family: "Rubik";
       }
       p{
         margin: 0;
-        font-family: "Inter";
+        font-family: "Rubik";
       }
     }
   }
   
   .filter {
-    background-color: #fff;
-    border-radius: 4px;
-    padding: 10px;
+    display: flex;
+    align-items: center;
+    background: #30334E;
+    padding: 22px 13px 0;
   }
 
   .filter-state {
@@ -40,7 +43,7 @@ const ExpensesTableWrapper=styled.div`
     &__inner {
       padding: 10px;
       border-radius: 15px;
-      background-color: #e9e9e9;
+      background-color: #30334E;
 
       display: flex;
       align-items: center;
@@ -61,15 +64,17 @@ const ExpensesTableWrapper=styled.div`
 
       tr {
         display: flex;
-        background: #fff;
+        background: rgb(58,62,91);
         border-radius: 6px 6px 0px 0px;
+        border-bottom: 1px solid rgba(159, 160, 184, 0.3);
+        padding: 5px 0;
 
         th.col {
           font-style: normal;
           font-weight: 600;
           font-size: 18px;
           line-height: 24px;
-          color: #1F3C88;
+          color: #D4D4EA;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -78,93 +83,56 @@ const ExpensesTableWrapper=styled.div`
           padding: 15px 12px 10px 20px;
         }
 
-        th.row {
-          font-style: normal;
-          font-weight: 600;
-          font-size: 18px;
-          line-height: 24px;
-          color: #1F3C88;
-          display: flex;
-          align-items: center;
-          justify-content: start;
-          text-align: center;
-          font-family: "Inter";
-        }
       }
     }
 
     tbody {
-      background: #fff;
+      background: #30334E;
 
       tr {
         display: flex;
         justify-content: space-between;
+        border-bottom: 1px solid rgba(159, 160, 184, 0.3);
+        
 
         td.col {
           font-style: normal;
-          font-weight: 400;
+          font-weight: 500;
           font-size: 18px;
           line-height: 24px;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #000000;
+          color: #9FA0B8;
           text-align: center;
           font-family: "Inter";
           padding-left: 20px;
-          
+
 
 
           .btns {
-            width: 100%;
+            width: 60%;
             display: flex;
             justify-content: center;
+
             button {
-              background: transparent;
-              border: 1px solid #000;
-              border-radius: 10px;
               cursor: pointer;
               transition: 300ms;
+              background: transparent;
 
-              &:hover {
-                background: rgba(31, 60, 136, 0.75);
-
-              }
-
-              svg {
-                fill: none;
-                stroke: none;
-              }
+                svg {
+                  fill: none;
+                  width: 20px;
+                  height: 20px;
+                  fill: rgb(253, 181, 40);
+                }
             }
-          }
         }
       }
     }
   }
 
 `
-const ModalHeader=styled.header`
-  background: #fff;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #f5f6f8;
-  padding: 20px 20px 5px 20px;
-  h2.title{
-    margin-bottom: 0;
-    font-size: 25px !important;
-  }
-    svg{
-      height: 20px;
-      width: 20px;
-      color:#000;
-    }
-  
-  button.closeSvg{
-    background: transparent;
-    border: none;
-  }
-`
-
 
 const ModalContent=styled.div`
   //padding: 20px;
@@ -306,7 +274,6 @@ const FilterWrapper = styled.div`
 
 export{
   ExpensesTableWrapper,
-  ModalHeader,
   ModalContent,
   ModalFooter,
   FilterWrapper

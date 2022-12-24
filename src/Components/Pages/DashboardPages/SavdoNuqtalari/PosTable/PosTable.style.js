@@ -12,8 +12,8 @@ const PosTableWrapper = styled.div`
       font-weight: 600;
       font-size: 30px;
       line-height: 25px;
-      color: #1F3C88;
-      font-family: "Inter";
+      color: #D2D3E8;
+      font-family: "Rubik";
 
     }
   }
@@ -24,7 +24,7 @@ const PosTableWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.03);
 
     thead {
       width: 100%;
@@ -33,16 +33,17 @@ const PosTableWrapper = styled.div`
         display: flex;
         //justify-content: space-between;
         //background: rgba(31, 60, 136, 0.1);
-        background: #fff;
+        background: rgb(58,62,91);
         border-radius: 6px 6px 0px 0px;
-        //padding: 15px 22px;
+        border-bottom: 1px solid rgba(159, 160, 184, 0.3);
+        padding: 5px 0;
 
         th.col {
           font-style: normal;
           font-weight: 600;
           font-size: 18px;
           line-height: 24px;
-          color: #1F3C88;
+          color: #D4D4EA;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -67,52 +68,62 @@ const PosTableWrapper = styled.div`
     }
 
     tbody {
-      background: #fff;
-      
-      img{
-        width: 50px;
-        height: 50px;
+      background: #30334E;
+
+      img {
+        object-fit: cover;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
       }
 
       tr {
         display: flex;
         //justify-content: space-between;
+        border-bottom: 1px solid rgba(159, 160, 184, 0.3);
 
         td.col {
           font-style: normal;
-          font-weight: 400;
+          font-weight: 500;
           font-size: 18px;
           line-height: 24px;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #000000;
+          color: #9FA0B8;
           text-align: center;
           font-family: "Inter";
           padding-left: 20px;
-          
-
 
           .btns {
-            width: 40%;
+            width: 60%;
             display: flex;
             justify-content: space-between;
+
             button {
-              background: transparent;
-              border: 1px solid #000;
-              border-radius: 10px;
               cursor: pointer;
               transition: 300ms;
+              background: transparent;
 
-              &:hover {
-                background: rgba(31, 60, 136, 0.75);
-
+              &:nth-child(1) {
+                svg {
+                  fill: none;
+                  width: 20px;
+                  height: 20px;
+                  fill: rgb(255, 77, 73);
+                }
               }
 
-              svg {
-                fill: none;
-                stroke: none;
+              &:nth-child(2) {
+                svg {
+                  fill: none;
+                  width: 20px;
+                  height: 20px;
+                  fill: rgb(253, 181, 40);
+                }
               }
+
+
             }
           }
         }

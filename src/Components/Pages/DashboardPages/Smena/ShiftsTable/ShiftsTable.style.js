@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 const ShiftsTableWrapper=styled.div`
   font-family: "Inter";
+  max-width: 100%;
   .top{
-    min-width: 100% !important;
+    max-width: 100% !important;
     display: flex;
     justify-content: space-between;
     margin-bottom: 30px;
@@ -13,8 +14,8 @@ const ShiftsTableWrapper=styled.div`
       font-weight: 600;
       font-size: 30px;
       line-height: 25px;
-      color: #1F3C88;
-      font-family: "Inter";
+      color: #D2D3E8;
+      font-family: "Rubik";
     }
     
     .modalWrapper{
@@ -23,7 +24,8 @@ const ShiftsTableWrapper=styled.div`
   
   .table-responsive{
     //width: 1200px;
-    background: #fff;
+    background: rgb(58,62,91);
+    border-radius: 6px 6px 0px 0px;
     overflow-x: scroll;
     box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
 
@@ -40,17 +42,19 @@ const ShiftsTableWrapper=styled.div`
 
       tr {
         display: flex;
-        background: #fff;
+        background: rgb(58,62,91);
         border-radius: 6px 6px 0px 0px;
-        //padding: 0px 12px;
+        border-bottom: 1px solid rgba(159, 160, 184, 0.3);
+        padding: 5px 0;
+
 
         th.col {
           min-width: 10% !important;
           font-style: normal;
           font-weight: 600;
-          font-size: 18px;
+          font-size: 13px;
           line-height: 24px;
-          color: #1F3C88;
+          color: #D4D4EA;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -61,70 +65,28 @@ const ShiftsTableWrapper=styled.div`
     }
 
     tbody {
-      background: #fff;
-      width: 100%;
 
       tr {
         display: flex;
         justify-content: space-between;
-        //padding: 0px 12px;
-        width: 100% !important;
+        border-bottom: 1px solid rgba(159, 160, 184, 0.3);
+        
 
         td.col {
           min-width: 10% !important;
           font-style: normal;
           font-weight: 400;
-          font-size: 18px;
+          font-size: 13px;
           line-height: 24px;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #000000;
+          color: #9FA0B8;
           text-align: center;
           font-family: "Inter";
           
-
-
-          .btns {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            button {
-              background: transparent;
-              border: 1px solid #000;
-              cursor: pointer;
-              transition: 300ms;
-
-              &:hover {
-                background: rgba(31, 60, 136, 0.75);
-
-              }
-
-              svg {
-                fill: none;
-                stroke: none;
-              }
-            }
-          }
         }
-        //&:hover{
-        //  background-color: #f2f2f2;
-        //}
-
-        //&:nth-child(even) {
-        //}
-
-        td.row {
-          font-style: normal;
-          font-weight: 400;
-          font-size: 18px;
-          line-height: 24px;
-          display: flex;
-          align-items: center;
-          justify-content: start;
-          text-align: center;
-          font-family: "Inter";
-        }
+       
       }
     }
   }

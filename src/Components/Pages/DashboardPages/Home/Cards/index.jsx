@@ -97,8 +97,10 @@ const Cards = () => {
                         </div>
                         <div className="right">
                             <p className="title">Yangi foydalanuvchilar</p>
-                            <span>1000</span>
-                            <span className="persent"><TopSvg/>25.8%</span>
+                            <div className="bot">
+                                <span>1000</span>
+                                <span className="persent"><TopSvg/>25.8%</span>
+                            </div>
                         </div>
                     </div>
                     <div>
@@ -107,8 +109,10 @@ const Cards = () => {
                         </div>
                         <div className="right">
                             <p className="title">Jami daromad</p>
-                            <span>3000000</span>
-                            <span className="persent"><TopSvg/>25.8%</span>
+                            <div className="bot">
+                                <span>3000000</span>
+                                <span className="persent"><TopSvg/>25.8%</span>
+                            </div>
                         </div>
                     </div>
                     <div>
@@ -117,8 +121,10 @@ const Cards = () => {
                         </div>
                         <div className="right">
                             <p className="title">Xarajatlar</p>
-                            <span>1000</span>
-                            <span className="persent"><TopSvg/>25.8%</span>
+                            <div className="bot">
+                                <span>1000</span>
+                                <span className="persent"><TopSvg/>25.8%</span>
+                            </div>
                         </div>
                     </div>
                 </div>

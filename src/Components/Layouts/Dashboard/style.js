@@ -6,27 +6,45 @@ const Wrapper=styled.div`
 
   .layout__sidebar {
     flex-shrink: 0;
+    background: #282A42;
     width: 260px;
-    border-right: 1px solid rgba(31, 60, 136, 0.2);
+    height: 100vh;
+    //border-right: 1px solid rgba(31, 60, 136, 0.2);
+    overflow-y: auto;
+
+
+    &::-webkit-scrollbar-track {
+      //-webkit-box-shadow: inset 0 0 6px rgba(187, 187, 187, 0.3);
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar {
+      width: 3px;
+      background-color: transparent !important;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #57596C!important;
+    }
+    
   }
 
   .layout__top {
-    border-bottom: 1px solid rgba(31, 60, 136, 0.2);
+    //border-bottom: 1px solid rgba(31, 60, 136, 0.2);
     position: absolute;
     top: 0;
     left: 260px;
     width: calc(100% - 250px);
-    background: #fff;
+    background: #282A42;
+    border-bottom: 1px solid rgba(159, 160, 184, 0.3);
   }
 
   .layout__main {
-    margin-top: 50px;
-    height: calc(100vh - 50px);
+    margin-top: 45px;
+    height: calc(100vh - 45px);
     overflow-y: auto;
     padding: 20px 20px 10px;
-    //background-image: url("/img/mountain2.jpg");
-    background-attachment: fixed;
-    background-size: cover;
+    background: #282A42;
 
     &::-webkit-scrollbar-track {
       //-webkit-box-shadow: inset 0 0 6px rgba(187, 187, 187, 0.3);

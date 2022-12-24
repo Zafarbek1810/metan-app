@@ -14,6 +14,9 @@ import MinLoader from "../../../../Common/MinLoader";
 import {useRouter} from "next/router";
 import {useContext, useContextSelector} from "use-context-selector";
 import GlobalContext from "../../../../../Context/GlobalContext/Context";
+import {Chip, IconButton} from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 const customStyles = {
   content: {
@@ -153,12 +156,12 @@ const PosTable = ({RefObj, setIsOpen}) => {
           </Modal>
         </div>
       </div>
-      <table className="table table-striped table-hover">
+      <table className="table table-hover table-borderless">
         <thead>
         <tr>
           {/*<th style={{width: "20px" , display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">ID</th>*/}
-          <th style={{width: "15%"}} className="col">Rasm</th>
-          <th style={{width: "40%"}} className="col">Savdo nuqtasi nomi</th>
+          <th style={{width: "15%"}}  className="col">Rasm</th>
+          <th style={{minWidth: "50%"}} className="col">Savdo nuqtasi nomi</th>
           <th style={{width: "8%"}} className="col">Ochiq</th>
           <th style={{width: "8%"}} className="col">Faollashtirilgan</th>
           <th style={{width: "10%"}} className="col">Amallar</th>
@@ -171,22 +174,27 @@ const PosTable = ({RefObj, setIsOpen}) => {
               ? outlet.map((obj, index) => (
                 <tr key={obj.id}>
                   {/*<td style={{width: "20px" , display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">{index + 1}</td>*/}
-                  <td style={{width: "15%" }} className="col"><img src="/img/metan.png" alt=""/></td>
-                  <td style={{width: "40%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">{obj.title}</td>
+                  <td style={{width: "15%" }} className="col"><img src="/img/metan.jpg" alt=""/></td>
+                  <td style={{minWidth: "50%", display: "flex", justifyContent:"center", alignItems:"center", textAlign:"start"}} className="col">{obj.title}</td>
                   <td style={{width: "8%"}} className="col">
-                    <span style={{background:"#43A047",borderRadius:15, color:"white", padding:"5px 10px"}}>Ha</span>
+                    <span
+                    >
+                     <Chip label="Ha" variant="outlined" style={{background:"rgb(114, 225, 40, 0.12)", color:"rgb(114, 225, 40)",border:"none"}} />
+                    </span>
                   </td>
                   <td style={{width: "8%"}} className="col">
-                    <span style={{background:"#43A047",borderRadius:15, color:"white", padding:"5px 10px"}}>Ha</span>
+                    <span >
+                     <Chip label="Ha" variant="outlined" style={{background:"rgb(114, 225, 40, 0.12)", color:"rgb(114, 225, 40)",border:"none"}} />
+                    </span>
                   </td>
                   <td style={{width: "10%"}} className="col">
                     <div className="btns">
-                      <button onClick={() => handleDeleteOutlet(obj.id)}>
-                        <DeleteSvg/>
-                      </button>
-                      <button onClick={() => handleEditUser(obj.id)}>
-                        <EditSvg/>
-                      </button>
+                        <IconButton style={{background:"rgb(255, 77, 73, 0.12)"}} onClick={() => handleDeleteOutlet(obj.id)} aria-label="delete">
+                          <DeleteIcon />
+                        </IconButton>
+                        <IconButton style={{background:"rgb(253, 181, 40, 0.12)"}} onClick={() => handleEditUser(obj.id)} aria-label="delete">
+                          <EditIcon />
+                        </IconButton>
                     </div>
                   </td>
                 </tr>
