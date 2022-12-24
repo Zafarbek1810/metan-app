@@ -31,6 +31,59 @@ const ExpensesTableWrapper=styled.div`
     }
   }
 
+  .statistika {
+    width: 20%;
+    margin-left: auto;
+    margin-bottom: 20px;
+    .card {
+      border-radius: 12px;
+      background-color: #30334E;
+      padding: 15px;
+      box-shadow: rgb(20 21 33 / 18%) 0px 2px 10px 0px;
+
+      h5 {
+        color: #D2D3E8;
+        font-family: "Rubik";
+        margin-bottom: 13px;
+      }
+
+      .wrap {
+        display: flex;
+        .left {
+          width: 50%;
+          display: flex;
+          .icon {
+            background: rgb(255, 77, 73, 0.12);
+            border-radius: 12px;
+            padding: 10px;
+            svg {
+              width: 30px;
+              height: 30px;
+            }
+          }
+
+          .bot {
+            margin-left: 15px;
+            display: flex;
+            flex-direction: column;
+
+            p{
+              color: #D2D3E8;
+              margin-bottom: 0;
+            }
+            span{
+              font-weight: 700;
+              font-size: 18px;
+              color: #D2D3E8;
+            }
+          }
+        }
+
+      }
+
+    }
+  }
+
   .filter {
     background-color: #30334E;
     border-radius: 4px;

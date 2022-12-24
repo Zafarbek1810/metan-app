@@ -31,12 +31,13 @@ const ShiftsTableWrapper=styled.div`
     .card {
       border-radius: 12px;
       background-color: #30334E;
-      padding: 10px;
+      padding: 15px;
       box-shadow: rgb(20 21 33 / 18%) 0px 2px 10px 0px;
 
       h5 {
         color: #D2D3E8;
         font-family: "Rubik";
+        margin-bottom: 13px;
       }
 
       .wrap {
@@ -64,6 +65,8 @@ const ShiftsTableWrapper=styled.div`
               margin-bottom: 0;
             }
             span{
+              font-weight: 700;
+              font-size: 18px;
               color: #D2D3E8;
             }
           }
@@ -94,6 +97,8 @@ const ShiftsTableWrapper=styled.div`
               margin-bottom: 0;
             }
             span{
+              font-weight: 700;
+              font-size: 18px;
               color: #D2D3E8;
             }
           }

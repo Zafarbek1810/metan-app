@@ -148,10 +148,10 @@ const NewSidebar = () => {
                         }
                         </div>
                     </Panel>
-                    <Panel header="This is panel header 2" key="2">
+                    <Panel header="Propan shahobchalar" key="2">
                         {text}
                     </Panel>
-                    <Panel header="This is panel header 3" key="3">
+                    <Panel header="Benzin shahobchalar" key="3">
                         {text}
                     </Panel>
                 </Collapse>

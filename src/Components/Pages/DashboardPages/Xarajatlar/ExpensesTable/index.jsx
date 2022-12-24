@@ -11,6 +11,8 @@ import {toast} from "react-toastify";
 import Pagination from "rc-pagination";
 import {Button, Chip, IconButton} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import CardSvg from "../../../../Common/Svgs/CardSvg";
+import DollarSvg2 from "../../../../Common/Svgs/DollarSvg2";
 
 
 const ExpensesTable = () => {
@@ -161,12 +163,28 @@ const ExpensesTable = () => {
 
   return (
     <ExpensesTableWrapper>
+      <div className="statistika">
+        <div className="card">
+          <div className="wrap">
+            <div className="left">
+              <div className="icon">
+                <CardSvg/>
+              </div>
+              <div className="bot">
+                <span>{summ?.expensesAmountSum}</span>
+                <p>Xarajat</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="top">
         <h3 className="title">Xarajatlar</h3>
-          <div className="summ" >
-            <h3>Umumiy summa:</h3>
-            <h3 style={{color:"rgb(255, 77, 73)"}}>{summ?.expensesAmountSum}</h3>
-          </div>
+          {/*<div className="summ" >*/}
+          {/*  <h3>Umumiy summa:</h3>*/}
+          {/*  <h3 style={{color:"rgb(255, 77, 73)"}}>{summ?.expensesAmountSum}</h3>*/}
+          {/*</div>*/}
         <div className="modal-wrapper">
           {/*====MODAL====*/}
           <div className="modal-wrapper">
