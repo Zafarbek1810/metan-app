@@ -6,11 +6,11 @@ export default class OutletProvider {
   }
 
   static async getAllOutlets(page = 0, size = 10, sort = "asc") {
-    return await client.get(`/outlet/getOutlets?page=${page}&size=${size}&sort=${sort}`);
+    return await client.get(`/outlet/getOutletsforadmin?page=${page}&size=${size}&sort=${sort}`);
   }
 
   static async getOneOutlet(outletId) {
-    return await client.get(`/outlet/getOutlets/${outletId}`);
+    return await client.get(`/outlet/getOutletsforadmin/${outletId}`);
   }
 
   static async getOneFullOutlet(id) {

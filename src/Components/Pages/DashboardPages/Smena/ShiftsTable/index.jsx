@@ -3,7 +3,7 @@ import { ModalContent, ShiftsTableWrapper } from "./ShiftsTable.style";
 import { Modal, Select } from "antd";
 import OutletProvider from "../../../../../Data/Providers/OutletProvider";
 import Message from "../../../../../utils/Message";
-import {Controller, useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import ButtonLoader from "../../../../Common/ButtonLoader";
 import EditSvg from "../../../../Common/Svgs/EditSvg";
 import MinLoader from "../../../../Common/MinLoader";
@@ -28,11 +28,12 @@ const ShiftsTable = () => {
 
   //today date
   let defaultDate = new Date();
-  defaultDate.setDate(defaultDate.getDate() + 1);
+  defaultDate.setDate(defaultDate.getDate());
   const [date, setDate] = useState(defaultDate);
   const onSetDate = (event) => {
     setDate(new Date(event.target.value));
     console.log(date.toLocaleDateString("en-CA"))
+    onFilterSum()
   };
 
   const [loading, setLoading] = useState(false);
@@ -42,11 +43,16 @@ const ShiftsTable = () => {
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filterState, setFilterState] = useState({});
+  const [filterStateSum, setFilterStateSum] = useState({});
   const filSelectRef = useRef();
   const filDateRef = useRef();
+  const filModDateRef = useRef();
+  const filModOutletRef = useRef();
 
   const showModal = () => {
+    onFilterSum()
     setIsModalOpen(true);
+
   };
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -58,6 +64,8 @@ const ShiftsTable = () => {
   const [expence, setExpence] = useState([]);
   const [pnl, setPnl] = useState([]);
 
+  const [exSum, setExSum] = useState([]);
+const [render, setRender]= useState(null)
   const [totalElements, setTotalElements] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
   const onChange = (page) => {
@@ -65,15 +73,18 @@ const ShiftsTable = () => {
   };
 
   useEffect(() => {
-    OutletProvider.getAllOutlets(0, 1000)
+    async function fn(){
+   await OutletProvider.getAllOutlets(0, 1000)
       .then((res) => {
-        console.log("outlet", res);
+        console.log("outlet", res.data);
         setOutlet(res.data);
       })
       .catch((err) => {
         console.log(err);
         Message.serverError();
       });
+    }
+    fn()
   }, []);
 
   const optionExpense = outlet.map((i) => ({
@@ -83,13 +94,16 @@ const ShiftsTable = () => {
 
   const handleOutletId = (value) => {
     setoutletId(value);
-    console.log("setoutletId", value);
   };
+
+  const [activeOutlet, setActiveOutlet] = useState(null);
+
+
 
   const onSubmit = async (values) => {
     const body = {};
     body.outletId = outletId;
-    body.expenses = +values.expence;
+    body.expenses = +values.xarajat;
     body.autopilot = +values.autopilot;
     body.byCard = +values.terminal;
     body.transfers = +values.money;
@@ -101,14 +115,14 @@ const ShiftsTable = () => {
       const { data } = await OutletProvider.addShift(body);
       console.log(data);
       setForRender(Math.random());
-      setValue("expence", "");
+      setValue("xarajat", "");
       setValue("autopilot", "");
       setValue("terminal", "");
       setValue("money", "");
       setValue("dept", "");
       setValue("cash", "");
       setValue("date", "");
-      toast.success("Muvaffaqoyatli!");
+      toast.success("Muvaffaqiyatli!");
       handleCancel();
     } catch (err) {
       console.log(err);
@@ -137,11 +151,37 @@ const ShiftsTable = () => {
       });
   }, [filterState, forRender, currentPage]);
 
+  useEffect(()=>{
+    async function fn(){
+      await OutletProvider.getExpensesSum(0,1000, filterStateSum)
+          .then((res)=>{
+            console.log("expensessum",res)
+            setExSum(res.data.expensesAmountSum)
+            setValue("xarajat", exSum);
+          })
+          .catch((err)=>{
+            console.log(err)
+            Message.serverError()
+          })
+    }
+    fn()
+  },[filterStateSum, isModalOpen])
+
+  const onFilterSum=()=>{
+    const date = filModDateRef.current?.value?.split("-").reverse().join("-");
+    const outletId = filModOutletRef.current?.value;
+    setFilterStateSum({ date, outletId });
+  }
+
   const onOnFilter = () => {
     const date = filDateRef.current?.value?.split("-").reverse().join("-");
     const outletId = filSelectRef.current?.value;
     setFilterState({ date, outletId });
     setIsFilterOpen(false);
+  };
+
+  const handleOutletFilter = (e) => {
+    setActiveOutlet(e.target.value);
   };
 
   const onOffFilter = () => {
@@ -180,27 +220,29 @@ const ShiftsTable = () => {
             <ModalContent>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <label className="label mb-1">
-                  <span className="label-text">Savdo nuqtalari</span>
-                  <Controller
-                      control={control}
-                      name="test"
-                      render={({
-                                 field: { onChange, onBlur, value, name, ref },
-                                 fieldState: { invalid, isTouched, isDirty, error },
-                                 formState,
-                               }) => (
-                          <Select
-                              placeholder="Tanlang"
-                              allowClear
-                              style={{
-                                width: "100%",
-                              }}
-                              value={outletId}
-                              onChange={handleOutletId}
-                              options={optionExpense}
-                          />
-                      )}
-                  />
+                  {/*<span className="label-text">Savdo nuqtalari</span>*/}
+                  {/*    <Select*/}
+                  {/*        placeholder="Tanlang"*/}
+                  {/*        allowClear*/}
+                  {/*        style={{*/}
+                  {/*          width: "100%",*/}
+                  {/*        }}*/}
+                  {/*        ref={filModOutletRef}*/}
+                  {/*        value={outletId}*/}
+                  {/*        onChange={handleOutletId}*/}
+                  {/*        options={optionExpense}*/}
+                  {/*    />*/}
+                  <label className="form-label">Savdo nuqtasi</label>
+                  <select value={activeOutlet} ref={filModOutletRef} className="form-control">
+                    <option  disabled>
+                      Tanlang
+                    </option>
+                    {optionExpense.map((i) => (
+                        <option value={i.value} key={i.value}>
+                          {i.label}
+                        </option>
+                    ))}
+                  </select>
                 </label>
                 <label className="label">
                   <span className="label-text">Sana</span>
@@ -208,6 +250,7 @@ const ShiftsTable = () => {
                     <span className="err-text">Majburiy maydon</span>
                   )}
                   <input
+                      ref={filModDateRef}
                     autoComplete="off"
                     type="date"
                     // disabled
@@ -218,13 +261,14 @@ const ShiftsTable = () => {
 
                 <label className="label">
                   <span className="label-text">Xarajat</span>
-                  {errors.expence && (
+                  {errors.xarajat && (
                     <span className="err-text">Majburiy maydon</span>
                   )}
                   <input
                     autoComplete="off"
                     type="number"
-                    {...register("expence", { required: true })}
+                    value={exSum}
+                    {...register("xarajat", { required: true })}
                   />
                 </label>
 
