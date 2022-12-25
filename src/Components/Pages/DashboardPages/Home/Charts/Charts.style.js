@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
-const ChartsWrapper=styled.div`
-  background: #30334E;
+const ChartsWrapper = styled.div`
+  background: #fff;
   padding: 20px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
+  //box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
   border-radius: 24px;
+  box-shadow: rgb(20 21 33 / 18%) 0px 2px 10px 0px;
   
   .apexcharts-text tspan{
     font-size: 16px;
@@ -17,7 +18,7 @@ const ChartsWrapper=styled.div`
   h4{
     font-size: 20px;
     font-weight: 500;
-    color: #D2D3E8;
+    color: rgba(0, 0, 0, 0.7);
     font-family: "Rubik";
   }
   .wrap{
@@ -28,7 +29,7 @@ const ChartsWrapper=styled.div`
       p{
         font-family: "Rubik";
         font-size: 16px;
-        color: #D2D3E8;
+        color: rgba(0, 0, 0, 0.7);
         margin-bottom: 0;
       }
       span{
@@ -50,6 +51,6 @@ const ChartsWrapper=styled.div`
   }
 `
 
-export{
+export {
   ChartsWrapper
 }

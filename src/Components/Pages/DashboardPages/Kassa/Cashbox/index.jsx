@@ -121,6 +121,7 @@ const Tab1 = ({outletId, setMijozObj, setSpinning}) => {
                 <span className="err-text">Majburiy maydon</span>
               )}
               <input
+                  autoComplete="off"
                 placeholder="Izlash..."
                 type="number"
                 {...register("name", {required: false})}
@@ -135,6 +136,7 @@ const Tab1 = ({outletId, setMijozObj, setSpinning}) => {
                 <span className="err-text">Majburiy maydon</span>
               )}
               <input
+                  autoComplete="off"
                 type="text"
                 {...register("carNum", {required: false})}
                 onKeyDown={handleFetchMijozByAuto}
@@ -149,6 +151,7 @@ const Tab1 = ({outletId, setMijozObj, setSpinning}) => {
               <span className="err-text"></span>
             )}
             <input
+                autoComplete="off"
               placeholder=""
               type="number"
               {...register("summa", {required: true})}
@@ -220,6 +223,7 @@ const Tab3 = ({outletId, setMijozObj}) => {
             <span className="err-text"></span>
           )}
           <input
+              autoComplete="off"
             placeholder="Izlash..."
             type="number"
             {...register("name", {required: true})}
@@ -234,6 +238,7 @@ const Tab3 = ({outletId, setMijozObj}) => {
             <span className="err-text"></span>
           )}
           <input
+              autoComplete="off"
             placeholder=""
             type="number"
             {...register("qarz", {required: true})}
@@ -245,6 +250,7 @@ const Tab3 = ({outletId, setMijozObj}) => {
             <span className="err-text"></span>
           )}
           <input
+              autoComplete="off"
             type="date"
             {...register("sana", {required: true})}
           />
@@ -278,6 +284,8 @@ const Cashbox = () => {
   const [carType, setCarType] = useState([])
   const [carid, setCarid] = useState(null)
 
+  const [editingClient, setEditingClient] = useState(null)
+
   useEffect(() => {
     UserProvider.getMe()
       .then(({data}) => {
@@ -306,6 +314,12 @@ const Cashbox = () => {
     setIsModalOpen(false);
   };
 
+  const handleEdit = (obj) => {
+    setEditingClient(obj);
+    console.log("ss",editingClient);
+    setIsModalOpen(true);
+  };
+
   const onSubmit =async (values) => {
     const body = {}
     body.fullName = values.name
@@ -315,17 +329,37 @@ const Cashbox = () => {
     body.carType = values.carType
 
 
-    try {
-      const {data} = await  UserProvider.addClient(body);
-      console.log(data)
-      toast.success("Qo'shildi!")
-      handleCancel()
-    } catch (err) {
-      console.log(err)
-      Message.serverError();
+    if(editingClient){
+      try {
+        body.clientId = editingClient.id
+        const {data} = await  UserProvider.editClient(body);
+        toast.success("Muvaffaqiyatli o'zgartirildi!")
+        handleCancel()
+      } catch (err) {
+        console.log(err)
+        Message.serverError();
+      }
+    }else{
+      try {
+        const {data} = await  UserProvider.addClient(body);
+        console.log(data)
+        toast.success("Muvaffaqiyatli yaratildi!")
+        handleCancel()
+      } catch (err) {
+        console.log(err)
+        Message.serverError();
+      }
     }
-
   }
+
+  useEffect(()=>{
+    if(editingClient){
+      setValue("name", editingClient.fullName)
+      setValue("phoneNumber", editingClient.phoneNumber)
+      setValue("avtoNum", editingClient.plateNumber)
+      setValue("carType", editingClient.cartype.title)
+    }
+  }, [isModalOpen])
 
   return (
     <CashboxWrapper>
@@ -354,6 +388,7 @@ const Cashbox = () => {
                         <span className="err-text">Majburiy maydon</span>
                       )}
                       <input
+                          autoComplete="off"
                         type="text"
                         {...register("name", {required: true})}
                       />
@@ -364,6 +399,7 @@ const Cashbox = () => {
                         <span className="err-text">Majburiy maydon</span>
                       )}
                       <input
+                          autoComplete="off"
                         type="number"
                         {...register("phoneNumber", {required: true})}
                       />
@@ -374,6 +410,7 @@ const Cashbox = () => {
                         <span className="err-text">Majburiy maydon</span>
                       )}
                       <input
+                          autoComplete="off"
                         placeholder="01X000XX"
                         type="text"
                         {...register("avtoNum", {required: true})}
@@ -411,8 +448,9 @@ const Cashbox = () => {
                         <span className="err-text">Majburiy maydon</span>
                       )}
                       <input
+                          autoComplete="off"
                         type="text"
-                        {...register("password", {required: true})}
+                        {...register("password", {required: false})}
                       />
                     </label>
                     <div className="btns">
@@ -430,8 +468,8 @@ const Cashbox = () => {
             <div className="bottom">
               <div className="box">
                 <div className="head">
-                  <h3 style={{color:"#D1D0E7"}}>Balans: {mijozObj.balance}</h3>
-                  <IconButton style={{background:"rgb(253, 181, 40, 0.12)"}} onClick={() => handleEdit(obj)} >
+                  <h3 style={{color:"rgba(0, 0, 0, 0.7)"}}>Balans: {mijozObj.balance}</h3>
+                  <IconButton style={{background:"rgb(253, 181, 40, 0.12)"}} onClick={() => handleEdit(mijozObj)} >
                     <EditIcon />
                   </IconButton>
                 </div>
@@ -470,42 +508,28 @@ const Cashbox = () => {
                         <CheckSvg/>
                         <h4>Maksimal summa</h4>
                       </div>
-                      <div className="right"><p>{mijozObj.fullName}</p></div>
+                      <div className="right"><p>-</p></div>
                     </div>
                     <div className="col">
                       <div className="left">
                         <StatusSvg/>
                         <h4>Status</h4>
                       </div>
-                      <div className="right"><p>{mijozObj.fullName}</p></div>
+                      <div className="right"><p>{mijozObj.status}</p></div>
                     </div>
-                    <div className="col">
-                      <div className="left">
-                        <AwardSvg/>
-                        <h4>Bonus</h4>
-                      </div>
-                      <div className="right"><p>{mijozObj.fullName}</p></div>
-                    </div>
+                    {/*<div className="col">*/}
+                    {/*  <div className="left">*/}
+                    {/*    <AwardSvg/>*/}
+                    {/*    <h4>Bonus</h4>*/}
+                    {/*  </div>*/}
+                    {/*  <div className="right"><p>{mijozObj.fullName}</p></div>*/}
+                    {/*</div>*/}
                     <div className="col">
                       <div className="left">
                         <CashSvg/>
                         <h4>Qarz</h4>
                       </div>
-                      <div className="right"><p>{mijozObj.fullName}</p></div>
-                    </div>
-                    <div className="col">
-                      <div className="left">
-                        <CalendarSvg/>
-                        <h4>Qaytarish kuni</h4>
-                      </div>
-                      <div className="right"><p>{mijozObj.fullName}</p></div>
-                    </div>
-                    <div className="col">
-                      <div className="left">
-                        <GasBallonSvg/>
-                        <h4>Gaz ballon</h4>
-                      </div>
-                      <div className="right"><p>{mijozObj.fullName}</p></div>
+                      <div className="right"><p>{mijozObj.totalDebt}</p></div>
                     </div>
                   </div>
                 </div>

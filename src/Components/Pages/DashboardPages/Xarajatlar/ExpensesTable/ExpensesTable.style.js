@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ExpensesTableWrapper=styled.div`
+const ExpensesTableWrapper = styled.div`
   .top{
     margin-bottom: 15px;
     display: flex;
@@ -12,7 +12,7 @@ const ExpensesTableWrapper=styled.div`
       font-weight: 600;
       font-size: 30px;
       line-height: 25px;
-      color: #D2D3E8;
+      color: rgba(0, 0, 0, 0.7);
       font-family: "Rubik";
     }
     
@@ -20,7 +20,7 @@ const ExpensesTableWrapper=styled.div`
       display: flex;
       align-items: center;
       h3{
-        color: #D2D3E8;
+        color: rgba(0, 0, 0, 0.7);
         margin: 0 15px 0 0;
         font-family: "Rubik";
       }
@@ -37,12 +37,12 @@ const ExpensesTableWrapper=styled.div`
     margin-bottom: 20px;
     .card {
       border-radius: 12px;
-      background-color: #30334E;
+      background-color: #fff;
       padding: 15px;
       box-shadow: rgb(20 21 33 / 18%) 0px 2px 10px 0px;
 
       h5 {
-        color: #D2D3E8;
+        color: rgba(0, 0, 0, 0.7);
         font-family: "Rubik";
         margin-bottom: 13px;
       }
@@ -68,13 +68,13 @@ const ExpensesTableWrapper=styled.div`
             flex-direction: column;
 
             p{
-              color: #D2D3E8;
+              color: rgba(0, 0, 0, 0.7);
               margin-bottom: 0;
             }
             span{
               font-weight: 700;
               font-size: 18px;
-              color: #D2D3E8;
+              color: rgba(0, 0, 0, 0.7);
             }
           }
         }
@@ -85,7 +85,7 @@ const ExpensesTableWrapper=styled.div`
   }
 
   .filter {
-    background-color: #30334E;
+    background-color: transparent;
     border-radius: 4px;
     padding: 10px;
   }
@@ -95,7 +95,7 @@ const ExpensesTableWrapper=styled.div`
     &__inner {
       padding: 10px;
       border-radius: 15px;
-      background-color: #30334E;
+      background-color: #e9e9e9;
 
       display: flex;
       align-items: center;
@@ -109,14 +109,15 @@ const ExpensesTableWrapper=styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
+    //box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
+    box-shadow: rgb(20 21 33 / 18%) 0px 2px 10px 0px;
 
     thead {
       width: 100%;
 
       tr {
         display: flex;
-        background: rgb(58,62,91);
+        background: #F5F5F7;
         border-radius: 6px 6px 0px 0px;
         border-bottom: 1px solid rgba(159, 160, 184, 0.3);
         padding: 5px 0;
@@ -126,7 +127,7 @@ const ExpensesTableWrapper=styled.div`
           font-weight: 600;
           font-size: 18px;
           line-height: 24px;
-          color: #D4D4EA;
+          color: rgba(0, 0, 0, 0.7);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -139,7 +140,7 @@ const ExpensesTableWrapper=styled.div`
     }
 
     tbody {
-      background: #30334E;
+      background: #fff;
 
       tr {
         display: flex;
@@ -155,7 +156,7 @@ const ExpensesTableWrapper=styled.div`
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #9FA0B8;
+          color: rgba(0, 0, 0, 0.7);
           text-align: center;
           font-family: "Inter";
           padding-left: 20px;
@@ -186,7 +187,7 @@ const ExpensesTableWrapper=styled.div`
 
 `
 
-const ModalContent=styled.div`
+const ModalContent = styled.div`
   //padding: 20px;
   border-bottom: 1px solid #f5f6f8;
   background: #fff;
@@ -278,7 +279,7 @@ const ModalContent=styled.div`
   
 `
 
-const ModalFooter=styled.footer`
+const ModalFooter = styled.footer`
   padding: 20px;
   display: flex;
   align-items: center;
@@ -324,7 +325,7 @@ const FilterWrapper = styled.div`
   }
 `
 
-export{
+export {
   ExpensesTableWrapper,
   ModalContent,
   ModalFooter,

@@ -1,138 +1,162 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {ExpensesTableWrapper, FilterWrapper, ModalContent} from "./ExpensesTable.style";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  ExpensesTableWrapper,
+  FilterWrapper,
+  ModalContent,
+} from "./ExpensesTable.style";
 import EditSvg from "../../../../Common/Svgs/EditSvg";
 import ButtonLoader from "../../../../Common/ButtonLoader";
 import Message from "../../../../../utils/Message";
-import {Controller, useForm} from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import OutletProvider from "../../../../../Data/Providers/OutletProvider";
-import {Modal, Select} from "antd";
+import { Modal, Select } from "antd";
 import MinLoader from "../../../../Common/MinLoader";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 import Pagination from "rc-pagination";
-import {Button, Chip, IconButton} from "@mui/material";
+import { Button, Chip, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import CardSvg from "../../../../Common/Svgs/CardSvg";
 import DollarSvg2 from "../../../../Common/Svgs/DollarSvg2";
-
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import TextField from '@mui/material/TextField';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
 
 const ExpensesTable = () => {
-  const {register, formState: {errors}, handleSubmit, setValue, reset, control} = useForm({
-    defaultValues: {}
+  const [valuedate, setValuedate] = React.useState(dayjs(new Date()));
+
+  const handleChange = (newValue) => {
+    console.log("11111");
+    console.log(newValue)
+    setValuedate(newValue);
+  };
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    setValue,
+    reset,
+    control,
+  } = useForm({
+    defaultValues: {},
   });
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [loading, setLoading] = useState(false);
-  const [outlet, setOutlet] = useState([])
+  const [outlet, setOutlet] = useState([]);
   const [loading2, setLoading2] = useState(false);
-  const [editingExpence, setEditingExpence] = useState(null)
-  const [forRender, setForRender] = useState(null)
-  const [expenses, setExpenses] = useState([])
-  const [outletId, setoutletId] = useState(null)
+  const [editingExpence, setEditingExpence] = useState(null);
+  const [forRender, setForRender] = useState(null);
+  const [expenses, setExpenses] = useState([]);
+  const [outletId, setoutletId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filterState, setFilterState] = useState({});
   const filSelectRef = useRef();
   const filDateRef = useRef();
 
-  const [totalElements, setTotalElements]=useState(20)
+  const [totalElements, setTotalElements] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
-  const onChange = page => {
+  const onChange = (page) => {
     setCurrentPage(page);
   };
 
-  const [summ, setSumm] = useState([])
+  const [summ, setSumm] = useState([]);
 
   useEffect(() => {
     OutletProvider.getAllOutlets(0, 1000)
-      .then(res => {
-        console.log(res)
-        setOutlet(res.data)
+      .then((res) => {
+        console.log(res);
+        setOutlet(res.data);
       })
-      .catch(err => {
-        console.log(err)
-        Message.serverError()
-      })
-    OutletProvider.getExpensesSum(currentPage-1, 20, filterState)
-      .then(res => {
-        console.log("sum",res)
-        setSumm(res.data)
-      })
-  }, [forRender, filterState])
+      .catch((err) => {
+        console.log(err);
+        Message.serverError();
+      });
+    // OutletProvider.getExpensesSum(currentPage - 1, 20, filterState).then(
+    //   (res) => {
+    //     console.log("sum", res);
+    //     setSumm(res.data);
+    //   }
+    // );
+  }, [forRender, filterState]);
 
   useEffect(() => {
     setLoading2(true);
-    OutletProvider.getExpenses(currentPage-1, 20, filterState)
-      .then(({data}) => {
+    OutletProvider.getExpenses(currentPage - 1, 20, filterState)
+      .then(({ data }) => {
         console.log("setExpenses", data);
         setExpenses(data.data);
-        setTotalElements(data.count)
+        setTotalElements(data.count);
+        setSumm(data.sum);
+
       })
-      .catch(err => {
-        console.log(err)
-        Message.serverError()
-      }).finally(() => {
-      setLoading2(false);
-    })
-  }, [filterState, forRender, currentPage])
+      .catch((err) => {
+        console.log(err);
+        Message.serverError();
+      })
+      .finally(() => {
+        setLoading2(false);
+      });
+  }, [filterState, forRender, currentPage]);
 
   const handleEdit = (obj) => {
-    setEditingExpence(obj)
-    setIsModalOpen(true)
-  }
-
+    setEditingExpence(obj);
+    setIsModalOpen(true);
+  };
 
   const onSubmit = async (values) => {
-    const body = {}
-    body.outletId = outletId
+    const body = {};
+    body.outletId = outletId;
     body.title = values.name;
     body.amount = +values.summ;
 
-    setLoading(true)
+    setLoading(true);
     if (editingExpence) {
       try {
-        body.expenseId = editingExpence.id
-        const {data} = await OutletProvider.updateExpense(body);
-        console.log(data.res)
-        toast.success("Muvaffaqiyatli o'zgartirildi!")
+        body.expenseId = editingExpence.id;
+        const { data } = await OutletProvider.updateExpense(body);
+        console.log(data.res);
+        toast.success("Muvaffaqiyatli o'zgartirildi!");
         setForRender(Math.random());
-        handleCancel()
+        handleCancel();
       } catch (err) {
-        console.log(err)
+        console.log(err);
         Message.serverError();
       }
     } else {
       try {
-        const {data} = await OutletProvider.addExpence(body);
-        console.log(data.res)
-        toast.success("Muvaffaqiyatli yaratildi!")
+        const { data } = await OutletProvider.addExpence(body);
+        console.log(data.res);
+        toast.success("Muvaffaqiyatli yaratildi!");
         setForRender(Math.random());
-        handleCancel()
+        handleCancel();
       } catch (err) {
-        console.log(err)
+        console.log(err);
         Message.serverError();
       }
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   useEffect(() => {
     if (editingExpence) {
-      setValue("outlet", editingExpence.expenseId)
-      setValue("name", editingExpence.name)
-      setValue("summ", editingExpence.amount)
+      setValue("outlet", editingExpence.expenseId);
+      setValue("name", editingExpence.name);
+      setValue("summ", editingExpence.amount);
     }
-  }, [isModalOpen])
+  }, [isModalOpen]);
 
-  const optionExpense = outlet.map((i) => (
-    {
-      label: i.title,
-      value: i.id
-    }
-  ))
+  const optionExpense = outlet.map((i) => ({
+    label: i.title,
+    value: i.id,
+  }));
 
   const handleOutletId = (value) => {
-    setoutletId(value)
-    console.log("setoutletId", value)
-  }
+    setoutletId(value);
+    console.log("setoutletId", value);
+  };
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -140,26 +164,28 @@ const ExpensesTable = () => {
 
   const handleCancel = () => {
     setIsModalOpen(false);
-    setValue("outlet", '')
-    setValue("name", "")
-    setValue("summ", "")
+    setValue("outlet", "");
+    setValue("name", "");
+    setValue("summ", "");
   };
 
   const onOnFilter = () => {
-    const date = filDateRef.current?.value?.split("-").reverse().join("-");
-    const outletId = filSelectRef.current?.value
-    setFilterState({date, outletId});
+    console.log(filDateRef)
+    const date = filDateRef.current?.value.replaceAll("/","-");
+
+    const outletId = filSelectRef.current?.value;
+    setFilterState({ date, outletId });
     setIsFilterOpen(false);
-  }
+  };
 
   const onOffFilter = () => {
-    if(Object.keys(filterState).length) {
+    if (Object.keys(filterState).length) {
       setFilterState({});
     }
     filDateRef.current.value = "";
     filSelectRef.current.value = "";
     setIsFilterOpen(false);
-  }
+  };
 
   return (
     <ExpensesTableWrapper>
@@ -168,10 +194,10 @@ const ExpensesTable = () => {
           <div className="wrap">
             <div className="left">
               <div className="icon">
-                <CardSvg/>
+                <CardSvg />
               </div>
               <div className="bot">
-                <span>{summ?.expensesAmountSum}</span>
+                <span>{summ}</span>
                 <p>Xarajat</p>
               </div>
             </div>
@@ -181,15 +207,18 @@ const ExpensesTable = () => {
 
       <div className="top">
         <h3 className="title">Xarajatlar</h3>
-          {/*<div className="summ" >*/}
-          {/*  <h3>Umumiy summa:</h3>*/}
-          {/*  <h3 style={{color:"rgb(255, 77, 73)"}}>{summ?.expensesAmountSum}</h3>*/}
-          {/*</div>*/}
         <div className="modal-wrapper">
           {/*====MODAL====*/}
           <div className="modal-wrapper">
-            <Button variant="contained" onClick={showModal}
-                    style={{fontFamily: "Inter",color:"#fff", background:"#787EFF"}}>
+            <Button
+              variant="contained"
+              onClick={showModal}
+              style={{
+                fontFamily: "Inter",
+                color: "#fff",
+                background: "#787EFF",
+              }}
+            >
               + Qo'shish
             </Button>
             <Modal
@@ -207,10 +236,10 @@ const ExpensesTable = () => {
                       control={control}
                       name="outlet"
                       render={({
-                                 field: {onChange, onBlur, value, name, ref},
-                                 fieldState: {invalid, isTouched, isDirty, error},
-                                 formState,
-                               }) => (
+                        field: { onChange, onBlur, value, name, ref },
+                        fieldState: { invalid, isTouched, isDirty, error },
+                        formState,
+                      }) => (
                         <Select
                           placeholder="Tanlang"
                           size="large"
@@ -226,7 +255,6 @@ const ExpensesTable = () => {
                         />
                       )}
                     />
-
                   </label>
                   <label className="label">
                     <span className="label-text">Nomi</span>
@@ -234,8 +262,9 @@ const ExpensesTable = () => {
                       <span className="err-text">Majburiy maydon</span>
                     )}
                     <input
+                      autoComplete="off"
                       type="text"
-                      {...register("name", {required: true})}
+                      {...register("name", { required: true })}
                     />
                   </label>
                   <label className="label">
@@ -244,15 +273,26 @@ const ExpensesTable = () => {
                       <span className="err-text">Majburiy maydon</span>
                     )}
                     <input
+                      autoComplete="off"
                       type="number"
-                      {...register("summ", {required: true})}
+                      {...register("summ", { required: true })}
                     />
                   </label>
                   <div className="btns">
-                    <button type="button" className="btn btn-outline-warning" onClick={handleCancel}>Bekor qilish
+                    <button
+                      type="button"
+                      className="btn btn-outline-warning"
+                      onClick={handleCancel}
+                    >
+                      Bekor qilish
                     </button>
-                    <button type="submit" className="btn btn-primary" disabled={loading}>Saqlash {loading &&
-                      <ButtonLoader/>}</button>
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      disabled={loading}
+                    >
+                      Saqlash {loading && <ButtonLoader />}
+                    </button>
                   </div>
                 </form>
               </ModalContent>
@@ -263,94 +303,190 @@ const ExpensesTable = () => {
 
       <div className="filter">
         <FilterWrapper>
-          <Button variant="contained" onClick={() => setIsFilterOpen(p => !p)}
-                  style={{fontFamily: "Inter",color:"#fff", background:"#787EFF"}}>
+          <Button
+            variant="contained"
+            onClick={() => setIsFilterOpen((p) => !p)}
+            style={{
+              fontFamily: "Inter",
+              color: "#fff",
+              background: "#787EFF",
+            }}
+          >
             Filter
           </Button>
 
-          <div className="filter-content" style={{visibility: isFilterOpen ? "visible" : "hidden"}}>
+          <div
+            className="filter-content"
+            style={{ visibility: isFilterOpen ? "visible" : "hidden" }}
+          >
             <div className="row">
               <div className="mb-3 col-6">
                 <label className="form-label">Savdo nuqtasi</label>
                 <select ref={filSelectRef} className="form-control">
-                  <option value={"null"} disabled>Tanlang</option>
-                  {
-                    optionExpense.map(i => (
-                      <option value={i.value} key={i.value}>{i.label}</option>
-                    ))
-                  }
+                  <option value={"null"} disabled>
+                    Tanlang
+                  </option>
+                  {optionExpense.map((i) => (
+                    <option value={i.value} key={i.value}>
+                      {i.label}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="mb-3 col-6">
                 <label className="form-label">Davr</label>
-                <input ref={filDateRef} name="startDate" type="date" className="form-control"/>
+                {/*<input*/}
+                {/*  autoComplete="off"*/}
+                {/*  ref={filDateRef}*/}
+                {/*  name="startDate"*/}
+                {/*  type="date"*/}
+                {/*  className="form-control"*/}
+                {/*/>*/}
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DesktopDatePicker
+                      label="Date desktop"
+                      inputRef={filDateRef}
+                      // ref={filDateRef}
+                      inputFormat="DD-MM-YYYY"
+                      value={valuedate}
+                      onChange={handleChange}
+                      renderInput={(params) => <TextField {...params} />}
+                  />
+                </LocalizationProvider>
               </div>
               <div className="d-flex gap-2">
-                <Button variant="outlined" onClick={onOffFilter}>Bekor qilish</Button>
-                <Button variant="contained" color="success" onClick={onOnFilter}>Qo'llash</Button>
-
+                <Button variant="outlined" onClick={onOffFilter}>
+                  Bekor qilish
+                </Button>
+                <Button
+                  variant="contained"
+                  color="success"
+                  onClick={onOnFilter}
+                >
+                  Qo'llash
+                </Button>
               </div>
             </div>
           </div>
         </FilterWrapper>
-        {
-          !!Object.keys(filterState).length && (
-            <div className="filter-state col-12">
-              <div className="filter-state__inner">
-                <span>Filtrlangan</span>
-                <button className="btn btn-secondary" onClick={onOffFilter}>O'chirish</button>
-              </div>
+        {!!Object.keys(filterState).length && (
+          <div className="filter-state col-12">
+            <div className="filter-state__inner">
+              <span>Filtrlangan</span>
+              <button className="btn btn-secondary" onClick={onOffFilter}>
+                O'chirish
+              </button>
             </div>
-          )
-        }
+          </div>
+        )}
       </div>
 
       <table className="table table-borderless table-hover">
         <thead>
-        <tr style={{width: "100%"}}>
-          <th style={{width: "30%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">Nomi</th>
-          <th style={{width: "20%"}} className="col">Savdo nuqtasi</th>
-          <th style={{width: "10%"}} className="col">Admin</th>
-          <th style={{width: "10%"}} className="col">Sana</th>
-          <th style={{width: "20%"}} className="col">Summa</th>
-          <th style={{width: "10%"}} className="col">Amallar</th>
-        </tr>
+          <tr style={{ width: "100%" }}>
+            <th
+              style={{
+                width: "30%",
+                display: "flex",
+                justifyContent: "start",
+                alignItems: "center",
+                textAlign: "start",
+              }}
+              className="col"
+            >
+              Nomi
+            </th>
+            <th style={{ width: "20%" }} className="col">
+              Savdo nuqtasi
+            </th>
+            <th style={{ width: "10%" }} className="col">
+              Admin
+            </th>
+            <th style={{ width: "10%" }} className="col">
+              Sana
+            </th>
+            <th style={{ width: "20%" }} className="col">
+              Summa
+            </th>
+            <th style={{ width: "10%" }} className="col">
+              Amallar
+            </th>
+          </tr>
         </thead>
         <tbody>
-        {
-          !loading2 ?
-            expenses.length
-              ? expenses.map((obj, index) => (
+          {!loading2 ? (
+            expenses.length ? (
+              expenses.map((obj, index) => (
                 <tr key={obj.id}>
-                  <td style={{width: "30%", display: "flex", justifyContent:"start", alignItems:"center", textAlign:"start"}} className="col">
-                  {(currentPage - 1) * 20 + index + 1}. {obj.name}
+                  <td
+                    style={{
+                      width: "30%",
+                      display: "flex",
+                      justifyContent: "start",
+                      alignItems: "center",
+                      textAlign: "start",
+                    }}
+                    className="col"
+                  >
+                    {(currentPage - 1) * 20 + index + 1}. {obj.name}
                   </td>
-                  <td style={{width: "30%"}} className="col">{obj.outlet.title}</td>
-                  <td style={{width: "10%"}} className="col" title={obj.admin.fullName}>{obj.admin.fullName}</td>
-                  <td style={{width: "10%"}} className="col">{new Date(obj.date).toLocaleString("en-GB")}</td>
-                  <td style={{width: "20%", color: "red", fontWeight: 600}} className="col">
-                    <span >
-                      <Chip label={obj.amount} variant="outlined" style={{fontSize:18, background:"rgb(255, 77, 73, 0.12)", color:"rgb(255, 77, 73)",border:"none"}} />
+                  <td style={{ width: "30%" }} className="col">
+                    {obj.outlet?.title}
+                  </td>
+                  <td
+                    style={{ width: "10%" }}
+                    className="col"
+                    title={obj.admin?.fullName}
+                  >
+                    {obj.admin?.fullName}
+                  </td>
+                  <td style={{ width: "10%" }} className="col">
+                    {new Date(obj.date).toLocaleString("en-GB")}
+                  </td>
+                  <td
+                    style={{ width: "20%", color: "red", fontWeight: 600 }}
+                    className="col"
+                  >
+                    <span>
+                      <Chip
+                        label={obj.amount?.toLocaleString().replaceAll(",", " ")}
+                        variant="outlined"
+                        style={{
+                          fontSize: 18,
+                          background: "rgb(255, 77, 73, 0.12)",
+                          color: "rgb(255, 77, 73)",
+                          border: "none",
+                        }}
+                      />
                     </span>
                   </td>
-                  <td style={{width: "10%"}} className="col">
+                  <td style={{ width: "10%" }} className="col">
                     <div className="btns">
-                      <IconButton style={{background:"rgb(253, 181, 40, 0.12)"}} onClick={() => handleEdit(obj)} >
+                      <IconButton
+                        style={{ background: "rgb(253, 181, 40, 0.12)" }}
+                        onClick={() => handleEdit(obj)}
+                      >
                         <EditIcon />
                       </IconButton>
                     </div>
                   </td>
                 </tr>
-              )) : <div style={
-                {
+              ))
+            ) : (
+              <div
+                style={{
                   textAlign: "center",
                   padding: 30,
-                }
-              }><h3 style={{color:"#D2D3E8"}}>Xarajatlar mavjud emas!</h3></div>
-            : <MinLoader/>
-        }
-
-
+                }}
+              >
+                <h3 style={{ color: "rgba(0, 0, 0, 0.7)" }}>
+                  Xarajatlar mavjud emas!
+                </h3>
+              </div>
+            )
+          ) : (
+            <MinLoader />
+          )}
         </tbody>
       </table>
       <Pagination
@@ -359,7 +495,6 @@ const ExpensesTable = () => {
         total={totalElements}
         pageSize={20}
       />
-
     </ExpensesTableWrapper>
   );
 };

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const DirectorTableWrapper=styled.div`
+const DirectorTableWrapper = styled.div`
   .top{
     margin-bottom: 15px;
     display: flex;
@@ -11,7 +11,7 @@ const DirectorTableWrapper=styled.div`
       font-weight: 600;
       font-size: 30px;
       line-height: 25px;
-      color: #D2D3E8;
+      color: rgba(0, 0, 0, 0.7);
       font-family: "Rubik";
     }
   }
@@ -24,7 +24,8 @@ const DirectorTableWrapper=styled.div`
 
   .table{
     margin-top: 20px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
+    //box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
+    box-shadow: rgb(20 21 33 / 18%) 0px 2px 10px 0px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -34,7 +35,7 @@ const DirectorTableWrapper=styled.div`
       width: 100%;
       tr{
         display: flex;
-        background: rgb(58,62,91);
+        background: #F5F5F7;
         border-radius: 6px 6px 0px 0px;
         border-bottom: 1px solid rgba(159, 160, 184, 0.3);
         padding: 5px 0;
@@ -44,7 +45,7 @@ const DirectorTableWrapper=styled.div`
           font-weight: 600;
           font-size: 18px;
           line-height: 24px;
-          color: #D4D4EA;
+          color: rgba(0, 0, 0, 0.7);
           display: flex;
           align-items: center;
           justify-content: start;
@@ -58,7 +59,7 @@ const DirectorTableWrapper=styled.div`
     }
 
     tbody{
-      background: #30334E;
+      background: #fff;
       tr{
         display: flex;
         border-bottom: 1px solid rgba(159, 160, 184, 0.3);
@@ -71,7 +72,7 @@ const DirectorTableWrapper=styled.div`
           display: flex;
           align-items: center;
           justify-content: start;
-          color: #9FA0B8;
+          color: rgba(0, 0, 0, 0.7);
           text-align: center;
           font-family: "Inter";
           padding-left: 20px;
@@ -110,7 +111,7 @@ const DirectorTableWrapper=styled.div`
   
 `
 
-const ModalHeader=styled.header`
+const ModalHeader = styled.header`
   background: #fff;
   display: flex;
   align-items: center;
@@ -133,7 +134,7 @@ const ModalHeader=styled.header`
 `
 
 
-const ModalContent=styled.div`
+const ModalContent = styled.div`
   padding: 20px;
   border-bottom: 1px solid #f5f6f8;
   background: #fff;
@@ -228,7 +229,7 @@ const ModalContent=styled.div`
 
 
 
-const ModalFooter=styled.footer`
+const ModalFooter = styled.footer`
   padding: 20px;
   display: flex;
   align-items: center;
@@ -255,7 +256,7 @@ const ModalFooter=styled.footer`
     }
 `
 
-export{
+export {
   DirectorTableWrapper,
   ModalHeader,
   ModalContent,

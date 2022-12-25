@@ -180,11 +180,11 @@ const GasColumnReport = () => {
             <div className="row">
               <div className="mb-3 col-6">
                 <label className="form-label">Davr</label>
-                <input ref={startDateRef} name="startDate" type="date" className="form-control"/>
+                <input autoComplete="off" ref={startDateRef} name="startDate" type="date" className="form-control"/>
               </div>
               <div className="mb-3 mt-2 col-6">
                 <label className="form-label"></label>
-                <input ref={endDateRef} name="endDate" type="date" className="form-control"/>
+                <input autoComplete="off" ref={endDateRef} name="endDate" type="date" className="form-control"/>
               </div>
             </div>
 
@@ -264,7 +264,7 @@ const GasColumnReport = () => {
             <tbody>
             <tr>
               <td>{editGazReport?.gasColumn.name}</td>
-              <td><input type="text" className="form-control w-75"/></td>
+              <td><input autoComplete="off" type="text" className="form-control w-75"/></td>
               <td>{editGazReport?.lastValue}</td>
               <td>Natija</td>
             </tr>
@@ -291,7 +291,7 @@ function ReportModal({renderParent, handleCancel}) {
   const [activeOutlet, setActiveOutlet] = useState(null);
   const [cols, setCols] = useState([]);
   const [forRender, setForRender] = useState(123);
-
+  let itogo=  0;
   let defaultDate = new Date()
   defaultDate.setDate(defaultDate.getDate())
 
@@ -353,7 +353,7 @@ function ReportModal({renderParent, handleCancel}) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="d-flex w-75 gap-2">
-        <input disabled type="date" value={date.toLocaleDateString('en-CA')} onChange={onSetDate}/>
+        <input autoComplete="off" type="date" value={date.toLocaleDateString('en-CA')} onChange={onSetDate}/>
         <select className="form-control" value={activeOutlet} onChange={(e) => setActiveOutlet(e.target.value)}>
           {
             outlets.map(i => (
@@ -374,10 +374,25 @@ function ReportModal({renderParent, handleCancel}) {
         </thead>
         <tbody>
         {
-          cols.map(item => <ReportTr watch={watch} register={register} item={item} key={item.id}/>)
+
+          cols.map(item => <ReportTr watch={watch} register={register} item={item} key={item.id} foo={(temp, birinchi)=>{
+            if(birinchi){
+              itogo = 0;
+              itogo+=temp;
+            }else{
+              itogo += +temp;
+            }
+            document.getElementById("jami").innerHTML = "Jami: " + itogo;
+          }
+          }/>)
         }
         </tbody>
+        {
+          cols.map(item => console.log(item))
+        }
       </table>
+     <span id="jami" style={{width:"100%", fontWeight:700, fontSize:20,textAlign:"center"}}></span>
+      {/*<input name="searchTxt" disabled type="text" maxLength="512" id="jami" className="searchField"/>*/}
 
       <div className="d-flex gap-2 justify-content-end">
         <button className="btn btn-danger" type="button" onClick={() => handleCancel()}>Bekor qilish</button>
@@ -387,14 +402,26 @@ function ReportModal({renderParent, handleCancel}) {
   )
 }
 
-function ReportTr({watch, register, item}) {
+
+
+function ReportTr({watch, register, item,foo}) {
   const jami = watch(item.id + "") ? watch(item.id + "") - item.lastValue : 0;
+  //console.log(item) ;
+  if(item.name === '1'){
+    foo(jami, true);
+  }else{
+    foo(jami, false);
+  }
+  //console.log(itogo)
+
+  // let itogo=jami + jami
+  // console.log(itogo)
 
   return (
     <tr>
       <th className="col">{item?.name}</th>
       <th className="col">
-        <input type="number" {...register(item.id + "")}/>
+        <input autoComplete="off" type="number" {...register(item.id + "")}/>
       </th>
       <th className="col">{item.lastValue}</th>
       <th className="col">{jami}</th>

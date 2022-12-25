@@ -12,7 +12,7 @@ const CardsWrapper = styled.div`
       font-weight: 600;
       font-size: 30px;
       line-height: 25px;
-      color: #D2D3E8;
+      color: rgba(0, 0, 0, 0.7);
       font-family: "Rubik";
     }
 
@@ -36,7 +36,7 @@ const CardsWrapper = styled.div`
     flex-wrap: wrap;
 
     & > div {
-      background: #30334E;
+      background: #F7F7F9;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -48,15 +48,16 @@ const CardsWrapper = styled.div`
       box-shadow: rgb(20 21 33 / 18%) 0px 2px 10px 0px;
       border: 1px solid rgba(58, 53, 65, 0.12);
       border-radius: 24px;
-    
-      &:nth-child(2){
+
+      &:nth-child(2) {
         .left {
           background: rgb(255, 77, 73, 0.12);
           border-radius: 12px;
           padding: 10px;
         }
       }
-      &:nth-child(3){
+
+      &:nth-child(3) {
         .left {
           background: rgb(253, 181, 40, 0.12);
           border-radius: 12px;
@@ -69,7 +70,8 @@ const CardsWrapper = styled.div`
           }
         }
       }
-      &:nth-child(4){
+
+      &:nth-child(4) {
         .left {
           background: rgb(114, 225, 40, 0.12);
           border-radius: 12px;
@@ -82,12 +84,13 @@ const CardsWrapper = styled.div`
           }
         }
       }
-      &:nth-child(6){
+
+      &:nth-child(6) {
         .left {
           background: rgb(102, 108, 255, 0.12);
           border-radius: 12px;
           padding: 10px;
-        
+
           svg {
             width: 30px;
             height: 30px;
@@ -116,8 +119,8 @@ const CardsWrapper = styled.div`
 
         span {
           font-size: 21px;
-          font-weight: 700;
-          color: #D2D3E8;
+          font-weight: 500;
+          color: rgba(0, 0, 0, 0.7);
           font-family: "Rubik";
 
         }
@@ -125,7 +128,7 @@ const CardsWrapper = styled.div`
         p {
           font-family: "Rubik";
           font-size: 15px;
-          color: #9FA0B8;
+          color: rgba(0, 0, 0, 0.7);
           margin-bottom: 0;
         }
       }
@@ -182,8 +185,8 @@ const CardsWrapper = styled.div`
           font-family: "Rubik";
           color: #fff;
         }
-        
-        .bot{
+
+        .bot {
           display: flex;
           justify-content: space-between;
         }

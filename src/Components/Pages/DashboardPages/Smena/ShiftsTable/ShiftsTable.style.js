@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ShiftsTableWrapper=styled.div`
+const ShiftsTableWrapper = styled.div`
   font-family: "Inter";
   max-width: 100%;
 
@@ -16,7 +16,7 @@ const ShiftsTableWrapper=styled.div`
       font-weight: 600;
       font-size: 30px;
       line-height: 25px;
-      color: #D2D3E8;
+      color: rgba(0, 0, 0, 0.7);
       font-family: "Rubik";
     }
 
@@ -30,12 +30,12 @@ const ShiftsTableWrapper=styled.div`
     margin-bottom: 20px;
     .card {
       border-radius: 12px;
-      background-color: #30334E;
+      background-color: #fff;
       padding: 15px;
       box-shadow: rgb(20 21 33 / 18%) 0px 2px 10px 0px;
 
       h5 {
-        color: #D2D3E8;
+        color: rgba(0, 0, 0, 0.7);
         font-family: "Rubik";
         margin-bottom: 13px;
       }
@@ -61,13 +61,13 @@ const ShiftsTableWrapper=styled.div`
             flex-direction: column;
             
             p{
-              color: #D2D3E8;
+              color: rgba(0, 0, 0, 0.7);
               margin-bottom: 0;
             }
             span{
               font-weight: 700;
               font-size: 18px;
-              color: #D2D3E8;
+              color: rgba(0, 0, 0, 0.7);
             }
           }
         }
@@ -93,13 +93,13 @@ const ShiftsTableWrapper=styled.div`
             flex-direction: column;
 
             p{
-              color: #D2D3E8;
+              color: rgba(0, 0, 0, 0.7);
               margin-bottom: 0;
             }
             span{
               font-weight: 700;
               font-size: 18px;
-              color: #D2D3E8;
+              color: rgba(0, 0, 0, 0.7);
             }
           }
         }
@@ -109,7 +109,7 @@ const ShiftsTableWrapper=styled.div`
   }
 
   .filter {
-    background-color: #30334E;
+    background-color: transparent;
     border-radius: 4px;
     padding: 10px;
     margin-bottom: 20px;
@@ -121,7 +121,7 @@ const ShiftsTableWrapper=styled.div`
     &__inner {
       padding: 10px;
       border-radius: 15px;
-      background-color: #30334E;
+      background-color: #e9e9e9;
 
       display: flex;
       align-items: center;
@@ -132,10 +132,11 @@ const ShiftsTableWrapper=styled.div`
 
   .table-responsive {
     //width: 1200px;
-    background: rgb(58, 62, 91);
+    background: #f5f5f9;
     border-radius: 6px 6px 0px 0px;
     overflow-x: scroll;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.03);
+    //box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.03);
+    box-shadow: rgb(20 21 33 / 18%) 0px 2px 10px 0px;
 
   }
 
@@ -151,7 +152,7 @@ const ShiftsTableWrapper=styled.div`
 
       tr {
         display: flex;
-        background: rgb(58, 62, 91);
+        background: #f5f5f9;
         border-radius: 6px 6px 0px 0px;
         border-bottom: 1px solid rgba(159, 160, 184, 0.3);
         padding: 5px 0;
@@ -163,7 +164,7 @@ const ShiftsTableWrapper=styled.div`
           font-weight: 600;
           font-size: 13px;
           line-height: 24px;
-          color: #D4D4EA;
+          color: rgba(0, 0, 0, 0.7);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -174,6 +175,7 @@ const ShiftsTableWrapper=styled.div`
     }
 
     tbody {
+      background: #fff;
 
       tr {
         display: flex;
@@ -190,7 +192,7 @@ const ShiftsTableWrapper=styled.div`
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #9FA0B8;
+          color: rgba(0, 0, 0, 0.7);
           text-align: center;
           font-family: "Inter";
 
@@ -204,7 +206,7 @@ const ShiftsTableWrapper=styled.div`
 
 `
 
-const ModalContent=styled.div`
+const ModalContent = styled.div`
   //padding: 20px;
   border-bottom: 1px solid #f5f6f8;
   background: #fff;
@@ -296,4 +298,4 @@ const ModalContent=styled.div`
 
 
 
-export {ShiftsTableWrapper, ModalContent}
+export { ShiftsTableWrapper, ModalContent }

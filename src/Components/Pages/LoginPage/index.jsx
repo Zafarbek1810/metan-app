@@ -74,11 +74,11 @@ const LoginPage = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="input">
                 <label>Login</label>
-                <input type="text" {...register("name", {required: true})}/>
+                <input autoComplete="off" type="text" {...register("name", {required: true})}/>
               </div>
               <div className="input">
                 <label>Parol</label>
-                <input type="password" {...register("password", {required: true})}/>
+                <input autoComplete="off" type="password" {...register("password", {required: true})}/>
               </div>
               <button disabled={loading} type="submit" className="loginBtn">
                 Kirish

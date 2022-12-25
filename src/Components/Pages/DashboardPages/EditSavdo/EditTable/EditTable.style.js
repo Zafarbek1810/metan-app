@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const EditTableWrapper = styled.div`
   form {
-    background: #30334E;
+    background: #fff;
     padding: 20px;
     font-family: "Inter";
 
@@ -10,7 +10,7 @@ const EditTableWrapper = styled.div`
   .keshbekTitle{
     font-size: 20px;
     font-family: "Inter";
-    color: #D2D3E8;
+    color: rgba(0, 0, 0, 0.7);
 
   }
 
@@ -22,7 +22,7 @@ const EditTableWrapper = styled.div`
     font-family: "Inter";
     
     span{
-      color: #D2D3E8;
+      color: rgba(0, 0, 0, 0.7);
     }
 
 
@@ -48,7 +48,7 @@ const EditTableWrapper = styled.div`
         font-weight: 600;
         font-size: 1rem;
         line-height: 16px;
-        color: #D2D3E8 !important;
+        color: rgba(0, 0, 0, 0.7) !important;
         border: 2px solid rgba(31, 60, 136, 0.4);
         border-radius: 6px;
         padding: 10px 10px;
@@ -57,15 +57,15 @@ const EditTableWrapper = styled.div`
       }
       
       .ant-select-selector{
-        color: #D2D3E8 !important;
-        background-color: #30334E;
+        color: rgba(0, 0, 0, 0.7) !important;
+        background-color: #fff;
       }
       
       textarea{
         font-style: normal;
         font-weight: 600;
         font-size: 1rem;
-        color: #D2D3E8;
+        color: rgba(0, 0, 0, 0.7);
         min-height: 100px;
       }
     }
@@ -91,7 +91,7 @@ const EditTableWrapper = styled.div`
           justify-content: space-between;
 
           td {
-            color: #D2D3E8;
+            color: rgba(0, 0, 0, 0.7);
             button {
               background: transparent;
               border: none;
@@ -110,4 +110,4 @@ const EditTableWrapper = styled.div`
   }
 `
 
-export {EditTableWrapper}
+export { EditTableWrapper }

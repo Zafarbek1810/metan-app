@@ -49,7 +49,7 @@ const Cards = () => {
                             <CardSvg/>
                         </div>
                         <div className="right">
-                            <span>{data.amountOfAllExpenses ? data.amountOfAllExpenses : "Ma'lumot yo'q"}</span>
+                            <span>{data.amountOfAllExpenses ? data.amountOfAllExpenses.toLocaleString().replaceAll(',', ' ') : "Ma'lumot yo'q"}</span>
                             <p>Xarajatlar</p>
                         </div>
                     </div>
@@ -58,7 +58,7 @@ const Cards = () => {
                             <DollarSvg/>
                         </div>
                         <div className="right">
-                            <span>{data.amountOfAllPayments ? data.amountOfAllPayments : "Ma'lumot yo'q"}</span>
+                            <span>{data.amountOfAllPayments ? data.amountOfAllPayments.toLocaleString().replaceAll(',', ' ') : "Ma'lumot yo'q"}</span>
                             <p>To'langan summa</p>
                         </div>
                     </div>

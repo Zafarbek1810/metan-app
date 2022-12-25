@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ClientsTableWrapper=styled.div`
+const ClientsTableWrapper = styled.div`
   .top {
     margin-bottom: 15px;
     display: flex;
@@ -11,7 +11,7 @@ const ClientsTableWrapper=styled.div`
       font-weight: 600;
       font-size: 30px;
       line-height: 25px;
-      color: #D2D3E8;
+      color: rgba(0, 0, 0, 0.7);
       font-family: "Rubik";
       margin-top: 15px;
     }
@@ -103,7 +103,8 @@ const ClientsTableWrapper=styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.03);
+    //box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.03);
+    box-shadow: rgb(20 21 33 / 18%) 0px 2px 10px 0px;
 
     .link {
       background: transparent;
@@ -120,7 +121,7 @@ const ClientsTableWrapper=styled.div`
 
       tr {
         display: flex;
-        background: rgb(58, 62, 91);
+        background: #F5F5F7;
         border-radius: 6px 6px 0px 0px;
         border-bottom: 1px solid rgba(159, 160, 184, 0.3);
         padding: 5px 0;
@@ -130,7 +131,7 @@ const ClientsTableWrapper=styled.div`
           font-weight: 600;
           font-size: 18px;
           line-height: 24px;
-          color: #D4D4EA;
+          color: rgba(0, 0, 0, 0.7);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -155,7 +156,7 @@ const ClientsTableWrapper=styled.div`
     }
 
     tbody {
-      background: #30334E;
+      background: #fff;
 
       tr {
         display: flex;
@@ -170,7 +171,7 @@ const ClientsTableWrapper=styled.div`
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #9FA0B8;
+          color: rgba(0, 0, 0, 0.7);
           text-align: center;
           font-family: "Inter";
           padding-left: 20px;
@@ -191,7 +192,7 @@ const ClientsTableWrapper=styled.div`
 }
 `
 
-const ModalContent=styled.div`
+const ModalContent = styled.div`
   //padding: 20px;
   border-bottom: 1px solid #f5f6f8;
   background: #fff;
@@ -283,4 +284,4 @@ const ModalContent=styled.div`
   
 `
 
-export{ClientsTableWrapper , ModalContent}
+export { ClientsTableWrapper, ModalContent }

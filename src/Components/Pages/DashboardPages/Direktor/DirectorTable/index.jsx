@@ -1,64 +1,77 @@
-import React, {useEffect, useState} from 'react';
-import {DirectorTableWrapper, ModalContent, ModalFooter, ModalHeader} from "./DirectorTable.style";
+import React, { useEffect, useState } from "react";
+import {
+  DirectorTableWrapper,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+} from "./DirectorTable.style";
 import EditSvg from "../../../../Common/Svgs/EditSvg";
-import {useForm} from "react-hook-form";
-import Modal from "react-modal"
+import { useForm } from "react-hook-form";
+import Modal from "react-modal";
 import CloseSvg from "../../../../Common/Svgs/CloseSvg";
 import ButtonLoader from "../../../../Common/ButtonLoader";
 import UserProvider from "../../../../../Data/Providers/UserProvider";
 import Message from "../../../../../utils/Message";
 import MinLoader from "../../../../Common/MinLoader";
-import {Avatar, Button, IconButton} from "@mui/material";
+import { Avatar, Button, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
 const customStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
     minHeight: 200,
     width: 600,
-    transform: 'translate(-50%, -50%)',
+    transform: "translate(-50%, -50%)",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
     borderRadius: 8,
     padding: 0,
     overlay: {
-      background: "red"
-    }
+      background: "red",
+    },
   },
 };
 
-Modal.setAppElement('#__next');
+Modal.setAppElement("#__next");
 
 const DirectorTable = () => {
-  const {register, formState: {errors}, handleSubmit, setValue, reset, control} = useForm({
-    defaultValues: {}
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    setValue,
+    reset,
+    control,
+  } = useForm({
+    defaultValues: {},
   });
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  const [editingDirector, setEditingDirector] = useState(null)
+  const [editingDirector, setEditingDirector] = useState(null);
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
-  const [directors, setDirectors] = useState([])
-  const [forRender, setForRender] = useState(null)
+  const [directors, setDirectors] = useState([]);
+  const [forRender, setForRender] = useState(null);
 
   useEffect(() => {
     setLoading2(true);
     UserProvider.getAllDirectors(0, 1000)
-      .then(res => {
-        console.log(res)
-        setDirectors(res.data)
+      .then((res) => {
+        console.log(res);
+        setDirectors(res.data);
       })
-      .catch(err => {
-        console.log(err)
-        Message.serverError()
-      }).finally(() => {
-      setLoading2(false);
-    })
-  }, [forRender])
+      .catch((err) => {
+        console.log(err);
+        Message.serverError();
+      })
+      .finally(() => {
+        setLoading2(false);
+      });
+  }, [forRender]);
 
   function openModal() {
     setIsOpen(true);
@@ -66,63 +79,70 @@ const DirectorTable = () => {
 
   function closeModal() {
     setIsOpen(false);
-    setEditingDirector(null)
-    setValue("name", "")
-    setValue("login", "")
-    setValue("pass", "")
+    setEditingDirector(null);
+    setValue("name", "");
+    setValue("login", "");
+    setValue("pass", "");
   }
 
   const onSubmit = async (values) => {
-    const body = {}
+    const body = {};
     body.fullName = values.name;
     body.username = values.login;
     body.password = values.pass;
 
-    setLoading(true)
-    if(editingDirector){
+    setLoading(true);
+    if (editingDirector) {
       try {
-        body.id = editingDirector.id
+        body.id = editingDirector.id;
 
-        const {data} = await UserProvider.updateDirector(body);
+        const { data } = await UserProvider.updateDirector(body);
         setForRender(Math.random());
-        closeModal()
+        closeModal();
       } catch (err) {
-        console.log(err)
+        console.log(err);
         Message.serverError();
       }
-    }else{
+    } else {
       try {
-        const {data} = await UserProvider.createDirector(body);
+        const { data } = await UserProvider.createDirector(body);
         setForRender(Math.random());
-        closeModal()
+        closeModal();
       } catch (err) {
-        console.log(err)
+        console.log(err);
         Message.serverError();
       }
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   const handleEdit = (obj) => {
-    setEditingDirector(obj)
-    setIsOpen(true)
-  }
+    setEditingDirector(obj);
+    setIsOpen(true);
+  };
 
-  useEffect(()=>{
-    if(editingDirector){
-      setValue("name", editingDirector.fullName)
-      setValue("login", editingDirector.username)
-      setValue("pass", "")
+  useEffect(() => {
+    if (editingDirector) {
+      setValue("name", editingDirector.fullName);
+      setValue("login", editingDirector.username);
+      setValue("pass", "");
     }
-  }, [modalIsOpen])
+  }, [modalIsOpen]);
 
   return (
     <DirectorTableWrapper>
       <div className="top">
         <h3 className="title">Ish boshqaruvchi</h3>
         <div className="modal-wrapper">
-          <Button variant="contained" onClick={openModal}
-                  style={{fontFamily: "Inter",color:"#fff", background:"#787EFF"}}>
+          <Button
+            variant="contained"
+            onClick={openModal}
+            style={{
+              fontFamily: "Inter",
+              color: "#fff",
+              background: "#787EFF",
+            }}
+          >
             + Qo'shish
           </Button>
           {/*====MODAL====*/}
@@ -133,7 +153,9 @@ const DirectorTable = () => {
           >
             <ModalHeader className="modal-header">
               <h2 className="title">Qo'shish</h2>
-              <button className="closeSvg" onClick={closeModal}><CloseSvg/></button>
+              <button className="closeSvg" onClick={closeModal}>
+                <CloseSvg />
+              </button>
             </ModalHeader>
             <ModalContent>
               <form onSubmit={handleSubmit(onSubmit)}>
@@ -143,8 +165,9 @@ const DirectorTable = () => {
                     <span className="err-text">Majburiy maydon</span>
                   )}
                   <input
+                      autoComplete="off"
                     type="text"
-                    {...register("name", {required: true})}
+                    {...register("name", { required: true })}
                   />
                 </label>
                 <label className="label">
@@ -153,8 +176,9 @@ const DirectorTable = () => {
                     <span className="err-text">Majburiy maydon</span>
                   )}
                   <input
+                      autoComplete="off"
                     type="text"
-                    {...register("login", {required: true})}
+                    {...register("login", { required: true })}
                   />
                 </label>
                 <label className="label">
@@ -163,59 +187,90 @@ const DirectorTable = () => {
                     <span className="err-text">Majburiy maydon</span>
                   )}
                   <input
+                      autoComplete="off"
                     type="text"
-                    {...register("pass", {required: true})}
+                    {...register("pass", { required: true })}
                   />
                 </label>
                 <div className="btns">
-                  <button type="button" className="btn btn-outline-warning" onClick={closeModal}>Bekor qilish</button>
-                  <button type="submit" className="btn btn-primary" disabled={loading}>Saqlash {loading &&
-                  <ButtonLoader/>}</button>
+                  <button
+                    type="button"
+                    className="btn btn-outline-warning"
+                    onClick={closeModal}
+                  >
+                    Bekor qilish
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={loading}
+                  >
+                    Saqlash {loading && <ButtonLoader />}
+                  </button>
                 </div>
               </form>
             </ModalContent>
           </Modal>
         </div>
-
       </div>
       <table className="table table-borderless table-hover">
         <thead>
-        <tr>
-          <th style={{width: "10%"}} className="col">Rasm</th>
-          <th style={{width: "30%"}} className="col">To'liq ismi</th>
-          <th style={{width: "30%"}} className="col">Login</th>
-          <th style={{width: "30%"}} className="col">Amallar</th>
-        </tr>
+          <tr>
+            <th style={{ width: "10%" }} className="col">
+              Rasm
+            </th>
+            <th style={{ width: "30%" }} className="col">
+              To'liq ismi
+            </th>
+            <th style={{ width: "30%" }} className="col">
+              Login
+            </th>
+            <th style={{ width: "30%" }} className="col">
+              Amallar
+            </th>
+          </tr>
         </thead>
         <tbody>
-        {
-          !loading2 ?
-            directors.length
-              ? directors.map((obj, index) => (
+          {!loading2 ? (
+            directors.length ? (
+              directors.map((obj, index) => (
                 <tr key={obj.id}>
-                  <td style={{width: "10%"}} className="col">
-                    <Avatar alt='Victor Anderson' src='/img/3.png' />
+                  <td style={{ width: "10%" }} className="col">
+                    <Avatar alt="Victor Anderson" src="/img/3.png" />
                   </td>
-                  <td style={{width: "30%"}} className="col">{obj.fullName} </td>
-                  <td style={{width: "30%"}} className="col">{obj.username}</td>
-                  <td style={{width: "30%"}} className="col">
+                  <td style={{ width: "30%" }} className="col">
+                    {obj.fullName}{" "}
+                  </td>
+                  <td style={{ width: "30%" }} className="col">
+                    {obj.username}
+                  </td>
+                  <td style={{ width: "30%" }} className="col">
                     <div className="btns">
                       <IconButton
-                          style={{background:"rgb(253, 181, 40, 0.12)"}}
-                          onClick={() => handleEdit(obj)}>
+                        style={{ background: "rgb(253, 181, 40, 0.12)" }}
+                        onClick={() => handleEdit(obj)}
+                      >
                         <EditIcon />
                       </IconButton>
                     </div>
                   </td>
                 </tr>
-              )) : <div style={
-                {
+              ))
+            ) : (
+              <div
+                style={{
                   textAlign: "center",
                   padding: 30,
-                }
-              }><h3 style={{color:"#D2D3E8"}}>Direktorlar mavjud emas!</h3></div>
-            : <MinLoader/>
-        }
+                }}
+              >
+                <h3 style={{ color: "rgba(0, 0, 0, 0.7)" }}>
+                  Direktorlar mavjud emas!
+                </h3>
+              </div>
+            )
+          ) : (
+            <MinLoader />
+          )}
         </tbody>
       </table>
     </DirectorTableWrapper>

@@ -12,23 +12,25 @@ const CashierTableWrapper = styled.div`
       font-weight: 600;
       font-size: 30px;
       line-height: 25px;
-      color: #D2D3E8;
+      color: rgba(0, 0, 0, 0.7);
       font-family: "Rubik";
     }
   }
 
   .table{
     margin-top: 20px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
+    //box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow: rgb(20 21 33 / 18%) 0px 2px 10px 0px;
+
     thead{
       width: 100%;
       tr{
         display: flex;
-        background: rgb(58,62,91);
+        background: #f5f5f7;
         border-radius: 6px 6px 0px 0px;
         border-bottom: 1px solid rgba(159, 160, 184, 0.3);
         padding: 5px 0;
@@ -38,7 +40,7 @@ const CashierTableWrapper = styled.div`
           font-weight: 600;
           font-size: 18px;
           line-height: 24px;
-          color: #D4D4EA;
+          color: rgba(0, 0, 0, 0.7);
           display: flex;
           align-items: center;
           justify-content: start;
@@ -51,7 +53,7 @@ const CashierTableWrapper = styled.div`
     }
 
     tbody{
-      background: #30334E;
+      background: #fff;
       tr{
         display: flex;
         border-bottom: 1px solid rgba(159, 160, 184, 0.3);
@@ -65,7 +67,7 @@ const CashierTableWrapper = styled.div`
           display: flex;
           align-items: center;
           justify-content: start;
-          color: #9FA0B8;
+          color: rgba(0, 0, 0, 0.7);
           text-align: center;
           font-family: "Inter";
           padding-left: 20px;

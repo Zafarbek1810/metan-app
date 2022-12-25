@@ -28,6 +28,13 @@ const Wrapper=styled.div`
     }
     
   }
+  
+  //.layout__right{
+  //  background-image: url("/img/okean.jpg");
+  //  background-attachment: fixed;
+  //  background-repeat: no-repeat;
+  //  background-size: cover;
+  //}
 
   .layout__top {
     //border-bottom: 1px solid rgba(31, 60, 136, 0.2);
@@ -35,7 +42,7 @@ const Wrapper=styled.div`
     top: 0;
     left: 260px;
     width: calc(100% - 250px);
-    background: #282A42;
+    background: #F7F7F9;
     border-bottom: 1px solid rgba(159, 160, 184, 0.3);
   }
 
@@ -44,7 +51,8 @@ const Wrapper=styled.div`
     height: calc(100vh - 45px);
     overflow-y: auto;
     padding: 20px 20px 10px;
-    background: #282A42;
+    background: #F7F7F9;
+    
 
     &::-webkit-scrollbar-track {
       //-webkit-box-shadow: inset 0 0 6px rgba(187, 187, 187, 0.3);

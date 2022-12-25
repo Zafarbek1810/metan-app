@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import {colors} from "./color";
 
 const GlobalStyle = createGlobalStyle`
   .rc-pagination {
@@ -327,4 +328,11 @@ const GlobalStyle = createGlobalStyle`
   
 `
 
-export {GlobalStyle}
+const defaultTheme = {
+    colors,
+    // opacities,
+    // fontSize
+}
+
+
+export {GlobalStyle, defaultTheme}

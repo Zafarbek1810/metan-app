@@ -8,14 +8,14 @@ const Wrapper = styled.div`
     font-weight: 600;
     font-size: 30px;
     line-height: 25px;
-    color: #D2D3E8;
+    color: rgba(0, 0, 0, 0.7);
     margin-bottom: 30px;
     margin-top: 15px;
     font-family: "Inter";
   }
 
   .content {
-    background-color: #30334E;
+    background-color: #fff;
     border-radius: 12px;
     padding: 20px;
   }
@@ -41,16 +41,16 @@ const Wrapper = styled.div`
 
   .edit_row {
     td, th {
-      color: #D2D3E8;
+      color: rgba(0, 0, 0, 0.7);
       width: 20%;
       padding: 10px;
       border-bottom: 1px solid rgba(159, 160, 184, 0.3);
       
     }
-    //
-    //&:nth-child(even) {
-    //  background-color: #f2f2f2;
-    //}
+
+    &:nth-child(even) {
+      background-color: #f2f2f2;
+    }
   }
 
   .delete-btn {

@@ -35,7 +35,7 @@ function MyApp({Component, pageProps}) {
           <Component {...pageProps} />
           {loading && <NewLoader/>}
           <ToastContainer
-            position="top-right"
+            position="bottom-right"
             autoClose={3000}
             hideProgressBar={false}
             newestOnTop={false}

@@ -8,7 +8,7 @@ const CashboxWrapper = styled.div`
   }
 
   .bottom {
-    background: #282A42;
+    background: #fff;
     padding: 10px;
     border: 1px solid #1F3C88;
 
@@ -45,13 +45,13 @@ const CashboxWrapper = styled.div`
             font-size: 18px;
             font-weight: 400;
             font-family: "Inter";
-            color: #D1D0E7;
+            color: rgba(0, 0, 0, 0.7);
           }
 
           svg {
             width: 20px;
             height: 20px;
-            stroke: #D1D0E7;
+            stroke: rgba(0, 0, 0, 0.7);
             margin-right: 10px;
           }
         }

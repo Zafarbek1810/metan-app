@@ -16,6 +16,7 @@ import ShopSvg from "../../../Common/Svgs/ShopSvg";
 import CashbackSvg from "../../../Common/Svgs/CashbackSvg";
 import FireSvg from "../../../Common/Svgs/FireSvg";
 import ClockSvg from "../../../Common/Svgs/ClockSvg";
+import PlanSvg from "../../../Common/Svgs/PlanSvg";
 
 const {Panel} = Collapse;
 const {Option} = Select;
@@ -113,6 +114,15 @@ const SidebarItemsMenu = [
 
 ];
 
+const PlanMenu=[
+    {
+        title: "Rejalar",
+        path: "/dashboard/plans",
+        Svg: PlanSvg,
+        role: ["SUPER_ADMIN"]
+    },
+]
+
 const NewSidebar = () => {
     const router = useRouter();
     const [expandIconPosition, setExpandIconPosition] = useState('start');
@@ -123,9 +133,10 @@ const NewSidebar = () => {
 
 
     const NavListMenu = SidebarItemsMenu.filter(({role}) => role.includes(userRole));
+    const PlanListMenu = PlanMenu.filter(({role}) => role.includes(userRole));
     return (
         <SidebarWrap>
-                <MyLink className="logo" to="/">
+                <MyLink className="logo" to="/dashboard/home">
                     {/*<LogoSvg className="logoSvg"/>*/}
                     <img src="/img/logo.png" alt=""/>
                 </MyLink>
@@ -153,6 +164,24 @@ const NewSidebar = () => {
                     </Panel>
                     <Panel header="Benzin shahobchalar" key="3">
                         {text}
+                    </Panel>
+                    <Panel header="Rejalar" key="4">
+                        <div className="sidebar-menu">
+                            {
+                                PlanListMenu.map(({title, Svg, path}, idx) => {
+                                    return (
+                                        <MyLink
+                                            className={router.pathname === path ?  "activelink" : "link"}
+                                            to={path}
+                                            key={idx}
+                                        >
+                                            <Svg/>
+                                            {title}
+                                        </MyLink>
+                                    )
+                                })
+                            }
+                        </div>
                     </Panel>
                 </Collapse>
         </SidebarWrap>

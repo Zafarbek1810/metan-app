@@ -11,7 +11,7 @@ const DashHeaderWrapper=styled.div`
     display: flex;
     
     h3{
-      color: #D1D1E7;
+      color: rgba(0, 0, 0, 0.7);
       font-family: "Inter";
     }
     svg{
@@ -45,13 +45,13 @@ const DashHeaderWrapper=styled.div`
     border: none;
     font-family: "Inter";
     h3{
-      color: #D1D1E7;
+      color: rgba(0, 0, 0, 0.7);
       font-size: 20px;
       margin-bottom: 0;
       font-family: "Rubik";
     }
     svg{
-      stroke: #D1D1E7;
+      stroke: rgba(0, 0, 0, 0.7);
       margin-left: 10px;
       width: 20px;
       height: 20px;
