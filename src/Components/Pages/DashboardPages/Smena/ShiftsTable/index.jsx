@@ -13,6 +13,7 @@ import { FilterWrapper } from "../../Xarajatlar/ExpensesTable/ExpensesTable.styl
 import { Button } from "@mui/material";
 import CardSvg from "../../../../Common/Svgs/CardSvg";
 import DollarSvg2 from "../../../../Common/Svgs/DollarSvg2";
+import { NumericFormat } from 'react-number-format';
 
 const ShiftsTable = () => {
   const {
@@ -51,6 +52,7 @@ const ShiftsTable = () => {
 
   const showModal = () => {
     onFilterSum()
+    handleOutletFilter()
     setIsModalOpen(true);
 
   };
@@ -102,13 +104,13 @@ const [render, setRender]= useState(null)
 
   const onSubmit = async (values) => {
     const body = {};
-    body.outletId = outletId;
+    body.outletId = 1;
     body.expenses = +values.xarajat;
     body.autopilot = +values.autopilot;
-    body.byCard = +values.terminal;
-    body.transfers = +values.money;
-    body.debt = +values.dept;
-    body.cash = +values.cash;
+    body.byCard = +numTerminal;
+    body.transfers = +numTransfer;
+    body.debt = +numDept;
+    body.cash = +numCash;
     body.date = date.toLocaleDateString("en-CA");
     setLoading(true);
     try {
@@ -157,7 +159,6 @@ const [render, setRender]= useState(null)
           .then((res)=>{
             console.log("expensessum",res)
             setExSum(res.data.expensesAmountSum)
-            setValue("xarajat", exSum);
           })
           .catch((err)=>{
             console.log(err)
@@ -165,7 +166,7 @@ const [render, setRender]= useState(null)
           })
     }
     fn()
-  },[filterStateSum, isModalOpen])
+  },[filterStateSum, isModalOpen, render])
 
   const onFilterSum=()=>{
     const date = filModDateRef.current?.value?.split("-").reverse().join("-");
@@ -181,7 +182,8 @@ const [render, setRender]= useState(null)
   };
 
   const handleOutletFilter = (e) => {
-    setActiveOutlet(e.target.value);
+    setActiveOutlet(e);
+    console.log("asasa",activeOutlet)
   };
 
   const onOffFilter = () => {
@@ -192,6 +194,11 @@ const [render, setRender]= useState(null)
     filSelectRef.current.value = "";
     setIsFilterOpen(false);
   };
+
+  const [numDept, setNumDept] = useState(null)
+  const [numTerminal, setNumTerminal] = useState(null)
+  const [numTransfer, setNumTransfer] = useState(null)
+  const [numCash, setNumCash] = useState(null)
 
   return (
     <ShiftsTableWrapper>
@@ -233,8 +240,8 @@ const [render, setRender]= useState(null)
                   {/*        options={optionExpense}*/}
                   {/*    />*/}
                   <label className="form-label">Savdo nuqtasi</label>
-                  <select value={activeOutlet} ref={filModOutletRef} className="form-control">
-                    <option  disabled>
+                  <select value={activeOutlet} ref={filModOutletRef} onChange={handleOutletFilter} className="form-control">
+                    <option value="null" disabled>
                       Tanlang
                     </option>
                     {optionExpense.map((i) => (
@@ -289,10 +296,16 @@ const [render, setRender]= useState(null)
                   {errors.terminal && (
                     <span className="err-text">Majburiy maydon</span>
                   )}
-                  <input
-                    autoComplete="off"
-                    type="number"
-                    {...register("terminal", { required: true })}
+                  <NumericFormat
+                      value={+numTerminal}
+                      autoComplete="off"
+                      onValueChange={(e)=>{
+                        console.log(e.floatValue);
+                        setNumTerminal(e.floatValue)
+                      }
+                      }
+                      allowLeadingZeros thousandSeparator=" "
+                      {...register("terminal", { required: false })}
                   />
                 </label>
 
@@ -301,21 +314,34 @@ const [render, setRender]= useState(null)
                   {errors.money && (
                     <span className="err-text">Majburiy maydon</span>
                   )}
-                  <input
-                    autoComplete="off"
-                    type="number"
-                    {...register("money", { required: true })}
+                  <NumericFormat
+                      value={+numTransfer}
+                      autoComplete="off"
+                      onValueChange={(e)=>{
+                        console.log(e.floatValue);
+                        setNumTransfer(e.floatValue)
+                      }
+                      }
+                      allowLeadingZeros thousandSeparator=" "
+                      {...register("money", { required: false })}
                   />
                 </label>
+
                 <label className="label">
                   <span className="label-text">Kelgan pul</span>
                   {errors.cash && (
                     <span className="err-text">Majburiy maydon</span>
                   )}
-                  <input
-                    autoComplete="off"
-                    type="number"
-                    {...register("cash", { required: true })}
+                  <NumericFormat
+                      value={+numCash}
+                      autoComplete="off"
+                      onValueChange={(e)=>{
+                        console.log(e.floatValue);
+                        setNumCash(e.floatValue)
+                      }
+                      }
+                      allowLeadingZeros thousandSeparator=" "
+                      {...register("cash", { required: false })}
                   />
                 </label>
 
@@ -324,10 +350,16 @@ const [render, setRender]= useState(null)
                   {errors.dept && (
                     <span className="err-text">Majburiy maydon</span>
                   )}
-                  <input
+                  <NumericFormat
+                      value={+numDept}
                     autoComplete="off"
-                    type="number"
-                    {...register("dept", { required: true })}
+                      onValueChange={(e)=>{
+                        console.log(e.floatValue);
+                        setNumDept(e.floatValue)
+                      }
+                      }
+                    allowLeadingZeros thousandSeparator=" "
+                    {...register("dept", { required: false })}
                   />
                 </label>
                 <div className="btns">
