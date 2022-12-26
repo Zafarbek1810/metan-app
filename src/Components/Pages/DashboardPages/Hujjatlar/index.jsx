@@ -1,11 +1,14 @@
 import React from 'react';
 import DashboardLayout from "../../../Layouts/Dashboard";
 import DocumentsTable from "./DocumentsTable";
+import {Wrapper} from "../Home/style";
 
 const Hujjatlar = () => {
   return (
     <DashboardLayout>
-      <DocumentsTable/>
+      <Wrapper>
+          <DocumentsTable/>
+      </Wrapper>
     </DashboardLayout>
   );
 };

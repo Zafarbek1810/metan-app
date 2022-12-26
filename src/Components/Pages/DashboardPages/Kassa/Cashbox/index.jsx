@@ -357,7 +357,7 @@ const Cashbox = () => {
       setValue("name", editingClient.fullName)
       setValue("phoneNumber", editingClient.phoneNumber)
       setValue("avtoNum", editingClient.plateNumber)
-      setValue("carType", editingClient.cartype.title)
+      setValue("carType", editingClient.cartype?.title)
     }
   }, [isModalOpen])
 

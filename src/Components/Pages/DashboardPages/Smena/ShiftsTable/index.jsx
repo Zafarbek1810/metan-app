@@ -192,7 +192,7 @@ const ShiftsTable = () => {
                 })
                 .catch((err) => {
                     console.log(err)
-                    Message.serverError()
+                    // Message.serverError()
                 })
 
             console.log("EXPENSESDAN RESPONSE OLINDI");

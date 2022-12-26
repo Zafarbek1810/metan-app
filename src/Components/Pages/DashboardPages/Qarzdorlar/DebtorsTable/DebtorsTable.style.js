@@ -67,7 +67,7 @@ const DebtorsTableWrapper = styled.div`
         td.col {
           padding-left: 20px;
           font-style: normal;
-          font-weight: 500;
+          font-weight: 400;
           font-size: 18px;
           line-height: 24px;
           display: flex;

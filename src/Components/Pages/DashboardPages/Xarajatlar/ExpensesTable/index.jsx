@@ -189,197 +189,203 @@ const ExpensesTable = () => {
 
   return (
     <ExpensesTableWrapper>
-      <div className="statistika">
-        <div className="card">
-          <div className="wrap">
-            <div className="left">
-              <div className="icon">
-                <CardSvg />
-              </div>
-              <div className="bot">
-                <span>{summ}</span>
-                <p>Xarajat</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="top">
-        <h3 className="title">Xarajatlar</h3>
-        <div className="modal-wrapper">
-          {/*====MODAL====*/}
-          <div className="modal-wrapper">
-            <Button
+      <div className="modal-wrapper">
+        {/*====MODAL====*/}
+        <div className="modal-wrapper d-flex">
+          <Button
               variant="contained"
               onClick={showModal}
               style={{
                 fontFamily: "Inter",
                 color: "#fff",
                 background: "#787EFF",
+                marginLeft:"auto",
+                marginTop:20
               }}
-            >
-              + Qo'shish
-            </Button>
-            <Modal
+          >
+            + Qo'shish
+          </Button>
+          <Modal
               title="Qo'shish"
               open={isModalOpen}
               onCancel={handleCancel}
               width={700}
               footer={[null]}
-            >
-              <ModalContent>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <label className="label">
-                    <span className="label-text">Savdo nuqtalari</span>
-                    <Controller
+          >
+            <ModalContent>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <label className="label">
+                  <span className="label-text">Savdo nuqtalari</span>
+                  <Controller
                       control={control}
                       name="outlet"
                       render={({
-                        field: { onChange, onBlur, value, name, ref },
-                        fieldState: { invalid, isTouched, isDirty, error },
-                        formState,
-                      }) => (
-                        <Select
-                          placeholder="Tanlang"
-                          size="large"
-                          allowClear
-                          style={{
-                            width: "100%",
-                            marginTop: "10px",
-                            marginBottom: "10px",
-                          }}
-                          onChange={handleOutletId}
-                          options={optionExpense}
-                          value={outletId}
-                        />
+                                 field: { onChange, onBlur, value, name, ref },
+                                 fieldState: { invalid, isTouched, isDirty, error },
+                                 formState,
+                               }) => (
+                          <Select
+                              placeholder="Tanlang"
+                              size="large"
+                              allowClear
+                              style={{
+                                width: "100%",
+                                marginTop: "10px",
+                                marginBottom: "10px",
+                              }}
+                              onChange={handleOutletId}
+                              options={optionExpense}
+                              value={outletId}
+                          />
                       )}
-                    />
-                  </label>
-                  <label className="label">
-                    <span className="label-text">Nomi</span>
-                    {errors.name && (
+                  />
+                </label>
+                <label className="label">
+                  <span className="label-text">Nomi</span>
+                  {errors.name && (
                       <span className="err-text">Majburiy maydon</span>
-                    )}
-                    <input
+                  )}
+                  <input
                       autoComplete="off"
                       type="text"
                       {...register("name", { required: true })}
-                    />
-                  </label>
-                  <label className="label">
-                    <span className="label-text">Summa</span>
-                    {errors.summ && (
+                  />
+                </label>
+                <label className="label">
+                  <span className="label-text">Summa</span>
+                  {errors.summ && (
                       <span className="err-text">Majburiy maydon</span>
-                    )}
-                    <input
+                  )}
+                  <input
                       autoComplete="off"
                       type="number"
                       {...register("summ", { required: true })}
-                    />
-                  </label>
-                  <div className="btns">
-                    <button
+                  />
+                </label>
+                <div className="btns">
+                  <button
                       type="button"
                       className="btn btn-outline-warning"
                       onClick={handleCancel}
-                    >
-                      Bekor qilish
-                    </button>
-                    <button
+                  >
+                    Bekor qilish
+                  </button>
+                  <button
                       type="submit"
                       className="btn btn-primary"
                       disabled={loading}
-                    >
-                      Saqlash {loading && <ButtonLoader />}
-                    </button>
-                  </div>
-                </form>
-              </ModalContent>
-            </Modal>
-          </div>
+                  >
+                    Saqlash {loading && <ButtonLoader />}
+                  </button>
+                </div>
+              </form>
+            </ModalContent>
+          </Modal>
         </div>
       </div>
 
-      <div className="filter">
-        <FilterWrapper>
-          <Button
-            variant="contained"
-            onClick={() => setIsFilterOpen((p) => !p)}
-            style={{
-              fontFamily: "Inter",
-              color: "#fff",
-              background: "#787EFF",
-            }}
-          >
-            Filter
-          </Button>
 
-          <div
-            className="filter-content"
-            style={{ visibility: isFilterOpen ? "visible" : "hidden" }}
-          >
-            <div className="row">
-              <div className="mb-3 col-6">
-                <label className="form-label">Savdo nuqtasi</label>
-                <select ref={filSelectRef} className="form-control">
-                  <option value={"null"} disabled>
-                    Tanlang
-                  </option>
-                  {optionExpense.map((i) => (
-                    <option value={i.value} key={i.value}>
-                      {i.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="mb-3 col-6">
-                <label className="form-label">Davr</label>
-                {/*<input*/}
-                {/*  autoComplete="off"*/}
-                {/*  ref={filDateRef}*/}
-                {/*  name="startDate"*/}
-                {/*  type="date"*/}
-                {/*  className="form-control"*/}
-                {/*/>*/}
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DesktopDatePicker
-                      label="Date desktop"
-                      inputRef={filDateRef}
-                      // ref={filDateRef}
-                      inputFormat="DD-MM-YYYY"
-                      value={valuedate}
-                      onChange={handleChange}
-                      renderInput={(params) => <TextField {...params} />}
-                  />
-                </LocalizationProvider>
-              </div>
-              <div className="d-flex gap-2">
-                <Button variant="outlined" onClick={onOffFilter}>
-                  Bekor qilish
-                </Button>
-                <Button
+      <div className="top">
+        <div className="d-flex flex-column w-50">
+          <h3 className="title">Xarajatlar</h3>
+          <div className="filter">
+            <FilterWrapper>
+              <Button
                   variant="contained"
-                  color="success"
-                  onClick={onOnFilter}
-                >
-                  Qo'llash
-                </Button>
+                  onClick={() => setIsFilterOpen((p) => !p)}
+                  style={{
+                    fontFamily: "Inter",
+                    color: "#fff",
+                    background: "#787EFF",
+                  }}
+              >
+                Filter
+              </Button>
+
+              <div
+                  className="filter-content"
+                  style={{ visibility: isFilterOpen ? "visible" : "hidden" }}
+              >
+                <div className="row">
+                  <div className="mb-3 col-6">
+                    <label className="form-label">Savdo nuqtasi</label>
+                    <select ref={filSelectRef} className="form-control">
+                      <option value={"null"} disabled>
+                        Tanlang
+                      </option>
+                      {optionExpense.map((i) => (
+                          <option value={i.value} key={i.value}>
+                            {i.label}
+                          </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="mb-3 col-6 mt-3">
+                    {/*<label className="form-label">Davr</label>*/}
+                    {/*<input*/}
+                    {/*  autoComplete="off"*/}
+                    {/*  ref={filDateRef}*/}
+                    {/*  name="startDate"*/}
+                    {/*  type="date"*/}
+                    {/*  className="form-control"*/}
+                    {/*/>*/}
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DesktopDatePicker
+                          label="Davr"
+                          inputRef={filDateRef}
+                          inputFormat="DD-MM-YYYY"
+                          value={valuedate}
+                          onChange={handleChange}
+                          renderInput={(params) => <TextField {...params} />}
+                      />
+                    </LocalizationProvider>
+                  </div>
+                  <div className="d-flex gap-2">
+                    <Button variant="outlined" onClick={onOffFilter}>
+                      Bekor qilish
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="success"
+                        onClick={onOnFilter}
+                    >
+                      Qo'llash
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </FilterWrapper>
+            {!!Object.keys(filterState).length && (
+                <div className="filter-state col-12">
+                  <div className="filter-state__inner">
+                    <span>Filtrlangan</span>
+                    <button className="btn btn-secondary" onClick={onOffFilter}>
+                      O'chirish
+                    </button>
+                  </div>
+                </div>
+            )}
+          </div>
+        </div>
+        <div className="statistika">
+          <div className="card">
+            <div className="wrap">
+              <div className="left">
+                <div className="icon">
+                  <CardSvg />
+                </div>
+                <div className="bot">
+                  <span>{summ}</span>
+                  <p>Xarajat</p>
+                </div>
               </div>
             </div>
           </div>
-        </FilterWrapper>
-        {!!Object.keys(filterState).length && (
-          <div className="filter-state col-12">
-            <div className="filter-state__inner">
-              <span>Filtrlangan</span>
-              <button className="btn btn-secondary" onClick={onOffFilter}>
-                O'chirish
-              </button>
-            </div>
-          </div>
-        )}
+        </div>
+
       </div>
+
+
 
       <table className="table table-borderless table-hover">
         <thead>
@@ -444,7 +450,7 @@ const ExpensesTable = () => {
                     {new Date(obj.date).toLocaleString("en-GB")}
                   </td>
                   <td
-                    style={{ width: "20%", color: "red", fontWeight: 600 }}
+                    style={{ width: "20%", color: "red", fontWeight: 400, }}
                     className="col"
                   >
                     <span>
@@ -453,6 +459,7 @@ const ExpensesTable = () => {
                         variant="outlined"
                         style={{
                           fontSize: 18,
+                          fontFamily:"Rubik",
                           background: "rgb(255, 77, 73, 0.12)",
                           color: "rgb(255, 77, 73)",
                           border: "none",

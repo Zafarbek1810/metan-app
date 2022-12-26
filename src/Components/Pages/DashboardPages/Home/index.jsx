@@ -3,12 +3,15 @@ import DashboardLayout from "../../../Layouts/Dashboard";
 // import DashboardLayout from "../../../NewLayouts";
 import Chart from "./Charts";
 import Cards from "./Cards";
+import {Wrapper} from "./style";
 
 const HomeDashboard = () => {
   return (
     <DashboardLayout>
-      <Cards/>
-      <Chart/>
+      <Wrapper>
+          <Cards/>
+          <Chart/>
+      </Wrapper>
     </DashboardLayout>
   );
 };

@@ -1,11 +1,14 @@
 import React from 'react';
 import DashboardLayout from "../../../Layouts/Dashboard";
 import ServicesTable from "./ServicesTable";
+import {Wrapper} from "../Home/style";
 
 const Keshbek = () => {
   return (
     <DashboardLayout>
-      <ServicesTable/>
+      <Wrapper>
+          <ServicesTable/>
+      </Wrapper>
     </DashboardLayout>
   );
 };

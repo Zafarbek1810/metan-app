@@ -1,11 +1,14 @@
 import React from 'react';
 import DebtorsTable from "./DebtorsTable";
 import DashboardLayout from "../../../Layouts/Dashboard";
+import {Wrapper} from "../Home/style";
 
 const Qarzdorlar = () => {
   return (
     <DashboardLayout>
-      <DebtorsTable/>
+      <Wrapper>
+          <DebtorsTable/>
+      </Wrapper>
     </DashboardLayout>
   );
 };

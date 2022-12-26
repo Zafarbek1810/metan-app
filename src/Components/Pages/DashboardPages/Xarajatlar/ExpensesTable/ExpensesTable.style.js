@@ -33,7 +33,6 @@ const ExpensesTableWrapper = styled.div`
 
   .statistika {
     width: 20%;
-    margin-left: auto;
     margin-bottom: 20px;
     .card {
       border-radius: 12px;
@@ -87,7 +86,8 @@ const ExpensesTableWrapper = styled.div`
   .filter {
     background-color: transparent;
     border-radius: 4px;
-    padding: 10px;
+    //padding: 10px;
+    margin-top: 15px;
   }
 
   .filter-state {
@@ -150,7 +150,7 @@ const ExpensesTableWrapper = styled.div`
 
         td.col {
           font-style: normal;
-          font-weight: 500;
+          font-weight: 400;
           font-size: 18px;
           line-height: 24px;
           display: flex;
@@ -191,6 +191,7 @@ const ModalContent = styled.div`
   //padding: 20px;
   border-bottom: 1px solid #f5f6f8;
   background: #fff;
+  
   
   form{
     background: #fff;

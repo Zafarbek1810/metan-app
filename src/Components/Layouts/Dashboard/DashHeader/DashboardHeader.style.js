@@ -6,6 +6,7 @@ const DashHeaderWrapper=styled.div`
   position: relative;
   justify-content: space-between;
   
+  
   .storeName{
     width: 550px;
     display: flex;

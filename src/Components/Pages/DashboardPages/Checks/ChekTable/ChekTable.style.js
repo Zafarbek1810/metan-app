@@ -86,7 +86,7 @@ const ChekTableWrapper = styled.div`
         td.col {
           font-size: 18px;
           line-height: 18px;
-          font-weight: 500;
+          font-weight: 400;
           display: flex;
           align-items: center;
           justify-content: center;

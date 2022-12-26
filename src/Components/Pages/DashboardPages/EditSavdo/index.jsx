@@ -3,6 +3,7 @@ import DashboardLayout from "../../../Layouts/Dashboard";
 import EditTable from "./EditTable";
 import ConfirmModal from "../../../Common/ConfirmModal";
 import {ModalContextProvider} from "../../../../Context/ModalContext";
+import {Wrapper} from "../Home/style";
 
 const EditSavdo = ({outletId}) => {
   const RefObj = useRef({resolve(){}, reject(){}});
@@ -10,7 +11,9 @@ const EditSavdo = ({outletId}) => {
   return (
     <>
       <DashboardLayout>
-        <EditTable id={outletId} RefObj={RefObj} setIsOpen={setIsOpen}/>
+        <Wrapper>
+            <EditTable id={outletId} RefObj={RefObj} setIsOpen={setIsOpen}/>
+        </Wrapper>
       </DashboardLayout>
       <ModalContextProvider
         RefObj={RefObj}

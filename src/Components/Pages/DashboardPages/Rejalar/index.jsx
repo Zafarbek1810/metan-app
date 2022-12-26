@@ -1,11 +1,14 @@
 import React from 'react';
 import DashboardLayout from "../../../Layouts/Dashboard";
 import ListTable from "./ListTable";
+import {Wrapper} from "../Home/style";
 
 const Rejalar = () => {
     return (
         <DashboardLayout>
-            <ListTable/>
+            <Wrapper>
+                <ListTable/>
+            </Wrapper>
         </DashboardLayout>
     );
 };

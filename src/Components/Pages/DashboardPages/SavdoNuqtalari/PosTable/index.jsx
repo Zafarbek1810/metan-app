@@ -238,9 +238,11 @@ const PosTable = ({ RefObj, setIsOpen }) => {
                         label="Ha"
                         variant="outlined"
                         style={{
-                          background: "rgb(114, 225, 40, 0.12)",
-                          color: "rgb(114, 225, 40)",
+                          background: "rgb(114, 225, 40, 0.7)",
+                          color: "#fff",
                           border: "none",
+                          fontFamily:"Rubik",
+                          fontSize:18
                         }}
                       />
                     </span>
@@ -251,9 +253,11 @@ const PosTable = ({ RefObj, setIsOpen }) => {
                         label="Ha"
                         variant="outlined"
                         style={{
-                          background: "rgb(114, 225, 40, 0.12)",
-                          color: "rgb(114, 225, 40)",
+                          background: "rgb(114, 225, 40, 0.7)",
+                          color: "#fff",
                           border: "none",
+                          fontFamily:"Rubik",
+                          fontSize:18
                         }}
                       />
                     </span>

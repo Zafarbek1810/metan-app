@@ -224,12 +224,12 @@ const ChekTable = () => {
       <table className="table table-hover table-borderless">
         <thead>
           <tr>
-            <th style={{ minWidth: "5%" }} className="col">
+            <th style={{ minWidth: "3%" }} className="col">
               Id
             </th>
             <th
               style={{
-                minWidth: "15%",
+                minWidth: "18%",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -248,16 +248,16 @@ const ChekTable = () => {
             <th style={{ minWidth: "10%" }} className="col">
               Bonus
             </th>
-            <th style={{ minWidth: "15%" }} className="col">
+            <th style={{ minWidth: "12%" }} className="col">
               Mijoz
             </th>
-            <th style={{ minWidth: "15%" }} className="col">
+            <th style={{ minWidth: "10%" }} className="col">
               Kassir
             </th>
-            <th style={{ minWidth: "10%" }} className="col">
+            <th style={{ minWidth: "15%" }} className="col">
               Savdo nuqtasi
             </th>
-            <th style={{ minWidth: "10%" }} className="col">
+            <th style={{ minWidth: "12%" }} className="col">
               Status
             </th>
           </tr>
@@ -267,17 +267,17 @@ const ChekTable = () => {
             cheques.length ? (
               cheques.map((obj, index) => (
                 <tr key={obj.id} className="edit_row">
-                  <td style={{ minWidth: "5%" }} className="col">
+                  <td style={{ minWidth: "3%" }} className="col">
                     {(currentPage - 1) * 20 + index + 1}
                   </td>
                   <td
                     style={{
-                      minWidth: "15%",
+                      minWidth: "18%",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
                       textAlign: "center",
-                      fontWeight: 500,
+                      fontWeight: 400,
                       fontFamily: "Inter",
                     }}
                     className="col"
@@ -285,16 +285,17 @@ const ChekTable = () => {
                     {new Date(obj.date).toLocaleString("en-GB")}
                   </td>
                   <td style={{ minWidth: "10%" }} className="col">
-                    <Chip
-                      label={obj.amount.toLocaleString().replaceAll(',', ' ')}
-                      variant="outlined"
-                      style={{
-                        background: "rgb(114, 225, 40, 0.12)",
-                        color: "rgb(114, 225, 40)",
-                        border: "none",
-                        fontSize: 18,
-                      }}
-                    />
+                    {/*<Chip*/}
+                    {/*  label=*/}
+                    {/*  variant="outlined"*/}
+                    {/*  style={{*/}
+                    {/*    background: "rgb(114, 225, 40, 0.12)",*/}
+                    {/*    color: "rgb(114, 225, 40)",*/}
+                    {/*    border: "none",*/}
+                    {/*    fontSize: 18,*/}
+                    {/*  }}*/}
+                    {/*/>*/}
+                    {obj.amount.toLocaleString().replaceAll(',', ' ')}
                   </td>
                   <td style={{ minWidth: "10%" }} className="col">
                     0.00
@@ -303,68 +304,76 @@ const ChekTable = () => {
                     {obj.giftedPoints}
                   </td>
                   <td
-                    style={{ minWidth: "15%", fontWeight: 600 }}
+                    style={{ minWidth: "12%", fontWeight: 400 }}
                     className="col"
                   >
                     {obj.client?.fullName}
                   </td>
                   <td
-                    style={{ minWidth: "15%", fontWeight: 600 }}
+                    style={{ minWidth: "10%", fontWeight: 400 }}
                     className="col"
                   >
                     {obj.cashier?.fullName}
                   </td>
                   <td
-                    style={{ minWidth: "10%", fontWeight: 600 }}
+                    style={{ minWidth: "15%", fontWeight: 400 }}
                     className="col"
                   >
-                    {obj.outlet.title}
+                    {obj.outlet?.title}
                   </td>
                   {obj.type === "PAID_BY_MONEY" ? (
-                    <td style={{ minWidth: "10%" }} className="col">
+                    <td style={{ minWidth: "12%" }} className="col">
                       <Chip
                         label="To'langan"
                         variant="outlined"
                         style={{
-                          background: "rgb(114, 225, 40, 0.12)",
-                          color: "rgb(114, 225, 40)",
+                          background: "rgb(114, 225, 40, 0.7)",
+                          color: "#fff",
                           border: "none",
+                          fontFamily:"Rubik",
+                          fontSize:18
                         }}
                       />
                     </td>
                   ) : obj.type === "PAID_BY_POINTS" ? (
-                    <td style={{ minWidth: "10%" }} className="col">
+                    <td style={{ minWidth: "12%" }} className="col">
                       <Chip
                         label="Ballar orqali"
                         variant="outlined"
                         style={{
-                          background: "rgb(253, 181, 40, 0.12)",
-                          color: "rgb(253, 181, 40)",
+                          background: "rgb(253, 181, 40, 0.7)",
+                          color: "#fff",
                           border: "none",
+                          fontFamily:"Rubik",
+                          fontSize:18
                         }}
                       />
                     </td>
                   ) : obj.type === "PAID_POINTS" ? (
-                    <td style={{ minWidth: "10%" }} className="col">
+                    <td style={{ minWidth: "12%" }} className="col">
                       <Chip
                         label="Ballar chiqarilgan"
                         variant="outlined"
                         style={{
-                          background: "rgb(253, 181, 40, 0.12)",
-                          color: "rgb(253, 181, 40)",
+                          background: "rgb(253, 181, 40, 0.7)",
+                          color: "#fff",
                           border: "none",
+                          fontFamily:"Rubik",
+                          fontSize:18
                         }}
                       />
                     </td>
                   ) : (
-                    <td style={{ minWidth: "10%" }} className="col">
+                    <td style={{ minWidth: "12%" }} className="col">
                       <Chip
                         label="Qarzga"
                         variant="outlined"
                         style={{
-                          background: "rgb(255, 77, 73, 0.12)",
-                          color: "rgb(255, 77, 73)",
+                          background: "rgb(255, 77, 73, 0.7)",
+                          color: "#fff",
                           border: "none",
+                          fontFamily:"Rubik",
+                          fontSize:18
                         }}
                       />
                     </td>

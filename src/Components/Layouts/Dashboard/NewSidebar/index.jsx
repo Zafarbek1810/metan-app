@@ -26,7 +26,7 @@ const text = `
   it can be found as a welcome guest in many households across the world.
 `;
 
-const SidebarItemsMenu = [
+const SidebarItemsMenu1 = [
     {
         title: "Kassa",
         path: "/dashboard/cashbox",
@@ -63,6 +63,8 @@ const SidebarItemsMenu = [
         Svg: CashSvg,
         role: ["CASHIER", "SUPER_ADMIN", "DIRECTOR"]
     },
+];
+const SidebarItemsMenu2 = [
     {
         title: "Savdo nuqtalari",
         path: "/dashboard/pos",
@@ -114,7 +116,16 @@ const SidebarItemsMenu = [
 
 ];
 
-const PlanMenu=[
+const Umumiy = [
+    {
+        title: "Panel",
+        path: "/dashboard/allBusines",
+        Svg: PlanSvg,
+        role: ["SUPER_ADMIN"]
+    },
+]
+
+const PlanMenu = [
     {
         title: "Rejalar",
         path: "/dashboard/plans",
@@ -132,58 +143,146 @@ const NewSidebar = () => {
     const userRole = useContextSelector(UserContext, ctx => ctx.state.user.role);
 
 
-    const NavListMenu = SidebarItemsMenu.filter(({role}) => role.includes(userRole));
+    const NavListMenu1 = SidebarItemsMenu1.filter(({role}) => role.includes(userRole));
+    const NavListMenu2 = SidebarItemsMenu2.filter(({role}) => role.includes(userRole));
     const PlanListMenu = PlanMenu.filter(({role}) => role.includes(userRole));
+    const UmumiyListMenu = Umumiy.filter(({role}) => role.includes(userRole));
+    console.log(userRole)
     return (
         <SidebarWrap>
-                <MyLink className="logo" to="/dashboard/home">
-                    {/*<LogoSvg className="logoSvg"/>*/}
-                    <img src="/img/logo.png" alt=""/>
-                </MyLink>
-                <Collapse bordered={false} defaultActiveKey={['1']}>
-                    <Panel header="Metan shahobchalar" key="1">
-                        <div className="sidebar-menu">
-                        {
-                            NavListMenu.map(({title, Svg, path}, idx) => {
-                                return (
-                                    <MyLink
-                                        className={router.pathname === path ?  "activelink" : "link"}
-                                        to={path}
-                                        key={idx}
-                                    >
-                                        <Svg/>
-                                        {title}
-                                    </MyLink>
-                                )
-                            })
-                        }
-                        </div>
-                    </Panel>
-                    <Panel header="Propan shahobchalar" key="2">
-                        {text}
-                    </Panel>
-                    <Panel header="Benzin shahobchalar" key="3">
-                        {text}
-                    </Panel>
-                    <Panel header="Rejalar" key="4">
-                        <div className="sidebar-menu">
-                            {
-                                PlanListMenu.map(({title, Svg, path}, idx) => {
-                                    return (
-                                        <MyLink
-                                            className={router.pathname === path ?  "activelink" : "link"}
-                                            to={path}
-                                            key={idx}
-                                        >
-                                            <Svg/>
-                                            {title}
-                                        </MyLink>
-                                    )
-                                })
-                            }
-                        </div>
-                    </Panel>
-                </Collapse>
+            <MyLink className="logo" to="/dashboard/home">
+                {/*<LogoSvg className="logoSvg"/>*/}
+                <img src="/img/logo.png" alt=""/>
+            </MyLink>
+
+                {(() => {
+                    if (userRole==="CASHIER" || userRole==="DIRECTOR") {
+                        return (
+                            <Collapse bordered={false}
+                                      defaultActiveKey={['1']}
+                            >
+                                <Panel header="Metan shahobchalar" key="1">
+                                    <div className="sidebar-menu">
+                                        {
+                                            NavListMenu1.map(({title, Svg, path}, idx) => {
+                                                return (
+                                                    <MyLink
+                                                        className={router.pathname === path ? "activelink" : "link"}
+                                                        to={path}
+                                                        key={idx}
+                                                    >
+                                                        <Svg/>
+                                                        {title}
+                                                    </MyLink>
+                                                )
+                                            })
+                                        }
+                                        <hr style={{color:"#D1D0E7"}}/>
+                                        {
+                                            NavListMenu2.map(({title, Svg, path}, idx) => {
+                                                return (
+                                                    <MyLink
+                                                        className={router.pathname === path ? "activelink" : "link"}
+                                                        to={path}
+                                                        key={idx}
+                                                    >
+                                                        <Svg/>
+                                                        {title}
+                                                    </MyLink>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </Panel>
+                            </Collapse>
+                        )
+                    } else if(userRole==="SUPER_ADMIN") {
+                        return (
+                            <Collapse bordered={false}
+                                      defaultActiveKey={['1']}
+                            >
+                                <Panel header="Barcha bizneslar" key="5">
+                                    <div className="sidebar-menu">
+                                        {
+                                            UmumiyListMenu.map(({title, Svg, path}, idx) => {
+                                                return (
+                                                    <MyLink
+                                                        className={router.pathname === path ? "activelink" : "link"}
+                                                        to={path}
+                                                        key={idx}
+                                                    >
+                                                        <Svg/>
+                                                        {title}
+                                                    </MyLink>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </Panel>
+                                <Panel header="Metan shahobchalar" key="1">
+                                    <div className="sidebar-menu">
+                                        {
+                                            NavListMenu1.map(({title, Svg, path}, idx) => {
+                                                return (
+                                                    <MyLink
+                                                        className={router.pathname === path ? "activelink" : "link"}
+                                                        to={path}
+                                                        key={idx}
+                                                    >
+                                                        <Svg/>
+                                                        {title}
+                                                    </MyLink>
+                                                )
+                                            })
+                                        }
+                                        <hr style={{color:"#D1D0E7"}}/>
+                                        {
+                                            NavListMenu2.map(({title, Svg, path}, idx) => {
+                                                return (
+                                                    <MyLink
+                                                        className={router.pathname === path ? "activelink" : "link"}
+                                                        to={path}
+                                                        key={idx}
+                                                    >
+                                                        <Svg/>
+                                                        {title}
+                                                    </MyLink>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </Panel>
+                                <Panel header="Propan shahobchalar" key="2">
+                                    {text}
+                                </Panel>
+                                <Panel header="Benzin shahobchalar" key="3">
+                                    {text}
+                                </Panel>
+                                <Panel header="Rejalar" key="4">
+                                    <div className="sidebar-menu">
+                                        {
+                                            PlanListMenu.map(({title, Svg, path}, idx) => {
+                                                return (
+                                                    <MyLink
+                                                        className={router.pathname === path ? "activelink" : "link"}
+                                                        to={path}
+                                                        key={idx}
+                                                    >
+                                                        <Svg/>
+                                                        {title}
+                                                    </MyLink>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </Panel>
+                            </Collapse>
+                        )
+                    }
+
+                })()}
+
+
         </SidebarWrap>
     );
 };

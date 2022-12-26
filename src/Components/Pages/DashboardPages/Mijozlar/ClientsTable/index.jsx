@@ -171,7 +171,7 @@ const ClientsTable = () => {
       <table className="table table-borderless table-hover">
         <thead>
           <tr>
-            <th style={{ minWidth: "5%" }} className="col">
+            <th style={{ minWidth: "3%" }} className="col">
               Id
             </th>
             <th
@@ -186,10 +186,10 @@ const ClientsTable = () => {
             >
               Mijoz
             </th>
-            <th style={{ minWidth: "10%" }} className="col">
+            <th style={{ minWidth: "13%" }} className="col">
               Telefon
             </th>
-            <th style={{ minWidth: "8%" }} className="col">
+            <th style={{ minWidth: "11%" }} className="col">
               Avto raqami
             </th>
             <th style={{ minWidth: "8%" }} className="col">
@@ -210,8 +210,8 @@ const ClientsTable = () => {
             <th style={{ minWidth: "8%" }} className="col">
               Tashriflar soni
             </th>
-            <th style={{ minWidth: "8%" }} className="col">
-              Amallar
+            <th style={{ minWidth: "4%" }} className="col">
+
             </th>
           </tr>
         </thead>
@@ -220,7 +220,7 @@ const ClientsTable = () => {
             user.length ? (
               user.map((obj, index) => (
                 <tr key={obj.id}>
-                  <td style={{ minWidth: "5%" }} className="col">
+                  <td style={{ minWidth: "3%" }} className="col">
                     {(currentPage - 1) * 20 + index + 1}
                   </td>
                   <td
@@ -246,10 +246,10 @@ const ClientsTable = () => {
                     </button>
                     {/*<MyLink className="link" to="/dashboard/aboutClient"></MyLink>*/}
                   </td>
-                  <td style={{ minWidth: "10%" }} className="col">
+                  <td style={{ minWidth: "13%" }} className="col">
                     {obj.phoneNumber}
                   </td>
-                  <td style={{ minWidth: "8%" }} className="col">
+                  <td style={{ minWidth: "11%" }} className="col">
                     {obj.plateNumber}
                   </td>
                   <td style={{ minWidth: "8%" }} className="col">
@@ -270,11 +270,10 @@ const ClientsTable = () => {
                   <td style={{ minWidth: "8%" }} className="col">
                     {obj.numberOfVisits}
                   </td>
-                  <td style={{ minWidth: "8%" }} className="col">
+                  <td style={{ minWidth: "4%" }} className="col">
                     <div className="btns">
                       <IconButton
                         style={{
-                          background: "rgb(38, 198, 249, 0.12)",
                           color: "rgb(38, 198, 249)",
                         }}
                         onClick={() => handleSend(obj)}

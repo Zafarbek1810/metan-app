@@ -50,7 +50,7 @@ const Wrapper=styled.div`
     margin-top: 45px;
     height: calc(100vh - 45px);
     overflow-y: auto;
-    padding: 20px 20px 10px;
+    //padding: 20px 20px 10px;
     background: #F7F7F9;
     
 

@@ -1,11 +1,14 @@
 import React from 'react';
 import DashboardLayout from "../../../Layouts/Dashboard";
 import GasColumnReport from "./GasColumnReport";
+import {Wrapper} from "../Home/style";
 
 const KolonkalarReport = () => {
   return (
     <DashboardLayout>
-      <GasColumnReport/>
+      <Wrapper>
+          <GasColumnReport/>
+      </Wrapper>
     </DashboardLayout>
   );
 };

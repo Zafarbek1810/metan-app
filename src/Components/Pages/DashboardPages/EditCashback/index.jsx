@@ -1,11 +1,14 @@
 import React from 'react';
 import DashboardLayout from "../../../Layouts/Dashboard";
 import EditCashbackTable from "./EditCashbackTable";
+import {Wrapper} from "../Home/style";
 
 const EditCashback = ({cashbackId}) => {
   return (
     <DashboardLayout>
-      <EditCashbackTable cashId={cashbackId}/>
+      <Wrapper>
+          <EditCashbackTable cashId={cashbackId}/>
+      </Wrapper>
     </DashboardLayout>
   );
 };
