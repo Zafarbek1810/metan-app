@@ -460,9 +460,9 @@ const ExpensesTable = () => {
                         style={{
                           fontSize: 18,
                           fontFamily:"Rubik",
-                          background: "rgb(255, 77, 73, 0.12)",
-                          color: "rgb(255, 77, 73)",
+                          background: "rgb(255, 77, 73, 0.7)",
                           border: "none",
+                          color: "#fff",
                         }}
                       />
                     </span>

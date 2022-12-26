@@ -123,6 +123,12 @@ const Umumiy = [
         Svg: PlanSvg,
         role: ["SUPER_ADMIN"]
     },
+    {
+        title: "Rejalar",
+        path: "/dashboard/plans",
+        Svg: PlanSvg,
+        role: ["SUPER_ADMIN"]
+    },
 ]
 
 const PlanMenu = [
@@ -130,7 +136,7 @@ const PlanMenu = [
         title: "Rejalar",
         path: "/dashboard/plans",
         Svg: PlanSvg,
-        role: ["SUPER_ADMIN"]
+        role: ["SUPER_ADMIN", "CASHIER", "DIRECTOR"]
     },
 ]
 
@@ -152,7 +158,7 @@ const NewSidebar = () => {
         <SidebarWrap>
             <MyLink className="logo" to="/dashboard/home">
                 {/*<LogoSvg className="logoSvg"/>*/}
-                <img src="/img/logo.png" alt=""/>
+                {/*<img src="/img/logo.png" alt=""/>*/}
             </MyLink>
 
                 {(() => {
@@ -161,7 +167,7 @@ const NewSidebar = () => {
                             <Collapse bordered={false}
                                       defaultActiveKey={['1']}
                             >
-                                <Panel header="Metan shahobchalar" key="1">
+                                <Panel header="Metan" key="1">
                                     <div className="sidebar-menu">
                                         {
                                             NavListMenu1.map(({title, Svg, path}, idx) => {
@@ -171,8 +177,8 @@ const NewSidebar = () => {
                                                         to={path}
                                                         key={idx}
                                                     >
-                                                        <Svg/>
                                                         {title}
+                                                        <Svg/>
                                                     </MyLink>
                                                 )
                                             })
@@ -186,8 +192,26 @@ const NewSidebar = () => {
                                                         to={path}
                                                         key={idx}
                                                     >
-                                                        <Svg/>
                                                         {title}
+                                                        <Svg/>
+                                                    </MyLink>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </Panel>
+                                <Panel header="Rejalar" key="2">
+                                    <div className="sidebar-menu">
+                                        {
+                                            PlanListMenu.map(({title, Svg, path}, idx) => {
+                                                return (
+                                                    <MyLink
+                                                        className={router.pathname === path ? "activelink" : "link"}
+                                                        to={path}
+                                                        key={idx}
+                                                    >
+                                                        {title}
+                                                        <Svg/>
                                                     </MyLink>
                                                 )
                                             })
@@ -211,15 +235,15 @@ const NewSidebar = () => {
                                                         to={path}
                                                         key={idx}
                                                     >
-                                                        <Svg/>
                                                         {title}
+                                                        <Svg/>
                                                     </MyLink>
                                                 )
                                             })
                                         }
                                     </div>
                                 </Panel>
-                                <Panel header="Metan shahobchalar" key="1">
+                                <Panel header="Metan" key="1">
                                     <div className="sidebar-menu">
                                         {
                                             NavListMenu1.map(({title, Svg, path}, idx) => {
@@ -229,8 +253,8 @@ const NewSidebar = () => {
                                                         to={path}
                                                         key={idx}
                                                     >
-                                                        <Svg/>
                                                         {title}
+                                                        <Svg/>
                                                     </MyLink>
                                                 )
                                             })
@@ -244,37 +268,31 @@ const NewSidebar = () => {
                                                         to={path}
                                                         key={idx}
                                                     >
-                                                        <Svg/>
                                                         {title}
+                                                        <Svg/>
                                                     </MyLink>
                                                 )
                                             })
                                         }
                                     </div>
                                 </Panel>
-                                <Panel header="Propan shahobchalar" key="2">
+                                <Panel header="Propan" key="2">
                                     {text}
                                 </Panel>
-                                <Panel header="Benzin shahobchalar" key="3">
+                                <Panel header="Benzin" key="3">
                                     {text}
                                 </Panel>
-                                <Panel header="Rejalar" key="4">
-                                    <div className="sidebar-menu">
-                                        {
-                                            PlanListMenu.map(({title, Svg, path}, idx) => {
-                                                return (
-                                                    <MyLink
-                                                        className={router.pathname === path ? "activelink" : "link"}
-                                                        to={path}
-                                                        key={idx}
-                                                    >
-                                                        <Svg/>
-                                                        {title}
-                                                    </MyLink>
-                                                )
-                                            })
-                                        }
-                                    </div>
+                                <Panel header="Issiqxona" key="6">
+                                    {text}
+                                </Panel>
+                                <Panel header="Moyka" key="7">
+                                    {text}
+                                </Panel>
+                                <Panel header="Arenda" key="8">
+                                    {text}
+                                </Panel>
+                                <Panel header="Kafe" key="9">
+                                    {text}
                                 </Panel>
                             </Collapse>
                         )

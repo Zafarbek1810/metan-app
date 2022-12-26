@@ -292,19 +292,24 @@ function ReportModal({renderParent, handleCancel}) {
   const [cols, setCols] = useState([]);
   const [forRender, setForRender] = useState(123);
   let itogo=  0;
+
   let defaultDate = new Date()
   defaultDate.setDate(defaultDate.getDate())
+
+
 
   const [date, setDate] = useState(defaultDate)
 
   const onSetDate = (event) => {
     setDate(new Date(event.target.value))
+    console.log("date",date.toLocaleDateString('en-CA'))
   }
 
   const onSubmit = (values) => {
     const body = {
       outletId: +activeOutlet,
-      gasColumnReports: []
+      gasColumnReports: [],
+      date: date.toLocaleDateString('en-GB').replaceAll('/', '-')
     };
     cols.forEach(col => {
       body.gasColumnReports.push({

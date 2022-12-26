@@ -188,12 +188,13 @@ const CardsWrapper = styled.div`
 
         .bot {
           display: flex;
+          flex-wrap: wrap;
           justify-content: space-between;
         }
 
         span {
-          font-weight: 700;
-          font-size: 20px;
+          font-weight: 500;
+          font-size: 18px;
           font-family: "Rubik";
           color: #fff;
         }

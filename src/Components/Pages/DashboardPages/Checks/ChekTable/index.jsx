@@ -363,6 +363,20 @@ const ChekTable = () => {
                         }}
                       />
                     </td>
+                  ) : obj.type === "DEBT_PAID" ? (
+                      <td style={{ minWidth: "12%" }} className="col">
+                        <Chip
+                            label="To'langan qarz"
+                            variant="outlined"
+                            style={{
+                              background: "rgb(253, 181, 40, 0.7)",
+                              color: "#fff",
+                              border: "none",
+                              fontFamily:"Rubik",
+                              fontSize:18
+                            }}
+                        />
+                      </td>
                   ) : (
                     <td style={{ minWidth: "12%" }} className="col">
                       <Chip

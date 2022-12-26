@@ -5,7 +5,7 @@ const SidebarWrap=styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 50px;
     svg {
       height: 100px;
       padding: 0 10px;
@@ -40,7 +40,7 @@ const SidebarWrap=styled.div`
       color: #D1D0E7;
       display: flex;
       align-items: center;
-      justify-content: start;
+      justify-content: space-between;
       text-decoration: none;
       font-family: "Inter";
       transition: 300ms;
@@ -54,7 +54,7 @@ const SidebarWrap=styled.div`
         border-radius: 12px;
         display: flex;
         align-items: center;
-        justify-content: start;
+        justify-content: space-between;
         text-decoration: none;
         background: #373951 !important;
         font-family: "Inter";
@@ -84,7 +84,7 @@ const SidebarWrap=styled.div`
       color: #D1D0E7;
       display: flex;
       align-items: center;
-      justify-content: start;
+      justify-content: space-between;
       text-decoration: none;
       background: #787EFF !important;
       border-radius: 12px;

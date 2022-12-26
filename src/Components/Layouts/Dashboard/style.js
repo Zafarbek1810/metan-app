@@ -11,6 +11,14 @@ const Wrapper=styled.div`
     height: 100vh;
     //border-right: 1px solid rgba(31, 60, 136, 0.2);
     overflow-y: auto;
+    z-index: 333;
+    transition: 0.5s ease;
+    transform: translateX(-190px);
+    
+    &:hover{
+      width: 260px;
+      transform: translateX(0);
+    }
 
 
     &::-webkit-scrollbar-track {
@@ -40,8 +48,8 @@ const Wrapper=styled.div`
     //border-bottom: 1px solid rgba(31, 60, 136, 0.2);
     position: absolute;
     top: 0;
-    left: 260px;
-    width: calc(100% - 250px);
+    left: 60px;
+    width: calc(100% - 60px);
     background: #F7F7F9;
     border-bottom: 1px solid rgba(159, 160, 184, 0.3);
   }
@@ -49,6 +57,7 @@ const Wrapper=styled.div`
   .layout__main {
     margin-top: 45px;
     height: calc(100vh - 45px);
+    width: 100%;
     overflow-y: auto;
     //padding: 20px 20px 10px;
     background: #F7F7F9;
@@ -71,15 +80,23 @@ const Wrapper=styled.div`
 
   .layout__right {
     flex-grow: 1;
+    transform: translateX(-100px);
+    
+    
   }
   
   @media(max-width: 992px){
     .layout__sidebar{
-      display: none;
+      //display: none;
     }
     .layout__top{
       left: 0;
       width: 100%;
+    }
+    .layout__right {
+      transform: translateX(0);
+
+
     }
   }
 

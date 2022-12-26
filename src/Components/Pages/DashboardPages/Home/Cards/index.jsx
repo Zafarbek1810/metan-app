@@ -110,7 +110,7 @@ const Cards = () => {
                         <div className="right">
                             <p className="title">Jami daromad</p>
                             <div className="bot">
-                                <span>3000000</span>
+                                <span>300000</span>
                                 <span className="persent"><TopSvg/>25.8%</span>
                             </div>
                         </div>
