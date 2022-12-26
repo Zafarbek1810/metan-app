@@ -22,11 +22,84 @@ import DepositWithdraw from './dashboard/DepositWithdraw'
 import SalesByCountries from './dashboard/SalesByCountries'
 import Trophy from "./dashboard/Trophy";
 import {Wrapper} from "../../Home/style";
+import React from "react";
+import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
+import {Card, Col, Progress, Row, Statistic} from 'antd';
 
 const Dashboard = () => {
     return (
         <Wrapper>
             <ApexChartWrapper>
+                <div className="site-statistic-demo-card mb-4">
+                    <Row gutter={16}>
+                        <Col span={8}>
+                            <Card>
+                                <Statistic
+                                    style={{marginBottom:20}}
+                                    title="Active"
+                                    value={21.28}
+                                    precision={2}
+                                    valueStyle={{
+                                        color: '#3f8600',
+                                    }}
+                                    prefix={<ArrowUpOutlined />}
+                                    suffix="$"
+                                />
+                                <Progress
+                                    percent={69}
+                                    strokeColor={{
+                                        '0%': '#108ee9',
+                                        '100%': '#87d068',
+                                    }}
+                                />
+                            </Card>
+                        </Col>
+                        <Col span={8}>
+                            <Card>
+                                <Statistic
+                                    style={{marginBottom:20}}
+                                    title="Idle"
+                                    value={9.3}
+                                    precision={2}
+                                    valueStyle={{
+                                        color: '#cf1322',
+                                    }}
+                                    prefix={<ArrowDownOutlined />}
+                                    suffix="%"
+                                />
+                                <Progress
+                                    percent={36}
+                                    strokeColor={{
+                                        '0%': '#899FD4',
+                                        '100%': '#899FD4',
+                                    }}
+                                />
+                            </Card>
+                        </Col>
+                        <Col span={8}>
+                            <Card>
+                                <Statistic
+                                    style={{marginBottom:20}}
+                                    title="Yearly Sales"
+                                    value={80}
+                                    precision={2}
+                                    valueStyle={{
+                                        color: '#3f8600',
+                                    }}
+                                    prefix={<ArrowUpOutlined />}
+                                    suffix="$"
+                                />
+                                <Progress
+                                    percent={69}
+                                    strokeColor={{
+                                        '0%': '#1de9b6',
+                                        '100%': '#1dc4e9',
+                                    }}
+                                />
+                            </Card>
+                        </Col>
+                    </Row>
+                </div>
                 <Grid container spacing={3}>
                     <Grid item xs={12} md={4}>
                         <Trophy />
