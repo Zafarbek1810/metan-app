@@ -30,6 +30,7 @@ const ShiftsTable = () => {
     //today date
     let defaultDate = new Date();
     defaultDate.setDate(defaultDate.getDate());
+
     const [date, setDate] = useState(defaultDate);
     const onSetDate = (event) => {
         setDate(new Date(event.target.value));
@@ -44,7 +45,7 @@ const ShiftsTable = () => {
 
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [filterState, setFilterState] = useState({});
-    const [filterStateSum, setFilterStateSum] = useState({});
+    const [filterStateSum, setFilterStateSum] = useState({date: new Date(), outletId: 1});
     const filSelectRef = useRef();
     const filDateRef = useRef();
     const filModDateRef = useRef();
@@ -66,7 +67,7 @@ const ShiftsTable = () => {
     const [expence, setExpence] = useState([]);
     const [pnl, setPnl] = useState([]);
 
-    const [exSum, setExSum] = useState([]);
+    const [exSum, setExSum] = useState(0);
     const [render, setRender] = useState(null)
     const [totalElements, setTotalElements] = useState(20);
     const [currentPage, setCurrentPage] = useState(1);
@@ -83,19 +84,29 @@ const ShiftsTable = () => {
 
     useEffect(() => {
         async function fn() {
+            console.log("OUTLETSGA REQUEST JONATILDI");
             await OutletProvider.getAllOutlets(0, 1000)
                 .then((res) => {
-                    console.log("outlet", res.data);
+                    console.log("outlet came from server", res.data);
                     setOutlet(res.data);
+                    console.log("outlet after setting: ", outlet);
+                    onFilterSum()
+                    onOpenFilterSum();
+
                 })
                 .catch((err) => {
                     console.log(err);
                     Message.serverError();
                 });
+            console.log("OUTLETSDAN REQUEST OLINDI");
         }
 
         fn()
     }, []);
+
+    useEffect(()=>{
+        onOpenFilterSum();
+    },[outlet])
 
     const optionExpense = outlet.map((i) => ({
         label: i.title,
@@ -166,24 +177,66 @@ const ShiftsTable = () => {
 
     useEffect(() => {
         async function fn() {
+            console.log("Outlet keldimi? ", outlet);
+            console.log("Filter state sum bormi ?", filterStateSum);
+            console.log("EXPENSES GA REQUEST JONATILDI");
             await OutletProvider.getExpensesSum(0, 1000, filterStateSum)
                 .then((res) => {
                     console.log("expensessum", res)
-                    setExSum(res.data.expensesAmountSum)
+                    setExSum(res.data.expensesAmountSum);
+                    console.log("Expenses sum joylandi");
+                    setTimeout(()=>{
+                        console.log("expensessum", exSum);
+
+                    }, 3000)
                 })
                 .catch((err) => {
                     console.log(err)
                     Message.serverError()
                 })
+
+            console.log("EXPENSESDAN RESPONSE OLINDI");
         }
 
         fn()
-    }, [filterStateSum, isModalOpen, render])
+    }, [filterStateSum, isModalOpen, outlet])
+
+    useEffect(()=>{
+        console.log("qiymat berdi", exSum)
+    }, [exSum])
 
     const onFilterSum = () => {
         const date = filModDateRef.current?.value?.split("-").reverse().join("-");
         const outletId = filModOutletRef.current?.value;
         setFilterStateSum({date, outletId});
+        console.log("-----")
+        console.log(date);
+        console.log(outletId);
+    }
+
+    const onOpenFilterSum=()=>{
+        // const date = filModDateRef.current?.value?.split("-").reverse().join("-");
+        // const outletId = filModOutletRef.current?.value;
+        console.log("tesss",outlet);
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        let mm = today.getMonth() + 1; // Months start at 0!
+        let dd = today.getDate();
+
+        if (dd < 10) dd = '0' + dd;
+        if (mm < 10) mm = '0' + mm;
+
+        const formattedToday = dd + '-' + mm + '-' + yyyy;
+
+
+        setFilterStateSum( prev=> ({
+            ...filterStateSum,
+            date: formattedToday,
+            outletId: outlet?outlet[0]?outlet[0].id:1:1
+        }));
+        console.log("-----")
+        console.log(date);
+        console.log(outletId);
     }
 
     const onOnFilter = () => {
