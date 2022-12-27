@@ -152,6 +152,7 @@ const ExpensesTable = () => {
         console.log(data.res);
         toast.success("Muvaffaqiyatli yaratildi!");
         setForRender(Math.random());
+        setNumSum("")
         handleCancel();
       } catch (err) {
         console.log(err);
