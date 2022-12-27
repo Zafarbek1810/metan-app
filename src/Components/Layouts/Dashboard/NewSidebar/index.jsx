@@ -129,6 +129,12 @@ const Umumiy = [
         Svg: PlanSvg,
         role: ["SUPER_ADMIN"]
     },
+    {
+        title: "Proyektlar",
+        path: "/dashboard/projects",
+        Svg: PlanSvg,
+        role: ["SUPER_ADMIN"]
+    },
 ]
 
 const PlanMenu = [
