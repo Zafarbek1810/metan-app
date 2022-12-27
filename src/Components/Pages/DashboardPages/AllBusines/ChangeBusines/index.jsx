@@ -62,7 +62,7 @@ const ChangeBusines = () => {
     return (
         <ChangeBusinesWrapper>
             <div className="wrap">
-                <h3>Admin</h3>
+                <h3>Olimjon</h3>
                 <div className="selects">
                     <FormControl variant="filled" fullWidth className={classes.formControl}>
                         <InputLabel style={{color:"#fff"}} id="demo-simple-select-label1">Proyektlar</InputLabel>
@@ -86,6 +86,10 @@ const ChangeBusines = () => {
                             <MenuItem value={1}>Metan</MenuItem>
                             <MenuItem value={2}>Propan</MenuItem>
                             <MenuItem value={3}>Benzin</MenuItem>
+                            <MenuItem value={4}>Kafe</MenuItem>
+                            <MenuItem value={5}>Issiqxona</MenuItem>
+                            <MenuItem value={6}>Moyka</MenuItem>
+                            <MenuItem value={7}>Arenda</MenuItem>
                         </Select>
                     </FormControl>
                     <FormControl variant="filled" fullWidth className={classes.formControl}>
@@ -106,9 +110,11 @@ const ChangeBusines = () => {
                             value={davr}
                             onChange={handleChangeDavr}
                         >
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
+                            <MenuItem value={10}>Oxrgi hafta</MenuItem>
+                            <MenuItem value={20}>Oxrgi oy</MenuItem>
+                            <MenuItem value={30}>Yarim yil</MenuItem>
+                            <MenuItem value={40}>Bir yil</MenuItem>
+                            <MenuItem value={50}>Hammasi</MenuItem>
                         </Select>
                     </FormControl>
                     <Button  className="selec" style={{color:"#fff"}} variant="outlined" startIcon={<Settings />}>

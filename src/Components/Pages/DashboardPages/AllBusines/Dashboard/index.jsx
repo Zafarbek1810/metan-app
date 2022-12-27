@@ -36,14 +36,14 @@ const Dashboard = () => {
                             <Card>
                                 <Statistic
                                     style={{marginBottom:20}}
-                                    title="Active"
-                                    value={21.28}
+                                    title="Kirimlar"
+                                    value={"129 000 000"}
                                     precision={2}
                                     valueStyle={{
                                         color: '#3f8600',
                                     }}
                                     prefix={<ArrowUpOutlined />}
-                                    suffix="$"
+                                    suffix="UZS"
                                 />
                                 <Progress
                                     percent={69}
@@ -58,14 +58,14 @@ const Dashboard = () => {
                             <Card>
                                 <Statistic
                                     style={{marginBottom:20}}
-                                    title="Idle"
-                                    value={9.3}
+                                    title="Chiqimlar"
+                                    value={"11 500 000"}
                                     precision={2}
                                     valueStyle={{
                                         color: '#cf1322',
                                     }}
                                     prefix={<ArrowDownOutlined />}
-                                    suffix="%"
+                                    suffix="UZS"
                                 />
                                 <Progress
                                     percent={36}
@@ -80,14 +80,14 @@ const Dashboard = () => {
                             <Card>
                                 <Statistic
                                     style={{marginBottom:20}}
-                                    title="Yearly Sales"
-                                    value={80}
+                                    title="Hisobdagi pullar"
+                                    value={"24 000 000"}
                                     precision={2}
                                     valueStyle={{
                                         color: '#3f8600',
                                     }}
                                     prefix={<ArrowUpOutlined />}
-                                    suffix="$"
+                                    suffix="UZS"
                                 />
                                 <Progress
                                     percent={69}
