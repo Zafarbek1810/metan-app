@@ -65,6 +65,19 @@ const ExpensesTable = () => {
 
   const [summ, setSumm] = useState([]);
 
+  const [numSum, setNumSum] = useState(null)
+
+  let defaultDate = new Date()
+  defaultDate.setDate(defaultDate.getDate())
+
+  const [date, setDate] = useState(defaultDate)
+
+  const onSetDate = (event) => {
+    setDate(new Date(event.target.value))
+    console.log("date", date.toLocaleDateString('en-CA',  {timeZone: "UTC"}))
+  }
+
+
   useEffect(() => {
     OutletProvider.getAllOutlets(0, 1000)
         .then((res) => {
@@ -131,7 +144,7 @@ const ExpensesTable = () => {
     body.outletId = outletId;
     body.title = values.name;
     body.amount = +numSum;
-    // body.amount = +values.summ;
+    body.date = date.toLocaleDateString('en-GB').replaceAll('/', '-')
 
     setLoading(true);
     if (editingExpence) {
@@ -210,7 +223,6 @@ const ExpensesTable = () => {
   };
 
 
-  const [numSum, setNumSum] = useState(null)
 
 
   return (
@@ -264,6 +276,19 @@ const ExpensesTable = () => {
                               value={outletId}
                           />
                       )}
+                  />
+                </label>
+
+                <label className="label">
+                  <span className="label-text">Sana</span>
+                  {errors.date && (
+                      <span className="err-text">Majburiy maydon</span>
+                  )}
+                  <input
+                      autoComplete="off"
+                      type="date"
+                      value={date.toLocaleDateString('en-CA',{timeZone: "UTC"})}
+                      onChange={onSetDate}
                   />
                 </label>
                 <label className="label">
