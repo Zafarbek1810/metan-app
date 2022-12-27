@@ -32,6 +32,7 @@ const ShiftsTable = () => {
     defaultDate.setDate(defaultDate.getDate());
 
     const [date, setDate] = useState(defaultDate);
+
     const onSetDate = (event) => {
         setDate(new Date(event.target.value));
         console.log(date.toLocaleDateString("en-CA"))
@@ -53,11 +54,13 @@ const ShiftsTable = () => {
 
     const showModal = () => {
         onFilterSum()
-        handleOutletFilter()
+        // handleOutletFilter()
+
         setIsModalOpen(true);
 
     };
     const handleCancel = () => {
+        console.log("Modal closed");
         setIsModalOpen(false);
     };
 
@@ -67,7 +70,7 @@ const ShiftsTable = () => {
     const [expence, setExpence] = useState([]);
     const [pnl, setPnl] = useState([]);
 
-    const [exSum, setExSum] = useState(0);
+    const [exSum, setExSum] = useState(-1);
     const [render, setRender] = useState(null)
     const [totalElements, setTotalElements] = useState(20);
     const [currentPage, setCurrentPage] = useState(1);
@@ -105,8 +108,28 @@ const ShiftsTable = () => {
     }, []);
 
     useEffect(()=>{
+        setActiveOutlet(outlet[0]?.id);
+        // const today = new Date();
+        // const yyyy = today.getFullYear();
+        // let mm = today.getMonth() + 1; // Months start at 0!
+        // let dd = today.getDate();
+        //
+        // if (dd < 10) dd = '0' + dd;
+        // if (mm < 10) mm = '0' + mm;
+        //
+        // const formattedToday = dd + '-' + mm + '-' + yyyy;
+        //
+        // setFilterStateSum( prev=> ({
+        //     ...filterStateSum,
+        //     date: filterStateSum.date?filterStateSum.date:formattedToday,
+        //     outletId: +outlet[0]?.id
+        // }));
+        // setoutletId(+outlet[0]?.id);
+        // +filterStateSum?.outletId
         onOpenFilterSum();
     },[outlet])
+
+
 
     const optionExpense = outlet.map((i) => ({
         label: i.title,
@@ -122,8 +145,13 @@ const ShiftsTable = () => {
 
     const onSubmit = async (values) => {
         const body = {};
-        body.outletId = 1;
-        body.expenses = +values.xarajat;
+        if(outlet.length === 1){
+            body.outletId = +outlet[0].id;
+        }else{
+            body.outletId = +activeOutlet;
+        }
+
+        body.expenses = +exSum;
         body.autopilot = +values.autopilot;
         body.byCard = +numTerminal;
         body.transfers = +numTransfer;
@@ -177,28 +205,102 @@ const ShiftsTable = () => {
 
     useEffect(() => {
         async function fn() {
-            console.log("Outlet keldimi? ", outlet);
-            console.log("Filter state sum bormi ?", filterStateSum);
-            console.log("EXPENSES GA REQUEST JONATILDI");
-            await OutletProvider.getExpensesSum(0, 1000, filterStateSum)
-                .then((res) => {
-                    console.log("expensessum", res)
-                    setExSum(res.data.expensesAmountSum);
-                    console.log("Expenses sum joylandi");
-                    setTimeout(()=>{
-                        console.log("expensessum", exSum);
-                    }, 3000)
-                })
-                .catch((err) => {
-                    console.log(err)
-                    // Message.serverError()
-                })
-
-            console.log("EXPENSESDAN RESPONSE OLINDI");
+            console.log("MODAL HOLATI O'ZGARDI", isModalOpen);
+            // setExSum(777);
         }
 
         fn()
-    }, [filterStateSum, isModalOpen, outlet])
+    }, [isModalOpen])
+
+
+    useEffect(() => {
+        async function fn() {
+            console.log("New active outlet", activeOutlet);
+            setoutletId(activeOutlet)
+            // setExSum(777);
+        }
+
+        fn()
+    }, [activeOutlet])
+
+
+
+    useEffect(() => {
+        async function fn() {
+            console.log("Yangi outlet tanlandi", activeOutlet);
+            //
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            let mm = today.getMonth() + 1; // Months start at 0!
+            let dd = today.getDate();
+
+            if (dd < 10) dd = '0' + dd;
+            if (mm < 10) mm = '0' + mm;
+
+            const formattedToday = dd + '-' + mm + '-' + yyyy;
+
+            setFilterStateSum( prev=> ({
+                ...filterStateSum,
+                date: filterStateSum.date?filterStateSum.date:formattedToday,
+                outletId: activeOutlet
+            }));
+            // setExSum(777);
+        }
+
+        fn()
+    }, [activeOutlet])
+
+
+    // useEffect(() => {
+    //     async function fn() {
+    //
+    //         console.log("Outlet keldimi? ", outlet);
+    //         console.log("Filter state sum bormi ?", filterStateSum);
+    //         console.log("EXPENSES GA REQUEST JONATILDI");
+    //         await OutletProvider.getExpensesSum(0, 1000, filterStateSum)
+    //             .then((res) => {
+    //                 console.log("expensessum", res)
+    //                 setExSum(res.data.expensesAmountSum);
+    //                 console.log("Expenses sum joylandi");
+    //                 setTimeout(()=>{
+    //                     console.log("expensessum", exSum);
+    //
+    //                 }, 3000)
+    //             })
+    //             .catch((err) => {
+    //                 console.log(err)
+    //                 // Message.serverError()
+    //             })
+    //
+    //         console.log("EXPENSESDAN RESPONSE OLINDI");
+    //     }
+    //
+    //     fn()
+    // }, [filterStateSum, isModalOpen, outlet])
+    //
+
+    useEffect(() => {
+        async function fn() {
+            console.log("777 filter state sum o'zgardi", filterStateSum);
+            if(filterStateSum.date && filterStateSum.outletId){
+                await OutletProvider.getExpensesSum(0, 1000, filterStateSum)
+                    .then((res) => {
+                        console.log("expensessum", res)
+                        setExSum(res.data.expensesAmountSum);
+                        console.log("Expenses sum joylandi");
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                        // Message.serverError()
+                    })
+            }
+
+            // setExSum(777);
+        }
+
+        fn()
+    }, [filterStateSum])
+
 
     useEffect(()=>{
         console.log("qiymat berdi", exSum)
@@ -207,7 +309,12 @@ const ShiftsTable = () => {
     const onFilterSum = () => {
         const date = filModDateRef.current?.value?.split("-").reverse().join("-");
         const outletId = filModOutletRef.current?.value;
-        setFilterStateSum({date, outletId});
+        setFilterStateSum( prev=> ({
+            ...filterStateSum,
+            date: date,
+            outletId: outletId
+        }));
+
         console.log("-----")
         console.log(date);
         console.log(outletId);
@@ -246,8 +353,17 @@ const ShiftsTable = () => {
     };
 
     const handleOutletFilter = (e) => {
-        setActiveOutlet(e);
+        console.log("wtf", e?.target?.value);
+        setActiveOutlet(e?.target?.value);
+
         console.log("asasa", activeOutlet)
+    };
+
+    const textChanged = (e) => {
+        console.log("text changed", +e?.target?.value);
+        // setActiveOutlet(e?.target?.value);
+        setExSum(+e?.target?.value);
+        // console.log("asasa", activeOutlet)
     };
 
     const onOffFilter = () => {
@@ -264,6 +380,8 @@ const ShiftsTable = () => {
         <ShiftsTableWrapper>
             <div className="top">
                 <h3 className="title">Smena</h3>
+
+               
                 <div className="modalWrapper">
                     <Button
                         variant="contained"
@@ -335,9 +453,18 @@ const ShiftsTable = () => {
                                     <input
                                         autoComplete="off"
                                         type="number"
-                                        value={exSum}
-                                        {...register("xarajat", {required: true})}
+                                        value = {exSum}
+                                        onChange={ event => setExSum(event.target.value)}
                                     />
+                                    {/*<input*/}
+                                    {/*    autoComplete="off"*/}
+                                    {/*    type="number"*/}
+                                    {/*    defaultValue={exSum}*/}
+                                    {/*    // onChange={textChanged}*/}
+                                    {/*    onChange={ event => setExSum(event.target.value)}*/}
+                                    {/*    {...register("xarajat", {required: true})*/}
+                                    {/*    }*/}
+                                    {/*/>*/}
                                 </label>
 
                                 <label className="label">
