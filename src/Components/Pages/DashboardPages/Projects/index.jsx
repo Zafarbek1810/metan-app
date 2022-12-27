@@ -1,5 +1,5 @@
 import React from 'react';
-import DashboardLayout from "../../../Layouts/Dashboard2";
+import DashboardLayout from "../../../Layouts/Dashboard";
 import Table from "./Table";
 import {Wrapper} from "../Home/style";
 

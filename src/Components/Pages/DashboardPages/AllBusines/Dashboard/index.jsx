@@ -117,43 +117,43 @@ const Dashboard = () => {
                         <Grid container spacing={3}>
                             <Grid item xs={6}>
                                 <CardStatisticsVerticalComponent
-                                    stats='235M'
+                                    stats='$25.6k'
                                     icon={<Poll />}
                                     color='success'
                                     trendNumber='+42%'
-                                    title='Qoldiq'
-                                    subtitle='Oxirgi oy'
+                                    title='Total Profit'
+                                    subtitle='Weekly Profit'
                                 />
                             </Grid>
                             <Grid item xs={6}>
                                 <CardStatisticsVerticalComponent
-                                    stats='100M'
-                                    title='Xarajatlar'
+                                    stats='$78'
+                                    title='Refunds'
                                     trend='negative'
                                     color='secondary'
                                     trendNumber='-15%'
-                                    subtitle="O'tgan oy"
+                                    subtitle='Past Month'
                                     icon={<CurrencyUsd />}
                                 />
                             </Grid>
                             <Grid item xs={6}>
                                 <CardStatisticsVerticalComponent
-                                    stats='24M'
+                                    stats='862'
                                     trend='negative'
                                     trendNumber='-18%'
-                                    title='Qarzlar'
-                                    subtitle="O'tgan oy"
+                                    title='New Project'
+                                    subtitle='Yearly Project'
                                     icon={<BriefcaseVariantOutline />}
                                 />
                             </Grid>
                             <Grid item xs={6}>
                                 <CardStatisticsVerticalComponent
-                                    stats='345M'
+                                    stats='15'
                                     color='warning'
-                                    trend='positive'
-                                    trendNumber='+18%'
-                                    subtitle='Oxirgi oy'
-                                    title='Kirim'
+                                    trend='negative'
+                                    trendNumber='-18%'
+                                    subtitle='Last Week'
+                                    title='Sales Queries'
                                     icon={<HelpCircleOutline />}
                                 />
                             </Grid>
