@@ -144,7 +144,7 @@ const ExpensesTable = () => {
     body.outletId = outletId;
     body.title = values.name;
     body.amount = +numSum;
-    body.date = date.toLocaleDateString('en-GB').replaceAll('/', '-')
+    body.date = date.toLocaleDateString('en-GB',{timeZone: "UTC"}).replaceAll('/', '-')
 
     setLoading(true);
     if (editingExpence) {
