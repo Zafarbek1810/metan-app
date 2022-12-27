@@ -309,7 +309,7 @@ function ReportModal({renderParent, handleCancel}) {
     const body = {
       outletId: +activeOutlet,
       gasColumnReports: [],
-      date: date.toLocaleDateString('en-GB').replaceAll('/', '-')
+      date: date.toLocaleDateString('en-GB',{timeZone: "UTC"}).replaceAll('/', '-')
     };
     cols.forEach(col => {
       body.gasColumnReports.push({
@@ -358,7 +358,7 @@ function ReportModal({renderParent, handleCancel}) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="d-flex w-75 gap-2">
-        <input autoComplete="off" type="date" value={date.toLocaleDateString('en-CA')} onChange={onSetDate}/>
+        <input autoComplete="off" type="date" value={date.toLocaleDateString('en-CA', {timeZone: "UTC"})} onChange={onSetDate}/>
         <select className="form-control" value={activeOutlet} onChange={(e) => setActiveOutlet(e.target.value)}>
           {
             outlets.map(i => (
