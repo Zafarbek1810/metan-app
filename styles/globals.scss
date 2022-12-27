@@ -13,3 +13,10 @@ body {
   background-color: rgba(31, 60, 136, 0.2) !important;
   z-index: 99999;
 }
+
+.MuiPaper-root {
+  width: 40% !important;
+  @media(max-width: 992px) {
+    width: 70% !important;
+  }
+}
