@@ -11,41 +11,41 @@ const depositData = [
   {
     logoWidth: 28,
     logoHeight: 29,
-    amount: '+$4,650',
-    subtitle: 'Sell UI Kit',
-    title: 'Gumroad Account',
+    amount: '+500,000',
+    subtitle: 'Biznesga kirgan pul',
+    title: 'Arenda kafe',
     logo: '/img/logos/gumroad.png'
   },
   {
     logoWidth: 38,
     logoHeight: 38,
-    amount: '+$92,705',
-    title: 'Mastercard',
-    subtitle: 'Wallet deposit',
+    amount: '+100,000',
+    subtitle: 'Biznesga kirgan pul',
+    title: 'Moyka',
     logo: '/img/logos/mastercard-label.png'
   },
   {
     logoWidth: 20,
     logoHeight: 28,
-    amount: '+$957',
-    title: 'Stripe Account',
-    subtitle: 'iOS Application',
+    amount: '+1,000,000',
+    subtitle: 'Biznesga kirgan pul',
+    title: 'Parnik',
     logo: '/img/logos/stripe.png'
   },
   {
     logoWidth: 34,
     logoHeight: 32,
-    amount: '+$6,837',
-    title: 'American Bank',
-    subtitle: 'Bank Transfer',
+    amount: '+600,000',
+    subtitle: 'Biznesga kirgan pul',
+    title: 'Arenda kafe',
     logo: '/img/logos/american-bank.png'
   },
   {
     logoWidth: 33,
     logoHeight: 22,
-    amount: '+$446',
-    title: 'Bank Account',
-    subtitle: 'Wallet deposit',
+    amount: '+200,000',
+    subtitle: 'Biznesga kirgan pul',
+    title: 'Parnik',
     logo: '/img/logos/citi-bank.png'
   }
 ]
@@ -54,42 +54,43 @@ const withdrawData = [
   {
     logoWidth: 29,
     logoHeight: 30,
-    amount: '-$145',
-    title: 'Google Adsense',
-    subtitle: 'Paypal deposit',
+    amount: '-5,000,000',
+    title: 'Metan',
+    subtitle: 'Arenda',
     logo: '/img/logos/google.png'
   },
   {
     logoWidth: 34,
     logoHeight: 34,
-    amount: '-$1870',
-    title: 'Github Enterprise',
-    logo: '/img/logos/github.png',
-    subtitle: 'Security & compliance'
+    amount: '-8,000,000',
+    title: 'Metan',
+    logo: '/img/logos/slack.png',
+    subtitle: 'Kredit',
   },
   {
     logoWidth: 30,
     logoHeight: 30,
-    amount: '-$450',
-    title: 'Upgrade Slack Plan',
-    subtitle: 'Debit card deposit',
+    amount: '-500,000',
+    title: 'Parnik',
+    subtitle: 'Boshqa harajatlar',
     logo: '/img/logos/slack.png'
   },
   {
     logoWidth: 30,
     logoHeight: 30,
-    amount: '-$540',
-    title: 'Digital Ocean',
-    subtitle: 'Cloud Hosting',
+    amount: '-1,500,000',
+    title: 'Kafe',
+    subtitle: 'Kredit',
     logo: '/img/logos/digital-ocean.png'
   },
   {
     logoWidth: 36,
     logoHeight: 21,
-    amount: '-$21',
-    title: 'AWS Account',
+    amount: '-3,000,000',
+    title: 'Moyka',
+    subtitle: 'Kredit',
     logo: '/img/logos/aws.png',
-    subtitle: 'Choosing a Cloud Platform'
+
   }
 ]
 
@@ -109,9 +110,9 @@ const DepositWithdraw = () => {
     <Card sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: ['column', 'column', 'row'] }}>
       <Box sx={{ width: '100%' }}>
         <CardHeader
-          title='Deposit'
+          title='Kirim'
           sx={{ pt: 5.5, alignItems: 'center', '& .MuiCardHeader-action': { mt: 0.6 } }}
-          action={<Typography variant='caption'>View All</Typography>}
+          action={<Typography variant='caption'>Hammasi</Typography>}
           titleTypographyProps={{
             variant: 'h6',
             sx: { lineHeight: '1.6 !important', letterSpacing: '0.15px !important' }
@@ -155,9 +156,9 @@ const DepositWithdraw = () => {
 
       <Box sx={{ width: '100%' }}>
         <CardHeader
-          title='Withdraw'
+          title='Chiqim'
           sx={{ pt: 5.5, alignItems: 'center', '& .MuiCardHeader-action': { mt: 0.6 } }}
-          action={<Typography variant='caption'>View All</Typography>}
+          action={<Typography variant='caption'>Hammasi</Typography>}
           titleTypographyProps={{
             variant: 'h6',
             sx: { lineHeight: '1.6 !important', letterSpacing: '0.15px !important' }

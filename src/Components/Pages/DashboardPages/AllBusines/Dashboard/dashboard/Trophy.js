@@ -29,15 +29,15 @@ const Trophy = () => {
   return (
     <Card sx={{ position: 'relative' }}>
       <CardContent >
-        <Typography variant='h6'>Congratulations John! 🥳</Typography>
+        <Typography variant='h6'>Tabriklaymiz Olimjon! 🥳</Typography>
         <Typography variant='body2' sx={{ letterSpacing: '0.25px' }}>
-          Best seller of the month
+          Bu oydagi qoldiq:
         </Typography>
         <Typography variant='h5' sx={{ my: 4, color: 'primary.main' }}>
-          $42.8k
+          UZS   419 000 000
         </Typography>
         <Button size='small' variant='contained'>
-          View Sales
+          Ko'rish
         </Button>
         <TriangleImg alt='triangle background' src={`/img/misc/${imageSrc}`} />
         <TrophyImg alt='trophy' src='/img/misc/trophy.png' />

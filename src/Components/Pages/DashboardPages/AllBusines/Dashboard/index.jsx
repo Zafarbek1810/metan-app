@@ -117,43 +117,43 @@ const Dashboard = () => {
                         <Grid container spacing={3}>
                             <Grid item xs={6}>
                                 <CardStatisticsVerticalComponent
-                                    stats='$25.6k'
+                                    stats='235M'
                                     icon={<Poll />}
                                     color='success'
                                     trendNumber='+42%'
-                                    title='Total Profit'
-                                    subtitle='Weekly Profit'
+                                    title='Qoldiq'
+                                    subtitle='Oxirgi oy'
                                 />
                             </Grid>
                             <Grid item xs={6}>
                                 <CardStatisticsVerticalComponent
-                                    stats='$78'
-                                    title='Refunds'
+                                    stats='100M'
+                                    title='Xarajatlar'
                                     trend='negative'
                                     color='secondary'
                                     trendNumber='-15%'
-                                    subtitle='Past Month'
+                                    subtitle="O'tgan oy"
                                     icon={<CurrencyUsd />}
                                 />
                             </Grid>
                             <Grid item xs={6}>
                                 <CardStatisticsVerticalComponent
-                                    stats='862'
+                                    stats='24M'
                                     trend='negative'
                                     trendNumber='-18%'
-                                    title='New Project'
-                                    subtitle='Yearly Project'
+                                    title='Qarzlar'
+                                    subtitle="O'tgan oy"
                                     icon={<BriefcaseVariantOutline />}
                                 />
                             </Grid>
                             <Grid item xs={6}>
                                 <CardStatisticsVerticalComponent
-                                    stats='15'
+                                    stats='345M'
                                     color='warning'
-                                    trend='negative'
-                                    trendNumber='-18%'
-                                    subtitle='Last Week'
-                                    title='Sales Queries'
+                                    trend='positive'
+                                    trendNumber='+18%'
+                                    subtitle='Oxirgi oy'
+                                    title='Kirim'
                                     icon={<HelpCircleOutline />}
                                 />
                             </Grid>

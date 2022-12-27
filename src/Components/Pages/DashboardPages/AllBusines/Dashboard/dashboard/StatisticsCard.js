@@ -17,27 +17,27 @@ import AccountOutline from 'mdi-material-ui/AccountOutline'
 
 const salesData = [
   {
-    stats: '245k',
-    title: 'Sales',
+    stats: '976M',
+    title: 'Biznesdagi pullar',
     color: 'primary',
     icon: <TrendingUp sx={{ fontSize: '1.75rem' }} />
   },
   {
-    stats: '12.5k',
-    title: 'Customers',
+    stats: '1.5k',
+    title: 'Mijozlar',
     color: 'success',
     icon: <AccountOutline sx={{ fontSize: '1.75rem' }} />
   },
   {
-    stats: '1.54k',
+    stats: '6 ta',
     color: 'warning',
-    title: 'Products',
+    title: 'Bizneslar',
     icon: <CellphoneLink sx={{ fontSize: '1.75rem' }} />
   },
   {
-    stats: '$88k',
+    stats: '16 ta',
     color: 'info',
-    title: 'Revenue',
+    title: 'Budjetlar',
     icon: <CurrencyUsd sx={{ fontSize: '1.75rem' }} />
   }
 ]
@@ -72,7 +72,7 @@ const StatisticsCard = () => {
   return (
     <Card>
       <CardHeader
-        title='Statistics Card'
+        title='Barcha bizneslarning statistikasi'
         action={
           <IconButton size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
             <DotsVertical />
@@ -81,9 +81,9 @@ const StatisticsCard = () => {
         subheader={
           <Typography variant='body2'>
             <Box component='span' sx={{ fontWeight: 600, color: 'text.primary' }}>
-              Total 48.5% growth
+              Oxirgi oylik o'sish: 12%
             </Box>{' '}
-            😎 this month
+
           </Typography>
         }
         titleTypographyProps={{

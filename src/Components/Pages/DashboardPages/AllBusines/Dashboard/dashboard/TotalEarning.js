@@ -16,28 +16,28 @@ const data = [
   {
     progress: 75,
     imgHeight: 20,
-    title: 'Zipcar',
+    title: 'Metan',
     color: 'primary',
-    amount: '$24,895.65',
-    subtitle: 'Vuejs, React & HTML',
+    amount: 'UZS 345,000,000',
+    subtitle: 'Barcha metan bizneslari',
     imgSrc: '/img/cards/logo-zipcar.png'
   },
   {
     progress: 50,
     color: 'info',
     imgHeight: 27,
-    title: 'Bitbank',
-    amount: '$8,650.20',
-    subtitle: 'Sketch, Figma & XD',
+    title: 'Parnik',
+    amount: 'UZS 50,125,000',
+    subtitle: 'Parnik bizneslari',
     imgSrc: '/img/cards/logo-bitbank.png'
   },
   {
     progress: 20,
     imgHeight: 20,
-    title: 'Aviato',
+    title: 'Benzin',
     color: 'secondary',
-    amount: '$1,245.80',
-    subtitle: 'HTML & Angular',
+    amount: 'UZS 45,000,000',
+    subtitle: 'Barcha benzin bizneslari',
     imgSrc: '/img/cards/logo-aviato.png'
   }
 ]
@@ -46,7 +46,7 @@ const TotalEarning = () => {
   return (
     <Card>
       <CardHeader
-        title='Total Earning'
+        title='Bizneslardan qoldiq'
         titleTypographyProps={{ sx: { lineHeight: '1.6 !important', letterSpacing: '0.15px !important' } }}
         action={
           <IconButton size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
@@ -57,7 +57,7 @@ const TotalEarning = () => {
       <CardContent sx={{ pt: theme => `${theme.spacing(2.25)} !important` }}>
         <Box sx={{ mb: 1.5, display: 'flex', alignItems: 'center' }}>
           <Typography variant='h4' sx={{ fontWeight: 600, fontSize: '2.125rem !important' }}>
-            $24,895
+            UZS 524,895,000
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center', color: 'success.main' }}>
             <MenuUp sx={{ fontSize: '1.875rem', verticalAlign: 'middle' }} />
@@ -68,7 +68,7 @@ const TotalEarning = () => {
         </Box>
 
         <Typography component='p' variant='caption' sx={{ mb: 10 }}>
-          Compared to $84,325 last year
+          O'tgan yilgi 450,100,000 UZS ga solishtirildi
         </Typography>
 
         {data.map((item, index) => {
