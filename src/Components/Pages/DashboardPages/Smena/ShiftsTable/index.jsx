@@ -107,7 +107,7 @@ const ShiftsTable = () => {
         fn()
     }, []);
 
-    useEffect(()=>{
+    useEffect(() => {
         setActiveOutlet(outlet[0]?.id);
         // const today = new Date();
         // const yyyy = today.getFullYear();
@@ -127,8 +127,7 @@ const ShiftsTable = () => {
         // setoutletId(+outlet[0]?.id);
         // +filterStateSum?.outletId
         onOpenFilterSum();
-    },[outlet])
-
+    }, [outlet])
 
 
     const optionExpense = outlet.map((i) => ({
@@ -145,9 +144,9 @@ const ShiftsTable = () => {
 
     const onSubmit = async (values) => {
         const body = {};
-        if(outlet.length === 1){
+        if (outlet.length === 1) {
             body.outletId = +outlet[0].id;
-        }else{
+        } else {
             body.outletId = +activeOutlet;
         }
 
@@ -224,7 +223,6 @@ const ShiftsTable = () => {
     }, [activeOutlet])
 
 
-
     useEffect(() => {
         async function fn() {
             console.log("Yangi outlet tanlandi", activeOutlet);
@@ -239,9 +237,9 @@ const ShiftsTable = () => {
 
             const formattedToday = dd + '-' + mm + '-' + yyyy;
 
-            setFilterStateSum( prev=> ({
+            setFilterStateSum(prev => ({
                 ...filterStateSum,
-                date: filterStateSum.date?filterStateSum.date:formattedToday,
+                date: filterStateSum.date ? filterStateSum.date : formattedToday,
                 outletId: activeOutlet
             }));
             // setExSum(777);
@@ -282,7 +280,7 @@ const ShiftsTable = () => {
     useEffect(() => {
         async function fn() {
             console.log("777 filter state sum o'zgardi", filterStateSum);
-            if(filterStateSum.date && filterStateSum.outletId){
+            if (filterStateSum.date && filterStateSum.outletId) {
                 await OutletProvider.getExpensesSum(0, 1000, filterStateSum)
                     .then((res) => {
                         console.log("expensessum", res)
@@ -302,14 +300,14 @@ const ShiftsTable = () => {
     }, [filterStateSum])
 
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log("qiymat berdi", exSum)
     }, [exSum])
 
     const onFilterSum = () => {
         const date = filModDateRef.current?.value?.split("-").reverse().join("-");
         const outletId = filModOutletRef.current?.value;
-        setFilterStateSum( prev=> ({
+        setFilterStateSum(prev => ({
             ...filterStateSum,
             date: date,
             outletId: outletId
@@ -320,10 +318,10 @@ const ShiftsTable = () => {
         console.log(outletId);
     }
 
-    const onOpenFilterSum=()=>{
+    const onOpenFilterSum = () => {
         // const date = filModDateRef.current?.value?.split("-").reverse().join("-");
         // const outletId = filModOutletRef.current?.value;
-        console.log("tesss",outlet);
+        console.log("tesss", outlet);
         const today = new Date();
         const yyyy = today.getFullYear();
         let mm = today.getMonth() + 1; // Months start at 0!
@@ -335,10 +333,10 @@ const ShiftsTable = () => {
         const formattedToday = dd + '-' + mm + '-' + yyyy;
 
 
-        setFilterStateSum( prev=> ({
+        setFilterStateSum(prev => ({
             ...filterStateSum,
             date: formattedToday,
-            outletId: outlet?outlet[0]?outlet[0].id:1:1
+            outletId: outlet ? outlet[0] ? outlet[0].id : 1 : 1
         }));
         console.log("-----")
         console.log(date);
@@ -381,7 +379,7 @@ const ShiftsTable = () => {
             <div className="top">
                 <h3 className="title">Smena</h3>
 
-               
+
                 <div className="modalWrapper">
                     <Button
                         variant="contained"
@@ -453,8 +451,8 @@ const ShiftsTable = () => {
                                     <input
                                         autoComplete="off"
                                         type="number"
-                                        value = {exSum}
-                                        onChange={ event => setExSum(event.target.value)}
+                                        value={exSum}
+                                        onChange={event => setExSum(event.target.value)}
                                     />
                                     {/*<input*/}
                                     {/*    autoComplete="off"*/}

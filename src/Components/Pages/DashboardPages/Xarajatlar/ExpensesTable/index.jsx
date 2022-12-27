@@ -22,6 +22,7 @@ import TextField from '@mui/material/TextField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
+import {NumericFormat} from "react-number-format";
 
 const ExpensesTable = () => {
   const [valuedate, setValuedate] = React.useState(dayjs(new Date()));
@@ -110,7 +111,8 @@ const ExpensesTable = () => {
     const body = {};
     body.outletId = outletId;
     body.title = values.name;
-    body.amount = +values.summ;
+    body.amount = +numSum;
+    // body.amount = +values.summ;
 
     setLoading(true);
     if (editingExpence) {
@@ -187,6 +189,10 @@ const ExpensesTable = () => {
     setIsFilterOpen(false);
   };
 
+
+  const [numSum, setNumSum] = useState(null)
+
+
   return (
     <ExpensesTableWrapper>
       <div className="modal-wrapper">
@@ -256,10 +262,16 @@ const ExpensesTable = () => {
                   {errors.summ && (
                       <span className="err-text">Majburiy maydon</span>
                   )}
-                  <input
+                  <NumericFormat
+                      value={+numSum}
                       autoComplete="off"
-                      type="number"
-                      {...register("summ", { required: true })}
+                      onValueChange={(e) => {
+                        console.log(e.floatValue);
+                        setNumSum(e.floatValue)
+                      }
+                      }
+                      allowLeadingZeros thousandSeparator=" "
+                      {...register("summ", {required: false})}
                   />
                 </label>
                 <div className="btns">

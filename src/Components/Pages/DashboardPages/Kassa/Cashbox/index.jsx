@@ -25,6 +25,7 @@ import GasBallonsProvider from "../../../../../Data/Providers/GasBallonsProvider
 import Message from "../../../../../utils/Message";
 import EditIcon from "@mui/icons-material/Edit";
 import {IconButton} from "@mui/material";
+import {NumericFormat} from "react-number-format";
 
 const Tab1 = ({outletId, setMijozObj, setSpinning}) => {
     const [data, setData] = useState({});
@@ -73,7 +74,8 @@ const Tab1 = ({outletId, setMijozObj, setSpinning}) => {
 
     const onSubmit = (values) => {
         const body = {
-            amount: +values.summa,
+            // amount: +values.summa,
+            amount: +numSum,
             clientId: data.id,
             outletId: +outletId
         }
@@ -110,6 +112,8 @@ const Tab1 = ({outletId, setMijozObj, setSpinning}) => {
             }
         }, 100)
     }
+
+    const [numSum, setNumSum] = useState(null)
 
     return (
         <Tab1Wrapper onSubmit={handleSubmit(onSubmit)}>
@@ -151,12 +155,23 @@ const Tab1 = ({outletId, setMijozObj, setSpinning}) => {
                         {errors.summa && (
                             <span className="err-text"></span>
                         )}
-                        <input
+                        <NumericFormat
+                            value={+numSum}
                             autoComplete="off"
-                            placeholder=""
-                            type="number"
-                            {...register("summa", {required: true})}
+                            onValueChange={(e) => {
+                                console.log(e.floatValue);
+                                setNumSum(e.floatValue)
+                            }
+                            }
+                            allowLeadingZeros thousandSeparator=" "
+                            {...register("summa", {required: false})}
                         />
+                        {/*<input*/}
+                        {/*    autoComplete="off"*/}
+                        {/*    placeholder=""*/}
+                        {/*    type="number"*/}
+                        {/*    {...register("summa", {required: true})}*/}
+                        {/*/>*/}
                     </label>
                 </div>
                 <div className="row">
