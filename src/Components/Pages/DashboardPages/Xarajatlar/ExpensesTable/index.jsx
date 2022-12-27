@@ -67,6 +67,25 @@ const ExpensesTable = () => {
 
   useEffect(() => {
     OutletProvider.getAllOutlets(0, 1000)
+        .then((res) => {
+          console.log( "Birinchi response keldi: ",res);
+          setOutlet(res.data);
+          setoutletId(+res?.data[0]?.id);
+        })
+        .catch((err) => {
+          console.log(err);
+          Message.serverError();
+        });
+    // OutletProvider.getExpensesSum(currentPage - 1, 20, filterState).then(
+    //   (res) => {
+    //     console.log("sum", res);
+    //     setSumm(res.data);
+    //   }
+    // );
+  }, []);
+
+  useEffect(() => {
+    OutletProvider.getAllOutlets(0, 1000)
       .then((res) => {
         console.log(res);
         setOutlet(res.data);

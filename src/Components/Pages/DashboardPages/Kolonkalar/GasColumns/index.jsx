@@ -51,6 +51,7 @@ const GasColumns = () => {
     OutletProvider.getAllOutlets(0, 1000)
       .then((res) => {
         setOutlet(res.data);
+        setoutletId(res?.data[0]?.id)
       })
       .catch((err) => {
         console.log(err);

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Wrapper=styled.div`
   display: flex;
-  background-image: url("/img/okean.jpg");
+  background-image: url("/img/nature2.jpg");
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
