@@ -8,4 +8,8 @@ export default class ProjectsProvider{
         return await client.get("/project");
     }
 
+    static async deleteProject(id) {
+        return await client.delete(`/project/delete/${id}`);
+    }
+
 }

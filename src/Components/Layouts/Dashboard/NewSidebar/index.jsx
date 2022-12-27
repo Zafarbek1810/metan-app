@@ -17,6 +17,9 @@ import CashbackSvg from "../../../Common/Svgs/CashbackSvg";
 import FireSvg from "../../../Common/Svgs/FireSvg";
 import ClockSvg from "../../../Common/Svgs/ClockSvg";
 import PlanSvg from "../../../Common/Svgs/PlanSvg";
+import DashboardSvg from "../../../Common/Svgs/DashboardSvg";
+import ChartTreeSvg from "../../../Common/Svgs/ChartTreeSvg";
+import ChartLineUp from "../../../Common/Svgs/ChartLineUp";
 
 const {Panel} = Collapse;
 const {Option} = Select;
@@ -120,7 +123,7 @@ const Umumiy = [
     {
         title: "Panel",
         path: "/dashboard/allBusines",
-        Svg: PlanSvg,
+        Svg: DashboardSvg,
         role: ["SUPER_ADMIN"]
     },
     {
@@ -132,13 +135,13 @@ const Umumiy = [
     {
         title: "Proyektlar",
         path: "/dashboard/projects",
-        Svg: PlanSvg,
+        Svg: ChartTreeSvg,
         role: ["SUPER_ADMIN"]
     },
     {
         title: "Operatsiyalar",
         path: "/dashboard/operation",
-        Svg: PlanSvg,
+        Svg: ChartLineUp,
         role: ["SUPER_ADMIN"]
     },
 ]

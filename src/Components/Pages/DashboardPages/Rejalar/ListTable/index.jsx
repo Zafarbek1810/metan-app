@@ -6,7 +6,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
-import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
+import DeleteIcon from '@mui/icons-material/Delete';
 import {Button} from "@mui/material";
 import {Modal, Select} from "antd";
 import {ModalContent} from "../../Smena/ShiftsTable/ShiftsTable.style";
@@ -20,7 +20,7 @@ import TodoProvider from "../../../../../Data/Providers/TodoProvider";
 const ListTable = () => {
     const {
         register,
-        formState: { errors },
+        formState: {errors},
         handleSubmit,
         setValue,
         reset,
@@ -63,9 +63,9 @@ const ListTable = () => {
     };
 
 
-    useEffect(()=>{
-        TodoProvider.getTodo(0,20)
-            .then(({ data }) => {
+    useEffect(() => {
+        TodoProvider.getTodo(0, 20)
+            .then(({data}) => {
                 console.log(data);
                 setTodos(data?.data)
                 console.log(todos)
@@ -74,7 +74,7 @@ const ListTable = () => {
                 console.log(err);
                 toast.error(err?.response?.data?.message);
             })
-    },[forRender])
+    }, [forRender])
 
     const onSubmit = async (values) => {
         const body = {};
@@ -82,7 +82,7 @@ const ListTable = () => {
         body.dueDate = date.toLocaleDateString("en-CA");
 
         try {
-            const { data } = await TodoProvider.addToDo(body);
+            const {data} = await TodoProvider.addToDo(body);
             console.log(data?.res);
             setValue("title", "");
             setValue("date", "");
@@ -95,7 +95,9 @@ const ListTable = () => {
         }
     };
 
-
+    const handleClick=(id)=>{
+        console.log(id)
+    }
 
 
     return (
@@ -113,7 +115,7 @@ const ListTable = () => {
                     + Qo'shish
                 </Button>
                 <Modal
-                    style={{ top: 10 }}
+                    style={{top: 10}}
                     title="Qo'shish"
                     open={isModalOpen}
                     onCancel={handleCancel}
@@ -130,7 +132,7 @@ const ListTable = () => {
                                 <input
                                     autoComplete="off"
                                     type="text"
-                                    {...register("namePlan", { required: true })}
+                                    {...register("namePlan", {required: true})}
                                 />
                             </label>
                             <label className="label">
@@ -167,17 +169,17 @@ const ListTable = () => {
                     </ModalContent>
                 </Modal>
             </div>
-            {todos.map((obj,index)=>(
-                <div key={obj.id} style={{background:"#e9e9e9"}}>
+            {todos.map((obj, index) => (
+                <div key={obj.id} style={{background: "#e9e9e9"}}>
                     <ListItem
                         secondaryAction={
-                            <IconButton edge="end" aria-label="comments">
-                                <PlaylistAddCheckIcon/>
+                            <IconButton edge="end" aria-label="comments" >
+                                <DeleteIcon />
                             </IconButton>
                         }
                         // disablePadding
                     >
-                        <ListItemButton role={undefined} onClick={handleToggle({index})} dense>
+                        <ListItemButton role={undefined} onClick={handleToggle(obj.id)} dense>
                             <ListItemIcon>
                                 <Checkbox
                                     edge="start"

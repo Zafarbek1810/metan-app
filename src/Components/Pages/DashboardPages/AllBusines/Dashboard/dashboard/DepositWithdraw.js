@@ -14,7 +14,7 @@ const depositData = [
     amount: '+500,000',
     subtitle: 'Biznesga kirgan pul',
     title: 'Arenda kafe',
-    logo: '/img/logos/gumroad.png'
+    logo: '/img/cash.png'
   },
   {
     logoWidth: 38,
@@ -22,7 +22,7 @@ const depositData = [
     amount: '+100,000',
     subtitle: 'Biznesga kirgan pul',
     title: 'Moyka',
-    logo: '/img/logos/mastercard-label.png'
+    logo: '/img/cash.png'
   },
   {
     logoWidth: 20,
@@ -30,7 +30,7 @@ const depositData = [
     amount: '+1,000,000',
     subtitle: 'Biznesga kirgan pul',
     title: 'Parnik',
-    logo: '/img/logos/stripe.png'
+    logo: '/img/cash.png'
   },
   {
     logoWidth: 34,
@@ -38,7 +38,7 @@ const depositData = [
     amount: '+600,000',
     subtitle: 'Biznesga kirgan pul',
     title: 'Arenda kafe',
-    logo: '/img/logos/american-bank.png'
+    logo: '/img/cash.png'
   },
   {
     logoWidth: 33,
@@ -46,7 +46,7 @@ const depositData = [
     amount: '+200,000',
     subtitle: 'Biznesga kirgan pul',
     title: 'Parnik',
-    logo: '/img/logos/citi-bank.png'
+    logo: '/img/cash.png'
   }
 ]
 
@@ -57,14 +57,14 @@ const withdrawData = [
     amount: '-5,000,000',
     title: 'Metan',
     subtitle: 'Arenda',
-    logo: '/img/logos/google.png'
+    logo: '/img/expenses.png'
   },
   {
     logoWidth: 34,
     logoHeight: 34,
     amount: '-8,000,000',
     title: 'Metan',
-    logo: '/img/logos/slack.png',
+    logo: '/img/expenses.png',
     subtitle: 'Kredit',
   },
   {
@@ -73,7 +73,7 @@ const withdrawData = [
     amount: '-500,000',
     title: 'Parnik',
     subtitle: 'Boshqa harajatlar',
-    logo: '/img/logos/slack.png'
+    logo: '/img/expenses.png'
   },
   {
     logoWidth: 30,
@@ -81,7 +81,7 @@ const withdrawData = [
     amount: '-1,500,000',
     title: 'Kafe',
     subtitle: 'Kredit',
-    logo: '/img/logos/digital-ocean.png'
+    logo: '/img/expenses.png'
   },
   {
     logoWidth: 36,
@@ -89,7 +89,7 @@ const withdrawData = [
     amount: '-3,000,000',
     title: 'Moyka',
     subtitle: 'Kredit',
-    logo: '/img/logos/aws.png',
+    logo: '/img/expenses.png',
 
   }
 ]
@@ -112,7 +112,7 @@ const DepositWithdraw = () => {
         <CardHeader
           title='Kirim'
           sx={{ pt: 5.5, alignItems: 'center', '& .MuiCardHeader-action': { mt: 0.6 } }}
-          action={<Typography variant='caption'><img style={{width:30, height:30, objectFit:"cover"}} src="/img/cash.png" alt=""/> Hammasi</Typography>}
+          action={<Typography variant='caption'>Hammasi</Typography>}
           titleTypographyProps={{
             variant: 'h6',
             sx: { lineHeight: '1.6 !important', letterSpacing: '0.15px !important' }

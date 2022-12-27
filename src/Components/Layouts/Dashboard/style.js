@@ -80,7 +80,8 @@ const Wrapper=styled.div`
 
   .layout__right {
     flex-grow: 1;
-    transform: translateX(-100px);
+    transform: translateX(-100px) ;
+    
     
     
   }

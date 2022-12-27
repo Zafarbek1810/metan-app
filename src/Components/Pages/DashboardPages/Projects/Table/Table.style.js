@@ -106,7 +106,7 @@ const TableWrapper=styled.div`
               fill: none;
               width: 20px;
               height: 20px;
-              fill: rgb(253, 181, 40);
+              fill: rgb(255, 77, 73);
             }
           }
         }

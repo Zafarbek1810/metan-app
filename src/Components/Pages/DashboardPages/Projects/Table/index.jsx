@@ -5,7 +5,7 @@ import Modal from "react-modal";
 import {ModalContent, ModalHeader} from "../../Kassirlar/CashierTable/CashierTable.style";
 import CloseSvg from "../../../../Common/Svgs/CloseSvg";
 import ButtonLoader from "../../../../Common/ButtonLoader";
-import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import MinLoader from "../../../../Common/MinLoader";
 import {useForm} from "react-hook-form";
 import {useContextSelector} from "use-context-selector";
@@ -14,7 +14,7 @@ import {useRouter} from "next/router";
 import CashbackProvider from "../../../../../Data/Providers/CashbackProvider";
 import Message from "../../../../../utils/Message";
 import ProjectsProvider from "../../../../../Data/Providers/ProjectsProvider";
-
+import OutletProvider from "../../../../../Data/Providers/OutletProvider";
 
 
 const customStyles = {
@@ -41,10 +41,10 @@ const customStyles = {
 Modal.setAppElement("#__next");
 
 
-const TablePage = () => {
+const TablePage = ({RefObj, setIsOpen}) => {
     const {
         register,
-        formState: { errors },
+        formState: {errors},
         handleSubmit,
         setValue,
         reset,
@@ -63,7 +63,7 @@ const TablePage = () => {
     const [loading, setLoading] = useState(false);
     const [loading2, setLoading2] = useState(false);
     const [forRender, setForRender] = useState(null);
-    const [cashback, setCashback] = useState([]);
+    const [project, setProject] = useState([]);
 
     function openModal() {
         setIsModalOpen(true);
@@ -79,7 +79,7 @@ const TablePage = () => {
         ProjectsProvider.getAllProjects()
             .then((res) => {
                 console.log(res.data);
-                setCashback(res.data.data);
+                setProject(res.data.data);
             })
             .catch((err) => {
                 console.log(err);
@@ -96,7 +96,7 @@ const TablePage = () => {
 
         setLoading(true);
         try {
-            const { data } = await ProjectsProvider.addProject(body);
+            const {data} = await ProjectsProvider.addProject(body);
             setForRender(Math.random());
             closeModal();
         } catch (err) {
@@ -106,10 +106,28 @@ const TablePage = () => {
         setLoading(false);
     };
 
-    const handleEditCash = (cashId) => {
-        cash_edit(cashId);
-        router.push("/dashboard/editCashback");
+    const handleDeleteOutlet = (id) => {
+        RefObj.current.textContent = `Rostdan ham o'chirishni xoxlaysizmi?`;
+        setIsOpen(true);
+        new Promise((res, rej) => {
+            RefObj.current.resolve = res;
+            RefObj.current.reject = rej;
+        })
+            .then(async () => {
+                await ProjectsProvider.deleteProject(id);
+                setProject((pre) =>
+                    pre.filter((mod) => {
+                        return mod.id !== id;
+                    })
+                );
+                setForRender(Math.random());
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
+
+
 
     return (
         <TableWrapper>
@@ -125,7 +143,7 @@ const TablePage = () => {
                             background: "#787EFF",
                         }}
                     >
-                        + Qo'shish
+                        + Proyekt Qo'shish
                     </Button>
                     {/*====MODAL====*/}
                     <Modal
@@ -136,7 +154,7 @@ const TablePage = () => {
                         <ModalHeader className="modal-header">
                             <h2 className="title">Qo'shish</h2>
                             <button className="closeSvg" onClick={closeModal}>
-                                <CloseSvg />
+                                <CloseSvg/>
                             </button>
                         </ModalHeader>
                         <ModalContent>
@@ -149,7 +167,7 @@ const TablePage = () => {
                                     <input
                                         autoComplete="off"
                                         type="text"
-                                        {...register("title", { required: true })}
+                                        {...register("title", {required: true})}
                                     />
                                 </label>
                                 <div className="btns">
@@ -165,7 +183,7 @@ const TablePage = () => {
                                         className="btn btn-primary"
                                         disabled={loading}
                                     >
-                                        Qo'shish {loading && <ButtonLoader />}
+                                        Qo'shish {loading && <ButtonLoader/>}
                                     </button>
                                 </div>
                             </form>
@@ -176,29 +194,29 @@ const TablePage = () => {
             <table className="table table-borderless table-hover">
                 <thead>
                 <tr>
-                    <th style={{ minWidth: "90%" }} className="col">
+                    <th style={{minWidth: "80%"}} className="col">
                         Nomi
                     </th>
-                    <th style={{ minWidth: "10%" }} className="col">
+                    <th style={{minWidth: "20%"}} className="col">
                         Amallar
                     </th>
                 </tr>
                 </thead>
                 <tbody>
                 {!loading2 ? (
-                    cashback.length ? (
-                        cashback.map((obj, index) => (
+                    project.length ? (
+                        project.map((obj, index) => (
                             <tr key={obj.id}>
-                                <td style={{ minWidth: "90%" }} className="col">
+                                <td style={{minWidth: "80%"}} className="col">
                                     {obj.title}
                                 </td>
-                                <td style={{ minWidth: "10%" }} className="col">
+                                <td style={{minWidth: "20%"}} className="col">
                                     <div className="btns">
                                         <IconButton
-                                            style={{ background: "rgb(253, 181, 40, 0.12)" }}
+                                            style={{background: "rgb(255, 77, 73, 0.12)"}}
                                             // onClick={() => handleEditCash(obj.id)}
                                         >
-                                            <EditIcon />
+                                            <DeleteIcon onClick={() => handleDeleteOutlet(obj.id)}/>
                                         </IconButton>
                                     </div>
                                 </td>
@@ -211,13 +229,13 @@ const TablePage = () => {
                                 padding: 30,
                             }}
                         >
-                            <h3 style={{ color: "rgba(0, 0, 0, 0.7)" }}>
+                            <h3 style={{color: "rgba(0, 0, 0, 0.7)"}}>
                                 Proyektlar mavjud emas
                             </h3>
                         </div>
                     )
                 ) : (
-                    <MinLoader />
+                    <MinLoader/>
                 )}
                 </tbody>
             </table>
