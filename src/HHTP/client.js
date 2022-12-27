@@ -20,7 +20,7 @@ client.interceptors.request.use((config) => {
 client.interceptors.response.use((config) => {
   return config;
 }, (error) => {
-  if (error.response.status === 401) {
+  if (error?.response?.status === 401) {
     Message.unauthorizedError();
     localStorage.removeItem("token");
     throw error;
