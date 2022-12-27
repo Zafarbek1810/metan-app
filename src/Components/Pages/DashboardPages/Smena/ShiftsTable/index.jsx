@@ -187,7 +187,6 @@ const ShiftsTable = () => {
                     console.log("Expenses sum joylandi");
                     setTimeout(()=>{
                         console.log("expensessum", exSum);
-
                     }, 3000)
                 })
                 .catch((err) => {

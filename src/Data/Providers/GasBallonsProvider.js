@@ -24,6 +24,6 @@ export default class GasBallonsProvider {
 
   static async getGasColumsReports(page = 0, size = 20, params) {
     const {outletId, gasColumnId, startDate, endDate} = params;
-    return await client.get(`gascolumn/getGasColumnReports?take=${size}&skip=${page*size}${outletId ? `&outletId=${outletId}` : ""}${gasColumnId ? `&colId=${gasColumnId}` : ""}${startDate ? `&startDate=${startDate}` : ""}${endDate ? `&endDate=${endDate}` : ""}`);
+    return await client.get(`gascolumn/getGasColumnReports?take=${size}&skip=${page*size}${outletId ? `&outletId=${outletId}` : ""}${gasColumnId ? `&gasColumnId=${gasColumnId}` : ""}${startDate ? `&startDate=${startDate}` : ""}${endDate ? `&endDate=${endDate}` : ""}`);
   }
 }
