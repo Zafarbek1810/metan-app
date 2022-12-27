@@ -684,7 +684,7 @@ const ShiftsTable = () => {
                         <th className="col">Jami</th>
                         <th className="col">Qarz</th>
                         <th className="col">Xarajat</th>
-                        <th className="col">Naqd</th>
+                        <th className="col">Kelgan pul</th>
                         <th className="col">Qoldiq</th>
                         <th className="col">Bonus</th>
                         <th className="col">To'langan ballar</th>
