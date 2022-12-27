@@ -112,7 +112,7 @@ const DepositWithdraw = () => {
         <CardHeader
           title='Kirim'
           sx={{ pt: 5.5, alignItems: 'center', '& .MuiCardHeader-action': { mt: 0.6 } }}
-          action={<Typography variant='caption'>Hammasi</Typography>}
+          action={<Typography variant='caption'><img style={{width:30, height:30, objectFit:"cover"}} src="/img/cash.png" alt=""/> Hammasi</Typography>}
           titleTypographyProps={{
             variant: 'h6',
             sx: { lineHeight: '1.6 !important', letterSpacing: '0.15px !important' }

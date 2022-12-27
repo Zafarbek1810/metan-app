@@ -678,13 +678,13 @@ const ShiftsTable = () => {
                         <th className="col">Kolonka Summa</th>
                         <th className="col">Avtopilot Summa</th>
                         <th className="col">Fakt</th>
-                        <th className="col">Naqd</th>
+                        <th className="col">inKassator</th>
                         <th className="col">Terminal</th>
                         <th className="col">Pul o'tkazma</th>
                         <th className="col">Jami</th>
                         <th className="col">Qarz</th>
                         <th className="col">Xarajat</th>
-                        <th className="col">inKassator</th>
+                        <th className="col">Naqd</th>
                         <th className="col">Qoldiq</th>
                         <th className="col">Bonus</th>
                         <th className="col">To'langan ballar</th>
@@ -725,12 +725,9 @@ const ShiftsTable = () => {
                                         {obj.autopilotSumm.toLocaleString().replaceAll(',', ' ')}
                                     </td>
                                     <td className="col">{obj.fact.toLocaleString().replaceAll(',', ' ')}</td>
-                                    <td
-                                        className="col"
-                                        style={{color: "#7CB342", fontWeight: 600}}
-                                    >
-                                        {obj.byCash.toLocaleString().replaceAll(',', ' ')}
-                                    </td>
+
+                                    <td className="col">{obj.inKassator.toLocaleString().replaceAll(',', ' ')}</td>
+
                                     <td className="col">{obj.byCard.toLocaleString().replaceAll(',', ' ')}</td>
                                     <td
                                         className="col"
@@ -741,7 +738,12 @@ const ShiftsTable = () => {
                                     <td className="col">{obj.total.toLocaleString().replaceAll(',', ' ')}</td>
                                     <td className="col">{obj.debts.toLocaleString().replaceAll(',', ' ')}</td>
                                     <td className="col">{obj.expenses.toLocaleString().replaceAll(',', ' ')}</td>
-                                    <td className="col">{obj.inKassator.toLocaleString().replaceAll(',', ' ')}</td>
+                                    <td
+                                        className="col"
+                                        style={{color: "#7CB342", fontWeight: 600}}
+                                    >
+                                        {obj.byCash.toLocaleString().replaceAll(',', ' ')}
+                                    </td>
                                     <td
                                         className="col"
                                         style={{color: "#FB8C00", fontWeight: 600}}
