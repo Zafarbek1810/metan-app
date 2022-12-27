@@ -13,6 +13,7 @@ import {Controller, useForm} from "react-hook-form";
 import {WRAPPER} from "./style";
 import ArticleProvider from "../../../../../Data/Providers/ArticleProvider";
 import {FilterWrapper} from "../../KolonkalarReport/GasColumnReport/GasColumnReport.style";
+import {toast} from "react-toastify";
 
 
 const MODAL_TYPE = {
@@ -59,7 +60,7 @@ const Main = () => {
     label: i.title,
     value: i.title
   }))]
-  const operationOptions = [{label: "Tanlang", value: "nullForOperationType"}, {label: MODAL_TYPE.INCOME, value: MODAL_TYPE.INCOME},{label: MODAL_TYPE.OUTCOME, value: MODAL_TYPE.OUTCOME}]
+  const operationOptions = [{label: "Tanlang", value: "nullForOperationType"}, {label: "Kirim", value: MODAL_TYPE.INCOME},{label: "Chiqim", value: MODAL_TYPE.OUTCOME}]
 
 
   // FILTER STATE
@@ -174,18 +175,22 @@ const Main = () => {
         console.log(res);
         reset();
         getOperations();
+        toast.success("Qo'shildi")
         onCloseModal();
       }, err => {
         console.log(err);
+        toast.error(err?.response?.data?.message);
       })
     } else {
       OperationProvider.addOutcome(body).then(res => {
         console.log(res);
         reset();
         getOperations();
+        toast.success("Qo'shildi")
         onCloseModal();
       }, err => {
         console.log(err);
+        toast.error(err?.response?.data?.message);
       })
     }
   });
@@ -324,11 +329,11 @@ const Main = () => {
               </div>
               <div className="row">
                 <div className="mb-3 col-6">
-                  <div>Start date</div>
+                  <div>Boshlanish sana</div>
                   <input className="form-control" type="date" {...filterForm.register("startDate")}/>
                 </div>
                 <div className="mb-3 col-6">
-                  <div>End date</div>
+                  <div>Oxirgi sana</div>
                   <input className="form-control" type="date" {...filterForm.register("endDate")}/>
                 </div>
               </div>
@@ -371,7 +376,7 @@ const Main = () => {
                     {obj.project.title}
                   </td>
                   <td style={{minWidth: "26%"}} className="col">
-                    {obj.amount}
+                    {obj.amount.toLocaleString().replaceAll(',', ' ')}
                   </td>
                   <td style={{minWidth: "10%"}} className="col">
                     <div className="btns">

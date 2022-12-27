@@ -25,7 +25,7 @@ const LoginPage = () => {
     if (isAuth && currentUser) {
       switch (currentUser.role) {
         case "SUPER_ADMIN": {
-          router.replace("/dashboard/operation")
+          router.replace("/dashboard/allBusines")
           break;
         }
       }
