@@ -727,8 +727,7 @@ const ShiftsTable = () => {
                                     <td className="col">{obj.fact.toLocaleString().replaceAll(',', ' ')}</td>
 
                                     <td className="col"  style={{color: "#F4511E", fontWeight: 600}}>
-                                        {obj.inKassator.toLocaleString().replaceAll(',', ' ')}
-                                     </td>
+                                        {obj.inKassator.toLocaleString().replaceAll(',', ' ')}</td>
 
                                     <td className="col">{obj.byCard.toLocaleString().replaceAll(',', ' ')}</td>
                                     <td
