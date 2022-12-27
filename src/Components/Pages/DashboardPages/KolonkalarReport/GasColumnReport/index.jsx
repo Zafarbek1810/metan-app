@@ -53,7 +53,7 @@ const GasColumnReport = () => {
   useEffect(() => {
     GasBallonsProvider.getGasColumsReports(currentPage - 1, 20, filterState)
       .then(({data}) => {
-        console.log(data)
+        console.log("dd",data.data)
         setColsData(data.data);
         setTotalElements(data.count)
       }, err => {
@@ -224,7 +224,7 @@ const GasColumnReport = () => {
               <td style={{minWidth: "15%"}} className="col">{item.currentValue}</td>
               <td style={{minWidth: "15%"}} className="col">{item.lastValue}</td>
               <td style={{minWidth: "15%"}} className="col">{item.currentValue - item.lastValue}</td>
-              <td style={{minWidth: "15%"}} className="col">30.11.2022</td>
+              <td style={{minWidth: "15%"}} className="col">{new Date(item.date).toISOString().split('T')[0]}</td>
               <td style={{minWidth: "15%"}} className="col">
                 <div className="btns">
                   <IconButton style={{background:"rgb(253, 181, 40, 0.12)"}}
