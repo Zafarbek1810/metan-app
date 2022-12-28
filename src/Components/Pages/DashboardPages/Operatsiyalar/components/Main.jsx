@@ -43,7 +43,7 @@ const Main = () => {
 
 
   // SELECT OPTIONSLARI
-  const projectOptions = [{label: "Project qo'shish +", value: "ADD_PROJECT"}, ...projects.map(i => ({
+  const projectOptions = [{label: "Loyiha qo'shish +", value: "ADD_PROJECT"}, ...projects.map(i => ({
     label: i.title,
     value: i.id
   }))];
@@ -164,8 +164,8 @@ const Main = () => {
   // DRAWERDAGI FORMA SUBMIT HANDLERLARI
   const onSubmitOperation = handleSubmit((values) => {
     const body = {
-      projectId: values.projectId.value,
-      articleId: values.articleId.label,
+      projectId: values.projectId?.value,
+      articleId: values.articleId?.label,
       description: values.description,
       amount: +values.amount
     }
@@ -232,7 +232,7 @@ const Main = () => {
                 background: "#787EFF",
               }}
             >
-              + Daromad
+              + Kirim qo'shsh
             </Button>
             &nbsp;&nbsp;&nbsp;
             <Button
@@ -244,7 +244,7 @@ const Main = () => {
                 background: "#787EFF",
               }}
             >
-              - Xarajat
+              - Chiqim qo'shish
             </Button>
           </div>
         </div>
@@ -260,12 +260,12 @@ const Main = () => {
                 background: "#787EFF",
               }}
             >
-              Filter
+              Filtrlash
             </Button>
             <form className="filter-content" style={{visibility: isFilterOpen ? "visible" : "hidden"}} onSubmit={onFilterSubmit}>
               <div className="row">
                 <div className="mb-3 col-6">
-                  <div>Project</div>
+                  <div>Proyekt</div>
                   <Controller
                     control={filterForm.control}
                     name="project"
@@ -354,10 +354,10 @@ const Main = () => {
               Sana
             </th>
             <th style={{minWidth: "26%"}} className="col">
-              Project
+              Loyiha nomi
             </th>
             <th style={{minWidth: "26%"}} className="col">
-              Amount
+              Qiymati
             </th>
             <th style={{minWidth: "10%"}} className="col">
               Amallar
@@ -426,7 +426,7 @@ const Main = () => {
         }}
       >
         <ModalHeader className="modal-header">
-          <h2 className="title">{modalType === MODAL_TYPE.INCOME ? "Daromad" : "Xarajat"}ni Qo'shish</h2>
+          <h2 className="title">{modalType === MODAL_TYPE.INCOME ? "Kirim" : "Chiqim"} qo'shish</h2>
           <button className="closeSvg" onClick={onCloseModal}>
             <CloseSvg/>
           </button>
@@ -442,6 +442,7 @@ const Main = () => {
                      }) => (
               <Select
                 value={value}
+                placeholder="Proyektni tanlang"
                 options={projectOptions}
                 onBlur={onBlur}
                 onChange={(v) => {
@@ -467,6 +468,7 @@ const Main = () => {
                      }) => (
               <Select
                 value={value}
+                placeholder="Artiklni tanlang"
                 options={articleOptions}
                 onBlur={onBlur}
                 onChange={(v) => {
@@ -482,10 +484,10 @@ const Main = () => {
             )}
           />
           <br/>
-          <input className="form-control" placeholder={"description"} {...register("description", {required: true})}/>
+          <input className="form-control" placeholder={"Izoh"} {...register("description", {required: true})}/>
           <br/>
           <input className="form-control" type="number"
-                 placeholder={"amount"} {...register("amount", {required: true})}/>
+                 placeholder={"Qiymati (summa)"} {...register("amount", {required: true})}/>
           <br/>
           <button type="submit" className="btn btn-primary">Qo'shish</button>
         </form>
@@ -499,19 +501,19 @@ const Main = () => {
         }}
       >
         <ModalHeader className="modal-header">
-          <h2 className="title">Artikl Qo'shish</h2>
+          <h2 className="title">Artikl qo'shish</h2>
           <button className="closeSvg" onClick={handleCloseArticleDrawer}>
             <CloseSvg/>
           </button>
         </ModalHeader>
         <ModalContent>
           <form onSubmit={submitAddArticle}>
-            <input className="form-control" type="text" {...articleForm.register("title", {required: true})}/>
+            <input className="form-control" placeholder="Artikl nomini kiriting" type="text" {...articleForm.register("title", {required: true})}/>
             <br/>
             <label className="form-control" style={{display: "flex", alignItems: "center"}}>
               <input style={{width: 20, height: 20}} type="checkbox" {...articleForm.register("isNegative")}/>
               &nbsp;&nbsp;&nbsp;
-              <span>isNegative</span>
+              <span>Agar artikl manfiy bo'lsa belgilang</span>
             </label>
             <br/>
             <br/>
@@ -529,14 +531,14 @@ const Main = () => {
         }}
       >
         <ModalHeader className="modal-header">
-          <h2 className="title">Project Qo'shish</h2>
+          <h2 className="title">Loyiha qo'shish</h2>
           <button className="closeSvg" onClick={handleCloseProjectDrawer}>
             <CloseSvg/>
           </button>
         </ModalHeader>
         <ModalContent>
           <form onSubmit={projectForm.handleSubmit(submitAddProject)}>
-            <input type="text" className="form-control" {...projectForm.register("title")}/>
+            <input type="text" placeholder="Proyekt nomi" className="form-control" {...projectForm.register("title")}/>
             <br/>
             <button type="submit" className="btn btn-primary">Qo'shish</button>
           </form>
