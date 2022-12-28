@@ -17,6 +17,7 @@ height: 50vh;
     .selects{
       display: flex;
       justify-content: space-between;
+      align-items: center;
       .selec{
         width: 90%;
       }
@@ -24,4 +25,22 @@ height: 50vh;
   }
 `
 
-export{ChangeBusinesWrapper}
+const FilterWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+  font-family: "Inter";
+  
+  .filter-content {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+
+    min-width: 400px;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+`
+
+export{ChangeBusinesWrapper,FilterWrapper}

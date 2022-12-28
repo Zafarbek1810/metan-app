@@ -9,7 +9,7 @@ const AllBusines = () => {
         <DashboardLayout>
             <StyleWrapper>
                 <ChangeBusines/>
-                <Dashboard/>
+                {/*<Dashboard/>*/}
             </StyleWrapper>
         </DashboardLayout>
     );
