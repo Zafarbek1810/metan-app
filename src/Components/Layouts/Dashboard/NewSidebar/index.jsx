@@ -151,19 +151,19 @@ const PlanMenu = [
         title: "Rejalar",
         path: "/dashboard/plans",
         Svg: PlanSvg,
-        role: ["SUPER_ADMIN", "CASHIER", "DIRECTOR"]
+        role: ["SUPER_ADMIN", "CASHIER", "OPERATOR", "DIRECTOR"]
     },
     {
         title: "Proyektlar",
         path: "/dashboard/projects",
         Svg: ChartTreeSvg,
-        role: ["SUPER_ADMIN","DIRECTOR"]
+        role: ["SUPER_ADMIN","OPERATOR"]
     },
     {
         title: "Operatsiyalar",
         path: "/dashboard/operation",
         Svg: ChartLineUp,
-        role: ["SUPER_ADMIN","DIRECTOR"]
+        role: ["SUPER_ADMIN","OPERATOR"]
     },
 ]
 
