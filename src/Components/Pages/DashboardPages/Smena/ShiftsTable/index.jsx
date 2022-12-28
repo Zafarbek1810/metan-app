@@ -10,12 +10,14 @@ import MinLoader from "../../../../Common/MinLoader";
 import {toast} from "react-toastify";
 import Pagination from "rc-pagination";
 import {FilterWrapper} from "../../Xarajatlar/ExpensesTable/ExpensesTable.style";
-import {Button} from "@mui/material";
+import {Button, IconButton} from "@mui/material";
 import CardSvg from "../../../../Common/Svgs/CardSvg";
 import DollarSvg2 from "../../../../Common/Svgs/DollarSvg2";
 import {NumericFormat} from 'react-number-format';
+import OperationProvider from "../../../../../Data/Providers/OperationProvider";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-const ShiftsTable = () => {
+const ShiftsTable = ({RefObj, setIsOpen}) => {
     const {
         register,
         formState: {errors},
@@ -374,6 +376,30 @@ const ShiftsTable = () => {
     };
 
 
+    //smena delete
+    const handleDeleteShift=(id)=>{
+        RefObj.current.textContent = `Rostdan ham o'chirishni xoxlaysizmi?`;
+        setIsOpen(true);
+        new Promise((res, rej) => {
+            RefObj.current.resolve = res;
+            RefObj.current.reject = rej;
+        })
+            .then(async () => {
+                await OutletProvider.deleteShift(id);
+                setShifts((pre) =>
+                    pre.filter((mod) => {
+                        return mod.id !== id;
+                    })
+                );
+                toast.success("Muvaffaqiyatli o'chirildi")
+                setForRender(Math.random());
+            })
+            .catch((err) => {
+                console.log(err);
+                toast.error(err?.response?.data?.message);
+            });
+    }
+
     return (
         <ShiftsTableWrapper>
             <div className="top">
@@ -688,6 +714,7 @@ const ShiftsTable = () => {
                         <th className="col">Qoldiq</th>
                         <th className="col">Bonus</th>
                         <th className="col">To'langan ballar</th>
+                        <th className="col">Amallar</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -762,6 +789,14 @@ const ShiftsTable = () => {
                                         style={{color: "#7CB342", fontWeight: 600}}
                                     >
                                         {obj.paidPoints.toLocaleString().replaceAll(',', ' ')}
+                                    </td>
+                                    <td className="col">
+                                        <IconButton
+                                            style={{background: "rgb(253, 181, 40, 0.12)"}}
+                                            onClick={() => handleDeleteShift(obj.id)}
+                                        >
+                                            <DeleteIcon style={{fill:"rgb(255, 77, 73)"}}/>
+                                        </IconButton>
                                     </td>
                                 </tr>
                             ))

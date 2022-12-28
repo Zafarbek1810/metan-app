@@ -159,7 +159,7 @@ const ShiftsTableWrapper = styled.div`
 
 
         th.col {
-          min-width: 10% !important;
+          min-width: 9% !important;
           font-style: normal;
           font-weight: 600;
           font-size: 13px;
@@ -184,7 +184,7 @@ const ShiftsTableWrapper = styled.div`
 
 
         td.col {
-          min-width: 10% !important;
+          min-width: 9% !important;
           font-style: normal;
           font-weight: 400;
           font-size: 13px;
@@ -199,12 +199,30 @@ const ShiftsTableWrapper = styled.div`
 
         }
 
+        .btns {
+          width: 40%;
+          display: flex;
+          margin-left: 20px;
+          justify-content: start;
+
+          button {
+            cursor: pointer;
+            transition: 300ms;
+            background: transparent;
+            
+
+            svg {
+              fill: none;
+              width: 20px;
+              height: 20px;
+              fill: rgb(255, 77, 73);
+            }
+          }
+        }
+
       }
     }
   }
-
-
-
 `
 
 const ModalContent = styled.div`
