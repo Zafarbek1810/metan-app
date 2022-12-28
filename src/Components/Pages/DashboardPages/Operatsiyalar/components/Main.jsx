@@ -18,6 +18,7 @@ import CardSvg from "../../../../Common/Svgs/CardSvg";
 import DollarSvg2 from "../../../../Common/Svgs/DollarSvg2";
 import DollarSvg from "../../../../Common/Svgs/DollarSvg";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {NumericFormat} from "react-number-format";
 
 
 const MODAL_TYPE = {
@@ -154,6 +155,7 @@ const Main = ({RefObj, setIsOpen}) => {
       console.log(res.data)
       setOperations(res.data);
       setOperDel(res.data.data)
+      setModalSum("")
       console.log(operDel)
     }, err => {
       console.log(err);
@@ -176,7 +178,7 @@ const Main = ({RefObj, setIsOpen}) => {
       projectId: values.projectId?.value,
       articleId: values.articleId?.label,
       description: values.description,
-      amount: +values.amount
+      amount: +modalSum
     }
 
     if (modalType === MODAL_TYPE.INCOME) {
@@ -247,6 +249,8 @@ const Main = ({RefObj, setIsOpen}) => {
           console.log(err);
         });
   }
+
+  const [modalSum, setModalSum] = useState(null)
 
   return (
     <WRAPPER>
@@ -583,8 +587,21 @@ const Main = ({RefObj, setIsOpen}) => {
           <br/>
           <input className="form-control" placeholder={"Izoh"} {...register("description", {required: true})}/>
           <br/>
-          <input className="form-control" type="number"
-                 placeholder={"Qiymati (summa)"} {...register("amount", {required: true})}/>
+          {/*<input className="form-control" type="number"*/}
+          {/*       placeholder={"Qiymati (summa)"} {...register("amount", {required: true})}/>*/}
+          <NumericFormat
+              className="form-control"
+              value={+modalSum}
+              placeholder={"Qiymati (summa)"}
+              autoComplete="off"
+              onValueChange={(e) => {
+                console.log(e.floatValue);
+                setModalSum(e.floatValue)
+              }
+              }
+              allowLeadingZeros thousandSeparator=" "
+              {...register("terminal", {required: false})}
+          />
           <br/>
           <button type="submit" className="btn btn-primary">Qo'shish</button>
         </form>
