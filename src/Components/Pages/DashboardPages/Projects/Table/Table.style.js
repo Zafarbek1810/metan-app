@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
 const TableWrapper=styled.div`
+  .bottom{
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
   .top {
     margin-bottom: 15px;
     display: flex;
@@ -14,6 +20,90 @@ const TableWrapper=styled.div`
       line-height: 25px;
       color: rgba(0, 0, 0, 0.7);
       font-family: "Rubik";
+    }
+
+    .statistika {
+      width: 40%;
+      margin-left: auto;
+      margin-bottom: 20px;
+      .card {
+        border-radius: 12px;
+        background-color: #fff;
+        padding: 15px;
+        box-shadow: rgb(20 21 33 / 18%) 0px 2px 10px 0px;
+
+        h5 {
+          color: rgba(0, 0, 0, 0.7);
+          font-family: "Rubik";
+          margin-bottom: 13px;
+        }
+
+        .wrap {
+          display: flex;
+          .left {
+            width: 50%;
+            display: flex;
+            .icon {
+              background: rgb(255, 77, 73, 0.12);
+              border-radius: 12px;
+              padding: 10px;
+              svg {
+                width: 30px;
+                height: 30px;
+              }
+            }
+
+            .bot {
+              margin-left: 15px;
+              display: flex;
+              flex-direction: column;
+
+              p{
+                color: rgba(0, 0, 0, 0.7);
+                margin-bottom: 0;
+              }
+              span{
+                font-weight: 700;
+                font-size: 18px;
+                color: rgba(0, 0, 0, 0.7);
+              }
+            }
+          }
+
+          .right {
+            width: 50%;
+            display: flex;
+            .icon {
+              background: rgb(114, 225, 40, 0.12);
+              border-radius: 12px;
+              padding: 10px;
+
+              svg {
+                width: 30px;
+                height: 30px;
+                stroke: rgb(102, 108, 255);
+              }
+            }
+
+            .bot {
+              margin-left: 15px;
+              display: flex;
+              flex-direction: column;
+
+              p{
+                color: rgba(0, 0, 0, 0.7);
+                margin-bottom: 0;
+              }
+              span{
+                font-weight: 700;
+                font-size: 18px;
+                color: rgba(0, 0, 0, 0.7);
+              }
+            }
+          }
+        }
+
+      }
     }
   }
 

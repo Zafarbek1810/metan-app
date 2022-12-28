@@ -14,6 +14,8 @@ import {WRAPPER} from "./style";
 import ArticleProvider from "../../../../../Data/Providers/ArticleProvider";
 import {FilterWrapper} from "../../KolonkalarReport/GasColumnReport/GasColumnReport.style";
 import {toast} from "react-toastify";
+import CardSvg from "../../../../Common/Svgs/CardSvg";
+import DollarSvg2 from "../../../../Common/Svgs/DollarSvg2";
 
 
 const MODAL_TYPE = {
@@ -145,6 +147,7 @@ const Main = () => {
   function getOperations() {
     setOperationLoading(true);
     OperationProvider.getAll(page, filterState).then(res => {
+      console.log(res.data)
       setOperations(res.data);
     }, err => {
       console.log(err);
@@ -222,34 +225,36 @@ const Main = () => {
       <TableWrapper>
         <div className="top">
           <h3 className="title">Operatsiyalar</h3>
-          <div className="modal-wrapper">
-            <Button
-              variant="contained"
-              onClick={() => openModal(MODAL_TYPE.INCOME)}
-              style={{
-                fontFamily: "Inter",
-                color: "#fff",
-                background: "#787EFF",
-              }}
-            >
-              + Kirim qo'shsh
-            </Button>
-            &nbsp;&nbsp;&nbsp;
-            <Button
-              variant="contained"
-              onClick={() => openModal(MODAL_TYPE.OUTCOME)}
-              style={{
-                fontFamily: "Inter",
-                color: "#fff",
-                background: "#787EFF",
-              }}
-            >
-              - Chiqim qo'shish
-            </Button>
+          <div className="statistika">
+            <div className="card">
+              <h5>Statistika</h5>
+              <div className="wrap">
+                <div className="left">
+                  <div className="icon">
+                    <CardSvg/>
+                  </div>
+                  <div className="bot">
+                    <span>{(operations.outcomesSum).toLocaleString().replaceAll(',', ' ')}</span>
+                    <p>Chiqimlar</p>
+                  </div>
+                </div>
+
+                <div className="right">
+                  <div className="icon">
+                    <DollarSvg2/>
+                  </div>
+                  <div className="bot">
+                    {/*<span>{(+pnl).toLocaleString().replaceAll(',', ' ')}</span>*/}
+                    <span>{(operations.incomesSum).toLocaleString().replaceAll(',', ' ')}</span>
+                    <p>Kirimlar</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div>
+        <div className="bottom">
           <FilterWrapper>
             <Button
               variant="contained"
@@ -345,6 +350,31 @@ const Main = () => {
               </div>
             </form>
           </FilterWrapper>
+          <div className="modal-wrapper">
+            <Button
+                variant="contained"
+                onClick={() => openModal(MODAL_TYPE.INCOME)}
+                style={{
+                  fontFamily: "Inter",
+                  color: "#fff",
+                  background: "#787EFF",
+                }}
+            >
+              + Kirim qo'shsh
+            </Button>
+            &nbsp;&nbsp;&nbsp;
+            <Button
+                variant="contained"
+                onClick={() => openModal(MODAL_TYPE.OUTCOME)}
+                style={{
+                  fontFamily: "Inter",
+                  color: "#fff",
+                  background: "#787EFF",
+                }}
+            >
+              - Chiqim qo'shish
+            </Button>
+          </div>
         </div>
 
         <table className="table table-borderless table-hover">
