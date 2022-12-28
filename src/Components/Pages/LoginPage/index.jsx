@@ -41,6 +41,12 @@ const LoginPage = () => {
           break;
         }
       }
+      switch (currentUser.role) {
+        case "OPERATOR": {
+          router.replace("/dashboard/operation")
+          break;
+        }
+      }
     }
   }, [isAuth, currentUser])
 
