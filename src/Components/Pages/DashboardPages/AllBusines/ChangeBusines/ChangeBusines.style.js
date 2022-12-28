@@ -33,7 +33,7 @@ const FilterWrapper = styled.div`
   .filter-content {
     position: absolute;
     top: calc(100% + 4px);
-    left: 0;
+    left: -80px;
 
     min-width: 400px;
     background-color: #fff;

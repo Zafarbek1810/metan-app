@@ -244,7 +244,6 @@ const Main = () => {
                     <DollarSvg2/>
                   </div>
                   <div className="bot">
-                    {/*<span>{(+pnl).toLocaleString().replaceAll(',', ' ')}</span>*/}
                     <span>{(operations.incomesSum).toLocaleString().replaceAll(',', ' ')}</span>
                     <p>Kirimlar</p>
                   </div>

@@ -218,7 +218,7 @@ const ChangeBusines = () => {
                                         <Statistic
                                             style={{marginBottom:20}}
                                             title="Kirimlar"
-                                            value={statistic.totalPnl}
+                                            value={statistic?.totalIncomes}
                                             precision={2}
                                             valueStyle={{
                                                 color: '#3f8600',
@@ -227,7 +227,7 @@ const ChangeBusines = () => {
                                             suffix="UZS"
                                         />
                                         <Progress
-                                            percent={69}
+                                            percent={109}
                                             strokeColor={{
                                                 '0%': '#108ee9',
                                                 '100%': '#87d068',
@@ -240,7 +240,7 @@ const ChangeBusines = () => {
                                         <Statistic
                                             style={{marginBottom:20}}
                                             title="Chiqimlar"
-                                            value={"11 500 000"}
+                                            value={statistic?.totalOutcomes}
                                             precision={2}
                                             valueStyle={{
                                                 color: '#cf1322',
@@ -249,7 +249,7 @@ const ChangeBusines = () => {
                                             suffix="UZS"
                                         />
                                         <Progress
-                                            percent={36}
+                                            percent={106}
                                             strokeColor={{
                                                 '0%': '#899FD4',
                                                 '100%': '#899FD4',
@@ -261,8 +261,8 @@ const ChangeBusines = () => {
                                     <Card>
                                         <Statistic
                                             style={{marginBottom:20}}
-                                            title="Hisobdagi pullar"
-                                            value={"24 000 000"}
+                                            title="Qoldiq"
+                                            value={statistic?.totalPnl}
                                             precision={2}
                                             valueStyle={{
                                                 color: '#3f8600',
@@ -271,7 +271,7 @@ const ChangeBusines = () => {
                                             suffix="UZS"
                                         />
                                         <Progress
-                                            percent={69}
+                                            percent={109}
                                             strokeColor={{
                                                 '0%': '#1de9b6',
                                                 '100%': '#1dc4e9',
