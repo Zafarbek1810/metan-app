@@ -14,6 +14,10 @@ export default class OperationProvider{
     return await client.get("/project/getOperations", {params});
   }
 
+  static async deleteOperation(id) {
+    return await client.delete(`/project/operation/delete/${id}`);
+  }
+
   static async addIncome(body) {
     return await client.post("/project/addIncome", body);
   }

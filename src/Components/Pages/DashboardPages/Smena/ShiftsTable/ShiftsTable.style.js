@@ -164,7 +164,7 @@ const ShiftsTableWrapper = styled.div`
           font-weight: 600;
           font-size: 13px;
           line-height: 24px;
-          color: rgba(0, 0, 0, 0.7);
+          color: rgb(0, 0, 0);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -192,7 +192,8 @@ const ShiftsTableWrapper = styled.div`
           display: flex;
           align-items: center;
           justify-content: center;
-          color: rgba(0, 0, 0, 0.7);
+          //color: rgba(0, 0, 0, 0.7);
+          color: #000;
           text-align: center;
           font-family: "Inter";
 

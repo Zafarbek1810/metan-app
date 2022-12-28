@@ -71,6 +71,7 @@ const Wrapper=styled.div`
     &::-webkit-scrollbar {
       width: 8px;
       background-color: #F5F5F5;
+      display: none;
     }
 
     &::-webkit-scrollbar-thumb {
@@ -80,7 +81,7 @@ const Wrapper=styled.div`
 
   .layout__right {
     flex-grow: 1;
-    transform: translateX(-100px) ;
+    transform: scaleX(1.09) translateX(-100px) ;
     
     
     

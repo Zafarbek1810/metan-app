@@ -23,7 +23,7 @@ const TableWrapper=styled.div`
     }
 
     .statistika {
-      width: 40%;
+      width: 60%;
       margin-left: auto;
       margin-bottom: 20px;
       .card {
@@ -40,8 +40,9 @@ const TableWrapper=styled.div`
 
         .wrap {
           display: flex;
+          justify-content: space-between;
           .left {
-            width: 50%;
+            width: 30%;
             display: flex;
             .icon {
               background: rgb(255, 77, 73, 0.12);
@@ -71,7 +72,38 @@ const TableWrapper=styled.div`
           }
 
           .right {
-            width: 50%;
+            width: 30%;
+            display: flex;
+            .icon {
+              background: rgb(253, 181, 40, 0.12);
+              border-radius: 12px;
+              padding: 10px;
+
+              svg {
+                width: 30px;
+                height: 30px;
+                stroke: rgb(102, 108, 255);
+              }
+            }
+
+            .bot {
+              margin-left: 15px;
+              display: flex;
+              flex-direction: column;
+
+              p{
+                color: rgba(0, 0, 0, 0.7);
+                margin-bottom: 0;
+              }
+              span{
+                font-weight: 700;
+                font-size: 18px;
+                color: rgba(0, 0, 0, 0.7);
+              }
+            }
+          }
+          .right2 {
+            width: 30%;
             display: flex;
             .icon {
               background: rgb(114, 225, 40, 0.12);

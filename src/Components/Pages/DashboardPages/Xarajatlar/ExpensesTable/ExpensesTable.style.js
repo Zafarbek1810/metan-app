@@ -1,13 +1,16 @@
 import styled from "styled-components";
 
 const ExpensesTableWrapper = styled.div`
-  .top{
+
+ 
+  
+  .top {
     margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
     margin-top: 15px;
 
-    .title{
+    .title {
       font-style: normal;
       font-weight: 600;
       font-size: 30px;
@@ -15,16 +18,18 @@ const ExpensesTableWrapper = styled.div`
       color: rgba(0, 0, 0, 0.7);
       font-family: "Rubik";
     }
-    
-    .summ{
+
+    .summ {
       display: flex;
       align-items: center;
-      h3{
+
+      h3 {
         color: rgba(0, 0, 0, 0.7);
         margin: 0 15px 0 0;
         font-family: "Rubik";
       }
-      p{
+
+      p {
         margin: 0;
         font-family: "Rubik";
       }
@@ -34,6 +39,7 @@ const ExpensesTableWrapper = styled.div`
   .statistika {
     width: 20%;
     margin-bottom: 20px;
+
     .card {
       border-radius: 12px;
       background-color: #fff;
@@ -48,13 +54,16 @@ const ExpensesTableWrapper = styled.div`
 
       .wrap {
         display: flex;
+
         .left {
           width: 50%;
           display: flex;
+
           .icon {
             background: rgb(255, 77, 73, 0.12);
             border-radius: 12px;
             padding: 10px;
+
             svg {
               width: 30px;
               height: 30px;
@@ -66,11 +75,12 @@ const ExpensesTableWrapper = styled.div`
             display: flex;
             flex-direction: column;
 
-            p{
+            p {
               color: rgba(0, 0, 0, 0.7);
               margin-bottom: 0;
             }
-            span{
+
+            span {
               font-weight: 700;
               font-size: 18px;
               color: rgba(0, 0, 0, 0.7);
@@ -92,6 +102,7 @@ const ExpensesTableWrapper = styled.div`
 
   .filter-state {
     padding: 10px 0;
+
     &__inner {
       padding: 10px;
       border-radius: 15px;
@@ -146,7 +157,7 @@ const ExpensesTableWrapper = styled.div`
         display: flex;
         justify-content: space-between;
         border-bottom: 1px solid rgba(159, 160, 184, 0.3);
-        
+
 
         td.col {
           font-style: normal;
@@ -162,7 +173,6 @@ const ExpensesTableWrapper = styled.div`
           padding-left: 20px;
 
 
-
           .btns {
             width: 60%;
             display: flex;
@@ -173,18 +183,18 @@ const ExpensesTableWrapper = styled.div`
               transition: 300ms;
               background: transparent;
 
-                svg {
-                  fill: none;
-                  width: 20px;
-                  height: 20px;
-                  fill: rgb(253, 181, 40);
-                }
+              svg {
+                fill: none;
+                width: 20px;
+                height: 20px;
+                fill: rgb(253, 181, 40);
+              }
             }
+          }
         }
       }
     }
   }
-
 `
 
 const ModalContent = styled.div`
@@ -312,6 +322,11 @@ const ModalFooter = styled.footer`
 const FilterWrapper = styled.div`
   position: relative;
   display: inline-block;
+  
+  .MuiCalendarPicker-root {
+    width: 100% !important;
+    background: black;
+  }
   
   .filter-content {
     position: absolute;

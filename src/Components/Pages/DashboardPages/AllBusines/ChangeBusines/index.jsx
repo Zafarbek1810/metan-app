@@ -219,7 +219,6 @@ const ChangeBusines = () => {
                                             style={{marginBottom:20}}
                                             title="Kirimlar"
                                             value={statistic?.totalIncomes}
-                                            precision={2}
                                             valueStyle={{
                                                 color: '#3f8600',
                                             }}
@@ -241,7 +240,6 @@ const ChangeBusines = () => {
                                             style={{marginBottom:20}}
                                             title="Chiqimlar"
                                             value={statistic?.totalOutcomes}
-                                            precision={2}
                                             valueStyle={{
                                                 color: '#cf1322',
                                             }}
@@ -263,7 +261,6 @@ const ChangeBusines = () => {
                                             style={{marginBottom:20}}
                                             title="Qoldiq"
                                             value={statistic?.totalPnl}
-                                            precision={2}
                                             valueStyle={{
                                                 color: '#3f8600',
                                             }}

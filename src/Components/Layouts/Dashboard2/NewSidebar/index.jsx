@@ -130,19 +130,19 @@ const Umumiy = [
         title: "Rejalar",
         path: "/dashboard/plans",
         Svg: PlanSvg,
-        role: ["SUPER_ADMIN"]
+        role: ["SUPER_ADMIN","DIRECTOR"]
     },
     {
         title: "Proyektlar",
         path: "/dashboard/projects",
         Svg: ChartTreeSvg,
-        role: ["SUPER_ADMIN"]
+        role: ["SUPER_ADMIN", "DIRECTOR"]
     },
     {
         title: "Operatsiyalar",
         path: "/dashboard/operation",
         Svg: ChartLineUp,
-        role: ["SUPER_ADMIN"]
+        role: ["SUPER_ADMIN", "DIRECTOR"]
     },
 ]
 
@@ -175,7 +175,7 @@ const NewSidebar = () => {
                 {/*<img src="/img/logo.png" alt=""/>*/}
             </MyLink>
             <Collapse bordered={false}
-                      defaultActiveKey={['1']}
+                      defaultActiveKey={['5']}
             >
                 <Panel header="Barcha bizneslar" key="5">
                     <div className="sidebar-menu">

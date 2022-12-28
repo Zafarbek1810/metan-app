@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Drawer, IconButton} from "@mui/material";
+import {Button, Chip, Drawer, IconButton} from "@mui/material";
 import {ModalContent, ModalHeader} from "../../Kassirlar/CashierTable/CashierTable.style";
 import CloseSvg from "../../../../Common/Svgs/CloseSvg";
 import EditIcon from "@mui/icons-material/Edit";
@@ -16,6 +16,8 @@ import {FilterWrapper} from "../../KolonkalarReport/GasColumnReport/GasColumnRep
 import {toast} from "react-toastify";
 import CardSvg from "../../../../Common/Svgs/CardSvg";
 import DollarSvg2 from "../../../../Common/Svgs/DollarSvg2";
+import DollarSvg from "../../../../Common/Svgs/DollarSvg";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 
 const MODAL_TYPE = {
@@ -24,11 +26,12 @@ const MODAL_TYPE = {
 }
 
 
-const Main = () => {
+const Main = ({RefObj, setIsOpen}) => {
   const {register, handleSubmit, control, reset} = useForm();
   const projectForm = useForm();
   const articleForm = useForm();
   const filterForm = useForm();
+  const [forRender, setForRender] = useState(null)
 
   const [page, setPage] = useState(1)
   const [modalType, setModalType] = useState(MODAL_TYPE.INCOME);
@@ -42,6 +45,7 @@ const Main = () => {
   const [operations, setOperations] = useState({data: [], count: 0});
   const [projects, setProjects] = useState([]);
   const [articles, setArticles] = useState([]);
+  const [operDel, setOperDel]= useState([])
 
 
   // SELECT OPTIONSLARI
@@ -149,6 +153,8 @@ const Main = () => {
     OperationProvider.getAll(page, filterState).then(res => {
       console.log(res.data)
       setOperations(res.data);
+      setOperDel(res.data.data)
+      console.log(operDel)
     }, err => {
       console.log(err);
     }).finally(() => setOperationLoading(false))
@@ -161,7 +167,7 @@ const Main = () => {
 
   useEffect(() => {
     getOperations();
-  }, [filterState])
+  }, [filterState,forRender])
 
 
   // DRAWERDAGI FORMA SUBMIT HANDLERLARI
@@ -220,6 +226,28 @@ const Main = () => {
     })
   })
 
+
+  const handleDeleteOperation=(id)=>{
+    RefObj.current.textContent = `Rostdan ham o'chirishni xoxlaysizmi?`;
+    setIsOpen(true);
+    new Promise((res, rej) => {
+      RefObj.current.resolve = res;
+      RefObj.current.reject = rej;
+    })
+        .then(async () => {
+          await OperationProvider.deleteOperation(id);
+          setOperDel((pre) =>
+              pre.filter((mod) => {
+                return mod.id !== id;
+              })
+          );
+          setForRender(Math.random());
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  }
+
   return (
     <WRAPPER>
       <TableWrapper>
@@ -234,18 +262,36 @@ const Main = () => {
                     <CardSvg/>
                   </div>
                   <div className="bot">
-                    <span>{(operations.outcomesSum).toLocaleString().replaceAll(',', ' ')}</span>
+                    <span>
+                      {operations.outcomesSum ?
+                        (+operations?.outcomesSum).toLocaleString().replaceAll(',', ' ')
+                        : "0"}
+                    </span>
                     <p>Chiqimlar</p>
                   </div>
                 </div>
 
                 <div className="right">
                   <div className="icon">
+                    <DollarSvg/>
+                  </div>
+                  <div className="bot">
+                    <span>
+                      {operations.incomesSum ?
+                          (+operations?.incomesSum).toLocaleString().replaceAll(',', ' ')
+                          : "0"}
+                    </span>
+                    <p>Kirimlar</p>
+                  </div>
+                </div>
+
+                <div className="right2">
+                  <div className="icon">
                     <DollarSvg2/>
                   </div>
                   <div className="bot">
-                    <span>{(operations.incomesSum).toLocaleString().replaceAll(',', ' ')}</span>
-                    <p>Kirimlar</p>
+                    <span>{(+(operations?.incomesSum+operations?.outcomesSum) ).toLocaleString().replaceAll(',', ' ')}</span>
+                    <p>Qoldiq</p>
                   </div>
                 </div>
               </div>
@@ -379,14 +425,20 @@ const Main = () => {
         <table className="table table-borderless table-hover">
           <thead>
           <tr>
-            <th style={{minWidth: "26%"}} className="col">
+            <th style={{minWidth: "10%"}} className="col">
               Sana
             </th>
-            <th style={{minWidth: "26%"}} className="col">
+            <th style={{minWidth: "20%"}} className="col">
               Loyiha nomi
             </th>
-            <th style={{minWidth: "26%"}} className="col">
+            <th style={{minWidth: "15%"}} className="col">
               Qiymati
+            </th>
+            <th style={{minWidth: "30%"}} className="col">
+              Izoh
+            </th>
+            <th style={{minWidth: "15%", justifyContent:"center"}} className="col">
+              Artikl
             </th>
             <th style={{minWidth: "10%"}} className="col">
               Amallar
@@ -396,24 +448,40 @@ const Main = () => {
           <tbody>
           {!operationLoading ? (
             operations?.data?.length ? (
-              operations?.data?.map((obj, index) => (
+              operDel?.map((obj, index) => (
                 <tr key={index}>
-                  <td style={{minWidth: "26%"}} className="col">
+                  <td style={{minWidth: "10%"}} className="col">
                     {new Date(obj.addedDate).toLocaleDateString()}
                   </td>
-                  <td style={{minWidth: "26%"}} className="col">
-                    {obj.project.title}
+                  <td style={{minWidth: "20%"}} className="col">
+                    {obj?.project?.title}
                   </td>
-                  <td style={{minWidth: "26%"}} className="col">
+                  <td style={{minWidth: "15%"}} className="col">
                     {obj.amount.toLocaleString().replaceAll(',', ' ')}
+                  </td>
+                  <td style={{minWidth: "30%"}} className="col">
+                    {obj?.description}
+                  </td>
+                  <td style={{minWidth: "15%"}} className="col">
+                    <Chip
+                        label={obj?.article?.title}
+                        variant="outlined"
+                        style={{
+                          background: "rgb(253, 181, 40, 0.7)",
+                          color: "#fff",
+                          border: "none",
+                          fontFamily:"Rubik",
+                          fontSize:18
+                        }}
+                    />
                   </td>
                   <td style={{minWidth: "10%"}} className="col">
                     <div className="btns">
                       <IconButton
                         style={{background: "rgb(253, 181, 40, 0.12)"}}
-                        // onClick={() => handleEditCash(obj.id)}
+                        onClick={() => handleDeleteOperation(obj.id)}
                       >
-                        <EditIcon/>
+                        <DeleteIcon/>
                       </IconButton>
                     </div>
                   </td>
@@ -460,7 +528,7 @@ const Main = () => {
             <CloseSvg/>
           </button>
         </ModalHeader>
-        <form className="p-3" onSubmit={onSubmitOperation}>
+        <form className="p-3" style={{width:500}} onSubmit={onSubmitOperation}>
           <Controller
             control={control}
             name="projectId"
@@ -536,7 +604,7 @@ const Main = () => {
           </button>
         </ModalHeader>
         <ModalContent>
-          <form onSubmit={submitAddArticle}>
+          <form onSubmit={submitAddArticle} >
             <input className="form-control" placeholder="Artikl nomini kiriting" type="text" {...articleForm.register("title", {required: true})}/>
             <br/>
             <label className="form-control" style={{display: "flex", alignItems: "center"}}>

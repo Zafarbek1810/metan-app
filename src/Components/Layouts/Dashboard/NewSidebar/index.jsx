@@ -153,6 +153,18 @@ const PlanMenu = [
         Svg: PlanSvg,
         role: ["SUPER_ADMIN", "CASHIER", "DIRECTOR"]
     },
+    {
+        title: "Proyektlar",
+        path: "/dashboard/projects",
+        Svg: ChartTreeSvg,
+        role: ["SUPER_ADMIN","DIRECTOR"]
+    },
+    {
+        title: "Operatsiyalar",
+        path: "/dashboard/operation",
+        Svg: ChartLineUp,
+        role: ["SUPER_ADMIN","DIRECTOR"]
+    },
 ]
 
 const NewSidebar = () => {
@@ -182,6 +194,24 @@ const NewSidebar = () => {
                             <Collapse bordered={false}
                                       defaultActiveKey={['1']}
                             >
+                                <Panel header="Rejalar" key="2">
+                                    <div className="sidebar-menu">
+                                        {
+                                            PlanListMenu.map(({title, Svg, path}, idx) => {
+                                                return (
+                                                    <MyLink
+                                                        className={router.pathname === path ? "activelink" : "link"}
+                                                        to={path}
+                                                        key={idx}
+                                                    >
+                                                        {title}
+                                                        <Svg/>
+                                                    </MyLink>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </Panel>
                                 <Panel header="Metan" key="1">
                                     <div className="sidebar-menu">
                                         {
@@ -215,24 +245,7 @@ const NewSidebar = () => {
                                         }
                                     </div>
                                 </Panel>
-                                <Panel header="Rejalar" key="2">
-                                    <div className="sidebar-menu">
-                                        {
-                                            PlanListMenu.map(({title, Svg, path}, idx) => {
-                                                return (
-                                                    <MyLink
-                                                        className={router.pathname === path ? "activelink" : "link"}
-                                                        to={path}
-                                                        key={idx}
-                                                    >
-                                                        {title}
-                                                        <Svg/>
-                                                    </MyLink>
-                                                )
-                                            })
-                                        }
-                                    </div>
-                                </Panel>
+
                             </Collapse>
                         )
                     } else if(userRole==="SUPER_ADMIN") {
