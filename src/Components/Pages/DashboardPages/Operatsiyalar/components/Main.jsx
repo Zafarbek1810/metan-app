@@ -432,7 +432,7 @@ const Main = ({RefObj, setIsOpen}) => {
         <table className="table table-borderless table-hover">
           <thead>
           <tr>
-            <th style={{minWidth: "10%"}} className="col">
+            <th style={{minWidth: "15%"}} className="col">
               Sana
             </th>
             <th style={{minWidth: "20%"}} className="col">
@@ -441,7 +441,7 @@ const Main = ({RefObj, setIsOpen}) => {
             <th style={{minWidth: "15%"}} className="col">
               Qiymati
             </th>
-            <th style={{minWidth: "30%"}} className="col">
+            <th style={{minWidth: "25%"}} className="col">
               Izoh
             </th>
             <th style={{minWidth: "15%", justifyContent:"center"}} className="col">
@@ -457,9 +457,15 @@ const Main = ({RefObj, setIsOpen}) => {
             operations?.data?.length ? (
               operDel?.map((obj, index) => (
                 <tr key={index}>
-                  <td style={{minWidth: "10%"}} className="col">
-                    {(page-1)*20+index+1}.{new Date(obj.addedDate).toISOString().split('T')[0]}
+                  <td style={{minWidth: "15%"}} className="col">
+                    {/*{(page-1)*20+index+1}.{new Date(obj.addedDate).toISOString().split('T')[0]}*/}
                     {/*{(page-1)*20+index+1}.{obj.addedDate}*/}
+
+                    {(page-1)*20+index+1}.{new Date(obj.addedDate).getDate() +
+                        "-" +
+                        (new Date(obj.addedDate).getMonth() + 1) +
+                        "-" +
+                        new Date(obj.addedDate).getFullYear()}
                   </td>
                   <td style={{minWidth: "20%"}} className="col">
                     {obj?.project?.title}
@@ -467,7 +473,7 @@ const Main = ({RefObj, setIsOpen}) => {
                   <td style={{minWidth: "15%"}} className="col">
                     {obj.amount.toLocaleString().replaceAll(',', ' ')}
                   </td>
-                  <td style={{minWidth: "30%"}} className="col">
+                  <td style={{minWidth: "25%"}} className="col">
                     {obj?.description}
                   </td>
                   <td style={{minWidth: "15%"}} className="col">
@@ -589,9 +595,9 @@ const Main = ({RefObj, setIsOpen}) => {
             )}
           />
           <br/>
-          <input className="form-control" placeholder={"Izoh"} {...register("description", {required: true})}/>
+          <input autoComplete="off" className="form-control" placeholder={"Izoh"} {...register("description", {required: true})}/>
           <br/>
-          <input className="form-control" type="date" placeholder={"Sana"} {...register("date", {required: true})}/>
+          <input autoComplete="off" className="form-control" type="date" placeholder={"Sana"} {...register("date", {required: true})}/>
           <br/>
           {/*<input className="form-control" type="number"*/}
           {/*       placeholder={"Qiymati (summa)"} {...register("amount", {required: true})}/>*/}
