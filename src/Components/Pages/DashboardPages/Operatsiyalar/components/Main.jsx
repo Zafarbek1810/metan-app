@@ -152,7 +152,7 @@ const Main = ({RefObj, setIsOpen}) => {
   function getOperations() {
     setOperationLoading(true);
     OperationProvider.getAll(page, filterState).then(res => {
-      console.log(res.data)
+      console.log("z",res.data.data)
       setOperations(res.data);
       setOperDel(res.data.data)
       setModalSum("")
@@ -169,7 +169,7 @@ const Main = ({RefObj, setIsOpen}) => {
 
   useEffect(() => {
     getOperations();
-  }, [filterState,forRender])
+  }, [filterState,forRender, page])
 
 
   // DRAWERDAGI FORMA SUBMIT HANDLERLARI
@@ -178,8 +178,11 @@ const Main = ({RefObj, setIsOpen}) => {
       projectId: values.projectId?.value,
       articleId: values.articleId?.label,
       description: values.description,
-      amount: +modalSum
+      amount: +modalSum,
+      date: values.date
     }
+
+    console.log("body",body)
 
     if (modalType === MODAL_TYPE.INCOME) {
       OperationProvider.addIncome(body).then(res => {
@@ -455,7 +458,8 @@ const Main = ({RefObj, setIsOpen}) => {
               operDel?.map((obj, index) => (
                 <tr key={index}>
                   <td style={{minWidth: "10%"}} className="col">
-                    {new Date(obj.addedDate).toLocaleDateString()}
+                    {(page-1)*20+index+1}.{new Date(obj.addedDate).toISOString().split('T')[0]}
+                    {/*{(page-1)*20+index+1}.{obj.addedDate}*/}
                   </td>
                   <td style={{minWidth: "20%"}} className="col">
                     {obj?.project?.title}
@@ -586,6 +590,8 @@ const Main = ({RefObj, setIsOpen}) => {
           />
           <br/>
           <input className="form-control" placeholder={"Izoh"} {...register("description", {required: true})}/>
+          <br/>
+          <input className="form-control" type="date" placeholder={"Sana"} {...register("date", {required: true})}/>
           <br/>
           {/*<input className="form-control" type="number"*/}
           {/*       placeholder={"Qiymati (summa)"} {...register("amount", {required: true})}/>*/}
