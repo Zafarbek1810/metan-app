@@ -12,6 +12,15 @@ const WRAPPER = styled.div`
   .inOutDrawer {
     padding: 20px;
   }
+  
+  .bottom{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .filter-content{
+    width: 100%;
+  }
 `
 
 export {

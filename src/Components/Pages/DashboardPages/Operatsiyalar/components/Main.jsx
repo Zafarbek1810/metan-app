@@ -319,7 +319,7 @@ const Main = ({RefObj, setIsOpen}) => {
           <div>
           <form className="filter-content" onSubmit={onFilterSubmit}>
               <div className="row">
-                <div className="mb-3 col-6">
+                <div className="mb-3 col-4">
                   <div>Proyekt</div>
                   <Controller
                     control={filterForm.control}
@@ -339,7 +339,7 @@ const Main = ({RefObj, setIsOpen}) => {
                     )}
                   />
                 </div>
-                <div className="mb-3 col-6">
+                <div className="mb-3 col-4">
                   <div>Artikl</div>
                   <Controller
                     control={filterForm.control}
@@ -359,47 +359,46 @@ const Main = ({RefObj, setIsOpen}) => {
                     )}
                   />
                 </div>
-              </div>
-              <div className="row">
-                <div className="mb-3 col-6">
+                <div className="mb-3 col-4">
                   <div>Operatsiya turi</div>
                   <Controller
-                    control={filterForm.control}
-                    name="operationType"
-                    render={({
-                               field: {onChange, onBlur, value, name, ref},
-                               fieldState: {invalid, isTouched, isDirty, error},
-                               formState,
-                             }) => (
-                      <Select
-                        value={value}
-                        options={operationOptions}
-                        onBlur={onBlur}
-                        onChange={onChange}
-                        ref={ref}
-                      />
-                    )}
+                      control={filterForm.control}
+                      name="operationType"
+                      render={({
+                                 field: {onChange, onBlur, value, name, ref},
+                                 fieldState: {invalid, isTouched, isDirty, error},
+                                 formState,
+                               }) => (
+                          <Select
+                              value={value}
+                              options={operationOptions}
+                              onBlur={onBlur}
+                              onChange={onChange}
+                              ref={ref}
+                          />
+                      )}
                   />
                 </div>
               </div>
               <div className="row">
-                <div className="mb-3 col-6">
+                <div className="mb-3 col-4">
                   <div>Boshlanish sana</div>
                   <input className="form-control" type="date" {...filterForm.register("startDate")}/>
                 </div>
-                <div className="mb-3 col-6">
+                <div className="mb-3 col-4">
                   <div>Oxirgi sana</div>
                   <input className="form-control" type="date" {...filterForm.register("endDate")}/>
+                </div>
+                <div className="d-flex align-items-center gap-2 col-4">
+                  <button className="btn btn-secondary" type="button" onClick={onFilterClear}>Bekor qilish</button>
                 </div>
               </div>
 
 
-              <div className="d-flex gap-2">
-                <button className="btn btn-secondary" type="button" onClick={onFilterClear}>Bekor qilish</button>
-              </div>
+
             </form>
           </div>
-          <div className="modal-wrapper">
+          <div className="modal-wrapper ms-auto">
             <Button
                 variant="contained"
                 onClick={() => openModal(MODAL_TYPE.INCOME)}
