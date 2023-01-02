@@ -102,6 +102,15 @@ const Main = ({RefObj, setIsOpen}) => {
     setIsFilterOpen(false);
   })
 
+  useEffect(() => {
+    onFilterSubmit(filterForm.getValues());
+  }, [
+    filterForm.watch("project"), 
+    filterForm.watch("article"), 
+    filterForm.watch("operationType"), 
+    filterForm.watch("startDate"), 
+    filterForm.watch("endDate")
+  ])
 
 
   // ASOSIY DRAWER
@@ -307,19 +316,8 @@ const Main = ({RefObj, setIsOpen}) => {
         </div>
 
         <div className="bottom">
-          <FilterWrapper>
-            <Button
-              variant="contained"
-              onClick={toggleFilter}
-              style={{
-                fontFamily: "Inter",
-                color: "#fff",
-                background: "#787EFF",
-              }}
-            >
-              Filtrlash
-            </Button>
-            <form className="filter-content" style={{visibility: isFilterOpen ? "visible" : "hidden"}} onSubmit={onFilterSubmit}>
+          <div>
+          <form className="filter-content" onSubmit={onFilterSubmit}>
               <div className="row">
                 <div className="mb-3 col-6">
                   <div>Proyekt</div>
@@ -398,10 +396,9 @@ const Main = ({RefObj, setIsOpen}) => {
 
               <div className="d-flex gap-2">
                 <button className="btn btn-secondary" type="button" onClick={onFilterClear}>Bekor qilish</button>
-                <button className="btn btn-success" type="submit">Qo'llash</button>
               </div>
             </form>
-          </FilterWrapper>
+          </div>
           <div className="modal-wrapper">
             <Button
                 variant="contained"
