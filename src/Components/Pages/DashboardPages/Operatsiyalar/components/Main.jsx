@@ -389,40 +389,40 @@ const Main = ({RefObj, setIsOpen}) => {
                   <div>Oxirgi sana</div>
                   <input className="form-control" type="date" {...filterForm.register("endDate")}/>
                 </div>
-                <div className="d-flex align-items-center gap-2 col-4">
-                  <button className="btn btn-secondary" type="button" onClick={onFilterClear}>Bekor qilish</button>
+                <div className="d-flex  gap-2 col-4">
+                  <div className="row align-items-center">
+                    <button className="btn btn-secondary col-4" type="button" onClick={onFilterClear}>Bekor qilish</button>
+                    <div className="modal-wrapper d-flex col-8">
+                      <Button
+                          variant="contained"
+                          onClick={() => openModal(MODAL_TYPE.INCOME)}
+                          style={{
+                            fontFamily: "Inter",
+                            color: "#fff",
+                            background: "#787EFF",
+                          }}
+                      >
+                        + Kirim qo'shsh
+                      </Button>
+                      &nbsp;&nbsp;&nbsp;
+                      <Button
+                          variant="contained"
+                          onClick={() => openModal(MODAL_TYPE.OUTCOME)}
+                          style={{
+                            fontFamily: "Inter",
+                            color: "#fff",
+                            background: "#787EFF",
+                          }}
+                      >
+                        - Chiqim qo'shish
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </div>
-
-
-
             </form>
           </div>
-          <div className="modal-wrapper ms-auto">
-            <Button
-                variant="contained"
-                onClick={() => openModal(MODAL_TYPE.INCOME)}
-                style={{
-                  fontFamily: "Inter",
-                  color: "#fff",
-                  background: "#787EFF",
-                }}
-            >
-              + Kirim qo'shsh
-            </Button>
-            &nbsp;&nbsp;&nbsp;
-            <Button
-                variant="contained"
-                onClick={() => openModal(MODAL_TYPE.OUTCOME)}
-                style={{
-                  fontFamily: "Inter",
-                  color: "#fff",
-                  background: "#787EFF",
-                }}
-            >
-              - Chiqim qo'shish
-            </Button>
-          </div>
+
         </div>
 
         <table className="table table-borderless table-hover">
