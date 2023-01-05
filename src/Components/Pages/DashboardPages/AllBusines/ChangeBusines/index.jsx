@@ -201,7 +201,7 @@ const ChangeBusines = () => {
                                             prefix={<ArrowUpOutlined />}
                                             suffix="UZS"
                                         />
-                                        <p style={{color: '#3f8600', fontSize:24,marginLeft:30 }}>{statistic?.totalIncomesInUSD.toLocaleString()} USD</p>
+                                        <p style={{color: '#3f8600', fontSize:24,marginLeft:30 }}>{statistic?.totalIncomesInUSD} USD</p>
                                         <Progress
                                             percent={109}
                                             strokeColor={{
@@ -223,7 +223,7 @@ const ChangeBusines = () => {
                                             prefix={<ArrowDownOutlined />}
                                             suffix="UZS"
                                         />
-                                        <p style={{color: '#cf1322', fontSize:24,marginLeft:30 }}>{statistic?.totalOutcomesInUSD.toLocaleString()} USD</p>
+                                        <p style={{color: '#cf1322', fontSize:24,marginLeft:30 }}>{statistic?.totalOutcomesInUSD} USD</p>
                                         <Progress
                                             percent={106}
                                             strokeColor={{
@@ -246,7 +246,7 @@ const ChangeBusines = () => {
                                             suffix="UZS"
                                         />
                                         <p style={{color: '#3f8600', fontSize:24,marginLeft:30 }}>
-                                            {(statistic?.totalIncomesInUSD-statistic?.totalOutcomesInUSD).toLocaleString()} USD
+                                            {statistic?.totalIncomesInUSD-statistic?.totalOutcomesInUSD} USD
                                         </p>
                                         <Progress
                                             percent={109}
