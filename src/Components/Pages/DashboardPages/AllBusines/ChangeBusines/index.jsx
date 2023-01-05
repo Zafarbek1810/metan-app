@@ -123,6 +123,7 @@ const ChangeBusines = () => {
 
 
 
+
     return (
         <ChangeBusinesWrapper>
             <div className="wrap">
@@ -157,34 +158,9 @@ const ChangeBusines = () => {
                         </Select>
                     </FormControl>
                     <FormControl variant="filled" fullWidth className={classes.formControl}>
-                        <InputLabel style={{color:"#fff"}} id="demo-simple-select-label2">Davr</InputLabel>
-                        <Select
-                            MenuProps={{
-                                classes: {
-                                    paper: classes.paper
-                                }
-                            }}
-                            inputProps={{
-                                classes: {
-                                    root: classes.input
-                                }
-                            }}
-                            labelId="demo-simple-select-label2"
-                            id="demo-simple-select"
-                            value={davr}
-                            onChange={handleChangeDavr}
-                        >
-                            <MenuItem value={10}>Oxrgi hafta</MenuItem>
-                            <MenuItem value={20}>Oxrgi oy</MenuItem>
-                            <MenuItem value={30}>Yarim yil</MenuItem>
-                            <MenuItem value={40}>Bir yil</MenuItem>
-                            <MenuItem value={50}>Hammasi</MenuItem>
-                        </Select>
-                    </FormControl>
-                    <FormControl variant="filled" fullWidth className={classes.formControl}>
                         <FilterWrapper>
                             <Button onClick={toggleFilter}  className="selec" style={{color:"#fff", height:"60px"}} variant="contained" startIcon={<Settings />}>
-                                Sozlamalar
+                                Filterlash
                             </Button>
                             <form className="filter-content" style={{visibility: isFilterOpen ? "visible" : "hidden"}} onSubmit={onFilterSubmit}>
                                 <div className="row">
@@ -225,6 +201,7 @@ const ChangeBusines = () => {
                                             prefix={<ArrowUpOutlined />}
                                             suffix="UZS"
                                         />
+                                        <p style={{color: '#3f8600', fontSize:24,marginLeft:30 }}>{statistic?.totalIncomesInUSD.toLocaleString()} USD</p>
                                         <Progress
                                             percent={109}
                                             strokeColor={{
@@ -246,6 +223,7 @@ const ChangeBusines = () => {
                                             prefix={<ArrowDownOutlined />}
                                             suffix="UZS"
                                         />
+                                        <p style={{color: '#cf1322', fontSize:24,marginLeft:30 }}>{statistic?.totalOutcomesInUSD.toLocaleString()} USD</p>
                                         <Progress
                                             percent={106}
                                             strokeColor={{
@@ -267,6 +245,9 @@ const ChangeBusines = () => {
                                             prefix={<ArrowUpOutlined />}
                                             suffix="UZS"
                                         />
+                                        <p style={{color: '#3f8600', fontSize:24,marginLeft:30 }}>
+                                            {(statistic?.totalIncomesInUSD-statistic?.totalOutcomesInUSD).toLocaleString()} USD
+                                        </p>
                                         <Progress
                                             percent={109}
                                             strokeColor={{

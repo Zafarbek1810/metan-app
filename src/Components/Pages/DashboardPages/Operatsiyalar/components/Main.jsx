@@ -466,7 +466,7 @@ const Main = ({RefObj, setIsOpen}) => {
                   <div>Oxirgi sana</div>
                   <input className="form-control" type="date" {...filterForm.register("endDate")}/>
                 </div>
-                <div className="d-flex  gap-2 col-6">
+                <div className="d-flex gap-2 col-6 mt-2">
                   <div className="row align-items-center col-12">
                     <button className="btn btn-secondary col-4" type="button" onClick={onFilterClear}>Bekor qilish</button>
                     <div className="modal-wrapper d-flex col-8">
@@ -546,7 +546,7 @@ const Main = ({RefObj, setIsOpen}) => {
                     {obj?.project?.title}
                   </td>
                   <td style={{minWidth: "15%"}} className="col">
-                    {obj.amount.toLocaleString().replaceAll(',', ' ')}
+                    {obj.amount.toLocaleString().replaceAll(',', ' ')} {obj.currency}
                   </td>
                   <td style={{minWidth: "25%"}} className="col">
                     {obj?.description}

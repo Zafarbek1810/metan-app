@@ -95,7 +95,7 @@ const WRAPPER = styled.div`
 
             span {
               font-weight: 700;
-              font-size: 18px;
+              font-size: 17px;
               color: rgba(0, 0, 0, 0.7);
             }
           }
@@ -129,7 +129,7 @@ const WRAPPER = styled.div`
 
             span {
               font-weight: 700;
-              font-size: 18px;
+              font-size: 17px;
               color: rgba(0, 0, 0, 0.7);
             }
           }
@@ -163,7 +163,7 @@ const WRAPPER = styled.div`
 
             span {
               font-weight: 700;
-              font-size: 18px;
+              font-size: 17px;
               color: rgba(0, 0, 0, 0.7);
             }
           }
