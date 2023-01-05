@@ -19,6 +19,7 @@ import DollarSvg2 from "../../../../Common/Svgs/DollarSvg2";
 import DollarSvg from "../../../../Common/Svgs/DollarSvg";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {NumericFormat} from "react-number-format";
+import { Radio } from 'antd';
 
 
 const MODAL_TYPE = {
@@ -47,7 +48,7 @@ const Main = ({RefObj, setIsOpen}) => {
   const [projects, setProjects] = useState([]);
   const [articles, setArticles] = useState([]);
   const [operDel, setOperDel]= useState([])
-
+  const [currency, setCurrency] = useState([])
 
   // SELECT OPTIONSLARI
   const projectOptions = [{label: "Loyiha qo'shish +", value: "ADD_PROJECT"}, ...projects.map(i => ({
@@ -70,6 +71,8 @@ const Main = ({RefObj, setIsOpen}) => {
   const operationOptions = [{label: "Tanlang", value: "nullForOperationType"}, {label: "Kirim", value: MODAL_TYPE.INCOME},{label: "Chiqim", value: MODAL_TYPE.OUTCOME}]
 
 
+  const currencyOptions=[{label: "Tanlang", value: "nullForCurrency"}, {label: "UZS", value: "UZS"},{label: "USD", value: "USD"}]
+
   // FILTER STATE
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filterState, setFilterState] = useState({});
@@ -85,6 +88,7 @@ const Main = ({RefObj, setIsOpen}) => {
     filterForm.setValue("project", filterProjectOptions[0]);
     filterForm.setValue("article", filterArticleOptions[0]);
     filterForm.setValue("operationType", operationOptions[0]);
+    filterForm.setValue("currency", currencyOptions[0]);
     filterForm.setValue("startDate", "");
     filterForm.setValue("endDate", "");
     setIsFilterOpen(false);
@@ -96,7 +100,8 @@ const Main = ({RefObj, setIsOpen}) => {
       articleId: values.article?.value === "nullForArticles" ? "" : values.article?.value,
       operationType: values.operationType?.value === "nullForOperationType" ? "" : values.operationType?.value,
       startDate: values.startDate?.split("-").reverse().join("-"),
-      endDate: values.endDate?.split("-").reverse().join("-")
+      endDate: values.endDate?.split("-").reverse().join("-"),
+      currency:values.currency?.value === "nullForCurrency" ? "" : values.currency?.value
     }
     setFilterState(obj);
     setIsFilterOpen(false);
@@ -108,7 +113,8 @@ const Main = ({RefObj, setIsOpen}) => {
     filterForm.watch("project"), 
     filterForm.watch("article"), 
     filterForm.watch("operationType"), 
-    filterForm.watch("startDate"), 
+    filterForm.watch("currency"),
+    filterForm.watch("startDate"),
     filterForm.watch("endDate")
   ])
 
@@ -162,6 +168,7 @@ const Main = ({RefObj, setIsOpen}) => {
     setOperationLoading(true);
     OperationProvider.getAll(page, filterState).then(res => {
       console.log("z",res.data.data)
+      setCurrency(res.data.data)
       setOperations(res.data);
       setOperDel(res.data.data)
       setModalSum("")
@@ -180,18 +187,24 @@ const Main = ({RefObj, setIsOpen}) => {
     getOperations();
   }, [filterState,forRender, page])
 
+  const [radioVal, setRadioVal] = useState("UZS")
+
+  const onChangeRadio = (e) => {
+    setRadioVal(e.target.value)
+    // console.log(`radio checked:${e.target.value}`);
+  };
 
   // DRAWERDAGI FORMA SUBMIT HANDLERLARI
+
   const onSubmitOperation = handleSubmit((values) => {
     const body = {
       projectId: values.projectId?.value,
       articleId: values.articleId?.label,
       description: values.description,
       amount: +modalSum,
-      date: values.date
+      date: values.date,
+      currency: radioVal
     }
-
-    console.log("body",body)
 
     if (modalType === MODAL_TYPE.INCOME) {
       OperationProvider.addIncome(body).then(res => {
@@ -264,52 +277,96 @@ const Main = ({RefObj, setIsOpen}) => {
 
   const [modalSum, setModalSum] = useState(null)
 
+
   return (
     <WRAPPER>
       <TableWrapper>
-        <div className="top">
           <h3 className="title">Operatsiyalar</h3>
-          <div className="statistika">
+        <div className="top">
+          <div className="statistika-wrap ">
             <div className="card">
               <h5>Statistika</h5>
-              <div className="wrap">
-                <div className="left">
-                  <div className="icon">
-                    <CardSvg/>
-                  </div>
-                  <div className="bot">
+              <div className="wrapper">
+                <div className="uzs-statistika">
+                  <div className="left">
+                    <div className="icon">
+                      <CardSvg/>
+                    </div>
+                    <div className="bot">
                     <span>
                       {operations.outcomesSum ?
-                        (+operations?.outcomesSum).toLocaleString().replaceAll(',', ' ')
-                        : "0"}
+                          (+operations?.outcomesSum).toLocaleString().replaceAll(',', ' ')
+                          : "0"}
                     </span>
-                    <p>Chiqimlar</p>
+                      <p>Chiqimlar(UZS)</p>
+                    </div>
                   </div>
-                </div>
 
-                <div className="right">
-                  <div className="icon">
-                    <DollarSvg/>
-                  </div>
-                  <div className="bot">
+                  <div className="right">
+                    <div className="icon">
+                      <DollarSvg/>
+                    </div>
+                    <div className="bot">
                     <span>
                       {operations.incomesSum ?
                           (+operations?.incomesSum).toLocaleString().replaceAll(',', ' ')
                           : "0"}
                     </span>
-                    <p>Kirimlar</p>
+                      <p>Kirimlar(UZS)</p>
+                    </div>
+                  </div>
+
+                  <div className="right2">
+                    <div className="icon">
+                      <DollarSvg2/>
+                    </div>
+                    <div className="bot">
+                      <span>{(+(operations?.incomesSum+operations?.outcomesSum) ).toLocaleString().replaceAll(',', ' ')}</span>
+                      <p>Qoldiq(UZS)</p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="right2">
-                  <div className="icon">
-                    <DollarSvg2/>
+                <div className="usd-statistika">
+                  <div className="left">
+                    <div className="icon">
+                      <CardSvg/>
+                    </div>
+                    <div className="bot">
+                    <span>
+                      {operations.outcomeSumInUSD ?
+                          (+operations?.outcomeSumInUSD).toLocaleString().replaceAll(',', ' ')
+                          : "0"}
+                    </span>
+                      <p>Chiqimlar(USD)</p>
+                    </div>
                   </div>
-                  <div className="bot">
-                    <span>{(+(operations?.incomesSum+operations?.outcomesSum) ).toLocaleString().replaceAll(',', ' ')}</span>
-                    <p>Qoldiq</p>
+
+                  <div className="right">
+                    <div className="icon">
+                      <DollarSvg/>
+                    </div>
+                    <div className="bot">
+                    <span>
+                      {operations.incomeSumInUSD ?
+                          (+operations?.incomeSumInUSD).toLocaleString().replaceAll(',', ' ')
+                          : "0"}
+                    </span>
+                      <p>Kirimlar(USD)</p>
+                    </div>
+                  </div>
+
+                  <div className="right2">
+                    <div className="icon">
+                      <DollarSvg2/>
+                    </div>
+                    <div className="bot">
+                      <span>{(+(operations?.incomeSumInUSD+operations?.outcomeSumInUSD) ).toLocaleString().replaceAll(',', ' ')}</span>
+                      <p>Qoldiq(USD)</p>
+                    </div>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -319,7 +376,7 @@ const Main = ({RefObj, setIsOpen}) => {
           <div>
           <form className="filter-content" onSubmit={onFilterSubmit}>
               <div className="row">
-                <div className="mb-3 col-4">
+                <div className="mb-3 col-3">
                   <div>Proyekt</div>
                   <Controller
                     control={filterForm.control}
@@ -339,7 +396,7 @@ const Main = ({RefObj, setIsOpen}) => {
                     )}
                   />
                 </div>
-                <div className="mb-3 col-4">
+                <div className="mb-3 col-3">
                   <div>Artikl</div>
                   <Controller
                     control={filterForm.control}
@@ -359,7 +416,7 @@ const Main = ({RefObj, setIsOpen}) => {
                     )}
                   />
                 </div>
-                <div className="mb-3 col-4">
+                <div className="mb-3 col-3">
                   <div>Operatsiya turi</div>
                   <Controller
                       control={filterForm.control}
@@ -379,21 +436,42 @@ const Main = ({RefObj, setIsOpen}) => {
                       )}
                   />
                 </div>
+                <div className="mb-3 col-3">
+                  <div>Valyuta turi</div>
+                  <Controller
+                      control={filterForm.control}
+                      name="currency"
+                      render={({
+                                 field: {onChange, onBlur, value, name, ref},
+                                 fieldState: {invalid, isTouched, isDirty, error},
+                                 formState,
+                               }) => (
+                          <Select
+                              value={value}
+                              options={currencyOptions}
+                              onBlur={onBlur}
+                              onChange={onChange}
+                              ref={ref}
+                          />
+                      )}
+                  />
+                </div>
               </div>
               <div className="row">
-                <div className="mb-3 col-4">
+                <div className="mb-3 col-3">
                   <div>Boshlanish sana</div>
                   <input className="form-control" type="date" {...filterForm.register("startDate")}/>
                 </div>
-                <div className="mb-3 col-4">
+                <div className="mb-3 col-3">
                   <div>Oxirgi sana</div>
                   <input className="form-control" type="date" {...filterForm.register("endDate")}/>
                 </div>
-                <div className="d-flex  gap-2 col-4">
-                  <div className="row align-items-center">
+                <div className="d-flex  gap-2 col-6">
+                  <div className="row align-items-center col-12">
                     <button className="btn btn-secondary col-4" type="button" onClick={onFilterClear}>Bekor qilish</button>
                     <div className="modal-wrapper d-flex col-8">
                       <Button
+                          className="col-6"
                           variant="contained"
                           onClick={() => openModal(MODAL_TYPE.INCOME)}
                           style={{
@@ -406,6 +484,7 @@ const Main = ({RefObj, setIsOpen}) => {
                       </Button>
                       &nbsp;&nbsp;&nbsp;
                       <Button
+                          className="col-6"
                           variant="contained"
                           onClick={() => openModal(MODAL_TYPE.OUTCOME)}
                           style={{
@@ -538,6 +617,19 @@ const Main = ({RefObj, setIsOpen}) => {
             <CloseSvg/>
           </button>
         </ModalHeader>
+        <div className="radio d-flex justify-content-center">
+          <Radio.Group
+              size="large"
+              onChange={onChangeRadio}
+              defaultValue="UZS"
+              style={{
+                marginTop: 16,
+              }}
+          >
+            <Radio.Button value="UZS">UZS</Radio.Button>
+            <Radio.Button value="USD">USD</Radio.Button>
+          </Radio.Group>
+        </div>
         <form className="p-3" style={{width:500}} onSubmit={onSubmitOperation}>
           <Controller
             control={control}
