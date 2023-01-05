@@ -3,7 +3,7 @@ import Message from "../utils/Message";
 
 // export const API_URL = "http://178.159.39.206:3000";
 // export const API_URL = "https://shark-app-4lfv8.ondigitalocean.app";
-export const API_URL = "https://api.iwt.uz";
+export const API_URL = "https://coral-app-j4kma.ondigitalocean.app";
 // export const API_URL = "http://192.168.1.6:3001";
 
 const client = axios.create({
