@@ -154,7 +154,7 @@ const ShiftsTable = ({RefObj, setIsOpen}) => {
         }
 
         body.expenses = +exSum;
-        body.autopilot = +values.autopilot;
+        body.autopilot = numAutopilot;//+values.autopilot;
         body.byCard = +numTerminal;
         body.transfers = +numTransfer;
         body.debt = +numDept;
