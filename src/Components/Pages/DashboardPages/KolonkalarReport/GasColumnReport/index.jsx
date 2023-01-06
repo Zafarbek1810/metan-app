@@ -219,7 +219,7 @@ const GasColumnReport = () => {
         {
           colsData.map((item, index) => (
             <tr key={item.id}>
-              <td style={{minWidth: "10%"}} className="col">{(currentPage - 1) * 20 + index + 1}</td>
+              <td style={{minWidth: "10%"}} className="col">{item.id}</td>
               <td style={{minWidth: "15%"}} className="col">{item.gasColumn.name}</td>
               <td style={{minWidth: "15%"}} className="col">{item.currentValue}</td>
               <td style={{minWidth: "15%"}} className="col">{item.lastValue}</td>
