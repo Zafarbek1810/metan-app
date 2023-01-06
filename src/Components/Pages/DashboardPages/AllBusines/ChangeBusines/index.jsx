@@ -199,8 +199,8 @@ const ChangeBusines = () => {
                                         <div className="d-flex align-items-center">
                                             <ArrowUpOutlined style={{color: '#3f8600', fontSize:30, marginRight:20}}/>
                                             <div className="textCard">
-                                                <p style={{color: '#3f8600', fontSize:24 }}>{(statistic?.totalIncomes).toLocaleString()} UZS</p>
-                                                <p style={{color: '#3f8600', fontSize:24 }}>{statistic?.totalIncomesInUSD} USD</p>
+                                                <p style={{color: '#3f8600', fontSize:24 }}>{(statistic?.totalIncomes?.toLocaleString())} UZS</p>
+                                                <p style={{color: '#3f8600', fontSize:24 }}>{statistic?.totalIncomesInUSD?.toLocaleString()} USD</p>
                                             </div>
                                         </div>
                                         <Progress
@@ -222,8 +222,8 @@ const ChangeBusines = () => {
                                         <div className="d-flex align-items-center">
                                             <ArrowDownOutlined style={{color: '#cf1322', fontSize:30, marginRight:20}}/>
                                             <div className="textCard">
-                                                <p style={{color: '#cf1322', fontSize:24 }}>{(statistic?.totalOutcomes).toLocaleString()} UZS</p>
-                                                <p style={{color: '#cf1322', fontSize:24 }}>{statistic?.totalOutcomesInUSD} USD</p>
+                                                <p style={{color: '#cf1322', fontSize:24 }}>{(statistic?.totalOutcomes?.toLocaleString())} UZS</p>
+                                                <p style={{color: '#cf1322', fontSize:24 }}>{statistic?.totalOutcomesInUSD?.toLocaleString()} USD</p>
                                             </div>
                                         </div>
                                         <Progress
@@ -245,8 +245,8 @@ const ChangeBusines = () => {
                                         <div className="d-flex align-items-center">
                                             <ArrowUpOutlined style={{color: '#3f8600', fontSize:30, marginRight:20}}/>
                                             <div className="textCard">
-                                                <p style={{color: '#3f8600', fontSize:24 }}>{(statistic?.totalPnl).toLocaleString()} UZS</p>
-                                                <p style={{color: '#3f8600', fontSize:24 }}>{statistic?.totalIncomesInUSD+statistic?.totalOutcomesInUSD} USD</p>
+                                                <p style={{color: '#3f8600', fontSize:24 }}>{(statistic?.totalPnl?.toLocaleString())} UZS</p>
+                                                <p style={{color: '#3f8600', fontSize:24 }}>{(statistic?.totalIncomesInUSD+statistic?.totalOutcomesInUSD).toLocaleString()} USD</p>
                                             </div>
                                         </div>
                                         <Progress
