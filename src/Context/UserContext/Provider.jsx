@@ -6,6 +6,7 @@ import UserProvider from "../../Data/Providers/UserProvider";
 const Provider = ({children}) => {
   const [userData, setUserData] = useState({isAuth: false, user: null});
   const [actions] = useState({login, logout});
+  const [isDoneUserChecking, setIsDoneUserChecking] = useState(false)
 
   function login() {
     UserProvider.getMe()
@@ -25,7 +26,11 @@ const Provider = ({children}) => {
       UserProvider.getMe()
         .then(({data}) => {
           setUserData({isAuth: true, user: data})
-        })
+        }).catch(err=>{
+          console.log(err)
+      }).finally(()=>{
+          setIsDoneUserChecking(true)
+      })
     }
   }, [])
 
@@ -33,7 +38,8 @@ const Provider = ({children}) => {
   return (
     <UserContext.Provider value={{
       state: userData,
-      actions
+      actions,
+      isDoneUserChecking
     }}>
       {children}
     </UserContext.Provider>
