@@ -7,6 +7,10 @@ export default class ProjectsProvider{
     static async getAllProjects() {
         return await client.get("/project");
     }
+
+    static async getRecentOperations() {
+        return await client.get("/project/getRecentOperations");
+    }
     static async getAllIncomeOutcomes(params) {
         const {
             startDate,
