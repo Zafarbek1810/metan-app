@@ -510,10 +510,10 @@ const Main = ({RefObj, setIsOpen}) => {
             <th style={{minWidth: "15%"}} className="col">
               Sana
             </th>
-            <th style={{minWidth: "15%"}} className="col">
+            <th style={{minWidth: "20%"}} className="col">
               Loyiha nomi
             </th>
-            <th style={{minWidth: "20%"}} className="col">
+            <th style={{minWidth: "15%"}} className="col">
               Qiymati
             </th>
             <th style={{minWidth: "25%"}} className="col">
@@ -546,7 +546,7 @@ const Main = ({RefObj, setIsOpen}) => {
                     {obj?.project?.title}
                   </td>
                   <td style={{minWidth: "15%"}} className="col">
-                    {obj.amount.toLocaleString().replaceAll(',', ' ')}<span>&nbsp;</span> <b >{obj.currency}</b>
+                    {(+obj.amount).toLocaleString().replaceAll(',', ' ')}<span>&nbsp;</span> <b >{obj.currency}</b>
                   </td>
                   <td style={{minWidth: "25%"}} className="col">
                     {obj?.description}
