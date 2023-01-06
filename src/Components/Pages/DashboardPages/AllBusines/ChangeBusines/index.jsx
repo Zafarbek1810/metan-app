@@ -191,17 +191,18 @@ const ChangeBusines = () => {
                             <Row gutter={16}>
                                 <Col span={8}>
                                     <Card>
-                                        <Statistic
-                                            style={{marginBottom:20}}
-                                            title="Kirimlar"
-                                            value={statistic?.totalIncomes}
-                                            valueStyle={{
-                                                color: '#3f8600',
-                                            }}
-                                            prefix={<ArrowUpOutlined />}
-                                            suffix="UZS"
-                                        />
-                                        <p style={{color: '#3f8600', fontSize:24,marginLeft:30 }}>{statistic?.totalIncomesInUSD} USD</p>
+                                        <div className="head">
+                                            <h4 className="title" style={{fontSize:14, color:"rgba(0,0,0,0.4)", fontWeight:400}}>
+                                                Kirimlar
+                                            </h4>
+                                        </div>
+                                        <div className="d-flex align-items-center">
+                                            <ArrowUpOutlined style={{color: '#3f8600', fontSize:30, marginRight:20}}/>
+                                            <div className="textCard">
+                                                <p style={{color: '#3f8600', fontSize:24 }}>{(statistic?.totalIncomes).toLocaleString()} UZS</p>
+                                                <p style={{color: '#3f8600', fontSize:24 }}>{statistic?.totalIncomesInUSD} USD</p>
+                                            </div>
+                                        </div>
                                         <Progress
                                             percent={109}
                                             strokeColor={{
@@ -213,17 +214,18 @@ const ChangeBusines = () => {
                                 </Col>
                                 <Col span={8}>
                                     <Card>
-                                        <Statistic
-                                            style={{marginBottom:20}}
-                                            title="Chiqimlar"
-                                            value={statistic?.totalOutcomes}
-                                            valueStyle={{
-                                                color: '#cf1322',
-                                            }}
-                                            prefix={<ArrowDownOutlined />}
-                                            suffix="UZS"
-                                        />
-                                        <p style={{color: '#cf1322', fontSize:24,marginLeft:30 }}>{statistic?.totalOutcomesInUSD} USD</p>
+                                        <div className="head">
+                                            <h4 className="title" style={{fontSize:14, color:"rgba(0,0,0,0.4)", fontWeight:400}}>
+                                                Chiqimlar
+                                            </h4>
+                                        </div>
+                                        <div className="d-flex align-items-center">
+                                            <ArrowDownOutlined style={{color: '#cf1322', fontSize:30, marginRight:20}}/>
+                                            <div className="textCard">
+                                                <p style={{color: '#cf1322', fontSize:24 }}>{(statistic?.totalOutcomes).toLocaleString()} UZS</p>
+                                                <p style={{color: '#cf1322', fontSize:24 }}>{statistic?.totalOutcomesInUSD} USD</p>
+                                            </div>
+                                        </div>
                                         <Progress
                                             percent={106}
                                             strokeColor={{
@@ -235,19 +237,18 @@ const ChangeBusines = () => {
                                 </Col>
                                 <Col span={8}>
                                     <Card>
-                                        <Statistic
-                                            style={{marginBottom:20}}
-                                            title="Qoldiq"
-                                            value={statistic?.totalPnl}
-                                            valueStyle={{
-                                                color: '#3f8600',
-                                            }}
-                                            prefix={<ArrowUpOutlined />}
-                                            suffix="UZS"
-                                        />
-                                        <p style={{color: '#3f8600', fontSize:24,marginLeft:30 }}>
-                                            {statistic?.totalIncomesInUSD-statistic?.totalOutcomesInUSD} USD
-                                        </p>
+                                        <div className="head">
+                                            <h4 className="title" style={{fontSize:14, color:"rgba(0,0,0,0.4)", fontWeight:400}}>
+                                                Qoldiq
+                                            </h4>
+                                        </div>
+                                        <div className="d-flex align-items-center">
+                                            <ArrowUpOutlined style={{color: '#3f8600', fontSize:30, marginRight:20}}/>
+                                            <div className="textCard">
+                                                <p style={{color: '#3f8600', fontSize:24 }}>{(statistic?.totalPnl).toLocaleString()} UZS</p>
+                                                <p style={{color: '#3f8600', fontSize:24 }}>{statistic?.totalIncomesInUSD+statistic?.totalOutcomesInUSD} USD</p>
+                                            </div>
+                                        </div>
                                         <Progress
                                             percent={109}
                                             strokeColor={{
