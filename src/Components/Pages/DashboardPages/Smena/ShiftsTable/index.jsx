@@ -723,7 +723,7 @@ const ShiftsTable = ({RefObj, setIsOpen}) => {
                             shifts.map((obj, index) => (
                                 <tr key={obj.id}>
                                     <td className="col">
-                                        {(currentPage - 1) * 20 + index + 1}.{" "}
+                                        {obj.id}.{" "}
                                         {new Date(obj.date).getDate() +
                                             "-" +
                                             (new Date(obj.date).getMonth() + 1) +

@@ -246,7 +246,7 @@ const ChangeBusines = () => {
                                             suffix="UZS"
                                         />
                                         <p style={{color: '#3f8600', fontSize:24,marginLeft:30 }}>
-                                            {statistic?.totalIncomesInUSD-statistic?.totalOutcomesInUSD} USD
+                                            {statistic?.totalIncomesInUSD+statistic?.totalOutcomesInUSD} USD
                                         </p>
                                         <Progress
                                             percent={109}

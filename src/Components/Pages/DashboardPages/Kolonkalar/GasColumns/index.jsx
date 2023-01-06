@@ -331,7 +331,7 @@ const GasColumns = () => {
               ballons.map((obj, index) => (
                 <tr key={obj.id}>
                   <td style={{ minWidth: "10%" }} className="col">
-                    {(currentPage - 1) * 20 + index + 1}
+                    {obj.id}
                   </td>
                   <td style={{ minWidth: "20%" }} className="col">
                     {obj.name}
