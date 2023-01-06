@@ -83,6 +83,7 @@ const ShiftsTable = ({RefObj, setIsOpen}) => {
 
     const [numDept, setNumDept] = useState(null)
     const [numTerminal, setNumTerminal] = useState(null)
+    const [numAutopilot, setNumAutopilot] = useState(null)
     const [numTransfer, setNumTransfer] = useState(null)
     const [numCash, setNumCash] = useState(null)
 
@@ -170,6 +171,7 @@ const ShiftsTable = ({RefObj, setIsOpen}) => {
             setNumTerminal("")
             setNumTransfer("")
             setNumCash("")
+            setNumAutopilot("")
             // setValue("numTerminal", "");
             // setValue("numCash", "");
             // setValue("numDept", "");
@@ -474,11 +476,22 @@ const ShiftsTable = ({RefObj, setIsOpen}) => {
                                     {errors.xarajat && (
                                         <span className="err-text">Majburiy maydon</span>
                                     )}
-                                    <input
-                                        autoComplete="off"
-                                        type="number"
+                                    {/*<input*/}
+                                    {/*    autoComplete="off"*/}
+                                    {/*    type="number"*/}
+                                    {/*    value={exSum}*/}
+                                    {/*    onChange={event => setExSum(event.target.value)}*/}
+                                    {/*/>*/}
+                                    <NumericFormat
                                         value={exSum}
+                                        autoComplete="off"
                                         onChange={event => setExSum(event.target.value)}
+                                        onValueChange={(e) => {
+                                            console.log(e.floatValue);
+                                            setExSum(e.floatValue)
+                                        }
+                                        }
+                                        allowLeadingZeros thousandSeparator=" "
                                     />
                                     {/*<input*/}
                                     {/*    autoComplete="off"*/}
@@ -496,10 +509,21 @@ const ShiftsTable = ({RefObj, setIsOpen}) => {
                                     {errors.autopilot && (
                                         <span className="err-text">Majburiy maydon</span>
                                     )}
-                                    <input
+                                    {/*<input*/}
+                                    {/*    autoComplete="off"*/}
+                                    {/*    type="number"*/}
+                                    {/*    {...register("autopilot", {required: true})}*/}
+                                    {/*/>*/}
+                                    <NumericFormat
+                                        value={+numAutopilot}
                                         autoComplete="off"
-                                        type="number"
-                                        {...register("autopilot", {required: true})}
+                                        onValueChange={(e) => {
+                                            console.log(e.floatValue);
+                                            setNumAutopilot(e.floatValue)
+                                        }
+                                        }
+                                        allowLeadingZeros thousandSeparator=" "
+                                        {...register("autopilot", {required: false})}
                                     />
                                 </label>
 

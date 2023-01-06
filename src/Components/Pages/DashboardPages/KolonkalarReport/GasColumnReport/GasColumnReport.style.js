@@ -151,4 +151,14 @@ const FilterWrapper = styled.div`
   }
 `
 
-export { GasColumnReportWrapper, FilterWrapper }
+const ModalWrap=styled.div`
+  .btn{
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.8;
+    }
+  }
+  
+`
+
+export { GasColumnReportWrapper, FilterWrapper, ModalWrap }

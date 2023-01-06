@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {FilterWrapper, GasColumnReportWrapper} from "./GasColumnReport.style";
+import {FilterWrapper, GasColumnReportWrapper, ModalWrap} from "./GasColumnReport.style";
 import EditSvg from "../../../../Common/Svgs/EditSvg";
 import {Modal} from "antd";
 import {ModalContent} from "../../Xarajatlar/ExpensesTable/ExpensesTable.style";
@@ -10,6 +10,7 @@ import {toast} from "react-toastify";
 import Pagination from "rc-pagination";
 import {Button, IconButton} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import ButtonLoader from "../../../../Common/ButtonLoader";
 
 const GasColumnReport = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -291,6 +292,8 @@ function ReportModal({renderParent, handleCancel}) {
   const [activeOutlet, setActiveOutlet] = useState(null);
   const [cols, setCols] = useState([]);
   const [forRender, setForRender] = useState(123);
+  const [loading, setLoading] = useState(false);
+
   let itogo=  0;
 
   let defaultDate = new Date()
@@ -317,7 +320,7 @@ function ReportModal({renderParent, handleCancel}) {
         newValue: values[col.id + ""]
       })
     })
-
+    setLoading(true);
     GasBallonsProvider.addGasColumnReport(body)
       .then(res => {
         console.log(res);
@@ -329,7 +332,9 @@ function ReportModal({renderParent, handleCancel}) {
       }, err => {
         console.log(err);
         toast.error("Kutilmagan xatolik yuz berdi!");
-      })
+      }).finally(() => {
+      setLoading(false);
+    })
   }
 
   useEffect(() => {
@@ -356,54 +361,56 @@ function ReportModal({renderParent, handleCancel}) {
 
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="d-flex w-75 gap-2">
-        <input autoComplete="off" type="date" value={date.toLocaleDateString('en-CA', {timeZone: "UTC"})} onChange={onSetDate}/>
-        <select className="form-control" value={activeOutlet} onChange={(e) => setActiveOutlet(e.target.value)}>
-          {
-            outlets.map(i => (
-              <option key={i.value} value={i.value}>{i.label}</option>
-            ))
-          }
-        </select>
-      </div>
-
-      <table className="table table-striped table-hover">
-        <thead>
-        <tr>
-          <th className="col">Nomi</th>
-          <th className="col">Ko'rsatgich</th>
-          <th className="col">Oxirgi Ko'rsatgich</th>
-          <th className="col">Jami</th>
-        </tr>
-        </thead>
-        <tbody>
-        {
-
-          cols.map(item => <ReportTr watch={watch} register={register} item={item} key={item.id} foo={(temp, birinchi)=>{
-            if(birinchi){
-              itogo = 0;
-              itogo+=temp;
-            }else{
-              itogo += +temp;
+    <ModalWrap>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="d-flex w-75 gap-2">
+          <input autoComplete="off" type="date" value={date.toLocaleDateString('en-CA', {timeZone: "UTC"})} onChange={onSetDate}/>
+          <select className="form-control" value={activeOutlet} onChange={(e) => setActiveOutlet(e.target.value)}>
+            {
+              outlets.map(i => (
+                  <option key={i.value} value={i.value}>{i.label}</option>
+              ))
             }
-            document.getElementById("jami").innerHTML = "Jami: " + itogo;
-          }
-          }/>)
-        }
-        </tbody>
-        {
-          cols.map(item => console.log(item))
-        }
-      </table>
-     <span id="jami" style={{width:"100%", fontWeight:700, fontSize:20,textAlign:"center"}}></span>
-      {/*<input name="searchTxt" disabled type="text" maxLength="512" id="jami" className="searchField"/>*/}
+          </select>
+        </div>
 
-      <div className="d-flex gap-2 justify-content-end">
-        <button className="btn btn-danger" type="button" onClick={() => handleCancel()}>Bekor qilish</button>
-        <button className="btn btn-primary">Saqlash</button>
-      </div>
-    </form>
+        <table className="table table-striped table-hover">
+          <thead>
+          <tr>
+            <th className="col">Nomi</th>
+            <th className="col">Ko'rsatgich</th>
+            <th className="col">Oxirgi Ko'rsatgich</th>
+            <th className="col">Jami</th>
+          </tr>
+          </thead>
+          <tbody>
+          {
+
+            cols.map(item => <ReportTr watch={watch} register={register} item={item} key={item.id} foo={(temp, birinchi)=>{
+              if(birinchi){
+                itogo = 0;
+                itogo+=temp;
+              }else{
+                itogo += +temp;
+              }
+              document.getElementById("jami").innerHTML = "Jami: " + itogo;
+            }
+            }/>)
+          }
+          </tbody>
+          {
+            cols.map(item => console.log(item))
+          }
+        </table>
+        <span id="jami" style={{width:"100%", fontWeight:700, fontSize:20,textAlign:"center"}}></span>
+        {/*<input name="searchTxt" disabled type="text" maxLength="512" id="jami" className="searchField"/>*/}
+
+        <div className="d-flex gap-2 justify-content-end">
+          <button className="btn btn-danger" type="button" onClick={() => handleCancel()}>Bekor qilish</button>
+          <button className="btn btn-primary" disabled={loading} >Saqlash {loading && <ButtonLoader />} </button>
+        </div>
+      </form>
+    </ModalWrap>
   )
 }
 
