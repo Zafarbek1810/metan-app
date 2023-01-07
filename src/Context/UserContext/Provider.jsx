@@ -26,6 +26,7 @@ const Provider = ({children}) => {
       UserProvider.getMe()
         .then(({data}) => {
           setUserData({isAuth: true, user: data})
+          console.log(data)
         }).catch(err=>{
           console.log(err)
       }).finally(()=>{

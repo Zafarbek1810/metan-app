@@ -144,6 +144,12 @@ const Umumiy = [
         Svg: ChartLineUp,
         role: ["SUPER_ADMIN", "OPERATOR"]
     },
+    {
+        title: "Kontragent",
+        path: "/dashboard/counterParty",
+        Svg: UsersSvg,
+        role: ["SUPER_ADMIN", "OPERATOR"]
+    },
 ]
 
 const PlanMenu = [

@@ -169,6 +169,7 @@ const ListTable = () => {
                     </ModalContent>
                 </Modal>
             </div>
+
             {todos.map((obj, index) => (
                 <div key={obj.id} style={{background: "#e9e9e9"}}>
                     <ListItem
@@ -189,8 +190,9 @@ const ListTable = () => {
                                     inputProps={{'aria-labelledby': "{obj.id}"}}
                                 />
                             </ListItemIcon>
-                            <ListItemText id={obj.id} primary={obj.title}/>
-                            <div className="sana">{new Date(obj.dueDate).toLocaleString("en-GB")}</div>
+                            <ListItemText style={{minWidth:"100"}} id={obj.id} primary={obj.title}/>
+                            <ListItemText style={{minWidth:"100"}} id={obj.id} primary={new Date(obj.dueDate).toLocaleString("en-GB")}/>
+                            <ListItemText style={{minWidth:"100"}} id={obj.id} primary={new Date(obj.dueDate).toLocaleString("en-GB")}/>
                         </ListItemButton>
                     </ListItem>
                 </div>
