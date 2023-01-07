@@ -80,8 +80,9 @@ const Wrapper=styled.div`
   }
 
   .layout__right {
+    width: 100vw;
     flex-grow: 1;
-    transform: scale(1.09) translateX(-100px) ;
+    transform:scaleX(1.09) translateX(-100px) ;
     
     
     

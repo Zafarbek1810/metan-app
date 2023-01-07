@@ -53,13 +53,15 @@ const Wrapper=styled.div`
     top: 0;
     left: 60px;
     //width: calc(100% - 60px);
+    z-index: 44;
+    //background-attachment: fixed;
     //background: transparent;
     //border-bottom: 1px solid rgba(159, 160, 184, 0.3);
   }
 
   .layout__main {
-    padding-top: 10px;
-    height: 100vh;
+    //padding-top: 10px;
+    height: calc(100vh - 60px);
     overflow-y: auto;
     //padding: 20px 20px 10px;
     
