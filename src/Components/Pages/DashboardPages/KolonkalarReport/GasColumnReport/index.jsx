@@ -225,7 +225,14 @@ const GasColumnReport = () => {
               <td style={{minWidth: "15%"}} className="col">{item.currentValue}</td>
               <td style={{minWidth: "15%"}} className="col">{item.lastValue}</td>
               <td style={{minWidth: "15%"}} className="col">{item.currentValue - item.lastValue}</td>
-              <td style={{minWidth: "15%"}} className="col">{new Date(item.date).toISOString().split('T')[0]}</td>
+              <td style={{minWidth: "15%"}} className="col">
+                {" "}
+                {new Date(item.date).getDate() +
+                    "-" +
+                    (new Date(item.date).getMonth() + 1) +
+                    "-" +
+                    new Date(item.date).getFullYear()}{" "}
+              </td>
               <td style={{minWidth: "15%"}} className="col">
                 <div className="btns">
                   <IconButton style={{background:"rgb(253, 181, 40, 0.12)"}}

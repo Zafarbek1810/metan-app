@@ -54,10 +54,11 @@ const Wrapper=styled.div`
     left: 60px;
     width: calc(100% - 60px);
     background: transparent;
-    border-bottom: 1px solid rgba(159, 160, 184, 0.3);
+    //border-bottom: 1px solid rgba(159, 160, 184, 0.3);
   }
 
   .layout__main {
+    padding-top: 10px;
     height: 100vh;
     overflow-y: auto;
     //padding: 20px 20px 10px;

@@ -18,9 +18,9 @@ const DashboardLayout = ({children, title}) => {
           <NewSidebar/>
         </div>
         <div className="layout__right">
-          {/*<div className="layout__top">*/}
-          {/*  <DashboardHeader title={title} RefObj={RefObj} setIsOpen={setIsOpen}/>*/}
-          {/*</div>*/}
+          <div className="layout__top">
+            <DashboardHeader title={title} RefObj={RefObj} setIsOpen={setIsOpen}/>
+          </div>
           <main className="layout__main">
             {children}
           </main>
