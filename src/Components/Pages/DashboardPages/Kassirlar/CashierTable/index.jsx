@@ -59,7 +59,7 @@ const CashierTable = () => {
 
   useEffect(() => {
     setLoading2(true);
-    UserProvider.getAllCashiers(0, 1000)
+    UserProvider.getAllCashiersForOutlet(0, 1000)
       .then((res) => {
         console.log(res);
         setCashiers(res.data);
