@@ -131,7 +131,8 @@ const ShiftsTableWrapper = styled.div`
 
 
   .table-responsive {
-    //width: 1200px;
+    //width: 1100px;
+    width: 82vw;
     background: #f5f5f9;
     border-radius: 6px 6px 0px 0px;
     overflow-x: scroll;
