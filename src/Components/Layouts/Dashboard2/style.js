@@ -49,11 +49,11 @@ const Wrapper=styled.div`
 
   .layout__top {
     //border-bottom: 1px solid rgba(31, 60, 136, 0.2);
-    position: absolute;
+    //position: absolute;
     top: 0;
     left: 60px;
-    width: calc(100% - 60px);
-    background: transparent;
+    //width: calc(100% - 60px);
+    //background: transparent;
     //border-bottom: 1px solid rgba(159, 160, 184, 0.3);
   }
 
