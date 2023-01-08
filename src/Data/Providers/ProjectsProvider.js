@@ -11,6 +11,11 @@ export default class ProjectsProvider{
     static async getRecentOperations() {
         return await client.get("/project/getRecentOperations");
     }
+
+    static async getProjectsWithPnl() {
+        return await client.get("/project/getProjectsWithPnl");
+    }
+
     static async getAllIncomeOutcomes(params) {
         const {
             startDate,

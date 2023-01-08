@@ -36,6 +36,7 @@ export default class UserProvider {
     return await client.get("/admin/dashboardCounterStatistics");
   }
   
+  
   static async getClients(page = 0, size = 20) {
     return await client.get(`/client/getClients/?skip=${page*size}&take=${size}`);
   }
