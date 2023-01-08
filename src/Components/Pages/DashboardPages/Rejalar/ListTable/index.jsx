@@ -24,9 +24,10 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import DeleteIcon from '@mui/icons-material/Delete';
 import moment from 'moment';
+import OutletProvider from "../../../../../Data/Providers/OutletProvider";
 
 
-const ListTable = ({RefObj, setIsOpen}) => {
+const ListTable = ({RefObj, setIsOpen1}) => {
     const {register, handleSubmit, control, reset} = useForm();
     const projectForm = useForm();
     const articleForm = useForm();
@@ -55,7 +56,7 @@ const ListTable = ({RefObj, setIsOpen}) => {
     const counterPartyOptions = [...counterParty.map(i => ({
         label: i.fullName, value: i.fullName
     }))];
-    const filterCounterPartyOptions = [ ...counterParty.map(i => ({
+    const filterCounterPartyOptions = [...counterParty.map(i => ({
         label: i.fullName, value: i.fullName
     }))]
 
@@ -164,16 +165,16 @@ const ListTable = ({RefObj, setIsOpen}) => {
             dueDate: values.dueDate,
         }
 
-            TodoProvider.addToDo(body).then(res => {
-                console.log(res);
-                reset();
-                getOperations();
-                toast.success("Qo'shildi")
-                onCloseModal();
-            }, err => {
-                console.log(err);
-                toast.error(err?.response?.data?.message);
-            })
+        TodoProvider.addToDo(body).then(res => {
+            console.log(res);
+            reset();
+            getOperations();
+            toast.success("Qo'shildi")
+            onCloseModal();
+        }, err => {
+            console.log(err);
+            toast.error(err?.response?.data?.message);
+        })
     });
 
     const submitAddProject = projectForm.handleSubmit((values) => {
@@ -186,7 +187,6 @@ const ListTable = ({RefObj, setIsOpen}) => {
             console.log(err)
         })
     })
-
 
 
     const [modalSum, setModalSum] = useState(null)
@@ -205,17 +205,17 @@ const ListTable = ({RefObj, setIsOpen}) => {
     };
 
     const changeCheckStatus = (event, id) => {
-        for(let i=0; i<todos.length; i++){
-            if(todos[i].id === id){
+        for (let i = 0; i < todos.length; i++) {
+            if (todos[i].id === id) {
                 let newArr = [...todos]; // copying the old datas array
                 // a deep copy is not needed as we are overriding the whole object below, and not setting a property of it. this does not mutate the state.
                 newArr[i].isFinished = event.target.checked; // replace e.target.value with whatever you want to change it to
-                setTodos(newArr);   
+                setTodos(newArr);
             }
         }
 
-        console.log(event.target.checked + " " + id );
-        TodoProvider.changeTodoStatus(+id, event.target.checked?"CHECK":"UNCHECK").then((_) => {
+        console.log(event.target.checked + " " + id);
+        TodoProvider.changeTodoStatus(+id, event.target.checked ? "CHECK" : "UNCHECK").then((_) => {
             // for(let i=0; i<todos.length; i++){
             //     if(todos[i].id === id){
             //         let newArr = [...todos]; // copying the old datas array
@@ -226,33 +226,44 @@ const ListTable = ({RefObj, setIsOpen}) => {
             // }
             // setTodos(todos);
 
-            
 
             toast.success("Muvaffaqiyatli");
         }).catch((err) => {
-            
-            for(let i=0; i<todos.length; i++){
-                if(todos[i].id === id){
+
+            for (let i = 0; i < todos.length; i++) {
+                if (todos[i].id === id) {
                     let newArr = [...todos]; // copying the old datas array
                     // a deep copy is not needed as we are overriding the whole object below, and not setting a property of it. this does not mutate the state.
                     newArr[i].isFinished = !event.target.checked; // replace e.target.value with whatever you want to change it to
-                    setTodos(newArr);   
+                    setTodos(newArr);
                 }
             }
             console.log(err);
             toast.error(err?.response?.data?.message);
         });
-        
+
         // setState({ ...state, [event.target.name]: event.target.checked });
-      };
-    
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
-    const handleCancel = () => {
-        setIsModalOpen(false);
     };
 
+    const handleDeleteTodo = (id) => {
+        RefObj.current.textContent = `Rostdan ham o'chirishni xoxlaysizmi?`;
+        setIsOpen1(true);
+        new Promise((res, rej) => {
+            RefObj.current.resolve = res;
+            RefObj.current.reject = rej;
+        })
+            .then(async () => {
+                await TodoProvider.deleteToDo(id);
+                setTodos((pre) =>
+                    pre.filter((mod) => {
+                        return mod.id !== id;
+                    })
+                );
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
 
     return (
@@ -274,12 +285,12 @@ const ListTable = ({RefObj, setIsOpen}) => {
                                                      fieldState: {invalid, isTouched, isDirty, error},
                                                      formState,
                                                  }) => (<Select
-                                                value={value}
-                                                options={filterProjectOptions}
-                                                onBlur={onBlur}
-                                                onChange={onChange}
-                                                ref={ref}
-                                            />)}
+                                            value={value}
+                                            options={filterProjectOptions}
+                                            onBlur={onBlur}
+                                            onChange={onChange}
+                                            ref={ref}
+                                        />)}
                                     />
                                 </div>
                                 <div className="mb-3 col-3">
@@ -292,12 +303,12 @@ const ListTable = ({RefObj, setIsOpen}) => {
                                                      fieldState: {invalid, isTouched, isDirty, error},
                                                      formState,
                                                  }) => (<Select
-                                                value={value}
-                                                options={filterCounterPartyOptions}
-                                                onBlur={onBlur}
-                                                onChange={onChange}
-                                                ref={ref}
-                                            />)}
+                                            value={value}
+                                            options={filterCounterPartyOptions}
+                                            onBlur={onBlur}
+                                            onChange={onChange}
+                                            ref={ref}
+                                        />)}
                                     />
                                 </div>
                                 <div className="mb-3 col-3">
@@ -309,26 +320,22 @@ const ListTable = ({RefObj, setIsOpen}) => {
                                     <input className="form-control" type="date" {...filterForm.register("endDate")}/>
                                 </div>
                             </div>
-                            <div className="row">
-                                <div className="d-flex gap-2 col-6 mt-2">
-                                    <div className="row align-items-center col-12">
-                                        <button className="btn btn-secondary col-4" type="button"
-                                                onClick={onFilterClear}>Bekor qilish
-                                        </button>
-                                        <div className="modal-wrapper d-flex col-8">
-                                            <Button
-                                                className="col-6"
-                                                variant="contained"
-                                                onClick={() => openModal()}
-                                                style={{
-                                                    fontFamily: "Inter", color: "#fff", background: "#787EFF",
-                                                }}
-                                            >
-                                                + Reja qo'shish
-                                            </Button>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div className="row  justify-content-between mx-1">
+                                <button className="btn btn-danger col-3" type="button"
+                                        onClick={onFilterClear}>Bekor qilish
+                                </button>
+                                {/*<div className="modal-wrapper d-flex col-8">*/}
+                                    <Button
+                                        className="col-3"
+                                        variant="contained"
+                                        onClick={() => openModal()}
+                                        style={{
+                                            fontFamily: "Inter", color: "#fff", background: "#787EFF",
+                                        }}
+                                    >
+                                        + Reja qo'shish
+                                    </Button>
+                                {/*</div>*/}
                             </div>
                         </form>
                     </div>
@@ -338,8 +345,8 @@ const ListTable = ({RefObj, setIsOpen}) => {
                     <div key={obj.id} style={{background: "#e9e9e9"}}>
                         <ListItem
                             secondaryAction={
-                                <IconButton edge="end" aria-label="comments" >
-                                    <DeleteIcon />
+                                <IconButton edge="end" aria-label="comments" onClick={() => handleDeleteTodo(obj.id)}>
+                                    <DeleteIcon/>
                                 </IconButton>
                             }
                             // disablePadding
@@ -357,9 +364,11 @@ const ListTable = ({RefObj, setIsOpen}) => {
                                         inputProps={{'aria-labelledby': "{obj.id}"}}
                                     />
                                 </ListItemIcon>
-                                <ListItemText style={{minWidth:"100"}} id={obj.id} primary={obj.title}/>
-                                <ListItemText style={{minWidth:"100"}} id={obj.id} primary={moment(new Date(obj.addedDate)).format('DD.MM.YYYY')}/>
-                                <ListItemText style={{minWidth:"100"}} id={obj.id} primary={moment(new Date(obj.dueDate)).format('DD.MM.YYYY')}/>
+                                <ListItemText style={{minWidth: "100"}} id={obj.id} primary={obj.title}/>
+                                <ListItemText style={{minWidth: "100"}} id={obj.id}
+                                              primary={moment(new Date(obj.addedDate)).format('DD.MM.YYYY')}/>
+                                <ListItemText style={{minWidth: "100"}} id={obj.id}
+                                              primary={moment(new Date(obj.dueDate)).format('DD.MM.YYYY')}/>
 
                             </ListItemButton>
                         </ListItem>
@@ -398,20 +407,20 @@ const ListTable = ({RefObj, setIsOpen}) => {
                                      fieldState: {invalid, isTouched, isDirty, error},
                                      formState,
                                  }) => (<Select
-                                value={value}
-                                placeholder="Proyektni tanlang"
-                                options={projectOptions}
-                                onBlur={onBlur}
-                                onChange={(v) => {
-                                    if (v.value === "ADD_PROJECT") {
-                                        handleOpenProjectDrawer();
-                                        onChange(value);
-                                        return;
-                                    }
-                                    onChange(v);
-                                }}
-                                ref={ref}
-                            />)}
+                            value={value}
+                            placeholder="Proyektni tanlang"
+                            options={projectOptions}
+                            onBlur={onBlur}
+                            onChange={(v) => {
+                                if (v.value === "ADD_PROJECT") {
+                                    handleOpenProjectDrawer();
+                                    onChange(value);
+                                    return;
+                                }
+                                onChange(v);
+                            }}
+                            ref={ref}
+                        />)}
                     />
                     <br/>
                     <Controller
@@ -422,12 +431,12 @@ const ListTable = ({RefObj, setIsOpen}) => {
                                      fieldState: {invalid, isTouched, isDirty, error},
                                      formState,
                                  }) => (<Select
-                                value={value}
-                                placeholder="kontragentni tanlang"
-                                options={counterPartyOptions}
-                                onBlur={onBlur}
-                                ref={ref}
-                            />)}
+                            value={value}
+                            placeholder="kontragentni tanlang"
+                            options={counterPartyOptions}
+                            onBlur={onBlur}
+                            ref={ref}
+                        />)}
                     />
                     <br/>
                     <input autoComplete="off" className="form-control"
@@ -476,7 +485,7 @@ const ListTable = ({RefObj, setIsOpen}) => {
                 </ModalContent>
             </Drawer>
         </WRAPPER>
-);
+    );
 };
 
 function pad(n) {

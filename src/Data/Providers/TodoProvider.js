@@ -6,7 +6,7 @@ export default class TodoProvider {
     }
 
     static async deleteToDo(id) {
-        return await client.post(`/todo/delete/${id}`);
+        return await client.delete(`/todo/delete/${id}`);
     }
 
     static async getTodo(page = 1,  {projectId,  startDate, endDate} = {})
