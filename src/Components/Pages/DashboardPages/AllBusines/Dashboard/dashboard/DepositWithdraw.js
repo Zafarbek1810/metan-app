@@ -137,7 +137,7 @@ const DepositWithdraw = () => {
                                     </Box>
                                     <Box
                                         sx={{
-                                            ml: 4,
+                                            ml: 1,
                                             width: '100%',
                                             display: 'flex',
                                             flexWrap: 'wrap',
@@ -189,7 +189,7 @@ const DepositWithdraw = () => {
                                 </Box>
                                 <Box
                                     sx={{
-                                        ml: 4,
+                                        ml: 1,
                                         width: '100%',
                                         display: 'flex',
                                         flexWrap: 'wrap',
