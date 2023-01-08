@@ -103,7 +103,7 @@ const SalesByCountries = () => {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                ...(index !== data.length - 1 ? { mb: 5.875 } : {})
+                ...(index !== data.length - 1 ? { mb: 2.875 } : {})
               }}
             >
               <Avatar

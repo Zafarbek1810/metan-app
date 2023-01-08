@@ -129,7 +129,7 @@ const DepositWithdraw = () => {
                                     sx={{
                                         display: 'flex',
                                         alignItems: 'center',
-                                        mb: index !== incomesData.length - 1 ? 6 : 0
+                                        mb: index !== incomesData.length - 1 ? 3 : 0
                                     }}
                                 >
                                     <Box sx={{minWidth: 38, display: 'flex', justifyContent: 'center'}}>
@@ -180,7 +180,7 @@ const DepositWithdraw = () => {
                                 sx={{
                                     display: 'flex',
                                     alignItems: 'center',
-                                    mb: index !== outcomesData.length - 1 ? 6 : 0
+                                    mb: index !== outcomesData.length - 1 ? 3 : 0
                                 }}
                             >
                                 <Box sx={{minWidth: 36, display: 'flex', justifyContent: 'center'}}>
