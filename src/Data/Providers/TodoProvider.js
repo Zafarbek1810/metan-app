@@ -11,6 +11,12 @@ export default class TodoProvider {
 
     static async getTodo(page = 0, size = 20) {
         return await client.get(`/todo?skip=${page}&take=${size}`);
+        
+    }
+
+    static async getTodoForDashboard(page = 0, size = 20) {
+        return await client.get(`/todo?skip=${page}&take=${size}&status=UNCHECK&sort=ASC&forDashboard=true`);
+        
     }
 
     static async changeTodoStatus(id , status) {
