@@ -204,14 +204,13 @@ const ListTable = ({RefObj, setIsOpen}) => {
         setChecked(newChecked);
     };
 
-
     const changeCheckStatus = (event, id) => {
         for(let i=0; i<todos.length; i++){
             if(todos[i].id === id){
                 let newArr = [...todos]; // copying the old datas array
                 // a deep copy is not needed as we are overriding the whole object below, and not setting a property of it. this does not mutate the state.
                 newArr[i].isFinished = event.target.checked; // replace e.target.value with whatever you want to change it to
-                setTodos(newArr);
+                setTodos(newArr);   
             }
         }
 
@@ -222,33 +221,42 @@ const ListTable = ({RefObj, setIsOpen}) => {
             //         let newArr = [...todos]; // copying the old datas array
             //         // a deep copy is not needed as we are overriding the whole object below, and not setting a property of it. this does not mutate the state.
             //         newArr[i].isFinished = !event.target.checked; // replace e.target.value with whatever you want to change it to
-            //         setTodos(newArr);
+            //         setTodos(newArr);   
             //     }
             // }
             // setTodos(todos);
 
-
+            
 
             toast.success("Muvaffaqiyatli");
         }).catch((err) => {
-
+            
             for(let i=0; i<todos.length; i++){
                 if(todos[i].id === id){
                     let newArr = [...todos]; // copying the old datas array
                     // a deep copy is not needed as we are overriding the whole object below, and not setting a property of it. this does not mutate the state.
                     newArr[i].isFinished = !event.target.checked; // replace e.target.value with whatever you want to change it to
-                    setTodos(newArr);
+                    setTodos(newArr);   
                 }
             }
             console.log(err);
             toast.error(err?.response?.data?.message);
         });
-
+        
         // setState({ ...state, [event.target.name]: event.target.checked });
+      };
+    
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+    const handleCancel = () => {
+        setIsModalOpen(false);
     };
 
 
-    return (<WRAPPER>
+
+    return (
+        <WRAPPER>
             <TableWrapper>
                 <h3 className="title">Rejalar</h3>
 
@@ -324,67 +332,8 @@ const ListTable = ({RefObj, setIsOpen}) => {
                             </div>
                         </form>
                     </div>
-
                 </div>
 
-                {/*<table className="table table-borderless table-hover">*/}
-                {/*    <thead>*/}
-                {/*    <tr>*/}
-                {/*        <th style={{minWidth: "15%"}} className="col">*/}
-                {/*            Sana*/}
-                {/*        </th>*/}
-                {/*        <th style={{minWidth: "20%"}} className="col">*/}
-                {/*            Loyiha nomi*/}
-                {/*        </th>*/}
-                {/*        <th style={{minWidth: "15%"}} className="col">*/}
-                {/*            Qiymati*/}
-                {/*        </th>*/}
-                {/*        <th style={{minWidth: "25%"}} className="col">*/}
-                {/*            Izoh*/}
-                {/*        </th>*/}
-                {/*        <th style={{minWidth: "10%"}} className="col">*/}
-                {/*            Amallar*/}
-                {/*        </th>*/}
-                {/*    </tr>*/}
-                {/*    </thead>*/}
-                {/*    <tbody>*/}
-                {/*    {!operationLoading ?*/}
-                {/*        (plans?.data?.length ?*/}
-                {/*            (plans?.data?.map((obj, index) =>*/}
-                {/*        (<tr key={index}>*/}
-                {/*                    <td style={{minWidth: "15%"}} className="col">*/}
-                {/*                        {obj.id})<span>&nbsp;</span>{pad(new Date(obj.dueDate).getDate()) + "-" + pad((new Date(obj.addedDate).getMonth() + 1)) + "-" + new Date(obj.addedDate).getFullYear()}*/}
-                {/*                    </td>*/}
-                {/*                    <td style={{minWidth: "20%"}} className="col">*/}
-                {/*                        {obj?.title}*/}
-                {/*                    </td>*/}
-                {/*                    <td style={{minWidth: "15%"}} className="col">*/}
-                {/*                        {(+obj?.amount).toLocaleString().replaceAll(',', ' ')}*/}
-                {/*                    </td>*/}
-                {/*                    <td style={{minWidth: "25%"}} className="col">*/}
-                {/*                        {obj?.admin?.fullName}*/}
-                {/*                    </td>*/}
-                {/*                    <td style={{minWidth: "10%"}} className="col">*/}
-                {/*                        <div className="btns">*/}
-                {/*                            <IconButton*/}
-                {/*                                style={{background: "rgb(253, 181, 40, 0.12)"}}*/}
-                {/*                                onClick={() => handleDeleteOperation(obj.id)}*/}
-                {/*                            >*/}
-                {/*                                <DeleteIcon/>*/}
-                {/*                            </IconButton>*/}
-                {/*                        </div>*/}
-                {/*                    </td>*/}
-                {/*                </tr>))) : (<div*/}
-                {/*                style={{*/}
-                {/*                    textAlign: "center", padding: 30,*/}
-                {/*                }}*/}
-                {/*            >*/}
-                {/*                <h3 style={{color: "rgba(0, 0, 0, 0.7)"}}>*/}
-                {/*                    Operatsiyalar mavjud emas*/}
-                {/*                </h3>*/}
-                {/*            </div>)) : (<MinLoader/>)}*/}
-                {/*    </tbody>*/}
-                {/*</table>*/}
                 {todos.map((obj, index) => (
                     <div key={obj.id} style={{background: "#e9e9e9"}}>
                         <ListItem
@@ -526,7 +475,8 @@ const ListTable = ({RefObj, setIsOpen}) => {
                     </form>
                 </ModalContent>
             </Drawer>
-        </WRAPPER>);
+        </WRAPPER>
+);
 };
 
 function pad(n) {

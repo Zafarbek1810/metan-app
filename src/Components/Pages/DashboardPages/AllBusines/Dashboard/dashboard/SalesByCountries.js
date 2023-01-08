@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from "react";
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -11,6 +13,15 @@ import CardContent from '@mui/material/CardContent'
 import ChevronUp from 'mdi-material-ui/ChevronUp'
 import ChevronDown from 'mdi-material-ui/ChevronDown'
 import DotsVertical from 'mdi-material-ui/DotsVertical'
+import TodoProvider from '../../../../../../Data/Providers/TodoProvider'
+import moment from "moment";
+
+
+function getRandomColor(){
+  const colors = Array('error', 'warning', 'success', 'secondary');
+  return colors[Math.floor(Math.random()*colors.length)];
+
+}
 
 const data = [
   {
@@ -57,6 +68,22 @@ const data = [
 ]
 
 const SalesByCountries = () => {
+
+  const [todos, setTodos] = useState([]);
+
+  function getTodos(){
+    TodoProvider.getTodoForDashboard(0, 5).then(res => {
+        console.log("todos",res.data.data);
+        setTodos(res.data.data);
+    }, err => {
+        console.log(err);
+    })
+  }
+
+  useEffect(() => {
+    getTodos();
+}, [])
+
   return (
     <Card>
       <CardHeader
@@ -69,10 +96,10 @@ const SalesByCountries = () => {
         }
       />
       <CardContent sx={{ pt: theme => `${theme.spacing(2)} !important` }}>
-        {data.map((item, index) => {
+        {todos.map((item, index) => {
           return (
             <Box
-              key={item.title}
+              key={item.id}
               sx={{
                 display: 'flex',
                 alignItems: 'center',
@@ -81,15 +108,15 @@ const SalesByCountries = () => {
             >
               <Avatar
                 sx={{
-                  width: 38,
-                  height: 38,
+                  width: 42,
+                  height: 42,
                   marginRight: 3,
                   fontSize: '1rem',
                   color: 'common.white',
-                  backgroundColor: `${item.avatarColor}.main`
+                  backgroundColor: `${getRandomColor()}.main`
                 }}
               >
-                {item.avatarText}
+                {"Reja"}
               </Avatar>
 
               <Box
@@ -103,7 +130,7 @@ const SalesByCountries = () => {
               >
                 <Box sx={{ marginRight: 2, display: 'flex', flexDirection: 'column' }}>
                   <Box sx={{ display: 'flex' }}>
-                    <Typography sx={{ mr: 0.5, fontWeight: 600, letterSpacing: '0.25px' }}>{item.title}</Typography>
+                    <Typography sx={{ mr: 0.5, fontWeight: 600, letterSpacing: '0.25px', lineHeight: 2, color: (new Date() > new Date(item.dueDate))?'red': 'green'   }}>{item.title}</Typography>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
 
                       <Typography
@@ -114,21 +141,32 @@ const SalesByCountries = () => {
                           color: item.trendDir === 'down' ? 'error.main' : 'success.main'
                         }}
                       >
-                        {item.trendNumber}
+                        {/* {item.trendNumber | "Jamshid Yoqubov"} */}
                       </Typography>
                     </Box>
                   </Box>
-                  <Typography variant='caption' sx={{ lineHeight: 1.5 }}>
-                    {item.subtitle}
-                  </Typography>
+                  <Typography
+                        variant='caption'
+                        sx={{
+                          fontWeight: 600,
+                          lineHeight: 1.5,
+                          color: item.trendDir === 'down' ? 'error.main' : 'success.main'
+                        }}
+                      >
+                        Kontragent: {item.admin?.fullName ?? "Yo'q"}
+                      </Typography>
+                  <Typography variant='caption' sx={{ lineHeight: 1.5,fontWeight: 400}}>
+                    {"Oxirgi muddat: " +moment(new Date(item.dueDate)).format('DD.MM.YYYY')}
+                  </Typography> 
                 </Box>
 
                 <Box sx={{ display: 'flex', textAlign: 'end', flexDirection: 'column' }}>
-                  <Typography sx={{ fontWeight: 600, fontSize: '0.875rem', lineHeight: 1.72, letterSpacing: '0.22px' }}>
-                    {item.sales}
+                  
+                  <Typography sx={{ fontWeight: 600, fontSize: '0.875rem', lineHeight: 1.72, letterSpacing: '0.22px', color: (new Date() > new Date(item.dueDate))?'red': 'green' }}>
+                    { Math.abs(moment(item.dueDate).diff(moment(new Date()), 'days'))  + " kun"}
                   </Typography>
-                  <Typography variant='caption' sx={{ lineHeight: 1.5 }}>
-                    qoldi
+                  <Typography variant='caption' sx={{ lineHeight: 1.5, color: (new Date() > new Date(item.dueDate))?'red': 'green'  }}>
+                    {(new Date() > new Date(item.dueDate))?"o'tib ketgan": 'qoldi'}
                   </Typography>
                 </Box>
               </Box>

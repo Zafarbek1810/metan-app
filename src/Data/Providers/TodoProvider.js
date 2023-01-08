@@ -9,21 +9,20 @@ export default class TodoProvider {
         return await client.post(`/todo/delete/${id}`);
     }
 
-    static async getTodo(page = 1,  {projectId,  startDate, endDate} = {}) {
-        const params = {
-            take: "20",
-            skip: 20 * (page - 1),
-            projectId,
-            startDate,
-            endDate,
-        }
-        return await client.get(`/todo`, {params});
-
+    static async getTodo(page = 1,  {projectId,  startDate, endDate} = {})
+{
+    const params = {
+        take: "20",
+        skip: 20 * (page - 1),
+        projectId,
+        startDate,
+        endDate,
     }
+    return await client.get(`/todo`, {params});
+}
 
     static async getTodoForDashboard(page = 0, size = 20) {
         return await client.get(`/todo?skip=${page}&take=${size}&status=UNCHECK&sort=ASC&forDashboard=true`);
-
     }
 
     static async changeTodoStatus(id , status) {
