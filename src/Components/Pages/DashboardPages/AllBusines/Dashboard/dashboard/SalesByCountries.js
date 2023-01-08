@@ -72,7 +72,7 @@ const SalesByCountries = () => {
   const [todos, setTodos] = useState([]);
 
   function getTodos(){
-    TodoProvider.getTodo(0, 5).then(res => {
+    TodoProvider.getTodoForDashboard(0, 5).then(res => {
         console.log("todos",res.data.data);
         setTodos(res.data.data);
     }, err => {
