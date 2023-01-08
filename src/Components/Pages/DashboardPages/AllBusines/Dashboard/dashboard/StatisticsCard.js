@@ -96,7 +96,7 @@ const renderStats = () => {
         <Avatar
           variant="rounded"
           sx={{
-            mr: 3,
+            mr: 1,
             width: 44,
             height: 44,
             boxShadow: 3,
