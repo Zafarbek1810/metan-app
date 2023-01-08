@@ -1,47 +1,195 @@
 import React, {useEffect, useState} from 'react';
+import {Button, Chip, Drawer, IconButton} from "@mui/material";
+import {ModalContent, ModalHeader} from "../../Kassirlar/CashierTable/CashierTable.style";
+import CloseSvg from "../../../../Common/Svgs/CloseSvg";
+import EditIcon from "@mui/icons-material/Edit";
+import MinLoader from "../../../../Common/MinLoader";
+import {TableWrapper} from "../../Projects/Table/Table.style";
+import Pagination from "rc-pagination";
+import OperationProvider from "../../../../../Data/Providers/OperationProvider";
+import ProjectsProvider from "../../../../../Data/Providers/ProjectsProvider";
+import Select from "react-select";
+import {Controller, useForm} from "react-hook-form";
+import ArticleProvider from "../../../../../Data/Providers/ArticleProvider";
+import {toast} from "react-toastify";
+import {NumericFormat} from "react-number-format";
+import {WRAPPER} from "../../Operatsiyalar/components/style";
+import CounterPartyProvider from "../../../../../Data/Providers/CounterPartyProvider";
+import TodoProvider from "../../../../../Data/Providers/TodoProvider";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {Button} from "@mui/material";
-import {Modal, Select} from "antd";
-import {ModalContent} from "../../Smena/ShiftsTable/ShiftsTable.style";
-import ButtonLoader from "../../../../Common/ButtonLoader";
-import {ListTableWrapper} from "./ListTable.style";
-import {useForm} from "react-hook-form";
-import OutletProvider from "../../../../../Data/Providers/OutletProvider";
-import {toast} from "react-toastify";
-import TodoProvider from "../../../../../Data/Providers/TodoProvider";
+import moment from 'moment';
 
-const ListTable = () => {
-    const {
-        register,
-        formState: {errors},
-        handleSubmit,
-        setValue,
-        reset,
-        control,
-    } = useForm({
-        defaultValues: {},
+
+const ListTable = ({RefObj, setIsOpen}) => {
+    const {register, handleSubmit, control, reset} = useForm();
+    const projectForm = useForm();
+    const articleForm = useForm();
+    const filterForm = useForm();
+    const [forRender, setForRender] = useState(null)
+
+    const [page, setPage] = useState(1)
+
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [isOpenArticleDrawer, setIsOpenArticleDrawer] = useState(false);
+    const [isOpenProjectDrawer, setIsOpenProjectDrawer] = useState(false);
+    const [todos, setTodos] = useState([])
+    const [operationLoading, setOperationLoading] = useState(false);
+    const [checked, setChecked] = React.useState([0]);
+    const [projects, setProjects] = useState([]);
+    const [counterParty, setCounterParty] = useState([]);
+
+    // SELECT OPTIONSLARI
+    const projectOptions = [{label: "Loyiha qo'shish +", value: "ADD_PROJECT"}, ...projects.map(i => ({
+        label: i.title, value: i.id
+    }))];
+    const filterProjectOptions = [{label: "Tanlang", value: "nullForProjects"}, ...projects.map(i => ({
+        label: i.title, value: i.id
+    }))]
+
+    const counterPartyOptions = [...counterParty.map(i => ({
+        label: i.fullName, value: i.fullName
+    }))];
+    const filterCounterPartyOptions = [ ...counterParty.map(i => ({
+        label: i.fullName, value: i.fullName
+    }))]
+
+    // FILTER STATE
+    const [isFilterOpen, setIsFilterOpen] = useState(false);
+    const [filterState, setFilterState] = useState({});
+
+    const toggleFilter = () => {
+        setIsFilterOpen(p => !p);
+    }
+
+    const onFilterClear = () => {
+        if (Object.keys(filterState).length) {
+            setFilterState({});
+        }
+        filterForm.setValue("project", filterProjectOptions[0]);
+        filterForm.setValue("article", filterArticleOptions[0]);
+        filterForm.setValue("startDate", "");
+        filterForm.setValue("endDate", "");
+        setIsFilterOpen(false);
+    };
+
+    const onFilterSubmit = filterForm.handleSubmit((values) => {
+        const obj = {
+            projectId: values.project?.value === "nullForProjects" ? "" : values.project?.value,
+            articleId: values.article?.value === "nullForArticles" ? "" : values.article?.value,
+            operationType: values.operationType?.value === "nullForOperationType" ? "" : values.operationType?.value,
+            startDate: values.startDate?.split("-").reverse().join("-"),
+            endDate: values.endDate?.split("-").reverse().join("-"),
+            currency: values.currency?.value === "nullForCurrency" ? "" : values.currency?.value
+        }
+        setFilterState(obj);
+        setIsFilterOpen(false);
+    })
+
+    useEffect(() => {
+        onFilterSubmit(filterForm.getValues());
+    }, [filterForm.watch("project"), filterForm.watch("article"), filterForm.watch("startDate"), filterForm.watch("endDate")])
+
+
+    // ASOSIY DRAWER
+    const openModal = (type) => {
+        setIsOpenModal(true);
+    }
+    const onCloseModal = () => {
+        setIsOpenModal(false);
+    }
+
+
+    // PROJECT QO'SHISH DRAWER
+    const handleOpenProjectDrawer = () => {
+        setIsOpenProjectDrawer(true);
+    }
+    const handleCloseProjectDrawer = () => {
+        setIsOpenProjectDrawer(false);
+    }
+
+
+    // GET QILUVCHI FUNKSIYALAR
+    function getProjects() {
+        ProjectsProvider.getAllProjects().then(res => {
+            setProjects(res.data.data);
+        }, err => {
+            console.log(err);
+        })
+    }
+
+    function getCounterParty() {
+        CounterPartyProvider.getAllCounterParty().then(res => {
+            console.log("cou", res.data)
+            setCounterParty(res.data);
+        }, err => {
+            console.log(err);
+        })
+    }
+
+    function getOperations() {
+        setOperationLoading(true);
+        TodoProvider.getTodo(page, filterState).then(res => {
+            setTodos(res.data.data);
+            console.log("z", res.data.data)
+            setModalSum("")
+        }, err => {
+            console.log(err);
+        }).finally(() => setOperationLoading(false))
+    }
+
+    useEffect(() => {
+        getProjects();
+        getCounterParty();
+    }, [])
+
+    useEffect(() => {
+        getOperations();
+    }, [filterState, forRender, page])
+
+
+    // DRAWERDAGI FORMA SUBMIT HANDLERLARI
+
+    const onSubmitPlan = handleSubmit((values) => {
+        const body = {
+            projectId: values.projectId?.value,
+            counterpartyId: values.counterPartyId?.label,
+            title: values.title,
+            amount: +modalSum,
+            dueDate: values.dueDate,
+        }
+
+            TodoProvider.addToDo(body).then(res => {
+                console.log(res);
+                reset();
+                getOperations();
+                toast.success("Qo'shildi")
+                onCloseModal();
+            }, err => {
+                console.log(err);
+                toast.error(err?.response?.data?.message);
+            })
     });
 
-    let defaultDate = new Date();
-    defaultDate.setDate(defaultDate.getDate() + 1);
-    const [date, setDate] = useState(defaultDate);
-    const onSetDate = (event) => {
-        setDate(new Date(event.target.value));
-        console.log(date.toLocaleDateString("en-CA"))
-    };
-    const [forRender, setForRender] = useState(null);
+    const submitAddProject = projectForm.handleSubmit((values) => {
+        ProjectsProvider.addProject(values).then(res => {
+            console.log(res);
+            projectForm.reset();
+            getProjects();
+            handleCloseProjectDrawer();
+        }, err => {
+            console.log(err)
+        })
+    })
 
-    const [checked, setChecked] = React.useState([0]);
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const [todos, setTodos] = useState([])
+
+    const [modalSum, setModalSum] = useState(null)
 
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
@@ -55,151 +203,334 @@ const ListTable = () => {
 
         setChecked(newChecked);
     };
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
 
 
-    useEffect(() => {
-        TodoProvider.getTodo(0, 20)
-            .then(({data}) => {
-                console.log(data);
-                setTodos(data?.data)
-                console.log(todos)
-            })
-            .catch((err) => {
-                console.log(err);
-                toast.error(err?.response?.data?.message);
-            })
-    }, [forRender])
+    const changeCheckStatus = (event, id) => {
+        for(let i=0; i<todos.length; i++){
+            if(todos[i].id === id){
+                let newArr = [...todos]; // copying the old datas array
+                // a deep copy is not needed as we are overriding the whole object below, and not setting a property of it. this does not mutate the state.
+                newArr[i].isFinished = event.target.checked; // replace e.target.value with whatever you want to change it to
+                setTodos(newArr);
+            }
+        }
 
-    const onSubmit = async (values) => {
-        const body = {};
-        body.title = values.namePlan;
-        body.dueDate = date.toLocaleDateString("en-CA");
+        console.log(event.target.checked + " " + id );
+        TodoProvider.changeTodoStatus(+id, event.target.checked?"CHECK":"UNCHECK").then((_) => {
+            // for(let i=0; i<todos.length; i++){
+            //     if(todos[i].id === id){
+            //         let newArr = [...todos]; // copying the old datas array
+            //         // a deep copy is not needed as we are overriding the whole object below, and not setting a property of it. this does not mutate the state.
+            //         newArr[i].isFinished = !event.target.checked; // replace e.target.value with whatever you want to change it to
+            //         setTodos(newArr);
+            //     }
+            // }
+            // setTodos(todos);
 
-        try {
-            const {data} = await TodoProvider.addToDo(body);
-            console.log(data?.res);
-            setValue("title", "");
-            setValue("date", "");
-            setForRender(Math.random());
-            toast.success("Muvaffaqiyatli!");
-            handleCancel();
-        } catch (err) {
+
+
+            toast.success("Muvaffaqiyatli");
+        }).catch((err) => {
+
+            for(let i=0; i<todos.length; i++){
+                if(todos[i].id === id){
+                    let newArr = [...todos]; // copying the old datas array
+                    // a deep copy is not needed as we are overriding the whole object below, and not setting a property of it. this does not mutate the state.
+                    newArr[i].isFinished = !event.target.checked; // replace e.target.value with whatever you want to change it to
+                    setTodos(newArr);
+                }
+            }
             console.log(err);
             toast.error(err?.response?.data?.message);
-        }
+        });
+
+        // setState({ ...state, [event.target.name]: event.target.checked });
     };
 
-    const handleClick=(id)=>{
-        console.log(id)
-    }
 
+    return (<WRAPPER>
+            <TableWrapper>
+                <h3 className="title">Rejalar</h3>
 
-    return (
-        <ListTableWrapper>
-            <div className="modalWrapper">
-                <Button
-                    variant="contained"
-                    onClick={showModal}
-                    style={{
-                        fontFamily: "Inter",
-                        color: "#fff",
-                        background: "#787EFF",
-                    }}
-                >
-                    + Qo'shish
-                </Button>
-                <Modal
-                    style={{top: 10}}
-                    title="Qo'shish"
-                    open={isModalOpen}
-                    onCancel={handleCancel}
-                    width={550}
-                    footer={[null]}
-                >
-                    <ModalContent>
-                        <form onSubmit={handleSubmit(onSubmit)}>
-                            <label className="label">
-                                <span className="label-text">Reja nomi</span>
-                                {errors.namePlan && (
-                                    <span className="err-text">Majburiy maydon</span>
-                                )}
-                                <input
-                                    autoComplete="off"
-                                    type="text"
-                                    {...register("namePlan", {required: true})}
-                                />
-                            </label>
-                            <label className="label">
-                                <span className="label-text">Sana</span>
-                                {errors.sana && (
-                                    <span className="err-text">Majburiy maydon</span>
-                                )}
-                                <input
-                                    autoComplete="off"
-                                    type="date"
-                                    // disabled
-                                    value={date.toLocaleDateString("en-CA")}
-                                    onChange={onSetDate}
-                                />
-                            </label>
-
-                            <div className="btns">
-                                <button
-                                    type="button"
-                                    className="btn btn-outline-warning"
-                                    onClick={handleCancel}
-                                >
-                                    Bekor qilish
-                                </button>
-                                <button
-                                    type="submit"
-                                    className="btn btn-primary"
-                                    // disabled={loading}
-                                >
-                                    Saqlash
-                                </button>
+                <div className="bottom">
+                    <div>
+                        <form className="filter-content" onSubmit={onFilterSubmit}>
+                            <div className="row">
+                                <div className="mb-3 col-3">
+                                    <div>Proyekt</div>
+                                    <Controller
+                                        control={filterForm.control}
+                                        name="project"
+                                        render={({
+                                                     field: {onChange, onBlur, value, name, ref},
+                                                     fieldState: {invalid, isTouched, isDirty, error},
+                                                     formState,
+                                                 }) => (<Select
+                                                value={value}
+                                                options={filterProjectOptions}
+                                                onBlur={onBlur}
+                                                onChange={onChange}
+                                                ref={ref}
+                                            />)}
+                                    />
+                                </div>
+                                <div className="mb-3 col-3">
+                                    <div>Qarama-qarshi tomonlar</div>
+                                    <Controller
+                                        control={filterForm.control}
+                                        name="article"
+                                        render={({
+                                                     field: {onChange, onBlur, value, name, ref},
+                                                     fieldState: {invalid, isTouched, isDirty, error},
+                                                     formState,
+                                                 }) => (<Select
+                                                value={value}
+                                                options={filterCounterPartyOptions}
+                                                onBlur={onBlur}
+                                                onChange={onChange}
+                                                ref={ref}
+                                            />)}
+                                    />
+                                </div>
+                                <div className="mb-3 col-3">
+                                    <div>Boshlanish sana</div>
+                                    <input className="form-control" type="date" {...filterForm.register("startDate")}/>
+                                </div>
+                                <div className="mb-3 col-3">
+                                    <div>Oxirgi sana</div>
+                                    <input className="form-control" type="date" {...filterForm.register("endDate")}/>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="d-flex gap-2 col-6 mt-2">
+                                    <div className="row align-items-center col-12">
+                                        <button className="btn btn-secondary col-4" type="button"
+                                                onClick={onFilterClear}>Bekor qilish
+                                        </button>
+                                        <div className="modal-wrapper d-flex col-8">
+                                            <Button
+                                                className="col-6"
+                                                variant="contained"
+                                                onClick={() => openModal()}
+                                                style={{
+                                                    fontFamily: "Inter", color: "#fff", background: "#787EFF",
+                                                }}
+                                            >
+                                                + Reja qo'shish
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </form>
-                    </ModalContent>
-                </Modal>
-            </div>
+                    </div>
 
-            {todos.map((obj, index) => (
-                <div key={obj.id} style={{background: "#e9e9e9"}}>
-                    <ListItem
-                        secondaryAction={
-                            <IconButton edge="end" aria-label="comments" >
-                                <DeleteIcon />
-                            </IconButton>
-                        }
-                        // disablePadding
-                    >
-                        <ListItemButton role={undefined} onClick={handleToggle(obj.id)} dense>
-                            <ListItemIcon>
-                                <Checkbox
-                                    edge="start"
-                                    checked={checked.indexOf(obj.id) !== -1}
-                                    tabIndex={-1}
-                                    disableRipple
-                                    inputProps={{'aria-labelledby': "{obj.id}"}}
-                                />
-                            </ListItemIcon>
-                            <ListItemText style={{minWidth:"100"}} id={obj.id} primary={obj.title}/>
-                            <ListItemText style={{minWidth:"100"}} id={obj.id} primary={new Date(obj.dueDate).toLocaleString("en-GB")}/>
-                            <ListItemText style={{minWidth:"100"}} id={obj.id} primary={new Date(obj.dueDate).toLocaleString("en-GB")}/>
-                        </ListItemButton>
-                    </ListItem>
                 </div>
-            ))}
 
-        </ListTableWrapper>
-    );
+                {/*<table className="table table-borderless table-hover">*/}
+                {/*    <thead>*/}
+                {/*    <tr>*/}
+                {/*        <th style={{minWidth: "15%"}} className="col">*/}
+                {/*            Sana*/}
+                {/*        </th>*/}
+                {/*        <th style={{minWidth: "20%"}} className="col">*/}
+                {/*            Loyiha nomi*/}
+                {/*        </th>*/}
+                {/*        <th style={{minWidth: "15%"}} className="col">*/}
+                {/*            Qiymati*/}
+                {/*        </th>*/}
+                {/*        <th style={{minWidth: "25%"}} className="col">*/}
+                {/*            Izoh*/}
+                {/*        </th>*/}
+                {/*        <th style={{minWidth: "10%"}} className="col">*/}
+                {/*            Amallar*/}
+                {/*        </th>*/}
+                {/*    </tr>*/}
+                {/*    </thead>*/}
+                {/*    <tbody>*/}
+                {/*    {!operationLoading ?*/}
+                {/*        (plans?.data?.length ?*/}
+                {/*            (plans?.data?.map((obj, index) =>*/}
+                {/*        (<tr key={index}>*/}
+                {/*                    <td style={{minWidth: "15%"}} className="col">*/}
+                {/*                        {obj.id})<span>&nbsp;</span>{pad(new Date(obj.dueDate).getDate()) + "-" + pad((new Date(obj.addedDate).getMonth() + 1)) + "-" + new Date(obj.addedDate).getFullYear()}*/}
+                {/*                    </td>*/}
+                {/*                    <td style={{minWidth: "20%"}} className="col">*/}
+                {/*                        {obj?.title}*/}
+                {/*                    </td>*/}
+                {/*                    <td style={{minWidth: "15%"}} className="col">*/}
+                {/*                        {(+obj?.amount).toLocaleString().replaceAll(',', ' ')}*/}
+                {/*                    </td>*/}
+                {/*                    <td style={{minWidth: "25%"}} className="col">*/}
+                {/*                        {obj?.admin?.fullName}*/}
+                {/*                    </td>*/}
+                {/*                    <td style={{minWidth: "10%"}} className="col">*/}
+                {/*                        <div className="btns">*/}
+                {/*                            <IconButton*/}
+                {/*                                style={{background: "rgb(253, 181, 40, 0.12)"}}*/}
+                {/*                                onClick={() => handleDeleteOperation(obj.id)}*/}
+                {/*                            >*/}
+                {/*                                <DeleteIcon/>*/}
+                {/*                            </IconButton>*/}
+                {/*                        </div>*/}
+                {/*                    </td>*/}
+                {/*                </tr>))) : (<div*/}
+                {/*                style={{*/}
+                {/*                    textAlign: "center", padding: 30,*/}
+                {/*                }}*/}
+                {/*            >*/}
+                {/*                <h3 style={{color: "rgba(0, 0, 0, 0.7)"}}>*/}
+                {/*                    Operatsiyalar mavjud emas*/}
+                {/*                </h3>*/}
+                {/*            </div>)) : (<MinLoader/>)}*/}
+                {/*    </tbody>*/}
+                {/*</table>*/}
+                {todos.map((obj, index) => (
+                    <div key={obj.id} style={{background: "#e9e9e9"}}>
+                        <ListItem
+                            secondaryAction={
+                                <IconButton edge="end" aria-label="comments" >
+                                    <DeleteIcon />
+                                </IconButton>
+                            }
+                            // disablePadding
+                        >
+                            <ListItemButton role={undefined} onClick={handleToggle(obj.id)} dense>
+                                <ListItemIcon>
+                                    <Checkbox
+                                        edge="start"
+                                        checked={obj.isFinished}
+                                        onChange={(value) => {
+                                            changeCheckStatus(value, obj.id);
+                                        }}
+                                        tabIndex={-1}
+                                        disableRipple
+                                        inputProps={{'aria-labelledby': "{obj.id}"}}
+                                    />
+                                </ListItemIcon>
+                                <ListItemText style={{minWidth:"100"}} id={obj.id} primary={obj.title}/>
+                                <ListItemText style={{minWidth:"100"}} id={obj.id} primary={moment(new Date(obj.addedDate)).format('DD.MM.YYYY')}/>
+                                <ListItemText style={{minWidth:"100"}} id={obj.id} primary={moment(new Date(obj.dueDate)).format('DD.MM.YYYY')}/>
+
+                            </ListItemButton>
+                        </ListItem>
+                    </div>
+                ))}
+                {/*<Pagination*/}
+                {/*    onChange={(p) => {*/}
+                {/*        setPage(p)*/}
+                {/*    }}*/}
+                {/*    current={page}*/}
+                {/*    total={todos?.count}*/}
+                {/*    pageSize={20}*/}
+                {/*/>*/}
+            </TableWrapper>
+            {/*-----------------------------------------*/}
+            <Drawer
+                anchor={"right"}
+                open={isOpenModal}
+
+                onClose={() => {
+                    onCloseModal();
+                }}
+            >
+                <ModalHeader className="modal-header">
+                    <h2 className="title">Reja qo'shish</h2>
+                    <button className="closeSvg" onClick={onCloseModal}>
+                        <CloseSvg/>
+                    </button>
+                </ModalHeader>
+                <form className="p-3" style={{width: 500}} onSubmit={onSubmitPlan}>
+                    <Controller
+                        control={control}
+                        name="projectId"
+                        render={({
+                                     field: {onChange, onBlur, value, name, ref},
+                                     fieldState: {invalid, isTouched, isDirty, error},
+                                     formState,
+                                 }) => (<Select
+                                value={value}
+                                placeholder="Proyektni tanlang"
+                                options={projectOptions}
+                                onBlur={onBlur}
+                                onChange={(v) => {
+                                    if (v.value === "ADD_PROJECT") {
+                                        handleOpenProjectDrawer();
+                                        onChange(value);
+                                        return;
+                                    }
+                                    onChange(v);
+                                }}
+                                ref={ref}
+                            />)}
+                    />
+                    <br/>
+                    <Controller
+                        control={control}
+                        name="counterPartyId"
+                        render={({
+                                     field: {onChange, onBlur, value, name, ref},
+                                     fieldState: {invalid, isTouched, isDirty, error},
+                                     formState,
+                                 }) => (<Select
+                                value={value}
+                                placeholder="kontragentni tanlang"
+                                options={counterPartyOptions}
+                                onBlur={onBlur}
+                                ref={ref}
+                            />)}
+                    />
+                    <br/>
+                    <input autoComplete="off" className="form-control"
+                           placeholder={"Reja nomi"} {...register("title", {required: true})}/>
+                    <br/>
+                    <input autoComplete="off" className="form-control" type="date"
+                           placeholder={"Sana"} {...register("dueDate", {required: true})}/>
+                    <br/>
+                    <NumericFormat
+                        className="form-control"
+                        value={+modalSum}
+                        placeholder="Qiymati"
+                        autoComplete="off"
+                        onValueChange={(e) => {
+                            console.log(e.floatValue);
+                            setModalSum(e.floatValue)
+                        }}
+                        allowLeadingZeros thousandSeparator=" "
+                        {...register("amount", {required: false})}
+                    />
+                    <br/>
+                    <button type="submit" className="btn btn-primary">Qo'shish</button>
+                </form>
+            </Drawer>
+
+            <Drawer
+                anchor={"left"}
+                open={isOpenProjectDrawer}
+                onClose={() => {
+                    handleCloseProjectDrawer();
+                }}
+            >
+                <ModalHeader className="modal-header">
+                    <h2 className="title">Loyiha qo'shish</h2>
+                    <button className="closeSvg" onClick={handleCloseProjectDrawer}>
+                        <CloseSvg/>
+                    </button>
+                </ModalHeader>
+                <ModalContent>
+                    <form onSubmit={projectForm.handleSubmit(submitAddProject)}>
+                        <input type="text" placeholder="Proyekt nomi"
+                               className="form-control" {...projectForm.register("title")}/>
+                        <br/>
+                        <button type="submit" className="btn btn-primary">Qo'shish</button>
+                    </form>
+                </ModalContent>
+            </Drawer>
+        </WRAPPER>);
 };
+
+function pad(n) {
+    return n < 10 ? '0' + n : n
+}
 
 export default ListTable;
