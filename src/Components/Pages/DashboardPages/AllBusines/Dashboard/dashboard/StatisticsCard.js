@@ -17,7 +17,7 @@ import AccountOutline from "mdi-material-ui/AccountOutline";
 import UserProvider from "../../../../../../Data/Providers/UserProvider";
 import { useEffect, useState } from "react";
 
-const renderStats = () => {
+const RenderStats = () => {
   const [salesData, setSalesData] = useState([
     {
       stats: "-1",
@@ -152,7 +152,7 @@ const StatisticsCard = () => {
       />
       <CardContent sx={{ pt: (theme) => `${theme.spacing(3)} !important` }}>
         <Grid container spacing={[5, 0]}>
-          {renderStats()}
+          {RenderStats()}
         </Grid>
       </CardContent>
     </Card>
