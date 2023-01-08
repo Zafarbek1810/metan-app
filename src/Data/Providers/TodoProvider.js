@@ -13,5 +13,9 @@ export default class TodoProvider {
         return await client.get(`/todo?skip=${page}&take=${size}`);
     }
 
+    static async changeTodoStatus(id , status) {
+        return await client.get(`/todo/finish/${id}/${status}`);
+    }
+
 
 }

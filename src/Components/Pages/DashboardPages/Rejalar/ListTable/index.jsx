@@ -16,6 +16,7 @@ import {useForm} from "react-hook-form";
 import OutletProvider from "../../../../../Data/Providers/OutletProvider";
 import {toast} from "react-toastify";
 import TodoProvider from "../../../../../Data/Providers/TodoProvider";
+import moment from 'moment';
 
 const ListTable = () => {
     const {
@@ -55,6 +56,50 @@ const ListTable = () => {
 
         setChecked(newChecked);
     };
+
+    
+    const changeCheckStatus = (event, id) => {
+        for(let i=0; i<todos.length; i++){
+            if(todos[i].id === id){
+                let newArr = [...todos]; // copying the old datas array
+                // a deep copy is not needed as we are overriding the whole object below, and not setting a property of it. this does not mutate the state.
+                newArr[i].isFinished = event.target.checked; // replace e.target.value with whatever you want to change it to
+                setTodos(newArr);   
+            }
+        }
+
+        console.log(event.target.checked + " " + id );
+        TodoProvider.changeTodoStatus(+id, event.target.checked?"CHECK":"UNCHECK").then((_) => {
+            // for(let i=0; i<todos.length; i++){
+            //     if(todos[i].id === id){
+            //         let newArr = [...todos]; // copying the old datas array
+            //         // a deep copy is not needed as we are overriding the whole object below, and not setting a property of it. this does not mutate the state.
+            //         newArr[i].isFinished = !event.target.checked; // replace e.target.value with whatever you want to change it to
+            //         setTodos(newArr);   
+            //     }
+            // }
+            // setTodos(todos);
+
+            
+
+            toast.success("Muvaffaqiyatli");
+        }).catch((err) => {
+            
+            for(let i=0; i<todos.length; i++){
+                if(todos[i].id === id){
+                    let newArr = [...todos]; // copying the old datas array
+                    // a deep copy is not needed as we are overriding the whole object below, and not setting a property of it. this does not mutate the state.
+                    newArr[i].isFinished = !event.target.checked; // replace e.target.value with whatever you want to change it to
+                    setTodos(newArr);   
+                }
+            }
+            console.log(err);
+            toast.error(err?.response?.data?.message);
+        });
+        
+        // setState({ ...state, [event.target.name]: event.target.checked });
+      };
+    
     const showModal = () => {
         setIsModalOpen(true);
     };
@@ -184,15 +229,19 @@ const ListTable = () => {
                             <ListItemIcon>
                                 <Checkbox
                                     edge="start"
-                                    checked={checked.indexOf(obj.id) !== -1}
+                                    checked={obj.isFinished}
+                                    onChange={(value) => {
+                                        changeCheckStatus(value, obj.id);
+                                    }}
                                     tabIndex={-1}
                                     disableRipple
                                     inputProps={{'aria-labelledby': "{obj.id}"}}
                                 />
                             </ListItemIcon>
                             <ListItemText style={{minWidth:"100"}} id={obj.id} primary={obj.title}/>
-                            <ListItemText style={{minWidth:"100"}} id={obj.id} primary={new Date(obj.dueDate).toLocaleString("en-GB")}/>
-                            <ListItemText style={{minWidth:"100"}} id={obj.id} primary={new Date(obj.dueDate).toLocaleString("en-GB")}/>
+                            <ListItemText style={{minWidth:"100"}} id={obj.id} primary={moment(new Date(obj.addedDate)).format('DD.MM.YYYY')}/>
+                            <ListItemText style={{minWidth:"100"}} id={obj.id} primary={moment(new Date(obj.dueDate)).format('DD.MM.YYYY')}/>
+
                         </ListItemButton>
                     </ListItem>
                 </div>
