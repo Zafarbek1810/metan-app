@@ -54,11 +54,12 @@ const ListTable = ({RefObj, setIsOpen1}) => {
     }))]
 
     const counterPartyOptions = [...counterParty.map(i => ({
-        label: i.fullName, value: i.fullName
+        label: i.fullName, value: i.id
     }))];
-    const filterCounterPartyOptions = [...counterParty.map(i => ({
-        label: i.fullName, value: i.fullName
+    const filterCounterPartyOptions = [{label: "Tanlang", value: "nullForCounterType"}, ...counterParty.map(i => ({
+        label: i.fullName, value: i.id
     }))]
+
 
     // FILTER STATE
     const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -73,7 +74,7 @@ const ListTable = ({RefObj, setIsOpen1}) => {
             setFilterState({});
         }
         filterForm.setValue("project", filterProjectOptions[0]);
-        filterForm.setValue("article", filterArticleOptions[0]);
+        filterForm.setValue("counterParty", filterCounterPartyOptions[0]);
         filterForm.setValue("startDate", "");
         filterForm.setValue("endDate", "");
         setIsFilterOpen(false);
@@ -82,11 +83,9 @@ const ListTable = ({RefObj, setIsOpen1}) => {
     const onFilterSubmit = filterForm.handleSubmit((values) => {
         const obj = {
             projectId: values.project?.value === "nullForProjects" ? "" : values.project?.value,
-            articleId: values.article?.value === "nullForArticles" ? "" : values.article?.value,
-            operationType: values.operationType?.value === "nullForOperationType" ? "" : values.operationType?.value,
+            counterpartyId: values.counterParty?.value === "nullForCounterType" ? "" : values.counterParty?.value,
             startDate: values.startDate?.split("-").reverse().join("-"),
             endDate: values.endDate?.split("-").reverse().join("-"),
-            currency: values.currency?.value === "nullForCurrency" ? "" : values.currency?.value
         }
         setFilterState(obj);
         setIsFilterOpen(false);
@@ -94,7 +93,7 @@ const ListTable = ({RefObj, setIsOpen1}) => {
 
     useEffect(() => {
         onFilterSubmit(filterForm.getValues());
-    }, [filterForm.watch("project"), filterForm.watch("article"), filterForm.watch("startDate"), filterForm.watch("endDate")])
+    }, [filterForm.watch("project"), filterForm.watch("counterParty"), filterForm.watch("startDate"), filterForm.watch("endDate")])
 
 
     // ASOSIY DRAWER
@@ -156,14 +155,16 @@ const ListTable = ({RefObj, setIsOpen1}) => {
 
     // DRAWERDAGI FORMA SUBMIT HANDLERLARI
 
-    const onSubmitPlan = handleSubmit((values) => {
+    const onSubmitPlan = ((values) => {
         const body = {
             projectId: values.projectId?.value,
-            counterpartyId: values.counterParty?.value,
+            counterpartyId: values.counterpartyId?.value,
             title: values.title,
             amount: +modalSum,
             dueDate: values.dueDate,
         }
+
+        console.log("body", body)
 
         TodoProvider.addToDo(body).then(res => {
             console.log(res);
@@ -297,18 +298,19 @@ const ListTable = ({RefObj, setIsOpen1}) => {
                                     <div>Qarama-qarshi tomonlar</div>
                                     <Controller
                                         control={filterForm.control}
-                                        name="article"
+                                        name="counterParty"
                                         render={({
                                                      field: {onChange, onBlur, value, name, ref},
                                                      fieldState: {invalid, isTouched, isDirty, error},
                                                      formState,
-                                                 }) => (<Select
-                                            value={value}
-                                            options={filterCounterPartyOptions}
-                                            onBlur={onBlur}
-                                            onChange={onChange}
-                                            ref={ref}
-                                        />)}
+                                                 }) => (
+                                            <Select
+                                                value={value}
+                                                options={filterCounterPartyOptions}
+                                                onBlur={onBlur}
+                                                onChange={onChange}
+                                                ref={ref}
+                                            />)}
                                     />
                                 </div>
                                 <div className="mb-3 col-3">
@@ -481,7 +483,7 @@ const ListTable = ({RefObj, setIsOpen1}) => {
                         <CloseSvg/>
                     </button>
                 </ModalHeader>
-                <form className="p-3" style={{width: 500}} onSubmit={onSubmitPlan}>
+                <form className="p-3" style={{width: 500}} onSubmit={handleSubmit(onSubmitPlan)}>
                     <Controller
                         control={control}
                         name="projectId"
@@ -509,18 +511,20 @@ const ListTable = ({RefObj, setIsOpen1}) => {
                     <br/>
                     <Controller
                         control={control}
-                        name="counterParty"
+                        name="counterpartyId"
                         render={({
                                      field: {onChange, onBlur, value, name, ref},
                                      fieldState: {invalid, isTouched, isDirty, error},
                                      formState,
-                                 }) => (<Select
-                            value={value}
-                            placeholder="Kontragentni tanlang"
-                            options={counterPartyOptions}
-                            onBlur={onBlur}
-                            ref={ref}
-                        />)}
+                                 }) => (
+                            <Select
+                                value={value}
+                                placeholder="Kontragentni tanlang"
+                                options={counterPartyOptions}
+                                onBlur={onBlur}
+                                ref={ref}
+                            />
+                        )}
                     />
                     <br/>
                     <input autoComplete="off" className="form-control"
