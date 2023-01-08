@@ -108,8 +108,8 @@ const SalesByCountries = () => {
             >
               <Avatar
                 sx={{
-                  width: 38,
-                  height: 38,
+                  width: 42,
+                  height: 42,
                   marginRight: 3,
                   fontSize: '1rem',
                   color: 'common.white',
@@ -130,7 +130,7 @@ const SalesByCountries = () => {
               >
                 <Box sx={{ marginRight: 2, display: 'flex', flexDirection: 'column' }}>
                   <Box sx={{ display: 'flex' }}>
-                    <Typography sx={{ mr: 0.5, fontWeight: 600, letterSpacing: '0.25px' }}>{item.title}</Typography>
+                    <Typography sx={{ mr: 0.5, fontWeight: 600, letterSpacing: '0.25px', lineHeight: 2, color: (new Date() > new Date(item.dueDate))?'red': 'green'   }}>{item.title}</Typography>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
 
                       <Typography
@@ -141,21 +141,32 @@ const SalesByCountries = () => {
                           color: item.trendDir === 'down' ? 'error.main' : 'success.main'
                         }}
                       >
-                        {/* {item.trendNumber | 777} */}
+                        {/* {item.trendNumber | "Jamshid Yoqubov"} */}
                       </Typography>
                     </Box>
                   </Box>
-                  <Typography variant='caption' sx={{ lineHeight: 1.5 }}>
+                  <Typography
+                        variant='caption'
+                        sx={{
+                          fontWeight: 600,
+                          lineHeight: 1.5,
+                          color: item.trendDir === 'down' ? 'error.main' : 'success.main'
+                        }}
+                      >
+                        Kontragent: {item.admin?.fullName ?? "Yo'q"}
+                      </Typography>
+                  <Typography variant='caption' sx={{ lineHeight: 1.5,fontWeight: 400}}>
                     {"Oxirgi muddat: " +moment(new Date(item.dueDate)).format('DD.MM.YYYY')}
-                  </Typography>
+                  </Typography> 
                 </Box>
 
                 <Box sx={{ display: 'flex', textAlign: 'end', flexDirection: 'column' }}>
-                  <Typography sx={{ fontWeight: 600, fontSize: '0.875rem', lineHeight: 1.72, letterSpacing: '0.22px' }}>
-                    {moment(item.dueDate).diff(moment(new Date()), 'days') + " kun"}
+                  
+                  <Typography sx={{ fontWeight: 600, fontSize: '0.875rem', lineHeight: 1.72, letterSpacing: '0.22px', color: (new Date() > new Date(item.dueDate))?'red': 'green' }}>
+                    { Math.abs(moment(item.dueDate).diff(moment(new Date()), 'days'))  + " kun"}
                   </Typography>
-                  <Typography variant='caption' sx={{ lineHeight: 1.5 }}>
-                    qoldi
+                  <Typography variant='caption' sx={{ lineHeight: 1.5, color: (new Date() > new Date(item.dueDate))?'red': 'green'  }}>
+                    {(new Date() > new Date(item.dueDate))?"o'tib ketgan": 'qoldi'}
                   </Typography>
                 </Box>
               </Box>
