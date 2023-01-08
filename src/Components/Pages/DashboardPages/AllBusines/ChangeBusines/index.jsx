@@ -27,6 +27,7 @@ import HelpCircleOutline from "mdi-material-ui/HelpCircleOutline";
 import SalesByCountries from "../Dashboard/dashboard/SalesByCountries";
 import DepositWithdraw from "../Dashboard/dashboard/DepositWithdraw";
 import Table from "../Dashboard/dashboard/Table";
+import PieChartDash from "../Dashboard/dashboard/PieChartDash";
 import {Wrapper} from "../../Home/style";
 import {StatistikaWrapper} from "../Dashboard/Statistika.style";
 
@@ -315,6 +316,9 @@ const ChangeBusines = () => {
                                             title='Sales Queries'
                                             icon={<HelpCircleOutline />}
                                         />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <PieChartDash/>
                                     </Grid>
                                 </Grid>
                             </Grid>
