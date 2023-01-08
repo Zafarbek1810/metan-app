@@ -268,6 +268,18 @@ const NewSidebar = () => {
                             <Panel header="Benzin" key="3">
                                 {text}
                             </Panel>
+                            <Panel header="Issiqxona" key="6">
+                                {text}
+                            </Panel>
+                            <Panel header="Moyka" key="7">
+                                {text}
+                            </Panel>
+                            <Panel header="Arenda" key="8">
+                                {text}
+                            </Panel>
+                            <Panel header="Kafe" key="9">
+                                {text}
+                            </Panel>
                         </Collapse>
                     )
                 }

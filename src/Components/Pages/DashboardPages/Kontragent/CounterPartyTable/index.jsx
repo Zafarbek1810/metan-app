@@ -48,7 +48,7 @@ const CounterParty = () => {
         defaultValues: {},
     });
     const [modalIsOpen, setIsOpen] = React.useState(false);
-    const [editingCashier, setEditingCashier] = useState(null);
+    const [editingKontragent, setEditingKontragent] = useState(null);
     const [loading, setLoading] = useState(false);
     const [loading2, setLoading2] = useState(false);
     const [counterParties, setCounterParties] = useState([]);
@@ -76,7 +76,7 @@ const CounterParty = () => {
 
     function closeModal() {
         setIsOpen(false);
-        setEditingCashier(null);
+        setEditingKontragent(null);
         setValue("name", "");
         setValue("login", "");
         setValue("pass", "");
@@ -89,19 +89,42 @@ const CounterParty = () => {
         body.password = values.pass;
 
         setLoading(true);
-        try {
-            const {data} = await CounterPartyProvider.createCounterParty(body);
-            setForRender(Math.random());
-            toast.success("Muvaffaqiyatli qo'shildi");
-            closeModal();
-        } catch (err) {
-            console.log(err);
-            Message.serverError();
+        if (editingKontragent) {
+            try {
+                body.id = editingKontragent.id;
+
+                const { data } = await CounterPartyProvider.updateKontragent(body);
+                setForRender(Math.random());
+                toast.success("Muvaffaqiyatli o'zgartirildi");
+                closeModal();
+            } catch (err) {
+                console.log(err);
+                Message.serverError();
+            }
+        } else {
+            try {
+                const {data} = await CounterPartyProvider.createCounterParty(body);
+                setForRender(Math.random());
+                toast.success("Muvaffaqiyatli qo'shildi");
+                closeModal();
+            } catch (err) {
+                console.log(err);
+                Message.serverError();
+            }
         }
+        setLoading(false);
     };
 
+    useEffect(() => {
+        if (editingKontragent) {
+            setValue("name", editingKontragent.fullName);
+            setValue("login", editingKontragent.username);
+            setValue("pass", "");
+        }
+    }, [modalIsOpen]);
+
     const handleEdit = (obj) => {
-        setEditingCashier(obj);
+        setEditingKontragent(obj);
         setIsOpen(true);
     };
 
@@ -219,7 +242,7 @@ const CounterParty = () => {
                                     <div className="btns">
                                         <IconButton
                                             style={{background: "rgb(253, 181, 40, 0.12)"}}
-                                            // onClick={() => handleEdit(obj)}
+                                            onClick={() => handleEdit(obj)}
                                         >
                                             <EditIcon/>
                                         </IconButton>

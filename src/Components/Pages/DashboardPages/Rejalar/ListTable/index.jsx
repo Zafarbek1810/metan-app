@@ -159,7 +159,7 @@ const ListTable = ({RefObj, setIsOpen1}) => {
     const onSubmitPlan = handleSubmit((values) => {
         const body = {
             projectId: values.projectId?.value,
-            counterpartyId: values.counterPartyId?.label,
+            counterpartyId: values.counterParty?.value,
             title: values.title,
             amount: +modalSum,
             dueDate: values.dueDate,
@@ -325,55 +325,58 @@ const ListTable = ({RefObj, setIsOpen1}) => {
                                         onClick={onFilterClear}>Bekor qilish
                                 </button>
                                 {/*<div className="modal-wrapper d-flex col-8">*/}
-                                    <Button
-                                        className="col-3"
-                                        variant="contained"
-                                        onClick={() => openModal()}
-                                        style={{
-                                            fontFamily: "Inter", color: "#fff", background: "#787EFF",
-                                        }}
-                                    >
-                                        + Reja qo'shish
-                                    </Button>
+                                <Button
+                                    className="col-3"
+                                    variant="contained"
+                                    onClick={() => openModal()}
+                                    style={{
+                                        fontFamily: "Inter", color: "#fff", background: "#787EFF",
+                                    }}
+                                >
+                                    + Reja qo'shish
+                                </Button>
                                 {/*</div>*/}
                             </div>
                         </form>
                     </div>
                 </div>
 
-                {todos.map((obj, index) => (
-                    <div key={obj.id} style={{background: "#e9e9e9"}}>
-                        <ListItem
-                            secondaryAction={
-                                <IconButton edge="end" aria-label="comments" onClick={() => handleDeleteTodo(obj.id)}>
-                                    <DeleteIcon/>
-                                </IconButton>
-                            }
-                            // disablePadding
-                        >
-                            <ListItemButton role={undefined} onClick={handleToggle(obj.id)} dense>
-                                <ListItemIcon>
-                                    <Checkbox
-                                        edge="start"
-                                        checked={obj.isFinished}
-                                        onChange={(value) => {
-                                            changeCheckStatus(value, obj.id);
-                                        }}
-                                        tabIndex={-1}
-                                        disableRipple
-                                        inputProps={{'aria-labelledby': "{obj.id}"}}
-                                    />
-                                </ListItemIcon>
-                                <ListItemText style={{minWidth: "100"}} id={obj.id} primary={obj.title}/>
-                                <ListItemText style={{minWidth: "100"}} id={obj.id}
-                                              primary={moment(new Date(obj.addedDate)).format('DD.MM.YYYY')}/>
-                                <ListItemText style={{minWidth: "100"}} id={obj.id}
-                                              primary={moment(new Date(obj.dueDate)).format('DD.MM.YYYY')}/>
+                {/*{todos.map((obj, index) => (*/}
+                {/*    <div key={obj.id} style={{background: "#e9e9e9"}}>*/}
+                {/*        <ListItem*/}
+                {/*            secondaryAction={*/}
+                {/*                <IconButton edge="end" aria-label="comments" onClick={() => handleDeleteTodo(obj.id)}>*/}
+                {/*                    <DeleteIcon/>*/}
+                {/*                </IconButton>*/}
+                {/*            }*/}
+                {/*            // disablePadding*/}
+                {/*        >*/}
+                {/*            <ListItemButton role={undefined} onClick={handleToggle(obj.id)} dense>*/}
+                {/*                <ListItemIcon>*/}
+                {/*                    <Checkbox*/}
+                {/*                        edge="start"*/}
+                {/*                        checked={obj.isFinished}*/}
+                {/*                        onChange={(value) => {*/}
+                {/*                            changeCheckStatus(value, obj.id);*/}
+                {/*                        }}*/}
+                {/*                        tabIndex={-1}*/}
+                {/*                        disableRipple*/}
+                {/*                        inputProps={{'aria-labelledby': "{obj.id}"}}*/}
+                {/*                    />*/}
+                {/*                </ListItemIcon>*/}
+                {/*                <ListItemText style={{width: "10%"}} id={obj.id} primary={obj.title}/>*/}
+                {/*                <ListItemText style={{width: "10%"}} id={obj.id}*/}
+                {/*                              primary={moment(new Date(obj.addedDate)).format('DD.MM.YYYY')}/>*/}
+                {/*                <ListItemText style={{width: "10%"}} id={obj.id}*/}
+                {/*                              primary={moment(new Date(obj.dueDate)).format('DD.MM.YYYY')}/>*/}
+                {/*                <ListItemText style={{width: "10%"}} id={obj.id} primary={obj?.admin?.fullName}/>*/}
+                {/*                <ListItemText style={{width: "10%"}} id={obj.id}*/}
+                {/*                              primary={obj.amount}/>*/}
 
-                            </ListItemButton>
-                        </ListItem>
-                    </div>
-                ))}
+                {/*            </ListItemButton>*/}
+                {/*        </ListItem>*/}
+                {/*    </div>*/}
+                {/*))}*/}
                 {/*<Pagination*/}
                 {/*    onChange={(p) => {*/}
                 {/*        setPage(p)*/}
@@ -382,6 +385,86 @@ const ListTable = ({RefObj, setIsOpen1}) => {
                 {/*    total={todos?.count}*/}
                 {/*    pageSize={20}*/}
                 {/*/>*/}
+
+                <table className="table table-borderless table-hover">
+                    <thead>
+                    <tr>
+                        <th style={{minWidth: "10%"}} className="col">
+                            Belgi
+                        </th>
+                        <th style={{minWidth: "15%"}} className="col">
+                            Boshlanish sanasi
+                        </th>
+                        <th style={{minWidth: "15%"}} className="col">
+                            Tugash sanasi
+                        </th>
+                        <th style={{minWidth: "15%"}} className="col">
+                            Reja nomi
+                        </th>
+                        <th style={{minWidth: "15%"}} className="col">
+                            Qiymati
+                        </th>
+                        <th style={{minWidth: "15%"}} className="col">
+                            Kontragent
+                        </th>
+                        <th style={{minWidth: "15%"}} className="col">
+                            Amallar
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {!operationLoading ? (
+                        todos?.length ?
+                            (todos?.map((obj, index) => (
+                                <tr key={index}>
+                                    <td style={{minWidth: "10%"}} className="col">
+                                        <Checkbox
+                                            edge="start"
+                                            checked={obj.isFinished}
+                                            onChange={(value) => {
+                                                changeCheckStatus(value, obj.id);
+                                            }}
+                                            tabIndex={-1}
+                                            disableRipple
+                                            inputProps={{'aria-labelledby': "{obj.id}"}}
+                                        />
+                                    </td>
+                                    <td style={{minWidth: "15%"}} className="col">
+                                        {moment(new Date(obj.addedDate)).format('DD.MM.YYYY')}
+                                    </td>
+                                    <td style={{minWidth: "15%"}} className="col">
+                                        {moment(new Date(obj.dueDate)).format('DD.MM.YYYY')}
+                                    </td>
+                                    <td style={{minWidth: "15%"}} className="col">
+                                        {obj?.title}
+                                    </td>
+                                    <td style={{minWidth: "15%"}} className="col">
+                                        {(+obj?.amount).toLocaleString().replaceAll(',', ' ')}
+                                    </td>
+                                    <td style={{minWidth: "15%"}} className="col">
+                                        {obj?.admin?.fullName}
+                                    </td>
+                                    <td style={{minWidth: "15%"}} className="col">
+                                        <div className="btns">
+                                            <IconButton
+                                                style={{background: "rgb(253, 181, 40, 0.12)"}}
+                                                onClick={() => handleDeleteTodo(obj.id)}
+                                            >
+                                                <DeleteIcon/>
+                                            </IconButton>
+                                        </div>
+                                    </td>
+                                </tr>))) : (<div
+                                style={{
+                                    textAlign: "center", padding: 30,
+                                }}
+                            >
+                                <h3 style={{color: "rgba(0, 0, 0, 0.7)"}}>
+                                    Rejalar mavjud emas
+                                </h3>
+                            </div>)) : (<MinLoader/>)}
+                    </tbody>
+                </table>
             </TableWrapper>
             {/*-----------------------------------------*/}
             <Drawer
@@ -406,33 +489,34 @@ const ListTable = ({RefObj, setIsOpen1}) => {
                                      field: {onChange, onBlur, value, name, ref},
                                      fieldState: {invalid, isTouched, isDirty, error},
                                      formState,
-                                 }) => (<Select
-                            value={value}
-                            placeholder="Proyektni tanlang"
-                            options={projectOptions}
-                            onBlur={onBlur}
-                            onChange={(v) => {
-                                if (v.value === "ADD_PROJECT") {
-                                    handleOpenProjectDrawer();
-                                    onChange(value);
-                                    return;
-                                }
-                                onChange(v);
-                            }}
-                            ref={ref}
-                        />)}
+                                 }) => (
+                            <Select
+                                value={value}
+                                placeholder="Proyektni tanlang"
+                                options={projectOptions}
+                                onBlur={onBlur}
+                                onChange={(v) => {
+                                    if (v.value === "ADD_PROJECT") {
+                                        handleOpenProjectDrawer();
+                                        onChange(value);
+                                        return;
+                                    }
+                                    onChange(v);
+                                }}
+                                ref={ref}
+                            />)}
                     />
                     <br/>
                     <Controller
                         control={control}
-                        name="counterPartyId"
+                        name="counterParty"
                         render={({
                                      field: {onChange, onBlur, value, name, ref},
                                      fieldState: {invalid, isTouched, isDirty, error},
                                      formState,
                                  }) => (<Select
                             value={value}
-                            placeholder="kontragentni tanlang"
+                            placeholder="Kontragentni tanlang"
                             options={counterPartyOptions}
                             onBlur={onBlur}
                             ref={ref}

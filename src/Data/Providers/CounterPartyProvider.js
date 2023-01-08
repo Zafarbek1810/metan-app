@@ -15,6 +15,10 @@ export default class CounterPartyProvider {
         return await client.get(`/admin/counterparties`);
     }
 
+    static async updateKontragent(body) {
+        return await client.post("/admin/editAdmin", body);
+    }
+
 
 
 }
