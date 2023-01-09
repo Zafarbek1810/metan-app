@@ -5,11 +5,9 @@ import {Settings} from "@mui/icons-material";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import {Controller, useForm} from "react-hook-form";
-import OperationProvider from "../../../../../Data/Providers/OperationProvider";
 import ProjectsProvider from "../../../../../Data/Providers/ProjectsProvider";
 import ApexChartWrapper from "../Dashboard/dashboard/react-apexcharts";
 import {Card, Col, Progress, Row, Statistic} from "antd";
@@ -17,13 +15,7 @@ import {ArrowDownOutlined, ArrowUpOutlined} from "@ant-design/icons";
 import Grid from "@mui/material/Grid";
 import Trophy from "../Dashboard/dashboard/Trophy";
 import StatisticsCard from "../Dashboard/dashboard/StatisticsCard";
-import WeeklyOverview from "../Dashboard/dashboard/WeeklyOverview";
 import TotalEarning from "../Dashboard/dashboard/TotalEarning";
-import CardStatisticsVerticalComponent from "../Dashboard/dashboard/card-stats-vertical";
-import Poll from "mdi-material-ui/Poll";
-import CurrencyUsd from "mdi-material-ui/CurrencyUsd";
-import BriefcaseVariantOutline from "mdi-material-ui/BriefcaseVariantOutline";
-import HelpCircleOutline from "mdi-material-ui/HelpCircleOutline";
 import SalesByCountries from "../Dashboard/dashboard/SalesByCountries";
 import DepositWithdraw from "../Dashboard/dashboard/DepositWithdraw";
 import Table from "../Dashboard/dashboard/Table";
@@ -31,6 +23,7 @@ import PieChartDash from "../Dashboard/dashboard/PieChartDash";
 import {Wrapper} from "../../Home/style";
 import {StatistikaWrapper} from "../Dashboard/Statistika.style";
 import PieChartDash2 from "../Dashboard/dashboard/PieChartDash2";
+import StatisticChart from "../Dashboard/dashboard/StatisticChart";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -276,50 +269,50 @@ const ChangeBusines = () => {
                             </Grid>
                             <Grid item xs={12} md={6} lg={4}>
                                 <Grid container spacing={3}>
-                                    <Grid item xs={6}>
-                                        <CardStatisticsVerticalComponent
-                                            stats='$25.6k'
-                                            icon={<Poll />}
-                                            color='success'
-                                            trendNumber='+42%'
-                                            title='Total Profit'
-                                            subtitle='Weekly Profit'
-                                        />
-                                    </Grid>
-                                    <Grid item xs={6} >
-                                        <CardStatisticsVerticalComponent
-                                            stats='$78'
-                                            title='Refunds'
-                                            trend='negative'
-                                            color='secondary'
-                                            trendNumber='-15%'
-                                            subtitle='Past Month'
-                                            icon={<CurrencyUsd />}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        <CardStatisticsVerticalComponent
-                                            stats='862'
-                                            trend='negative'
-                                            trendNumber='-18%'
-                                            title='New Project'
-                                            subtitle='Yearly Project'
-                                            icon={<BriefcaseVariantOutline />}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        <CardStatisticsVerticalComponent
-                                            stats='15'
-                                            color='warning'
-                                            trend='negative'
-                                            trendNumber='-18%'
-                                            subtitle='Last Week'
-                                            title='Sales Queries'
-                                            icon={<HelpCircleOutline />}
-                                        />
-                                    </Grid>
+                                    {/*<Grid item xs={6}>*/}
+                                    {/*    <CardStatisticsVerticalComponent*/}
+                                    {/*        stats='$25.6k'*/}
+                                    {/*        icon={<Poll />}*/}
+                                    {/*        color='success'*/}
+                                    {/*        trendNumber='+42%'*/}
+                                    {/*        title='Total Profit'*/}
+                                    {/*        subtitle='Weekly Profit'*/}
+                                    {/*    />*/}
+                                    {/*</Grid>*/}
+                                    {/*<Grid item xs={6} >*/}
+                                    {/*    <CardStatisticsVerticalComponent*/}
+                                    {/*        stats='$78'*/}
+                                    {/*        title='Refunds'*/}
+                                    {/*        trend='negative'*/}
+                                    {/*        color='secondary'*/}
+                                    {/*        trendNumber='-15%'*/}
+                                    {/*        subtitle='Past Month'*/}
+                                    {/*        icon={<CurrencyUsd />}*/}
+                                    {/*    />*/}
+                                    {/*</Grid>*/}
+                                    {/*<Grid item xs={6}>*/}
+                                    {/*    <CardStatisticsVerticalComponent*/}
+                                    {/*        stats='862'*/}
+                                    {/*        trend='negative'*/}
+                                    {/*        trendNumber='-18%'*/}
+                                    {/*        title='New Project'*/}
+                                    {/*        subtitle='Yearly Project'*/}
+                                    {/*        icon={<BriefcaseVariantOutline />}*/}
+                                    {/*    />*/}
+                                    {/*</Grid>*/}
+                                    {/*<Grid item xs={6}>*/}
+                                    {/*    <CardStatisticsVerticalComponent*/}
+                                    {/*        stats='15'*/}
+                                    {/*        color='warning'*/}
+                                    {/*        trend='negative'*/}
+                                    {/*        trendNumber='-18%'*/}
+                                    {/*        subtitle='Last Week'*/}
+                                    {/*        title='Sales Queries'*/}
+                                    {/*        icon={<HelpCircleOutline />}*/}
+                                    {/*    />*/}
+                                    {/*</Grid>*/}
                                     <Grid item xs={12} >
-                                        {/*<PieChartDash/>*/}
+                                        <StatisticChart/>
                                     </Grid>
                                 </Grid>
                             </Grid>
