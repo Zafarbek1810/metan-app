@@ -30,10 +30,65 @@ const Charts =()=> {
         },
         colors: ['#546E72']
     })
-
     const [series, setSeries] = useState( [{
         name: 'series-1',
         data: [10000000, 20000000, 35000000]
+    }])
+
+
+    const [options2, setOptions2] = useState({
+        chart: {
+            id: 'apexchart-example'
+        },
+        xaxis: {
+            categories: ["Jan", "Feb", "Mar"]
+        },
+        yaxis: {
+            labels: {
+                formatter: function(value) {
+                    let val = Math.abs(value)
+                    if (val >= 1000000) {
+                        val = (val / 1000000).toFixed(0) + ' M'
+                    }else if(val >= 1000){
+                        val = (val / 1000).toFixed(0) + ' K'
+                    }
+                    return val
+                }
+            }
+        },
+        colors: ['#546E72']
+    })
+    const [series2, setSeries2] = useState( [{
+        name: 'series-1',
+        data: [20000000, 23000000, 15000000]
+    }])
+
+
+    const [options3, setOptions3] = useState({
+        chart: {
+            id: 'apexchart-example'
+        },
+        xaxis: {
+            categories: ["Jan", "Feb", "Mar"]
+        },
+        yaxis: {
+            labels: {
+                formatter: function(value) {
+                    let val = Math.abs(value)
+                    if (val >= 1000000) {
+                        val = (val / 1000000).toFixed(0) + ' M'
+                    }else if(val >= 1000){
+                        val = (val / 1000).toFixed(0) + ' K'
+                    }
+                    return val
+                }
+            }
+        },
+        colors: ['#546E72']
+    })
+    const [series3, setSeries3] = useState( [{
+        name: 'series-1',
+        data: [10000000, 30000000, 35000000]
     }])
 
         return (
@@ -46,28 +101,31 @@ const Charts =()=> {
                         series={series}
                         type="line"
                         width="100%"
+                        height={200}
                     />
                 }
-                <Divider/>
+                <Divider style={{marginTop:0}}/>
                 <h4>Chiqim</h4>
                 {
                     (typeof window !== 'undefined') &&
                     <Chart
-                        options={options}
-                        series={series}
+                        options={options2}
+                        series={series2}
                         type="line"
                         width="100%"
+                        height={200}
                     />
                 }
-                <Divider/>
+                <Divider style={{marginTop:0}}/>
                 <h4>Qoldiq</h4>
                 {
                     (typeof window !== 'undefined') &&
                     <Chart
-                        options={options}
-                        series={series}
+                        options={options3}
+                        series={series3}
                         type="line"
                         width="100%"
+                        height={200}
                     />
                 }
 
