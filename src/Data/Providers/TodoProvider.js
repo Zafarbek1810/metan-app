@@ -9,12 +9,13 @@ export default class TodoProvider {
         return await client.delete(`/todo/delete/${id}`);
     }
 
-    static async getTodo(page = 1,  {projectId,  startDate, endDate} = {})
+    static async getTodo(page = 1,  {projectId,  startDate, endDate, counterpartyId} = {})
 {
     const params = {
         take: "20",
         skip: 20 * (page - 1),
         projectId,
+        counterpartyId,
         startDate,
         endDate,
     }

@@ -10,7 +10,6 @@ import OperationProvider from "../../../../../Data/Providers/OperationProvider";
 import ProjectsProvider from "../../../../../Data/Providers/ProjectsProvider";
 import Select from "react-select";
 import {Controller, useForm} from "react-hook-form";
-import ArticleProvider from "../../../../../Data/Providers/ArticleProvider";
 import {toast} from "react-toastify";
 import {NumericFormat} from "react-number-format";
 import {WRAPPER} from "../../Operatsiyalar/components/style";
@@ -30,14 +29,12 @@ import OutletProvider from "../../../../../Data/Providers/OutletProvider";
 const ListTable = ({RefObj, setIsOpen1}) => {
     const {register, handleSubmit, control, reset} = useForm();
     const projectForm = useForm();
-    const articleForm = useForm();
     const filterForm = useForm();
     const [forRender, setForRender] = useState(null)
 
     const [page, setPage] = useState(1)
 
     const [isOpenModal, setIsOpenModal] = useState(false);
-    const [isOpenArticleDrawer, setIsOpenArticleDrawer] = useState(false);
     const [isOpenProjectDrawer, setIsOpenProjectDrawer] = useState(false);
     const [todos, setTodos] = useState([])
     const [operationLoading, setOperationLoading] = useState(false);
@@ -342,52 +339,6 @@ const ListTable = ({RefObj, setIsOpen1}) => {
                         </form>
                     </div>
                 </div>
-
-                {/*{todos.map((obj, index) => (*/}
-                {/*    <div key={obj.id} style={{background: "#e9e9e9"}}>*/}
-                {/*        <ListItem*/}
-                {/*            secondaryAction={*/}
-                {/*                <IconButton edge="end" aria-label="comments" onClick={() => handleDeleteTodo(obj.id)}>*/}
-                {/*                    <DeleteIcon/>*/}
-                {/*                </IconButton>*/}
-                {/*            }*/}
-                {/*            // disablePadding*/}
-                {/*        >*/}
-                {/*            <ListItemButton role={undefined} onClick={handleToggle(obj.id)} dense>*/}
-                {/*                <ListItemIcon>*/}
-                {/*                    <Checkbox*/}
-                {/*                        edge="start"*/}
-                {/*                        checked={obj.isFinished}*/}
-                {/*                        onChange={(value) => {*/}
-                {/*                            changeCheckStatus(value, obj.id);*/}
-                {/*                        }}*/}
-                {/*                        tabIndex={-1}*/}
-                {/*                        disableRipple*/}
-                {/*                        inputProps={{'aria-labelledby': "{obj.id}"}}*/}
-                {/*                    />*/}
-                {/*                </ListItemIcon>*/}
-                {/*                <ListItemText style={{width: "10%"}} id={obj.id} primary={obj.title}/>*/}
-                {/*                <ListItemText style={{width: "10%"}} id={obj.id}*/}
-                {/*                              primary={moment(new Date(obj.addedDate)).format('DD.MM.YYYY')}/>*/}
-                {/*                <ListItemText style={{width: "10%"}} id={obj.id}*/}
-                {/*                              primary={moment(new Date(obj.dueDate)).format('DD.MM.YYYY')}/>*/}
-                {/*                <ListItemText style={{width: "10%"}} id={obj.id} primary={obj?.admin?.fullName}/>*/}
-                {/*                <ListItemText style={{width: "10%"}} id={obj.id}*/}
-                {/*                              primary={obj.amount}/>*/}
-
-                {/*            </ListItemButton>*/}
-                {/*        </ListItem>*/}
-                {/*    </div>*/}
-                {/*))}*/}
-                {/*<Pagination*/}
-                {/*    onChange={(p) => {*/}
-                {/*        setPage(p)*/}
-                {/*    }}*/}
-                {/*    current={page}*/}
-                {/*    total={todos?.count}*/}
-                {/*    pageSize={20}*/}
-                {/*/>*/}
-
                 <table className="table table-borderless table-hover">
                     <thead>
                     <tr>
@@ -467,6 +418,14 @@ const ListTable = ({RefObj, setIsOpen1}) => {
                             </div>)) : (<MinLoader/>)}
                     </tbody>
                 </table>
+                {/*<Pagination*/}
+                {/*    onChange={(p) => {*/}
+                {/*        setPage(p)*/}
+                {/*    }}*/}
+                {/*    current={page}*/}
+                {/*    total={todos?.count}*/}
+                {/*    pageSize={20}*/}
+                {/*/>*/}
             </TableWrapper>
             {/*-----------------------------------------*/}
             <Drawer
@@ -522,6 +481,9 @@ const ListTable = ({RefObj, setIsOpen1}) => {
                                 placeholder="Kontragentni tanlang"
                                 options={counterPartyOptions}
                                 onBlur={onBlur}
+                                onChange={(v) => {
+                                    onChange(v);
+                                }}
                                 ref={ref}
                             />
                         )}
@@ -530,9 +492,11 @@ const ListTable = ({RefObj, setIsOpen1}) => {
                     <input autoComplete="off" className="form-control"
                            placeholder={"Reja nomi"} {...register("title", {required: true})}/>
                     <br/>
+                    <label>Oxirgi sana</label>
                     <input autoComplete="off" className="form-control" type="date"
                            placeholder={"Sana"} {...register("dueDate", {required: true})}/>
                     <br/>
+                    <label>Qiymati</label>
                     <NumericFormat
                         className="form-control"
                         value={+modalSum}
