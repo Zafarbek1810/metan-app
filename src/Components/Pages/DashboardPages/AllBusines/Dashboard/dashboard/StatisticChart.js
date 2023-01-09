@@ -1,8 +1,10 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 // import Chart from 'react-apexcharts'
 import dynamic from 'next/dynamic'
 import {ChartsWrapper} from "../../../Home/Charts/Charts.style";
 import {Divider} from "antd";
+import ProjectsProvider from "../../../../../../Data/Providers/ProjectsProvider";
+import moment from "moment/moment";
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
@@ -28,7 +30,18 @@ const Charts =()=> {
                 }
             }
         },
-        colors: ['#546E72']
+        fill: {
+            type: 'gradient',
+            gradient: {
+                shade: 'dark',
+                gradientToColors: ['#06065a'],
+                shadeIntensity: 1,
+                type: 'horizontal',
+                opacityFrom: 1,
+                opacityTo: 1,
+                stops: [0, 100, 100, 100]
+            },
+        },
     })
     const [series, setSeries] = useState( [{
         name: 'series-1',
@@ -56,7 +69,18 @@ const Charts =()=> {
                 }
             }
         },
-        colors: ['#546E72']
+        fill: {
+            type: 'gradient',
+            gradient: {
+                shade: 'dark',
+                gradientToColors: ['#06065a'],
+                shadeIntensity: 1,
+                type: 'horizontal',
+                opacityFrom: 1,
+                opacityTo: 1,
+                stops: [0, 100, 100, 100]
+            },
+        },
     })
     const [series2, setSeries2] = useState( [{
         name: 'series-1',
@@ -84,12 +108,55 @@ const Charts =()=> {
                 }
             }
         },
-        colors: ['#546E72']
+        fill: {
+            type: 'gradient',
+            gradient: {
+                shade: 'dark',
+                gradientToColors: ['#06065a'],
+                shadeIntensity: 1,
+                type: 'horizontal',
+                opacityFrom: 1,
+                opacityTo: 1,
+                stops: [0, 100, 100, 100]
+            },
+        },
     })
     const [series3, setSeries3] = useState( [{
         name: 'series-1',
         data: [10000000, 30000000, 35000000]
     }])
+
+    useEffect(()=>{
+        ProjectsProvider.getShiftsForGraph()
+            .then(res=>{
+                console.log(res.data)
+                console.log(moment(new Date(res.data[0].date)).format('DD-MM'))
+                setOptions({
+                    xaxis: {
+                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD-MM'))
+                    },
+                })
+                setOptions2({
+                    xaxis: {
+                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD-MM'))
+                    },
+                })
+                setOptions3({
+                    xaxis: {
+                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD-MM'))
+                    },
+                })
+                setSeries([{
+                    data: res.data.map(item=>item.totalIncome)
+                }])
+                setSeries2([{
+                    data: res.data.map(item=>item.totalOutcome)
+                }])
+                setSeries3([{
+                    data: res.data.map(item=>item.totalPnl)
+                }])
+            })
+    }, [])
 
         return (
             <ChartsWrapper>

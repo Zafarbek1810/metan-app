@@ -38,5 +38,8 @@ export default class ProjectsProvider{
     static async getIncomesStructure() {
         return await client.get("/project/getOutcomesStructure?operationType=INCOME");
     }
+    static async getShiftsForGraph() {
+        return await client.get("/project/getShiftsForGraph");
+    }
 
 }
