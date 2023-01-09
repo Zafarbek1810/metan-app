@@ -30,6 +30,7 @@ import Table from "../Dashboard/dashboard/Table";
 import PieChartDash from "../Dashboard/dashboard/PieChartDash";
 import {Wrapper} from "../../Home/style";
 import {StatistikaWrapper} from "../Dashboard/Statistika.style";
+import PieChartDash2 from "../Dashboard/dashboard/PieChartDash2";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -285,7 +286,7 @@ const ChangeBusines = () => {
                                             subtitle='Weekly Profit'
                                         />
                                     </Grid>
-                                    <Grid item xs={6}>
+                                    <Grid item xs={6} >
                                         <CardStatisticsVerticalComponent
                                             stats='$78'
                                             title='Refunds'
@@ -317,13 +318,18 @@ const ChangeBusines = () => {
                                             icon={<HelpCircleOutline />}
                                         />
                                     </Grid>
+                                    <Grid item xs={12} >
+                                        {/*<PieChartDash/>*/}
+                                    </Grid>
                                 </Grid>
                             </Grid>
                             <Grid item xs={12} md={12} lg={8}>
                                 <DepositWithdraw />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={12} md={6} lg={4}>
                                 <PieChartDash/>
+                                <br/>
+                                <PieChartDash2/>
                             </Grid>
                             <Grid item xs={12}>
                                 <Table />

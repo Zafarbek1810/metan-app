@@ -5,8 +5,9 @@ import ProjectsProvider from "../../../../../../Data/Providers/ProjectsProvider"
 
 const Chart = dynamic(() => import('react-apexcharts'), {ssr: false});
 
+
 const PieChartDash = () => {
-    const [optionsIncome, setOptionsIncome] = useState({
+    const [optionsOutcome, setOptionsOutcome] = useState({
         series: [2, 1],
         chart: {
             width: 400,
@@ -15,11 +16,12 @@ const PieChartDash = () => {
         labels: ['Arenda ofis', 'Boshqa'],
     })
 
+
     useEffect(()=>{
-        ProjectsProvider.getIncomesStructure()
+        ProjectsProvider.getOutcomesStructure()
             .then(res=>{
                 console.log(res.data)
-                setOptionsIncome({
+                setOptionsOutcome({
                     series: res.data.map((i)=>+i.sum),
                     labels: res.data.map((i)=>i.articleTitle),
                 })
@@ -28,12 +30,12 @@ const PieChartDash = () => {
 
     return (
         <ChartsWrapper>
-            <h4>Kirim</h4>
+            <h4>Chiqim</h4>
             {
                 (typeof window !== 'undefined') &&
                 <Chart
-                    options={optionsIncome}
-                    series={optionsIncome.series}
+                    options={optionsOutcome}
+                    series={optionsOutcome.series}
                     type="pie"
                     width="360"
                 />

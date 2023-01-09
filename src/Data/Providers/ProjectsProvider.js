@@ -32,11 +32,11 @@ export default class ProjectsProvider{
         return await client.delete(`/project/delete/${id}`);
     }
 
-    static async getOutcomesStructure({ operationType} = {}) {
-        const params = {
-            operationType,
-        }
-        return await client.get("/project/getOutcomesStructure", {params});
+    static async getOutcomesStructure() {
+        return await client.get("/project/getOutcomesStructure?operationType=OUTCOME");
+    }
+    static async getIncomesStructure() {
+        return await client.get("/project/getOutcomesStructure?operationType=INCOME");
     }
 
 }
