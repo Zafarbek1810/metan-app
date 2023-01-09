@@ -111,10 +111,10 @@ const DepositWithdraw = () => {
 
     return (
         <Card sx={{display: 'flex', justifyContent: 'space-between', flexDirection: ['column', 'column', 'row']}}>
-            <Box sx={{width: '100%'}}>
+            <Box sx={{width: '100%', borderRight:"1px solid #eee", p:3}}>
                 <CardHeader
                     title='Kirim'
-                    sx={{pt: 5.5, alignItems: 'center', '& .MuiCardHeader-action': {mt: 0.6}}}
+                    sx={{ alignItems: 'center', '& .MuiCardHeader-action': {mt: 0.6}}}
                     action={<Typography variant='caption'><MyLink to="/dashboard/operation">Hammasi</MyLink></Typography>}
                     titleTypographyProps={{
                         variant: 'h6',
@@ -160,12 +160,12 @@ const DepositWithdraw = () => {
                     </CardContent>
             </Box>
 
-            <Divider flexItem/>
+            <Divider type="vertical"/>
 
-            <Box sx={{width: '100%'}}>
+            <Box sx={{width: '100%', p:3}}>
                 <CardHeader
                     title='Chiqim'
-                    sx={{pt: 5.5, alignItems: 'center', '& .MuiCardHeader-action': {mt: 0.6}}}
+                    sx={{ alignItems: 'center', '& .MuiCardHeader-action': {mt: 0.6}}}
                     action={<Typography variant='caption'><MyLink to="/dashboard/operation">Hammasi</MyLink></Typography>}
                     titleTypographyProps={{
                         variant: 'h6',
