@@ -150,6 +150,12 @@ const Umumiy = [
         Svg: UsersSvg,
         role: ["SUPER_ADMIN", "OPERATOR"]
     },
+    {
+        title: "Smena",
+        path: "/dashboard/commonSmena",
+        Svg: ClockSvg,
+        role: ["SUPER_ADMIN"]
+    },
 ]
 
 const PlanMenu = [

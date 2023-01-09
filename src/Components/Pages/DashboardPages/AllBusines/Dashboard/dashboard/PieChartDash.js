@@ -1,55 +1,60 @@
-import React, {Component} from 'react';
+import React, { useEffect, useState} from 'react';
 import dynamic from 'next/dynamic'
 import {ChartsWrapper} from "../../../Home/Charts/Charts.style";
+import ProjectsProvider from "../../../../../../Data/Providers/ProjectsProvider";
 
 const Chart = dynamic(() => import('react-apexcharts'), {ssr: false});
 
-class PieChartDash extends Component {
-    constructor(props) {
-        super(props);
+const PieChartDash = () => {
+    const [options, setOptions] = useState({
+        series: [2, 1, 5],
+        chart: {
+            width: 400,
+            type: 'pie',
+        },
+        labels: ['Arenda ofis', 'Bank komissiyasi', 'Boshqa'],
+    })
 
-        this.state = {
-            options: {
-                series: [44, 55, 13, 43, 22],
-                chart: {
-                    width: 380,
-                    type: 'pie',
-                },
-                labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-                responsive: [{
-                    breakpoint: 480,
-                    options: {
-                        chart: {
-                            width: 200
-                        },
-                        legend: {
-                            position: 'bottom'
-                        }
-                    }
-                }]
+    useEffect(()=>{
+        ProjectsProvider.getOutcomesStructure()
+            .then(res=>{
+                console.log(res.data)
+                setOptions({
+                    series: [2, 1, 5],
+                    chart: {
+                        width: 400,
+                        type: 'pie',
+                    },
+                    labels: ['Arenda ofis', 'Bank komissiyasi', 'Boshqa'],
+                })
+            })
+    }, [])
+
+    return (
+        <ChartsWrapper>
+            <h4>Statistika</h4>
+            {
+                (typeof window !== 'undefined') &&
+                <Chart
+                    options={options}
+                    series={options.series}
+                    type="pie"
+                    width="360"
+                />
+            }
+            <br/><br/>
+            {
+                (typeof window !== 'undefined') &&
+                <Chart
+                    options={options}
+                    series={options.series}
+                    type="pie"
+                    width="360"
+                />
             }
 
-        }
-    }
-
-        render()
-        {
-            return (
-                <ChartsWrapper>
-                    <h4>Statistika</h4>
-                    {
-                        (typeof window !== 'undefined') &&
-                        <Chart
-                            options={this.state.options}
-                            series={this.state.options.series}
-                            type="pie"
-                            width="380"
-                        />
-                    }
-
-                </ChartsWrapper>
-            );
-        }
+        </ChartsWrapper>
+    );
 }
 
 export default PieChartDash;

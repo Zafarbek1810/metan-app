@@ -317,13 +317,13 @@ const ChangeBusines = () => {
                                             icon={<HelpCircleOutline />}
                                         />
                                     </Grid>
-                                    <Grid item xs={12}>
-                                        <PieChartDash/>
-                                    </Grid>
                                 </Grid>
                             </Grid>
                             <Grid item xs={12} md={12} lg={8}>
                                 <DepositWithdraw />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <PieChartDash/>
                             </Grid>
                             <Grid item xs={12}>
                                 <Table />
