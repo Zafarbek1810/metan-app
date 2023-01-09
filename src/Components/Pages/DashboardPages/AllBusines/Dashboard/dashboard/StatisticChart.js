@@ -133,17 +133,17 @@ const Charts =()=> {
                 console.log(moment(new Date(res.data[0].date)).format('DD-MM'))
                 setOptions({
                     xaxis: {
-                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD-MM'))
+                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD-MM')).reverse()
                     },
                 })
                 setOptions2({
                     xaxis: {
-                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD-MM'))
+                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD-MM')).reverse()
                     },
                 })
                 setOptions3({
                     xaxis: {
-                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD-MM'))
+                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD-MM')).reverse()
                     },
                 })
                 setSeries([{
