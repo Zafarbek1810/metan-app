@@ -12,6 +12,10 @@ export default class ProjectsProvider{
         return await client.get("/project/getRecentOperations");
     }
 
+    static async getShifts(date, projectId, take, skip) {
+        return await client.get(`/project/getShifts?date=${date ?? ""}&projectId=${projectId ?? ""}&take=${take ?? ""}&skip=${skip ?? ""}`);
+    }
+
     static async getProjectsWithPnl() {
         return await client.get("/project/getProjectsWithPnl");
     }
