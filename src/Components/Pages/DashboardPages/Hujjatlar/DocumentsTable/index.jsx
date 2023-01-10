@@ -264,7 +264,7 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
                     }}
                 >
                   <h3 style={{ color: "rgba(0, 0, 0, 0.7)" }}>
-                    Kassirlar mavjud emas!
+                    Hujjatlar mavjud emas!
                   </h3>
                 </div>
             )
