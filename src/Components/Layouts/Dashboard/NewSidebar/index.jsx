@@ -20,6 +20,7 @@ import PlanSvg from "../../../Common/Svgs/PlanSvg";
 import DashboardSvg from "../../../Common/Svgs/DashboardSvg";
 import ChartTreeSvg from "../../../Common/Svgs/ChartTreeSvg";
 import ChartLineUp from "../../../Common/Svgs/ChartLineUp";
+import FileSvg from "../../../Common/Svgs/FileSvg";
 
 const {Panel} = Collapse;
 const {Option} = Select;
@@ -154,6 +155,12 @@ const Umumiy = [
         title: "Smena",
         path: "/dashboard/commonSmena",
         Svg: ClockSvg,
+        role: ["SUPER_ADMIN"]
+    },
+    {
+        title: "Hujjatlar",
+        path: "/dashboard/documents",
+        Svg: FileSvg,
         role: ["SUPER_ADMIN"]
     },
 ]
