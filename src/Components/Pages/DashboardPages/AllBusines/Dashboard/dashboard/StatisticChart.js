@@ -105,6 +105,10 @@ const Charts =()=> {
                         val = (val / 1000).toFixed(0) + ' K'
                     }
                     return val
+                },
+                style:{
+                    fontSize:8,
+                    fontWeight:300
                 }
             }
         },
@@ -122,7 +126,7 @@ const Charts =()=> {
         },
     })
     const [series3, setSeries3] = useState( [{
-        name: 'series-1',
+        // name: 'series-1',
         data: [10000000, 30000000, 35000000]
     }])
 
@@ -147,13 +151,13 @@ const Charts =()=> {
                     },
                 })
                 setSeries([{
-                    data: res.data.map(item=>item.totalIncome)
+                    data: res.data.map(item=>item.totalIncome).reverse()
                 }])
                 setSeries2([{
-                    data: res.data.map(item=>item.totalOutcome)
+                    data: res.data.map(item=>item.totalOutcome).reverse()
                 }])
                 setSeries3([{
-                    data: res.data.map(item=>item.totalPnl)
+                    data: res.data.map(item=>item.totalPnl).reverse()
                 }])
             })
     }, [])
