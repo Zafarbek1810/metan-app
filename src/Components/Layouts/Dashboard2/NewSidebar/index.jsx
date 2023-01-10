@@ -124,19 +124,19 @@ const Umumiy = [
         title: "Panel",
         path: "/dashboard/allBusines",
         Svg: DashboardSvg,
-        role: ["SUPER_ADMIN", "OPERATOR"]
+        role: ["SUPER_ADMIN"]
     },
     {
         title: "Rejalar",
         path: "/dashboard/plans",
         Svg: PlanSvg,
-        role: ["SUPER_ADMIN", "OPERATOR", "DIRECTOR"]
+        role: ["SUPER_ADMIN", "DIRECTOR"]
     },
     {
         title: "Proyektlar",
         path: "/dashboard/projects",
         Svg: ChartTreeSvg,
-        role: ["SUPER_ADMIN", "OPERATOR"]
+        role: ["SUPER_ADMIN"]
     },
     {
         title: "Operatsiyalar",
@@ -148,13 +148,13 @@ const Umumiy = [
         title: "Kontragent",
         path: "/dashboard/counterParty",
         Svg: UsersSvg,
-        role: ["SUPER_ADMIN", "OPERATOR"]
+        role: ["SUPER_ADMIN"]
     },
     {
         title: "Smena",
         path: "/dashboard/commonSmena",
         Svg: ClockSvg,
-        role: ["SUPER_ADMIN"]
+        role: ["SUPER_ADMIN","OPERATOR"]
     },
 ]
 
