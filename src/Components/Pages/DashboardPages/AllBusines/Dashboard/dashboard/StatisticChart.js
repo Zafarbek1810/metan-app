@@ -11,8 +11,17 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 const Charts =()=> {
 
     const [options, setOptions] = useState({
+        stroke: {
+            curve: 'smooth'
+        },
         chart: {
-            id: 'apexchart-example'
+            id: 'apexchart-example',
+            toolbar: {
+                show: false
+            },
+            zoom: {
+                enabled: false,
+            }
         },
         xaxis: {
             categories: ["Jan", "Feb", "Mar"]
@@ -50,8 +59,17 @@ const Charts =()=> {
 
 
     const [options2, setOptions2] = useState({
+        stroke: {
+            curve: 'smooth'
+        },
         chart: {
-            id: 'apexchart-example'
+            id: 'apexchart-example',
+            toolbar: {
+                show: false
+            },
+            zoom: {
+                enabled: false,
+            }
         },
         xaxis: {
             categories: ["Jan", "Feb", "Mar"]
@@ -89,8 +107,17 @@ const Charts =()=> {
 
 
     const [options3, setOptions3] = useState({
+        stroke: {
+            curve: 'smooth'
+        },
         chart: {
-            id: 'apexchart-example'
+            id: 'apexchart-example',
+            toolbar: {
+                show: false
+            },
+            zoom: {
+                enabled: false,
+            }
         },
         xaxis: {
             categories: ["Jan", "Feb", "Mar"]
@@ -137,17 +164,17 @@ const Charts =()=> {
                 console.log(moment(new Date(res.data[0].date)).format('DD-MM'))
                 setOptions({
                     xaxis: {
-                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD-MM')).reverse()
+                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD MMM')).reverse()
                     },
                 })
                 setOptions2({
                     xaxis: {
-                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD-MM')).reverse()
+                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD MMM')).reverse()
                     },
                 })
                 setOptions3({
                     xaxis: {
-                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD-MM')).reverse()
+                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD MMM')).reverse()
                     },
                 })
                 setSeries([{
