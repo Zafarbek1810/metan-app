@@ -91,8 +91,8 @@ export default class OutletProvider {
   }
 
   static async getShifts(page = 0, size = 20, params = {}) {
-    const {outletId, date} = params;
-    return await client.get(`/outlet/getShifts?skip=${page * size}&take=${size}${outletId ? `&outletId=${outletId}` : ""}${date ? `&date=${date}` : ""}`);
+    const {outletId, startDate, endDate} = params;
+    return await client.get(`/outlet/getShifts?skip=${page * size}&take=${size}${outletId ? `&outletId=${outletId}` : ""}${startDate ? `&startDate=${startDate}` : ""}${endDate ? `&endDate=${endDate}` : ""}`);
   }
 
 }

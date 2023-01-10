@@ -50,7 +50,8 @@ const ShiftsTable = ({RefObj, setIsOpen}) => {
     const [filterState, setFilterState] = useState({});
     const [filterStateSum, setFilterStateSum] = useState({date: new Date(), outletId: 1});
     const filSelectRef = useRef();
-    const filDateRef = useRef();
+    const filDateRef1 = useRef();
+    const filDateRef2 = useRef();
     const filModDateRef = useRef();
     const filModOutletRef = useRef();
 
@@ -348,9 +349,10 @@ const ShiftsTable = ({RefObj, setIsOpen}) => {
     }
 
     const onOnFilter = () => {
-        const date = filDateRef.current?.value?.split("-").reverse().join("-");
+        const startDate = filDateRef1.current?.value?.split("-").reverse().join("-");
+        const endDate = filDateRef2.current?.value?.split("-").reverse().join("-");
         const outletId = filSelectRef.current?.value;
-        setFilterState({date, outletId});
+        setFilterState({startDate,endDate, outletId});
         setIsFilterOpen(false);
     };
 
@@ -372,7 +374,8 @@ const ShiftsTable = ({RefObj, setIsOpen}) => {
         if (Object.keys(filterState).length) {
             setFilterState({});
         }
-        filDateRef.current.value = "";
+        filDateRef1.current.value = "";
+        filDateRef2.current.value = "";
         filSelectRef.current.value = "";
         setIsFilterOpen(false);
     };
@@ -666,7 +669,7 @@ const ShiftsTable = ({RefObj, setIsOpen}) => {
                         style={{visibility: isFilterOpen ? "visible" : "hidden"}}
                     >
                         <div className="row">
-                            <div className="mb-3 col-6">
+                            <div className="mb-3 col-4">
                                 <label className="form-label">Savdo nuqtasi</label>
                                 <select ref={filSelectRef} className="form-control">
                                     <option value={"null"} disabled>
@@ -679,11 +682,21 @@ const ShiftsTable = ({RefObj, setIsOpen}) => {
                                     ))}
                                 </select>
                             </div>
-                            <div className="mb-3 col-6">
-                                <label className="form-label">Davr</label>
+                            <div className="mb-3 col-4">
+                                <label className="form-label">Bohlanish sana</label>
                                 <input
                                     autoComplete="off"
-                                    ref={filDateRef}
+                                    ref={filDateRef1}
+                                    name="startDate"
+                                    type="date"
+                                    className="form-control"
+                                />
+                            </div>
+                            <div className="mb-3 col-4">
+                                <label className="form-label">Oxirgi sana</label>
+                                <input
+                                    autoComplete="off"
+                                    ref={filDateRef2}
                                     name="startDate"
                                     type="date"
                                     className="form-control"

@@ -333,7 +333,7 @@ const FilterWrapper = styled.div`
     top: calc(100% + 4px);
     left: 0;
 
-    min-width: 400px;
+    min-width: 600px;
     background-color: #fff;
     border-radius: 6px;
     padding: 10px;
