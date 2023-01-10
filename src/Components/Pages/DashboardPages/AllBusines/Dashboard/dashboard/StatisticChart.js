@@ -1,10 +1,10 @@
 import React, {Component, useEffect, useState} from 'react';
 // import Chart from 'react-apexcharts'
 import dynamic from 'next/dynamic'
-import {ChartsWrapper} from "../../../Home/Charts/Charts.style";
 import {Divider} from "antd";
 import ProjectsProvider from "../../../../../../Data/Providers/ProjectsProvider";
 import moment from "moment/moment";
+import {PieChartWrapper} from "./PieChart.style";
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
@@ -190,7 +190,7 @@ const Charts =()=> {
     }, [])
 
         return (
-            <ChartsWrapper>
+            <PieChartWrapper>
                 <h4>Kirim</h4>
                 {
                     (typeof window !== 'undefined') &&
@@ -227,7 +227,7 @@ const Charts =()=> {
                     />
                 }
 
-            </ChartsWrapper>
+            </PieChartWrapper>
         );
 }
 

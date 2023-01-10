@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import dynamic from 'next/dynamic'
-import {ChartsWrapper} from "../../../Home/Charts/Charts.style";
 import ProjectsProvider from "../../../../../../Data/Providers/ProjectsProvider";
+import {PieChartWrapper} from "./PieChart.style";
 
 const Chart = dynamic(() => import('react-apexcharts'), {ssr: false});
 
@@ -29,7 +29,7 @@ const PieChartDash = () => {
     }, [])
 
     return (
-        <ChartsWrapper>
+        <PieChartWrapper>
             <h4>Chiqim</h4>
             {
                 (typeof window !== 'undefined') &&
@@ -41,7 +41,7 @@ const PieChartDash = () => {
                 />
             }
 
-        </ChartsWrapper>
+        </PieChartWrapper>
     );
 }
 
