@@ -12,10 +12,59 @@ import UserCardSvg from "../../../../Common/Svgs/UserCardSvg";
 import UserProvider from "../../../../../Data/Providers/UserProvider";
 import {toast} from "react-toastify";
 import TopSvg from "../../../../Common/Svgs/TopSvg";
+import dynamic from "next/dynamic";
+import moment from "moment/moment";
 
-
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 const Cards = () => {
     const [data, setData] = useState([])
+    const [options, setOptions] = useState({
+        stroke: {
+            curve: 'smooth'
+        },
+        chart: {
+            id: 'apexchart-example',
+            toolbar: {
+                show: false
+            },
+            zoom: {
+                enabled: false,
+            }
+        },
+        xaxis: {
+            categories: ["Jan", "Feb", "Mar"]
+        },
+        yaxis: {
+            labels: {
+                formatter: function(value) {
+                    let val = Math.abs(value)
+                    if (val >= 1000000) {
+                        val = (val / 1000000).toFixed(0) + ' M'
+                    }else if(val >= 1000){
+                        val = (val / 1000).toFixed(0) + ' K'
+                    }
+                    return val
+                }
+            }
+        },
+        fill: {
+            type: 'gradient',
+            gradient: {
+                shade: 'dark',
+                gradientToColors: ['#06065a'],
+                shadeIntensity: 1,
+                type: 'horizontal',
+                opacityFrom: 1,
+                opacityTo: 1,
+                stops: [0, 100, 100, 100]
+            },
+        },
+    })
+    const [series, setSeries] = useState( [{
+        name: 'series-1',
+        data: [10000000, 20000000, 35000000]
+    }])
+
     useEffect(() => {
         UserProvider.getStatistics()
             .then(res => {
@@ -26,6 +75,20 @@ const Cards = () => {
             console.log(err)
             toast.warning("Ma'lumotlar olinmadi")
         })
+    }, [])
+    useEffect(()=>{
+        UserProvider.getStatistics()
+            .then(res=>{
+                console.log("zz",res.data)
+                setOptions({
+                    xaxis: {
+                        categories: res.data?.amountOfPaymentsDays.map(item=>moment(new Date(item.date)).format('DD MMM'))
+                    },
+                })
+                setSeries([{
+                    data: res.data?.amountOfPaymentsDays.map(item=>item.sum)
+                }])
+            })
     }, [])
 
     return (
@@ -91,42 +154,16 @@ const Cards = () => {
                     </div>
                 </div>
                 <div className="statistic">
-                    <div>
-                        <div className="left">
-                            <UsersSvg/>
-                        </div>
-                        <div className="right">
-                            <p className="title">Yangi foydalanuvchilar</p>
-                            <div className="bot">
-                                <span>1000</span>
-                                <span className="persent"><TopSvg/>25.8%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="left">
-                            <DollarSvg/>
-                        </div>
-                        <div className="right">
-                            <p className="title">Jami daromad</p>
-                            <div className="bot">
-                                <span>300000</span>
-                                <span className="persent"><TopSvg/>25.8%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="left">
-                            <UsersSvg/>
-                        </div>
-                        <div className="right">
-                            <p className="title">Xarajatlar</p>
-                            <div className="bot">
-                                <span>1000</span>
-                                <span className="persent"><TopSvg/>25.8%</span>
-                            </div>
-                        </div>
-                    </div>
+                    {
+                        (typeof window !== 'undefined') &&
+                        <Chart
+                            options={options}
+                            series={series}
+                            type="line"
+                            width="100%"
+                            height={250}
+                        />
+                    }
                 </div>
             </div>
 

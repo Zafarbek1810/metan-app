@@ -162,7 +162,8 @@ const SalesByCountries = () => {
 
                 <Box sx={{ display: 'flex', textAlign: 'end', flexDirection: 'column' }}>
                   
-                  <Typography sx={{ fontWeight: 600, fontSize: '0.875rem', lineHeight: 1.72, letterSpacing: '0.22px', color: (new Date() > new Date(item.dueDate))?'red': 'green' }}>
+                  <Typography sx={{ fontWeight: 600, fontSize: '0.875rem', lineHeight: 1.72, letterSpacing: '0.22px',
+                    color: (new Date() > new Date(item.dueDate))?'red': 'green' }}>
                     { Math.abs(moment(item.dueDate).diff(moment(new Date()), 'days'))  + " kun"}
                   </Typography>
                   <Typography variant='caption' sx={{ lineHeight: 1.5, color: (new Date() > new Date(item.dueDate))?'red': 'green'  }}>

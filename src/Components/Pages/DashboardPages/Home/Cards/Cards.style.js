@@ -149,18 +149,7 @@ const CardsWrapper = styled.div`
       display: flex;
       align-items: center;
       padding: 15px;
-
-      &:nth-child(1) {
-        background: linear-gradient(135deg, #8E2DE2, #4A00E0 100%);
-      }
-
-      &:nth-child(2) {
-        background: linear-gradient(135deg, #f12711 0%, #f5af19 100%);
-      }
-
-      &:nth-child(3) {
-        background: linear-gradient(135deg, #4facfe 50%, #00f2fe 100%);
-      }
+      background: #fff;
 
       .left {
         background: #fff;

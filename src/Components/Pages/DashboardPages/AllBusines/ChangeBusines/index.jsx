@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {ChangeBusinesWrapper, FilterWrapper} from "./ChangeBusines.style";
 import {Button} from "@mui/material";
 import {Settings} from "@mui/icons-material";
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
@@ -10,7 +10,7 @@ import Select from "@material-ui/core/Select";
 import {Controller, useForm} from "react-hook-form";
 import ProjectsProvider from "../../../../../Data/Providers/ProjectsProvider";
 import ApexChartWrapper from "../Dashboard/dashboard/react-apexcharts";
-import {Card, Col, Progress, Row, Statistic} from "antd";
+import {Card, Col, Divider, Progress, Row, Statistic} from "antd";
 import {ArrowDownOutlined, ArrowUpOutlined} from "@ant-design/icons";
 import Grid from "@mui/material/Grid";
 import Trophy from "../Dashboard/dashboard/Trophy";
@@ -37,16 +37,16 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         background: "white",
         color: "#000",
-        fontSize:18,
-        fontFamily:"Inter",
+        fontSize: 18,
+        fontFamily: "Inter",
 
     },
     input: {
         color: "#fff",
-        fontSize:18,
-        fontFamily:"Inter",
-        borderColor:"#000",
-        borderWidth:10,
+        fontSize: 18,
+        fontFamily: "Inter",
+        borderColor: "#000",
+        borderWidth: 10,
         backgroundColor: "transparent",
         borderRadius: 40,
         "&:focus": {
@@ -80,6 +80,7 @@ const ChangeBusines = () => {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [filterState, setFilterState] = useState({});
     const [statistic, setStatistic] = useState({})
+    const [statisticPiece, setStatisticPiece] = useState([])
     const filterForm = useForm();
     const toggleFilter = () => {
         setIsFilterOpen(p => !p);
@@ -103,10 +104,18 @@ const ChangeBusines = () => {
         setIsFilterOpen(false);
     })
 
-    function getAllIncomeOutcomes(){
+    function getAllIncomeOutcomes() {
         ProjectsProvider.getAllIncomeOutcomes(filterState).then(res => {
             setStatistic(res.data);
-            console.log(res.data)
+            console.log("stat",res.data)
+        }, err => {
+            console.log(err);
+        })
+    }
+    function getProjectsStatistics() {
+        ProjectsProvider.getProjectsStatistics(filterState).then(res => {
+            setStatisticPiece(res.data);
+            console.log("piece",res.data)
         }, err => {
             console.log(err);
         })
@@ -114,9 +123,8 @@ const ChangeBusines = () => {
 
     useEffect(() => {
         getAllIncomeOutcomes();
+        getProjectsStatistics()
     }, [filterState])
-
-
 
 
     return (
@@ -125,7 +133,7 @@ const ChangeBusines = () => {
                 <h3>Olimjon</h3>
                 <div className="selects">
                     <FormControl variant="filled" fullWidth className={classes.formControl}>
-                        <InputLabel style={{color:"#fff"}} id="demo-simple-select-label1">Proyektlar</InputLabel>
+                        <InputLabel style={{color: "#fff"}} id="demo-simple-select-label1">Proyektlar</InputLabel>
                         <Select
                             MenuProps={{
                                 classes: {
@@ -154,24 +162,30 @@ const ChangeBusines = () => {
                     </FormControl>
                     <FormControl variant="filled" fullWidth className={classes.formControl}>
                         <FilterWrapper>
-                            <Button onClick={toggleFilter}  className="selec" style={{color:"#fff", height:"60px"}} variant="contained" startIcon={<Settings />}>
+                            <Button onClick={toggleFilter} className="selec" style={{color: "#fff", height: "60px"}}
+                                    variant="contained" startIcon={<Settings/>}>
                                 Filterlash
                             </Button>
-                            <form className="filter-content" style={{visibility: isFilterOpen ? "visible" : "hidden"}} onSubmit={onFilterSubmit}>
+                            <form className="filter-content" style={{visibility: isFilterOpen ? "visible" : "hidden"}}
+                                  onSubmit={onFilterSubmit}>
                                 <div className="row">
                                     <div className="mb-3 col-6">
                                         <div>Boshlanish sana</div>
-                                        <input className="form-control" type="date" {...filterForm.register("startDate")}/>
+                                        <input className="form-control"
+                                               type="date" {...filterForm.register("startDate")}/>
                                     </div>
                                     <div className="mb-3 col-6">
                                         <div>Oxirgi sana</div>
-                                        <input className="form-control" type="date" {...filterForm.register("endDate")}/>
+                                        <input className="form-control"
+                                               type="date" {...filterForm.register("endDate")}/>
                                     </div>
                                 </div>
 
 
                                 <div className="d-flex gap-2">
-                                    <button className="btn btn-secondary" type="button" onClick={onFilterClear}>Bekor qilish</button>
+                                    <button className="btn btn-secondary" type="button" onClick={onFilterClear}>Bekor
+                                        qilish
+                                    </button>
                                     <button className="btn btn-success" type="submit">Qo'llash</button>
                                 </div>
                             </form>
@@ -187,15 +201,22 @@ const ChangeBusines = () => {
                                 <Col span={8}>
                                     <Card>
                                         <div className="head">
-                                            <h4 className="title" style={{fontSize:14, color:"rgba(0,0,0,0.4)", fontWeight:400}}>
-                                                Kirimlar
+                                            <h4 className="title"
+                                                style={{fontSize: 14, color: "rgba(0,0,0,0.4)", fontWeight: 400}}>
+                                                Umumiy kirimlar
                                             </h4>
                                         </div>
                                         <div className="d-flex align-items-center">
-                                            <ArrowUpOutlined style={{color: '#3f8600', fontSize:30, marginRight:20}}/>
+                                            <ArrowUpOutlined style={{color: '#3f8600', fontSize: 30, marginRight: 20}}/>
                                             <div className="textCard">
-                                                <p style={{color: '#3f8600', fontSize:24 }}>{(statistic?.totalIncomes?.toLocaleString())} UZS</p>
-                                                <p style={{color: '#3f8600', fontSize:24 }}>{statistic?.totalIncomesInUSD?.toLocaleString()} USD</p>
+                                                <p style={{
+                                                    color: '#3f8600',
+                                                    fontSize: 24
+                                                }}>{(statistic?.totalIncomes?.toLocaleString())} UZS</p>
+                                                <p style={{
+                                                    color: '#3f8600',
+                                                    fontSize: 24
+                                                }}>{statistic?.totalIncomesInUSD?.toLocaleString()} USD</p>
                                             </div>
                                         </div>
                                         <Progress
@@ -210,15 +231,23 @@ const ChangeBusines = () => {
                                 <Col span={8}>
                                     <Card>
                                         <div className="head">
-                                            <h4 className="title" style={{fontSize:14, color:"rgba(0,0,0,0.4)", fontWeight:400}}>
-                                                Chiqimlar
+                                            <h4 className="title"
+                                                style={{fontSize: 14, color: "rgba(0,0,0,0.4)", fontWeight: 400}}>
+                                                Umumiy chiqimlar
                                             </h4>
                                         </div>
                                         <div className="d-flex align-items-center">
-                                            <ArrowDownOutlined style={{color: '#cf1322', fontSize:30, marginRight:20}}/>
+                                            <ArrowDownOutlined
+                                                style={{color: '#cf1322', fontSize: 30, marginRight: 20}}/>
                                             <div className="textCard">
-                                                <p style={{color: '#cf1322', fontSize:24 }}>{(statistic?.totalOutcomes?.toLocaleString())} UZS</p>
-                                                <p style={{color: '#cf1322', fontSize:24 }}>{statistic?.totalOutcomesInUSD?.toLocaleString()} USD</p>
+                                                <p style={{
+                                                    color: '#cf1322',
+                                                    fontSize: 24
+                                                }}>{(statistic?.totalOutcomes?.toLocaleString())} UZS</p>
+                                                <p style={{
+                                                    color: '#cf1322',
+                                                    fontSize: 24
+                                                }}>{statistic?.totalOutcomesInUSD?.toLocaleString()} USD</p>
                                             </div>
                                         </div>
                                         <Progress
@@ -233,15 +262,22 @@ const ChangeBusines = () => {
                                 <Col span={8}>
                                     <Card>
                                         <div className="head">
-                                            <h4 className="title" style={{fontSize:14, color:"rgba(0,0,0,0.4)", fontWeight:400}}>
-                                                Qoldiq
+                                            <h4 className="title"
+                                                style={{fontSize: 14, color: "rgba(0,0,0,0.4)", fontWeight: 400}}>
+                                                Umumiy qoldiq
                                             </h4>
                                         </div>
                                         <div className="d-flex align-items-center">
-                                            <ArrowUpOutlined style={{color: '#3f8600', fontSize:30, marginRight:20}}/>
+                                            <ArrowUpOutlined style={{color: '#3f8600', fontSize: 30, marginRight: 20}}/>
                                             <div className="textCard">
-                                                <p style={{color: '#3f8600', fontSize:24 }}>{(statistic?.totalPnl?.toLocaleString())} UZS</p>
-                                                <p style={{color: '#3f8600', fontSize:24 }}>{(statistic?.totalIncomesInUSD+statistic?.totalOutcomesInUSD).toLocaleString()} USD</p>
+                                                <p style={{
+                                                    color: '#3f8600',
+                                                    fontSize: 24
+                                                }}>{(statistic?.totalPnl?.toLocaleString())} UZS</p>
+                                                <p style={{
+                                                    color: '#3f8600',
+                                                    fontSize: 24
+                                                }}>{(statistic?.totalIncomesInUSD + statistic?.totalOutcomesInUSD).toLocaleString()} USD</p>
                                             </div>
                                         </div>
                                         <Progress
@@ -255,17 +291,117 @@ const ChangeBusines = () => {
                                 </Col>
                             </Row>
                         </div>
+                        <div className="site-statistic-demo-card mb-4">
+                            <Row gutter={16}>
+                                <Col span={8}>
+                                    <Card>
+                                        <div className="head">
+                                            <h4 className="title"
+                                                style={{fontSize: 18, color: "rgba(0,0,0,0.4)", fontWeight: 400}}>
+                                                Kirimlar
+                                            </h4>
+                                        </div>
+                                        {
+                                            statisticPiece.map((obj,index)=>(
+                                                <div key={obj.id}>
+                                                    <div className="d-flex align-items-center">
+                                                        <span style={{minWidth:"25%", fontSize: 14, marginRight: 20}}>{obj?.projectTitle}</span>
+                                                        <div className="textCard" style={{minWidth:"75%"}}>
+                                                            <p style={{
+                                                                color: '#3f8600',
+                                                                fontSize: 14,
+                                                                marginBottom: 5
+                                                            }}>{(obj?.projectIncomeInUZS?.toLocaleString())} UZS</p>
+                                                            <p style={{
+                                                                color: '#3f8600',
+                                                                fontSize: 14,
+                                                                marginBottom: 5
+                                                            }}>{obj?.projectIncomeInUSD?.toLocaleString()} USD</p>
+                                                        </div>
+                                                    </div>
+                                                    <Divider style={{marginBottom:5, marginTop:5}}/>
+                                                </div>
+                                            ))
+                                        }
+                                    </Card>
+                                </Col>
+                                <Col span={8}>
+                                    <Card>
+                                        <div className="head">
+                                            <h4 className="title"
+                                                style={{fontSize: 18, color: "rgba(0,0,0,0.4)", fontWeight: 400}}>
+                                                Chiqimlar
+                                            </h4>
+                                        </div>
+                                        {
+                                            statisticPiece.map((obj,index)=>(
+                                                <div key={obj.id}>
+                                                    <div className="d-flex align-items-center">
+                                                        <span style={{minWidth:"25%", fontSize: 14, marginRight: 20}}>{obj?.projectTitle}</span>
+                                                        <div className="textCard" style={{minWidth:"75%"}}>
+                                                            <p style={{
+                                                                color: '#cf1322',
+                                                                fontSize: 14,
+                                                                marginBottom: 5
+                                                            }}>{(obj?.projectOutcomeInUZS?.toLocaleString())} UZS</p>
+                                                            <p style={{
+                                                                color: '#cf1322',
+                                                                fontSize: 14,
+                                                                marginBottom: 5
+                                                            }}>{obj?.projectOutcomeInUSD?.toLocaleString()} USD</p>
+                                                        </div>
+                                                    </div>
+                                                    <Divider style={{marginBottom:5, marginTop:5}}/>
+                                                </div>
+                                            ))
+                                        }
+                                    </Card>
+                                </Col>
+                                <Col span={8}>
+                                    <Card>
+                                        <div className="head">
+                                            <h4 className="title"
+                                                style={{fontSize: 18, color: "rgba(0,0,0,0.4)", fontWeight: 400}}>
+                                                Qoldiq
+                                            </h4>
+                                        </div>
+                                        {
+                                            statisticPiece.map((obj,index)=>(
+                                                <div key={obj.id}>
+                                                    <div className="d-flex align-items-center">
+                                                        <span style={{minWidth:"25%", fontSize: 14, marginRight: 20}}>{obj?.projectTitle}</span>
+                                                        <div className="textCard" style={{minWidth:"75%"}}>
+                                                            <p style={{
+                                                                color: '#3f8600',
+                                                                fontSize: 14,
+                                                                marginBottom: 5
+                                                            }}>{(obj?.projectPnlInUZS?.toLocaleString())} UZS</p>
+                                                            <p style={{
+                                                                color: '#3f8600',
+                                                                fontSize: 14,
+                                                                marginBottom: 5
+                                                            }}>{obj?.projectPnlInUSD?.toLocaleString()} USD</p>
+                                                        </div>
+                                                    </div>
+                                                    <Divider style={{marginBottom:5, marginTop:5}}/>
+                                                </div>
+                                            ))
+                                        }
+                                    </Card>
+                                </Col>
+                            </Row>
+                        </div>
                         <Grid container spacing={3}>
                             <Grid item xs={12} md={12}>
-                                <StatisticsCard />
+                                <StatisticsCard/>
                             </Grid>
                             <Grid item xs={12} md={6} lg={4}>
                                 <Trophy/>
                                 <br/>
-                                <SalesByCountries />
+                                <SalesByCountries/>
                             </Grid>
                             <Grid item xs={12} md={6} lg={4}>
-                                <TotalEarning />
+                                <TotalEarning/>
                             </Grid>
                             <Grid item xs={12} md={6} lg={4}>
                                 <Grid container spacing={3}>
@@ -311,13 +447,13 @@ const ChangeBusines = () => {
                                     {/*        icon={<HelpCircleOutline />}*/}
                                     {/*    />*/}
                                     {/*</Grid>*/}
-                                    <Grid item xs={12} >
+                                    <Grid item xs={12}>
                                         <StatisticChart/>
                                     </Grid>
                                 </Grid>
                             </Grid>
                             <Grid item xs={12} md={12} lg={8}>
-                                <DepositWithdraw />
+                                <DepositWithdraw/>
                             </Grid>
                             <Grid item xs={12} md={6} lg={4}>
                                 <PieChartDash/>
@@ -325,7 +461,7 @@ const ChangeBusines = () => {
                                 <PieChartDash2/>
                             </Grid>
                             <Grid item xs={12}>
-                                <Table />
+                                <Table/>
                             </Grid>
                         </Grid>
                     </ApexChartWrapper>

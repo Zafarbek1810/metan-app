@@ -41,5 +41,12 @@ export default class ProjectsProvider{
     static async getShiftsForGraph() {
         return await client.get("/project/getShiftsForGraph");
     }
+    static async getProjectsStatistics(params) {
+        const {
+            startDate,
+            endDate
+        } = params
+        return await client.get(`/project/getProjectsStatistics?${startDate ? `&startDate=${startDate}` : ""}${endDate ? `&endDate=${endDate}` : ""}`);
+    }
 
 }
