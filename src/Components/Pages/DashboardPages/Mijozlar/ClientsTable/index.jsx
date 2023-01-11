@@ -73,6 +73,7 @@ const ClientsTable = () => {
     UserProvider.getClients(currentPage - 1, 20)
       .then(({ data }) => {
         console.log("clients", data);
+        setTotalElements(data.count)
         setUser(data.data);
       })
       .catch((err) => {
@@ -82,7 +83,7 @@ const ClientsTable = () => {
       .finally(() => {
         setLoading2(false);
       });
-  }, [forRender]);
+  }, [forRender, currentPage]);
 
   const onSubmit = async (values) => {
     const body = {};
