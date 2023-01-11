@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import DashboardLayout from "../../../Layouts/Dashboard2";
+import DashboardLayout from "../../../Layouts/Dashboard";
 import DocumentsTable from "./DocumentsTable";
 import {Wrapper} from "../Home/style";
 import ConfirmModal from "../../../Common/ConfirmModal";

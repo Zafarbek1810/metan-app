@@ -160,8 +160,7 @@ const Charts =()=> {
     useEffect(()=>{
         ProjectsProvider.getShiftsForGraph()
             .then(res=>{
-                console.log(res.data)
-                console.log(moment(new Date(res.data[0].date)).format('DD-MM'))
+                console.log("asas",res.data)
                 setOptions({
                     xaxis: {
                         categories: res.data.map(item=>moment(new Date(item.date)).format('DD MMM')).reverse()

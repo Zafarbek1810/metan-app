@@ -94,6 +94,12 @@ const SidebarItemsMenu2 = [
         role: ["SUPER_ADMIN", "DIRECTOR"]
     },
     {
+        title: "Hujjatlar",
+        path: "/dashboard/documents",
+        Svg: FileSvg,
+        role: ["SUPER_ADMIN", "DIRECTOR"]
+    },
+    {
         title: "Keshbek",
         path: "/dashboard/services",
         Svg: CashbackSvg,
@@ -156,12 +162,6 @@ const Umumiy = [
         path: "/dashboard/commonSmena",
         Svg: ClockSvg,
         role: ["SUPER_ADMIN","OPERATOR"]
-    },
-    {
-        title: "Hujjatlar",
-        path: "/dashboard/documents",
-        Svg: FileSvg,
-        role: ["SUPER_ADMIN"]
     },
 ]
 

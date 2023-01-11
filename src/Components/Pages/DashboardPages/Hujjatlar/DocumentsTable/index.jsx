@@ -55,21 +55,79 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
   const [document, setDocument] = useState([]);
   const [forRender, setForRender] = useState(null);
   const filModDateRef = useRef();
+  const filModOutletRef = useRef();
+  const filModDocTypeRef = useRef();
+  const [outletId, setoutletId] = useState(null);
+  const [outlet, setOutlet] = useState([]);
+  const [documentType, setDocumentType] = useState([]);
+  const [activeOutlet, setActiveOutlet] = useState(null);
+  const [activeDocType, setActiveDocType] = useState(null);
+
 
   let defaultDate = new Date();
   defaultDate.setDate(defaultDate.getDate());
   const [date, setDate] = useState(defaultDate);
+  const [date2, setDate2] = useState(defaultDate);
   const onSetDate = (event) => {
     setDate(new Date(event.target.value));
     console.log(date.toLocaleDateString("en-CA"))
     // onFilterSum()
   };
+  const onSetDate2 = (event) => {
+    setDate2(new Date(event.target.value));
+    console.log(date.toLocaleDateString("en-CA"))
+    // onFilterSum()
+  };
+
+  const optionExpense = outlet.map((i) => ({
+    label: i.title,
+    value: i.id,
+  }));
+
+  const optionDocument = documentType.map((i) => ({
+    label: i.title,
+    value: i.id,
+  }));
+
+
+  useEffect(() => {
+    async function fn() {
+      await OutletProvider.getAllOutlets(0, 1000)
+          .then((res) => {
+            setOutlet(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+            Message.serverError();
+          });
+    }
+    async function fn2() {
+      await DocumentProvider.getDocumentTypes()
+          .then((res) => {
+            setDocumentType(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+            Message.serverError();
+          });
+    }
+
+    fn();
+    fn2();
+  }, []);
+
+  useEffect(() => {
+    setActiveOutlet(outlet[0]?.id);
+  }, [outlet])
+  useEffect(() => {
+    setActiveDocType(documentType[0]?.id);
+  }, [documentType])
 
   useEffect(() => {
     setLoading2(true);
     DocumentProvider.getAllDocument()
         .then((res) => {
-          console.log(res);
+          console.log("getdoc", res.data);
           setDocument(res.data);
         })
         .catch((err) => {
@@ -87,16 +145,33 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
 
   function closeModal() {
     setIsOpen(false);
-    setValue("name", "");
-    setValue("login", "");
-    setValue("pass", "");
+    setValue("title", "");
+    setValue("documentNumber", "");
   }
 
   const onSubmit = async (values) => {
     const body = {};
-    body.title = values.title;
-    body.expiryDate = date.toLocaleDateString("en-CA");
+    if (outlet.length === 1) {
+      body.outletId = +outlet[0].id;
+    } else {
+      body.outletId = +activeOutlet;
+    }
 
+    if (documentType.length === 1) {
+      body.documentTypeId = +documentType[0].id;
+    } else {
+      body.documentTypeId = +activeDocType;
+    }
+
+    console.log("values", values)
+
+    body.title = values.title;
+    body.file = values.file;
+    body.documentNumber = values.documentNumber;
+    body.date = date.toLocaleDateString("en-CA");
+    body.expiryDate = date2.toLocaleDateString("en-CA");
+
+    console.log("body", body)
     setLoading(true);
       try {
         const { data } = await DocumentProvider.createDocument(body);
@@ -108,6 +183,18 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
         Message.serverError();
       }
     setLoading(false);
+  };
+
+
+  const handleOutletFilter = (e) => {
+    console.log("wtf", e?.target?.value);
+    setActiveOutlet(e?.target?.value);
+
+    console.log("asasa", activeOutlet)
+  };
+  const handleDocTypeFilter = (e) => {
+    setActiveDocType(e?.target?.value);
+    console.log(activeDocType)
   };
 
   const handleDelete = (id) => {
@@ -179,8 +266,47 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
                   />
                 </label>
                 <label className="label">
-                  <span className="label-text">Tugash sanasi</span>
-                  {errors.expiryDate && (
+                  <label className="form-label">Savdo nuqtasi</label>
+                  <select value={activeOutlet} ref={filModOutletRef} onChange={handleOutletFilter}
+                          className="form-control">
+                    <option value="null" disabled>
+                      Tanlang
+                    </option>
+                    {optionExpense.map((i) => (
+                        <option value={i.value} key={i.value}>
+                          {i.label}
+                        </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="label">
+                  <label className="form-label">Hujjat turi</label>
+                  <select value={activeDocType} ref={filModDocTypeRef} onChange={handleDocTypeFilter}
+                          className="form-control">
+                    <option value="null" disabled>
+                      Tanlang
+                    </option>
+                    {optionDocument.map((i) => (
+                        <option value={i.value} key={i.value}>
+                          {i.label}
+                        </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="label">
+                  <span className="label-text">Hujjat raqami</span>
+                  {errors.documentNumber && (
+                      <span className="err-text">Majburiy maydon</span>
+                  )}
+                  <input
+                      autoComplete="off"
+                      type="number"
+                      {...register("documentNumber", { required: true })}
+                  />
+                </label>
+                <label className="label">
+                  <span className="label-text">Sana</span>
+                  {errors.date && (
                       <span className="err-text">Majburiy maydon</span>
                   )}
                   <input
@@ -190,6 +316,32 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
                       // disabled
                       value={date.toLocaleDateString("en-CA")}
                       onChange={onSetDate}
+                  />
+                </label>
+                <label className="label">
+                  <span className="label-text">Amal qilish muddati</span>
+                  {errors.expiryDate && (
+                      <span className="err-text">Majburiy maydon</span>
+                  )}
+                  <input
+                      ref={filModDateRef}
+                      autoComplete="off"
+                      type="date"
+                      // disabled
+                      value={date2.toLocaleDateString("en-CA")}
+                      onChange={onSetDate2}
+                  />
+                </label>
+                <label className="label">
+                  <span className="label-text">Fayl</span>
+                  {/*{errors.file && (*/}
+                  {/*    <span className="err-text">Majburiy maydon</span>*/}
+                  {/*)}*/}
+                  <input
+                      type="file"
+                      name="file"
+                      // disabled
+                      required={false}
                   />
                 </label>
                 <div className="btns">
@@ -216,16 +368,22 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
       <table className="table table-borderless table-hover">
         <thead>
         <tr>
-          <th style={{ minWidth: "10%" }} className="col">
-            ID
-          </th>
-          <th style={{ minWidth: "40%" }} className="col">
-            Nomi
-          </th>
-          <th style={{ minWidth: "30%" }} className="col">
-            Tugash vaqti
+          <th style={{ minWidth: "20%" }} className="col">
+            Savdo nuqtasi
           </th>
           <th style={{ minWidth: "20%" }} className="col">
+            Hujjat turi
+          </th>
+          <th style={{ minWidth: "15%" }} className="col">
+            Hujjat raqami
+          </th>
+          <th style={{ minWidth: "15%" }} className="col">
+            Berilgan sanasi
+          </th>
+          <th style={{ minWidth: "15%" }} className="col">
+            Amal qilish muddati
+          </th>
+          <th style={{ minWidth: "15%" }} className="col">
             Amallar
           </th>
         </tr>
@@ -235,16 +393,22 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
             document.length ? (
                 document.map((obj, index) => (
                     <tr key={obj.id}>
-                      <td style={{ minWidth: "10%" }} className="col">
-                        {obj.id}
-                      </td>
-                      <td style={{ minWidth: "40%" }} className="col">
-                        {obj.title}{" "}
-                      </td>
-                      <td style={{ minWidth: "30%" }} className="col">
-                        {moment(new Date(obj.expiryDate)).format('DD.MM.YYYY')}
+                      <td style={{ minWidth: "20%" }} className="col">
+                        {obj.id}{obj.title}
                       </td>
                       <td style={{ minWidth: "20%" }} className="col">
+                        {obj.documentType?.title}
+                      </td>
+                      <td style={{ minWidth: "15%" }} className="col">
+                        {obj.documentNumber}
+                      </td>
+                      <td style={{ minWidth: "15%" }} className="col">
+                        {moment(new Date(obj.date)).format('DD.MM.YYYY')}
+                      </td>
+                      <td style={{ minWidth: "15%" }} className="col">
+                        {moment(new Date(obj.expiryDate)).format('DD.MM.YYYY')}
+                      </td>
+                      <td style={{ minWidth: "15%" }} className="col">
                         <div className="btns">
                           <IconButton
                               style={{ background: "rgb(255, 77, 73, 0.12)" }}
