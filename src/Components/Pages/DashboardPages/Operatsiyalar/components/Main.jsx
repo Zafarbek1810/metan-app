@@ -20,6 +20,7 @@ import DollarSvg from "../../../../Common/Svgs/DollarSvg";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {NumericFormat} from "react-number-format";
 import { Radio } from 'antd';
+import ButtonLoader from "../../../../Common/ButtonLoader";
 
 
 const MODAL_TYPE = {
@@ -34,6 +35,8 @@ const Main = ({RefObj, setIsOpen}) => {
   const articleForm = useForm();
   const filterForm = useForm();
   const [forRender, setForRender] = useState(null)
+
+  const [loading, setLoading] = useState(false);
 
   const [page, setPage] = useState(1)
   const [modalType, setModalType] = useState(MODAL_TYPE.INCOME);
@@ -196,7 +199,7 @@ const Main = ({RefObj, setIsOpen}) => {
 
   // DRAWERDAGI FORMA SUBMIT HANDLERLARI
 
-  const onSubmitOperation = handleSubmit((values) => {
+  const onSubmitOperation = handleSubmit(async (values) => {
     const body = {
       projectId: values.projectId?.value,
       articleId: values.articleId?.label,
@@ -205,9 +208,9 @@ const Main = ({RefObj, setIsOpen}) => {
       date: values.date,
       currency: radioVal
     }
-
+    setLoading(true);
     if (modalType === MODAL_TYPE.INCOME) {
-      OperationProvider.addIncome(body).then(res => {
+      await OperationProvider.addIncome(body).then(res => {
         console.log(res);
         reset();
         getOperations();
@@ -218,7 +221,7 @@ const Main = ({RefObj, setIsOpen}) => {
         toast.error(err?.response?.data?.message);
       })
     } else {
-      OperationProvider.addOutcome(body).then(res => {
+      await OperationProvider.addOutcome(body).then(res => {
         console.log(res);
         reset();
         getOperations();
@@ -229,6 +232,7 @@ const Main = ({RefObj, setIsOpen}) => {
         toast.error(err?.response?.data?.message);
       })
     }
+    setLoading(false);
   });
 
   const submitAddProject = projectForm.handleSubmit((values) => {
@@ -703,7 +707,7 @@ const Main = ({RefObj, setIsOpen}) => {
               {...register("terminal", {required: false})}
           />
           <br/>
-          <button type="submit" className="btn btn-primary">Qo'shish</button>
+          <button type="submit" disabled={loading} className="btn btn-primary">Qo'shish {loading && <ButtonLoader/>}</button>
         </form>
       </Drawer>
 
