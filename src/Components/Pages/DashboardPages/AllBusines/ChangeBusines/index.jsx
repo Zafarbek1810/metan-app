@@ -372,7 +372,8 @@ const ChangeBusines = () => {
                                                         <span style={{minWidth:"25%", fontSize: 14, marginRight: 20}}>{obj?.projectTitle}</span>
                                                         <div className="textCard" style={{minWidth:"75%"}}>
                                                             <p style={{
-                                                                color: '#3f8600',
+                                                                // color: '#3f8600',
+                                                                color: +(obj?.toprojectPnlInUZStalPnl) > 0?"#cf1322":"#3f8600",
                                                                 fontSize: 14,
                                                                 marginBottom: 5
                                                             }}>{(obj?.projectPnlInUZS?.toLocaleString())} UZS</p>

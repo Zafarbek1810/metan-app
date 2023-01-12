@@ -62,6 +62,7 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
   const [documentType, setDocumentType] = useState([]);
   const [activeOutlet, setActiveOutlet] = useState(null);
   const [activeDocType, setActiveDocType] = useState(null);
+  const [file, setFile] = useState(null);
 
 
   let defaultDate = new Date();
@@ -78,6 +79,11 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
     console.log(date.toLocaleDateString("en-CA"))
     // onFilterSum()
   };
+
+  const onSetFile = e => {
+    console.log('file: ', e);
+    setFile(e.target.files[0]);
+};
 
   const optionExpense = outlet.map((i) => ({
     label: i.title,
@@ -166,15 +172,33 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
     console.log("values", values)
 
     body.title = values.title;
-    body.file = values.file;
+    body.file =  file; //values.file;
     body.documentNumber = values.documentNumber;
     body.date = date.toLocaleDateString("en-CA");
     body.expiryDate = date2.toLocaleDateString("en-CA");
 
+    var bodyFormData = new FormData();
+    bodyFormData.append('title', values.title);
+    bodyFormData.append('file', file);//values.file);
+    console.log("file1", file);
+    // console.log("file2", bodyFormData);
+    bodyFormData.append('documentNumber', values.documentNumber);
+    bodyFormData.append('date', date.toLocaleDateString("en-CA"));
+    bodyFormData.append('expiryDate', date2.toLocaleDateString("en-CA"));
+    bodyFormData.append('documentTypeId', body.documentTypeId);
+    bodyFormData.append('outletId', body.outletId);
+
+
+
+
+
+
     console.log("body", body)
     setLoading(true);
+    
+
       try {
-        const { data } = await DocumentProvider.createDocument(body);
+        const { data } = await DocumentProvider.createDocument(bodyFormData);
         setForRender(Math.random());
         toast.success("Muvaffaqiyatli qo'shildi");
         closeModal();
@@ -300,7 +324,7 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
                   )}
                   <input
                       autoComplete="off"
-                      type="number"
+                      type="text"
                       {...register("documentNumber", { required: true })}
                   />
                 </label>
@@ -341,6 +365,7 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
                       type="file"
                       name="file"
                       // disabled
+                      onChange={onSetFile}
                       required={false}
                   />
                 </label>
