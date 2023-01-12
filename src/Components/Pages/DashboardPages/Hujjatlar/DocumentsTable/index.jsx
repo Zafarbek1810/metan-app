@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {DocumentsTableWrapper} from "./DocumentsTable.style";
+import {DocumentsTableWrapper, FilterWrapper} from "./DocumentsTable.style";
 import Modal from "react-modal";
 import {useForm} from "react-hook-form";
 import UserProvider from "../../../../../Data/Providers/UserProvider";
@@ -15,6 +15,12 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import DocumentProvider from "../../../../../Data/Providers/DocumentProvider";
 import moment from "moment";
 import OutletProvider from "../../../../../Data/Providers/OutletProvider";
+import DownloadIcon from "@mui/icons-material/Download";
+import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {DesktopDatePicker} from "@mui/x-date-pickers/DesktopDatePicker";
+import TextField from "@mui/material/TextField";
+import MyLink from "../../../../Common/MyLink";
 
 const customStyles = {
   content: {
@@ -64,6 +70,12 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
   const [activeDocType, setActiveDocType] = useState(null);
   const [file, setFile] = useState(null);
 
+
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [filterState, setFilterState] = useState({});
+  const filSelectRef = useRef();
+
+  const [currentPage, setCurrentPage] = useState(1);
 
   let defaultDate = new Date();
   defaultDate.setDate(defaultDate.getDate());
@@ -131,7 +143,7 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
 
   useEffect(() => {
     setLoading2(true);
-    DocumentProvider.getAllDocument()
+    DocumentProvider.getAllDocument(currentPage - 1, 20, filterState)
         .then((res) => {
           console.log("getdoc", res.data);
           setDocument(res.data);
@@ -143,7 +155,7 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
         .finally(() => {
           setLoading2(false);
         });
-  }, [forRender]);
+  }, [forRender, currentPage, filterState]);
 
   function openModal() {
     setIsOpen(true);
@@ -187,11 +199,6 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
     bodyFormData.append('expiryDate', date2.toLocaleDateString("en-CA"));
     bodyFormData.append('documentTypeId', body.documentTypeId);
     bodyFormData.append('outletId', body.outletId);
-
-
-
-
-
 
     console.log("body", body)
     setLoading(true);
@@ -242,6 +249,20 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
           console.log(err);
           toast.error(err?.response?.data?.message);
         });
+  };
+
+  const onOnFilter = () => {
+    const outletId = filSelectRef.current?.value;
+    setFilterState({ date, outletId });
+    setIsFilterOpen(false);
+  };
+
+  const onOffFilter = () => {
+    if (Object.keys(filterState).length) {
+      setFilterState({});
+    }
+    filSelectRef.current.value = "";
+    setIsFilterOpen(false);
   };
 
 
@@ -390,25 +411,83 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
           </Modal>
         </div>
       </div>
+      <div className="filter">
+        <FilterWrapper>
+          <Button
+              variant="contained"
+              onClick={() => setIsFilterOpen((p) => !p)}
+              style={{
+                fontFamily: "Inter",
+                color: "#fff",
+                background: "#787EFF",
+              }}
+          >
+            Filter
+          </Button>
+
+          <div
+              className="filter-content"
+              style={{ visibility: isFilterOpen ? "visible" : "hidden" }}
+          >
+            <div className="row">
+              <div className="mb-3 col-6">
+                <label className="form-label">Savdo nuqtasi</label>
+                <select ref={filSelectRef} className="form-control">
+                  <option value={"null"} disabled>
+                    Tanlang
+                  </option>
+                  {optionExpense.map((i) => (
+                      <option value={i.value} key={i.value}>
+                        {i.label}
+                      </option>
+                  ))}
+                </select>
+              </div>
+              <div className="d-flex gap-2">
+                <Button variant="outlined" onClick={onOffFilter}>
+                  Bekor qilish
+                </Button>
+                <Button
+                    variant="contained"
+                    color="success"
+                    onClick={onOnFilter}
+                >
+                  Qo'llash
+                </Button>
+              </div>
+            </div>
+          </div>
+        </FilterWrapper>
+        {!!Object.keys(filterState).length && (
+            <div className="filter-state col-12">
+              <div className="filter-state__inner">
+                <span>Filtrlangan</span>
+                <button className="btn btn-secondary" onClick={onOffFilter}>
+                  O'chirish
+                </button>
+              </div>
+            </div>
+        )}
+      </div>
       <table className="table table-borderless table-hover">
         <thead>
         <tr>
           <th style={{ minWidth: "20%" }} className="col">
             Savdo nuqtasi
           </th>
-          <th style={{ minWidth: "20%" }} className="col">
+          <th style={{ minWidth: "30%" }} className="col">
             Hujjat turi
           </th>
-          <th style={{ minWidth: "15%" }} className="col">
+          <th style={{ minWidth: "14%" }} className="col">
             Hujjat raqami
           </th>
-          <th style={{ minWidth: "15%" }} className="col">
+          <th style={{ minWidth: "13%" }} className="col">
             Berilgan sanasi
           </th>
-          <th style={{ minWidth: "15%" }} className="col">
+          <th style={{ minWidth: "13%" }} className="col">
             Amal qilish muddati
           </th>
-          <th style={{ minWidth: "15%" }} className="col">
+          <th style={{ minWidth: "10%" }} className="col">
             Amallar
           </th>
         </tr>
@@ -419,27 +498,33 @@ const DocumentsTable = ({ RefObj, setIsOpenModal }) => {
                 document.map((obj, index) => (
                     <tr key={obj.id}>
                       <td style={{ minWidth: "20%" }} className="col">
-                        {obj.id}{obj.title}
+                        {obj.id}.{obj.outlet?.title}
                       </td>
-                      <td style={{ minWidth: "20%" }} className="col">
+                      <td style={{ minWidth: "30%" }} className="col">
                         {obj.documentType?.title}
                       </td>
-                      <td style={{ minWidth: "15%" }} className="col">
+                      <td style={{ minWidth: "14%" }} className="col">
                         {obj.documentNumber}
                       </td>
-                      <td style={{ minWidth: "15%" }} className="col">
+                      <td style={{ minWidth: "13%" }} className="col">
                         {moment(new Date(obj.date)).format('DD.MM.YYYY')}
                       </td>
-                      <td style={{ minWidth: "15%" }} className="col">
+                      <td style={{ minWidth: "13%" }} className="col">
                         {moment(new Date(obj.expiryDate)).format('DD.MM.YYYY')}
                       </td>
-                      <td style={{ minWidth: "15%" }} className="col">
+                      <td style={{ minWidth: "10%" }} className="col">
                         <div className="btns">
                           <IconButton
                               style={{ background: "rgb(255, 77, 73, 0.12)" }}
                               onClick={() => handleDelete(obj.id)}
                           >
                             <DeleteIcon />
+                          </IconButton>
+                          <IconButton
+                              style={{background: "rgb(253, 181, 40, 0.12)", marginLeft:10}}
+                              // onClick={obj.documentUrl}
+                          >
+                            <MyLink to={obj.documentUrl}><DownloadIcon/></MyLink>
                           </IconButton>
                         </div>
                       </td>

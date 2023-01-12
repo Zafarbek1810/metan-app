@@ -23,8 +23,9 @@ export default class DocumentProvider {
             headers: { 'Content-Type': 'multipart/form-data' },
         });
     }
-    static async getAllDocument() {
-        return await client.get(`/document`);
+    static async getAllDocument(page = 0, size = 20, params = {}) {
+        const {outletId} = params;
+        return await client.get(`/document?skip=${page * size}&take=${size}${outletId ? `&outletId=${outletId}` : ""}`);
     }
 
     static async getDocumentTypes() {

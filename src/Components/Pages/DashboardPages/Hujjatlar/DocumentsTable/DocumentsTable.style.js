@@ -17,6 +17,17 @@ const DocumentsTableWrapper=styled.div`
     }
   }
 
+
+  .filter-state__inner{
+    background: #eee;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   .table{
     margin-top: 20px;
     //box-shadow: 0 3px 6px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
@@ -68,7 +79,7 @@ const DocumentsTableWrapper=styled.div`
           align-items: center;
           justify-content: start;
           color: rgba(0, 0, 0, 0.7);
-          text-align: center;
+          text-align: start;
           font-family: "Inter";
           padding-left: 20px;
 
@@ -102,6 +113,25 @@ const DocumentsTableWrapper=styled.div`
     }
   }
 
+`
+
+const FilterWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+  
+  
+  .filter-content {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+
+    min-width: 300px;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+  
 `
 
 const ModalHeader = styled.header`
@@ -228,5 +258,6 @@ const ModalContent = styled.div`
 
 export{DocumentsTableWrapper,
     ModalHeader,
+    FilterWrapper,
     ModalContent
 }

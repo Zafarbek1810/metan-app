@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Button, Chip, Drawer, IconButton} from "@mui/material";
 import {ModalContent, ModalHeader} from "../../Kassirlar/CashierTable/CashierTable.style";
 import CloseSvg from "../../../../Common/Svgs/CloseSvg";
-import EditIcon from "@mui/icons-material/Edit";
 import MinLoader from "../../../../Common/MinLoader";
 import {TableWrapper} from "../../Projects/Table/Table.style";
 import Pagination from "rc-pagination";
@@ -576,6 +575,7 @@ const Main = ({RefObj, setIsOpen}) => {
                       >
                         <DeleteIcon/>
                       </IconButton>
+
                     </div>
                   </td>
                 </tr>
