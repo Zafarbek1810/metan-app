@@ -90,8 +90,8 @@ const Tab1 = ({outletId, setMijozObj, setSpinning}) => {
                         toast.success("Muvaffaqiyatli yaratildi!")
                         setValue("summa", "")
                     }).catch(err => {
-                    toast.error(err?.response?.data?.message)
                     console.log(err)
+                    toast.error(err?.response?.data?.message)
                 }).finally(() => {
                     setIsPayPoints(false)
                     setLoading(false)
@@ -104,7 +104,8 @@ const Tab1 = ({outletId, setMijozObj, setSpinning}) => {
                         toast.success("Muvaffaqiyatli yaratildi!")
                         setValue("summa", "")
                     }, err => {
-                        toast.error(err?.response?.data?.message)
+                        // toast.error(err?.response?.data?.message)
+                        toast.error("Ushbu kassir hech qaysi savdo nuqtasiga biriktirilmagan!")
                         console.log(err);
                     }).finally(() => {
                     setLoading2(false)
@@ -333,6 +334,10 @@ const Cashbox = () => {
     useEffect(() => {
         UserProvider.getMe()
             .then(({data}) => {
+                console.log(data)
+                if(data.outletAsCashier===null){
+                    toast.error("Kassir savdo nuqtasiga biriktirilmagan")
+                }
                 setOutletId(data.outletAsCashier?.id);
             }, err => {
                 console.log(err);

@@ -69,7 +69,7 @@ const ChekTable = () => {
     }
     PaymentProvider.getAllCheques(currentPage - 1, 20, filterState)
       .then(({ data }) => {
-        console.log("chek", data);
+        console.log("chek", data.data);
         setCheques(data.data);
         setTotalElements(data.count);
       })

@@ -60,14 +60,13 @@ const Charts = () => {
         UserProvider.getStatistics()
             .then(res=>{
                 console.log("zz",res.data)
-                // console.log(moment(new Date(res.data[0].date)).format('DD-MM'))
                 setOptions({
                     xaxis: {
-                        categories: res.data?.amountOfExpensesDays.map(item=>moment(new Date(item.date)).format('DD MMM'))
+                        categories: res.data?.amountOfPaymentsDays.map(item=>moment(new Date(item.date)).format('DD MMM'))
                     },
                 })
                 setSeries([{
-                    data: res.data?.amountOfExpensesDays.map(item=>item.sum)
+                    data: res.data?.amountOfPaymentsDays.map(item=>item.sum)
                 }])
             })
     }, [])
