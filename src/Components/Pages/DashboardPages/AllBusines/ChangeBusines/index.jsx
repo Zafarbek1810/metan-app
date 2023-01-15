@@ -306,7 +306,9 @@ const ChangeBusines = () => {
                                             statisticPiece.map((obj,index)=>(
                                                 <div key={obj.id}>
                                                     <div className="d-flex align-items-center">
-                                                        <span style={{minWidth:"25%", fontSize: 14, marginRight: 20}}>{obj?.projectTitle}</span>
+                                                        <MyLink to={`/dashboard/operation?project=${obj.projectTitle}`} style={{minWidth:"25%", fontSize: 14, marginRight: 20}}>
+                                                            {obj?.projectTitle}
+                                                        </MyLink>
                                                         <div className="textCard" style={{minWidth:"75%"}}>
                                                             <p style={{
                                                                 color: '#3f8600',

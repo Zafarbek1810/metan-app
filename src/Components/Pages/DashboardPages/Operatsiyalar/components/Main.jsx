@@ -21,7 +21,6 @@ import {NumericFormat} from "react-number-format";
 import { Radio } from 'antd';
 import ButtonLoader from "../../../../Common/ButtonLoader";
 import {useRouter} from "next/router";
-import {setSectionValue} from "@mui/x-date-pickers/internals/hooks/useField/useField.utils";
 
 
 const MODAL_TYPE = {
@@ -156,6 +155,7 @@ const Main = ({RefObj, setIsOpen}) => {
   function getProjects() {
     ProjectsProvider.getAllProjects().then(res => {
       setProjects(res.data.data);
+      console.log("pr",res.data.data)
     }, err => {
       console.log(err);
     })
@@ -287,13 +287,30 @@ const Main = ({RefObj, setIsOpen}) => {
 
   const router = useRouter()
 
-  console.log(router.query)
-
   useEffect(() => {
+    console.log(router.query)
     if(router.query.type === MODAL_TYPE.INCOME) {
       filterForm.setValue("operationType",  operationOptions[1]);
     } else if (router.query.type === MODAL_TYPE.OUTCOME) {
       filterForm.setValue("operationType",  operationOptions[2]);
+    }
+  }, [])
+
+  useEffect(()=>{
+    if(router.query.project === "Kafe"){
+      filterForm.setValue("project", projectOptions[5]);
+    }else if(router.query.project === "Benzin zapravka"){
+      filterForm.setValue("project", projectOptions[1]);
+    }else if(router.query.project === "Metan zapravka"){
+      filterForm.setValue("project", projectOptions[2]);
+    }else if(router.query.project === "Propan zapravka"){
+      filterForm.setValue("project", projectOptions[3]);
+    }else if(router.query.project === "Arenda"){
+      filterForm.setValue("project", projectOptions[4]);
+    }else if(router.query.project === "Moyka"){
+      filterForm.setValue("project", projectOptions[6]);
+    }else if(router.query.project === "Issiqxona"){
+      filterForm.setValue("project", projectOptions[7]);
     }
   }, [])
 
