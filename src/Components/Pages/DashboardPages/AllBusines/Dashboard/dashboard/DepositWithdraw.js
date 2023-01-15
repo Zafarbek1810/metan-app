@@ -115,7 +115,7 @@ const DepositWithdraw = () => {
                 <CardHeader
                     title='Kirim'
                     sx={{ alignItems: 'center', '& .MuiCardHeader-action': {mt: 0.6}}}
-                    action={<Typography variant='caption'><MyLink to="/dashboard/operation">Hammasi</MyLink></Typography>}
+                    action={<Typography variant='caption'><MyLink to="/dashboard/operation?type=INCOME">Hammasi</MyLink></Typography>}
                     titleTypographyProps={{
                         variant: 'h6',
                         sx: {lineHeight: '1.6 !important', letterSpacing: '0.15px !important'}
@@ -166,7 +166,7 @@ const DepositWithdraw = () => {
                 <CardHeader
                     title='Chiqim'
                     sx={{ alignItems: 'center', '& .MuiCardHeader-action': {mt: 0.6}}}
-                    action={<Typography variant='caption'><MyLink to="/dashboard/operation">Hammasi</MyLink></Typography>}
+                    action={<Typography variant='caption'><MyLink to="/dashboard/operation?type=OUTCOME">Hammasi</MyLink></Typography>}
                     titleTypographyProps={{
                         variant: 'h6',
                         sx: {lineHeight: '1.6 !important', letterSpacing: '0.15px !important'}

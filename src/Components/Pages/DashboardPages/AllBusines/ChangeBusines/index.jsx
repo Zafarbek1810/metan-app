@@ -24,6 +24,7 @@ import {Wrapper} from "../../Home/style";
 import {StatistikaWrapper} from "../Dashboard/Statistika.style";
 import PieChartDash2 from "../Dashboard/dashboard/PieChartDash2";
 import StatisticChart from "../Dashboard/dashboard/StatisticChart";
+import MyLink from "../../../../Common/MyLink";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -203,7 +204,7 @@ const ChangeBusines = () => {
                                         <div className="head">
                                             <h4 className="title"
                                                 style={{fontSize: 14, color: "rgba(0,0,0,0.4)", fontWeight: 400}}>
-                                                Umumiy kirimlar
+                                                <MyLink to="/dashboard/operation?type=INCOME">Umumiy kirimlar</MyLink>
                                             </h4>
                                         </div>
                                         <div className="d-flex align-items-center">
@@ -233,7 +234,7 @@ const ChangeBusines = () => {
                                         <div className="head">
                                             <h4 className="title"
                                                 style={{fontSize: 14, color: "rgba(0,0,0,0.4)", fontWeight: 400}}>
-                                                Umumiy chiqimlar
+                                                <MyLink to="/dashboard/operation?type=OUTCOME">Umumiy chiqimlar</MyLink>
                                             </h4>
                                         </div>
                                         <div className="d-flex align-items-center">

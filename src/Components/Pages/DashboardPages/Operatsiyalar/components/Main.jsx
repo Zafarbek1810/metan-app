@@ -20,6 +20,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import {NumericFormat} from "react-number-format";
 import { Radio } from 'antd';
 import ButtonLoader from "../../../../Common/ButtonLoader";
+import {useRouter} from "next/router";
+import {setSectionValue} from "@mui/x-date-pickers/internals/hooks/useField/useField.utils";
 
 
 const MODAL_TYPE = {
@@ -34,6 +36,7 @@ const Main = ({RefObj, setIsOpen}) => {
   const articleForm = useForm();
   const filterForm = useForm();
   const [forRender, setForRender] = useState(null)
+
 
   const [loading, setLoading] = useState(false);
 
@@ -281,6 +284,19 @@ const Main = ({RefObj, setIsOpen}) => {
   const [modalSum, setModalSum] = useState(null)
 
 
+
+  const router = useRouter()
+
+  console.log(router.query)
+
+  useEffect(() => {
+    if(router.query.type === MODAL_TYPE.INCOME) {
+      filterForm.setValue("operationType",  operationOptions[1]);
+    } else if (router.query.type === MODAL_TYPE.OUTCOME) {
+      filterForm.setValue("operationType",  operationOptions[2]);
+    }
+  }, [])
+
   return (
     <WRAPPER>
       <TableWrapper>
@@ -480,7 +496,7 @@ const Main = ({RefObj, setIsOpen}) => {
                           style={{
                             fontFamily: "Inter",
                             color: "#fff",
-                            background: "#787EFF",
+                            background: "#92C146",
                           }}
                       >
                         + Kirim qo'shsh
@@ -493,7 +509,7 @@ const Main = ({RefObj, setIsOpen}) => {
                           style={{
                             fontFamily: "Inter",
                             color: "#fff",
-                            background: "#787EFF",
+                            background: "#CA021D",
                           }}
                       >
                         - Chiqim qo'shish
@@ -539,7 +555,7 @@ const Main = ({RefObj, setIsOpen}) => {
                     {/*{(page-1)*20+index+1}.{new Date(obj.addedDate).toISOString().split('T')[0]}*/}
                     {/*{(page-1)*20+index+1}.{obj.addedDate}*/}
 
-                    {obj.id})<span>&nbsp;</span>{pad(new Date(obj.addedDate).getDate())  +
+                    <span>&nbsp;</span>{pad(new Date(obj.addedDate).getDate())  +
                         "-" +
                         pad((new Date(obj.addedDate).getMonth() + 1)) +
                         "-" +
@@ -548,7 +564,7 @@ const Main = ({RefObj, setIsOpen}) => {
                   <td style={{minWidth: "20%"}} className="col">
                     {obj?.project?.title}
                   </td>
-                  <td style={{minWidth: "15%"}} className="col">
+                  <td style={{minWidth: "15%", color: (obj.amount>0 ? "#92C146" : "#CA021D")}} className="col">
                     {(+obj.amount).toLocaleString().replaceAll(',', ' ')}<span>&nbsp;</span> <b >{obj.currency}</b>
                   </td>
                   <td style={{minWidth: "25%"}} className="col">
