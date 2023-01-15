@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {Button, Chip, Drawer, IconButton} from "@mui/material";
 import {ModalContent, ModalHeader} from "../../Kassirlar/CashierTable/CashierTable.style";
 import CloseSvg from "../../../../Common/Svgs/CloseSvg";
@@ -296,8 +296,10 @@ const Main = ({RefObj, setIsOpen}) => {
     }
   }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     if(router.query.project === "Kafe"){
+      console.log(router.query)
+      console.log(router.query)
       filterForm.setValue("project", projectOptions[5]);
     }else if(router.query.project === "Benzin zapravka"){
       filterForm.setValue("project", projectOptions[1]);
@@ -312,7 +314,27 @@ const Main = ({RefObj, setIsOpen}) => {
     }else if(router.query.project === "Issiqxona"){
       filterForm.setValue("project", projectOptions[7]);
     }
-  }, [])
+  }, [projects])
+
+  // const projOpt = useMemo(()=>{
+  //   if(router.query.project === "Kafe"){
+  //     console.log(router.query)
+  //     console.log(router.query)
+  //     filterForm.setValue("project", projectOptions[5]);
+  //   }else if(router.query.project === "Benzin zapravka"){
+  //     filterForm.setValue("project", projectOptions[1]);
+  //   }else if(router.query.project === "Metan zapravka"){
+  //     filterForm.setValue("project", projectOptions[2]);
+  //   }else if(router.query.project === "Propan zapravka"){
+  //     filterForm.setValue("project", projectOptions[3]);
+  //   }else if(router.query.project === "Arenda"){
+  //     filterForm.setValue("project", projectOptions[4]);
+  //   }else if(router.query.project === "Moyka"){
+  //     filterForm.setValue("project", projectOptions[6]);
+  //   }else if(router.query.project === "Issiqxona"){
+  //     filterForm.setValue("project", projectOptions[7]);
+  //   }
+  // }, [])
 
   return (
     <WRAPPER>
