@@ -237,7 +237,7 @@ const ChangeBusines = () => {
                                         <div className="head">
                                             <h4 className="title"
                                                 style={{fontSize: 14, color: "rgba(0,0,0,0.4)", fontWeight: 400}}>
-                                                <MyLink to="/dashboard/operation?type=OUTCOME">Umumiy chiqimlar</MyLink>
+                                                <MyLink to={`/dashboard/operation?type=OUTCOME&startDate=${startDate || ""}&endDate=${endDate || ""}`}>Umumiy chiqimlar</MyLink>
                                             </h4>
                                         </div>
                                         <div className="d-flex align-items-center">
@@ -309,7 +309,7 @@ const ChangeBusines = () => {
                                             statisticPiece.map((obj,index)=>(
                                                 <div key={obj.id}>
                                                     <div className="d-flex align-items-center">
-                                                        <MyLink to={`/dashboard/operation?project=${obj.projectTitle}`} style={{minWidth:"25%", fontSize: 14, marginRight: 20}}>
+                                                        <MyLink to={`/dashboard/operation?type=INCOME&project=${obj.projectTitle}&startDate=${startDate || ""}&endDate=${endDate || ""}`} style={{minWidth:"25%", fontSize: 14, marginRight: 20}}>
                                                             {obj?.projectTitle}
                                                         </MyLink>
                                                         <div className="textCard" style={{minWidth:"75%"}}>
@@ -343,7 +343,7 @@ const ChangeBusines = () => {
                                             statisticPiece.map((obj,index)=>(
                                                 <div key={obj.id}>
                                                     <div className="d-flex align-items-center">
-                                                        <MyLink to={`/dashboard/operation?project=${obj.projectTitle}`} style={{minWidth:"25%", fontSize: 14, marginRight: 20}}>
+                                                        <MyLink to={`/dashboard/operation?type=OUTCOME&project=${obj.projectTitle}&startDate=${startDate || ""}&endDate=${endDate || ""}`} style={{minWidth:"25%", fontSize: 14, marginRight: 20}}>
                                                             {obj?.projectTitle}
                                                         </MyLink>
                                                         <div className="textCard" style={{minWidth:"75%"}}>
