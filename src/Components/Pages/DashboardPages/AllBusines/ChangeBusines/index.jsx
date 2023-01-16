@@ -127,6 +127,9 @@ const ChangeBusines = () => {
         getProjectsStatistics()
     }, [filterState])
 
+    const startDate=filterForm.watch("startDate")
+    const endDate=filterForm.watch("endDate")
+
 
     return (
         <ChangeBusinesWrapper>
@@ -204,7 +207,7 @@ const ChangeBusines = () => {
                                         <div className="head">
                                             <h4 className="title"
                                                 style={{fontSize: 14, color: "rgba(0,0,0,0.4)", fontWeight: 400}}>
-                                                <MyLink to="/dashboard/operation?type=INCOME">Umumiy kirimlar</MyLink>
+                                                <MyLink to={`/dashboard/operation?type=INCOME&startDate=${startDate || ""}&endDate=${endDate || ""}`} >Umumiy kirimlar</MyLink>
                                             </h4>
                                         </div>
                                         <div className="d-flex align-items-center">

@@ -55,10 +55,13 @@ const Main = ({RefObj, setIsOpen}) => {
   const [currency, setCurrency] = useState([])
 
   // SELECT OPTIONSLARI
-  const projectOptions = [{label: "Loyiha qo'shish +", value: "ADD_PROJECT"}, ...projects.map(i => ({
-    label: i.title,
-    value: i.id
-  }))];
+  const projectOptions = useMemo(() => {
+    return [{label: "Loyiha qo'shish +", value: "ADD_PROJECT"}, ...projects.map(i => ({
+      label: i.title,
+      value: i.id
+    }))]
+  }, [projects]);
+
   const filterProjectOptions = [{label: "Tanlang", value: "nullForProjects"}, ...projects.map(i => ({
     label: i.title,
     value: i.id
@@ -107,12 +110,16 @@ const Main = ({RefObj, setIsOpen}) => {
       endDate: values.endDate?.split("-").reverse().join("-"),
       currency:values.currency?.value === "nullForCurrency" ? "" : values.currency?.value
     }
+
+    console.log("obj", obj)
+
     setFilterState(obj);
     setIsFilterOpen(false);
   })
 
   useEffect(() => {
     onFilterSubmit(filterForm.getValues());
+    console.log(filterForm.getValues())
   }, [
     filterForm.watch("project"), 
     filterForm.watch("article"), 
@@ -288,7 +295,6 @@ const Main = ({RefObj, setIsOpen}) => {
   const router = useRouter()
 
   useEffect(() => {
-    console.log(router.query)
     if(router.query.type === MODAL_TYPE.INCOME) {
       filterForm.setValue("operationType",  operationOptions[1]);
     } else if (router.query.type === MODAL_TYPE.OUTCOME) {
@@ -296,10 +302,19 @@ const Main = ({RefObj, setIsOpen}) => {
     }
   }, [])
 
+  useEffect(()=>{
+    console.log(router.query)
+
+    if(router.query.startDate) {
+      filterForm.setValue("startDate",  router.query.startDate);
+    } 
+    if (router.query.endDate) {
+      filterForm.setValue("endDate",  router.query.endDate);
+    }
+  }, [])
+
   useEffect(() => {
     if(router.query.project === "Kafe"){
-      console.log(router.query)
-      console.log(router.query)
       filterForm.setValue("project", projectOptions[5]);
     }else if(router.query.project === "Benzin zapravka"){
       filterForm.setValue("project", projectOptions[1]);
@@ -314,7 +329,7 @@ const Main = ({RefObj, setIsOpen}) => {
     }else if(router.query.project === "Issiqxona"){
       filterForm.setValue("project", projectOptions[7]);
     }
-  }, [projects])
+  }, [projectOptions])
 
   // const projOpt = useMemo(()=>{
   //   if(router.query.project === "Kafe"){
