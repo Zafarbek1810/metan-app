@@ -31,7 +31,7 @@ const Charts =()=> {
                 formatter: function(value) {
                     let val = Math.abs(value)
                     if (val >= 1000000) {
-                        val = (val / 1000000).toFixed(0) + ' M'
+                        val = (val / 1000000).toFixed(2) + ' M'
                     }else if(val >= 1000){
                         val = (val / 1000).toFixed(0) + ' K'
                     }
@@ -79,9 +79,9 @@ const Charts =()=> {
                 formatter: function(value) {
                     let val = Math.abs(value)
                     if (val >= 1000000) {
-                        val = (val / 1000000).toFixed(0) + ' M'
+                        val = -(val / 1000000).toFixed(2) + ' M'
                     }else if(val >= 1000){
-                        val = (val / 1000).toFixed(0) + ' K'
+                        val = (val / 1000).toFixed(2) + ' K'
                     }
                     return val
                 }
@@ -127,7 +127,7 @@ const Charts =()=> {
                 formatter: function(value) {
                     let val = Math.abs(value)
                     if (val >= 1000000) {
-                        val = (val / 1000000).toFixed(0) + ' M'
+                        val = (val / 1000000).toFixed(2) + ' M'
                     }else if(val >= 1000){
                         val = (val / 1000).toFixed(0) + ' K'
                     }

@@ -324,7 +324,7 @@ const NewSidebar = () => {
                                         }
                                     </div>
                                 </Panel>
-                                <Panel header="Propan" key="2">
+                                {/* <Panel header="Propan" key="2">
                                     {text}
                                 </Panel>
                                 <Panel header="Benzin" key="3">
@@ -341,7 +341,7 @@ const NewSidebar = () => {
                                 </Panel>
                                 <Panel header="Kafe" key="9">
                                     {text}
-                                </Panel>
+                                </Panel> */}
                             </Collapse>
                         )
                     }
