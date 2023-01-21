@@ -163,17 +163,17 @@ const Charts =()=> {
                 console.log("asas",res.data)
                 setOptions({
                     xaxis: {
-                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD MMM')).reverse()
+                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD.MM')).reverse()
                     },
                 })
                 setOptions2({
                     xaxis: {
-                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD MMM')).reverse()
+                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD.MM')).reverse()
                     },
                 })
                 setOptions3({
                     xaxis: {
-                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD MMM')).reverse()
+                        categories: res.data.map(item=>moment(new Date(item.date)).format('DD.MM')).reverse()
                     },
                 })
                 setSeries([{
