@@ -202,7 +202,7 @@ const ChangeBusines = () => {
                     <ApexChartWrapper>
                         <div className="site-statistic-demo-card mb-4">
                             <Row gutter={16}>
-                                <Col span={8}>
+                                <Col md={8} sm={12} span={24}>
                                     <Card>
                                         <div className="head">
                                             <h4 className="title"
@@ -232,7 +232,7 @@ const ChangeBusines = () => {
                                         />
                                     </Card>
                                 </Col>
-                                <Col span={8}>
+                                <Col md={8} sm={12} span={24}>
                                     <Card>
                                         <div className="head">
                                             <h4 className="title"
@@ -263,7 +263,7 @@ const ChangeBusines = () => {
                                         />
                                     </Card>
                                 </Col>
-                                <Col span={8}>
+                                <Col md={8} sm={12} span={24}>
                                     <Card>
                                         <div className="head">
                                             <h4 className="title"
@@ -297,7 +297,7 @@ const ChangeBusines = () => {
                         </div>
                         <div className="site-statistic-demo-card mb-4">
                             <Row gutter={16}>
-                                <Col span={8}>
+                                <Col md={8} sm={12} span={24}>
                                     <Card>
                                         <div className="head">
                                             <h4 className="title"
@@ -331,7 +331,7 @@ const ChangeBusines = () => {
                                         }
                                     </Card>
                                 </Col>
-                                <Col span={8}>
+                                <Col md={8} sm={12} span={24}>
                                     <Card>
                                         <div className="head">
                                             <h4 className="title"
@@ -365,7 +365,7 @@ const ChangeBusines = () => {
                                         }
                                     </Card>
                                 </Col>
-                                <Col span={8}>
+                                <Col md={8} sm={12} span={24}>
                                     <Card>
                                         <div className="head">
                                             <h4 className="title"
@@ -469,7 +469,7 @@ const ChangeBusines = () => {
                                 <br/>
                                 <PieChartDash2/>
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={12} md={6} lg={4}>
                                 <Table/>
                             </Grid>
                         </Grid>

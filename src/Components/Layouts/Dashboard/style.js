@@ -97,7 +97,7 @@ const Wrapper=styled.div`
       width: 100%;
     }
     .layout__right {
-      transform: translateX(0);
+      transform: translateX(-30%);
 
 
     }

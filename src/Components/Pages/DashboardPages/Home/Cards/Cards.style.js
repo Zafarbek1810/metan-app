@@ -228,12 +228,20 @@ const CardsWrapper = styled.div`
         width: 48%;
       }
     }
+
+    .wrapper{
+      flex-direction: column;
+
+      .statistic{
+        width: 100%;
+      }
+    }
   }
 
   @media (max-width: 690px) {
     .cards {
       & > div {
-        width: 100%;
+        width: 500px;
       }
     }
   }

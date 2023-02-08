@@ -6,6 +6,7 @@ const Wrapper=styled.div`
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
+  width: 100%;
 
   .layout__sidebar {
     flex-shrink: 0;
@@ -91,7 +92,7 @@ const Wrapper=styled.div`
   
   @media(max-width: 992px){
     .layout__sidebar{
-      display: none;
+      /* display: none; */
     }
     .layout__top{
       left: 0;

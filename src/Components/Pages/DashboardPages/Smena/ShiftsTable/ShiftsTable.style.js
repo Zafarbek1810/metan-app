@@ -224,6 +224,22 @@ const ShiftsTableWrapper = styled.div`
       }
     }
   }
+
+  @media (max-width: 700px) {
+    .table-responsive {
+    width: 900px;
+    /* width: 82vw; */
+    background: #f5f5f9;
+    border-radius: 6px 6px 0px 0px;
+    overflow-x: scroll;
+    //box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.03);
+    box-shadow: rgb(20 21 33 / 18%) 0px 2px 10px 0px;
+  }
+  .statistika{
+  width: 100%;
+
+  }
+  }
 `
 
 const ModalContent = styled.div`
@@ -313,6 +329,8 @@ const ModalContent = styled.div`
       }
     }
   }
+
+  
   
 `
 
